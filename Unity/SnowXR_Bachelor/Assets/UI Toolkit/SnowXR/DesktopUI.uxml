@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/SnowXR/DefualtStyleSheet.uss?fileID=7433441132597879392&amp;guid=6b9ab9ee181658446ae1a3396a2996c4&amp;type=3#DefualtStyleSheet" />
+    <ui:VisualElement name="Container" style="background-color: rgba(0, 0, 0, 0); flex-grow: 1; align-self: flex-end;">
+        <ui:Foldout text="UI" value="true" style="justify-content: flex-start; align-items: auto; height: 471px; align-self: flex-end;">
+            <ui:Button text="Toggle Pause" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ToggleTime" style="height: 18px;" />
+            <ui:Button text="Spectate Player" display-tooltip-when-elided="true" name="SpectatePlayer" />
+            <ui:Button text="Free Camera View" display-tooltip-when-elided="true" name="FreeCameraView" />
+            <ui:Button text="2D Representation" display-tooltip-when-elided="true" name="2DRepresentation" />
+            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 25px;" />
+            <ui:Button text="Place Ambulance Vehicle" display-tooltip-when-elided="true" name="PlaceAmbulanceVehicle" />
+            <ui:Button text="Place Police Vehicle" display-tooltip-when-elided="true" name="PlacePoliceVehicle" />
+            <ui:Button text="Place Fire Vehicle" display-tooltip-when-elided="true" name="PlaceFireVehicle" />
+            <ui:Button text="Place Helicopter" display-tooltip-when-elided="true" name="PlaceHelicopter" />
+        </ui:Foldout>
+    </ui:VisualElement>
+</ui:UXML>

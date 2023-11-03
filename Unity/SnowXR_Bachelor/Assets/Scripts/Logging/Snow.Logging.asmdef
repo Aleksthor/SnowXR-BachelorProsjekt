@@ -1,0 +1,16 @@
+{
+    "name": "Snow.Logging",
+    "rootNamespace": "Snow",
+    "references": [
+        "GUID:20ac8044f02912c46af26018fc401cef"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

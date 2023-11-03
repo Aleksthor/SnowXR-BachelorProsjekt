@@ -1,0 +1,18 @@
+{
+    "name": "Utility.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8aca2b9d8fe9e7d448f605c9b66ac684"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,19 @@
+{
+    "name": "SnowXR.GameInteraction.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:565b20491477c41438f73f422e8ef88c",
+        "GUID:16d78a620290fdf4f9868052e07016f9"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

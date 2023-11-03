@@ -1,0 +1,19 @@
+{
+    "name": "Snow.InteractionSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:47bed6b03a1fb1f4b8eba58f348090ce",
+        "GUID:7c88a4a7926ee5145ad2dfa06f454c67",
+        "GUID:a2724dfacdc2b994fa2798685508670a",
+        "GUID:fe685ec1767f73d42b749ea8045bfe43"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

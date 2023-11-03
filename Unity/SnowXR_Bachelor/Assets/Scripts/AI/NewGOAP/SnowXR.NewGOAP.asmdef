@@ -1,0 +1,26 @@
+{
+    "name": "SnowXR.NewGOAP",
+    "rootNamespace": "",
+    "references": [
+        "CrashKonijn.Goap.Resolver",
+        "CrashKonijn.Goap",
+        "KBCore.Refs",
+        "BBG.GizmoUtilities",
+        "SnowXR.Descriptor",
+        "Snow.InteractionSystem",
+        "Snow.Utility",
+        "Snow.Logging",
+        "FishNet.Runtime",
+        "Unity.Addressables",
+        "Unity.ResourceManager"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

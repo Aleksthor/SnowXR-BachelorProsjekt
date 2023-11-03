@@ -1,0 +1,19 @@
+{
+    "name": "SnowXR.2DRep.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:28c8872030783164388a81973adedd1a",
+        "GUID:cd24aae2797de87419a3c26c6464a445"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

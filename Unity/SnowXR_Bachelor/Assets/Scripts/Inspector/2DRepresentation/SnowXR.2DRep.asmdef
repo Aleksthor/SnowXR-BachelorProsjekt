@@ -1,0 +1,26 @@
+{
+    "name": "SnowXR.2DRep",
+    "rootNamespace": "",
+    "references": [
+        "GUID:33759803a11f4d538227861a78aba30b",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:8aca2b9d8fe9e7d448f605c9b66ac684",
+        "GUID:d5587185802c96843a79c78fc4d1ddcf",
+        "GUID:6d78c7c7e540e624eb5b3ece41907c93",
+        "GUID:7c88a4a7926ee5145ad2dfa06f454c67",
+        "GUID:cd24aae2797de87419a3c26c6464a445",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:8cf286dd79494264dafbf12a07ac59ad",
+        "GUID:536bcb7366ce5a44d9a52ed47310d6c6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

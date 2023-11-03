@@ -1,0 +1,18 @@
+{
+    "name": "Snow.Bootstrapper",
+    "rootNamespace": "Snow",
+    "references": [
+        "GUID:536bcb7366ce5a44d9a52ed47310d6c6",
+        "GUID:7c88a4a7926ee5145ad2dfa06f454c67",
+        "GUID:d5587185802c96843a79c78fc4d1ddcf"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
