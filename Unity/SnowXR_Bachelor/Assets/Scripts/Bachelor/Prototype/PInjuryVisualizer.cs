@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
 using UnityEngine;
+using TMPro;
 
 namespace BA.Prototype
 {
@@ -23,6 +24,8 @@ namespace BA.Prototype
         [SerializeField] GameObject leftThigh;
         [SerializeField] GameObject rightLeg;
         [SerializeField] GameObject leftLeg;
+        [SerializeField] TextMeshProUGUI breathing;
+        [SerializeField] TextMeshProUGUI pulse;
 
         private void Start()
         {
@@ -156,6 +159,31 @@ namespace BA.Prototype
                         break;
                     case 2:
                         leftLeg.SetActive(false);
+                        break;
+                }
+
+                switch ((int)injuredPerson.breathingStatus)
+                {
+                    case 0:
+                        breathing.text = "Breathing - Normal";
+                        break;
+                    case 1:
+                        breathing.text = "Breathing - UnNormal";
+                        break;
+                    case 2:
+                        breathing.text = "Breathing - None";
+                        break;
+                }
+                switch ((int)injuredPerson.pulseStatus)
+                {
+                    case 0:
+                        pulse.text = "Pulse - Normal";
+                        break;
+                    case 1:
+                        pulse.text = "Pulse - Low";
+                        break;
+                    case 2:
+                        pulse.text = "Pulse - None";
                         break;
                 }
             }
