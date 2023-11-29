@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Multiplayer/MP_2DRepresent/S_Test_MP_2DRep.unity
     guid: 77774e3c7d128e14cb932d3b151480d6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Multiplayer/Multiplayer.unity
     guid: 5bee56bd92775564eaca5b7f4e4d59a7
   - enabled: 0
