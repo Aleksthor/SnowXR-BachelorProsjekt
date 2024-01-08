@@ -24,6 +24,8 @@ namespace BA.Prototype
         [Header("Correct Zone")]
         [SerializeField] PZones correctZone;
 
+        int severity = 0;
+
         private void Awake()
         {
             InitInjuries();
@@ -31,7 +33,7 @@ namespace BA.Prototype
         void InitInjuries()
         {
             InitBleeding();
-            int severity = 0;
+            severity = 0;
             severity += InitBreathing();
             severity += InitPulse();
 
@@ -64,111 +66,111 @@ namespace BA.Prototype
         {
             // Setup Injuries
             int random = Random.Range(0, 101);
-            headBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            headBleeding = (PBleedingStatus)Evaluate(random, 90, 99);
             random = Random.Range(0, 101);
-            neckBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            neckBleeding = (PBleedingStatus)Evaluate(random, 80, 95);
             random = Random.Range(0, 101);
-            rightArmBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            rightArmBleeding = (PBleedingStatus)Evaluate(random, 80, 95);
             random = Random.Range(0, 101);
-            leftArmBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            leftArmBleeding = (PBleedingStatus)Evaluate(random, 80, 95);
             random = Random.Range(0, 101);
-            torsoBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            torsoBleeding = (PBleedingStatus)Evaluate(random, 75, 85);
             random = Random.Range(0, 101);
-            rightThighBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            rightThighBleeding = (PBleedingStatus)Evaluate(random, 80, 95);
             random = Random.Range(0, 101);
-            leftThighBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            leftThighBleeding = (PBleedingStatus)Evaluate(random, 80, 95);
             random = Random.Range(0, 101);
-            rightLegBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            rightLegBleeding = (PBleedingStatus)Evaluate(random, 90, 99);
             random = Random.Range(0, 101);
-            leftLegBleeding = (PBleedingStatus)Evaluate(random, 25, 50);
+            leftLegBleeding = (PBleedingStatus)Evaluate(random, 90, 99);
         }
         int InitBreathing()
         {
             int severity = 0;
-            switch((int)headBleeding)
+            switch (headBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 10;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 3;
                     break;
             }
-            switch ((int)neckBleeding)
+            switch (neckBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 20;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 10;
                     break;
             }
-            switch ((int)rightArmBleeding)
+            switch (rightArmBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 3;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 1;
                     break;
             }
-            switch ((int)leftArmBleeding)
+            switch (leftArmBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 3;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 1;
                     break;
             }
-            switch ((int)torsoBleeding)
+            switch (torsoBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 30;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 15;
                     break;
             }
-            switch ((int)rightThighBleeding)
+            switch (rightThighBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 15;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 10;
                     break;
             }
-            switch ((int)leftThighBleeding)
+            switch (leftThighBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 15;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 10;
                     break;
             }
-            switch ((int)rightLegBleeding)
+            switch (rightLegBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 3;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 1;
                     break;
             }
-            switch ((int)leftLegBleeding)
+            switch (leftLegBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 3;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 1;
                     break;
             }
 
 
-            switch(severity)
+            switch (severity)
             {
                 case int r when (r < 25):
                     breathingStatus = PBreathingStatus.Normal;
@@ -186,84 +188,84 @@ namespace BA.Prototype
         int InitPulse()
         {
             int severity = 0;
-            switch ((int)headBleeding)
+            switch (headBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 10;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 3;
                     break;
             }
-            switch ((int)neckBleeding)
+            switch (neckBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 20;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 10;
                     break;
             }
-            switch ((int)rightArmBleeding)
+            switch (rightArmBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 3;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 1;
                     break;
             }
-            switch ((int)leftArmBleeding)
+            switch (leftArmBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 3;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 1;
                     break;
             }
-            switch ((int)torsoBleeding)
+            switch (torsoBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 30;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 15;
                     break;
             }
-            switch ((int)rightThighBleeding)
+            switch (rightThighBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 15;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 10;
                     break;
             }
-            switch ((int)leftThighBleeding)
+            switch (leftThighBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 15;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 10;
                     break;
             }
-            switch ((int)rightLegBleeding)
+            switch (rightLegBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 3;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 1;
                     break;
             }
-            switch ((int)leftLegBleeding)
+            switch (leftLegBleeding)
             {
-                case 0:
+                case PBleedingStatus.Major:
                     severity += 3;
                     break;
-                case 1:
+                case PBleedingStatus.Moderate:
                     severity += 1;
                     break;
             }
@@ -283,7 +285,7 @@ namespace BA.Prototype
             }
             return severity;
         }
-        
+
         int Evaluate(int number, int range1, int range2)
         {
             switch (number)
@@ -303,6 +305,37 @@ namespace BA.Prototype
         {
             return correctZone;
         }
+
+
+        public bool CanWalk()
+        {
+            if (correctZone == PZones.Black || correctZone == PZones.Red)
+            {
+                return false;
+            }
+            if ((int)leftThighBleeding > 0 || (int)rightThighBleeding > 0)
+            {
+                return false;
+            }
+            if ((int)leftLegBleeding > 0 || (int)rightLegBleeding > 0)
+            {
+                return false;
+            }
+            if ((int)breathingStatus > 0)
+            {
+                return false;
+            }
+
+
+            return true;
+        }
+
+
+        public int Severity()
+        {
+            return severity;
+        }
+
     }
 
     [System.Serializable]
@@ -315,9 +348,9 @@ namespace BA.Prototype
     [System.Serializable]
     public enum PBleedingStatus
     {
-        Major,
+        None,
         Moderate,
-        None
+        Major
     }
     [System.Serializable]
     public enum PPulseStatus
@@ -332,7 +365,10 @@ namespace BA.Prototype
     {
         Green,
         Yellow,
-        Red, 
+        Red,
         Black
     }
+
+
+
 }
