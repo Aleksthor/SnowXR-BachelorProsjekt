@@ -8,7 +8,7 @@ public class Door : MonoBehaviour {
 	public bool isAutomatic = false;
 	public bool AutoClose = false;
 	public bool DoubleSidesOpen = false;
-	public string PlayerHeadTag = "MainCamera";
+	public string PlayerHeadTag = "Player";
 	public string OpenForwardAnimName = "Door_anim";
 	public string OpenBackwardAnimName = "DoorBack_anim";
 	private string _animName;
@@ -52,8 +52,9 @@ public class Door : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.GetComponent<Collider>().tag == PlayerHeadTag){
-			if(DoubleSidesOpen){
+		Debug.Log("Hit");
+        if (other.GetComponent<Collider>().tag == PlayerHeadTag){
+            if (DoubleSidesOpen){
 			relativePos = gameObject.transform.InverseTransformPoint (other.transform.position);
 			if (relativePos.z > 0) {
 				_animName = OpenForwardAnimName;
@@ -69,7 +70,7 @@ public class Door : MonoBehaviour {
 		}
 	}
 	void OnTriggerExit(Collider other){
-		if(other.GetComponent<Collider>().tag == PlayerHeadTag){
+		if(other.GetComponent<Collider>().tag == PlayerHeadTag){			
 			if (isAutomatic) {
 				CloseDoor ();
 			} else {

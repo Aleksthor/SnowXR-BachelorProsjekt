@@ -29,6 +29,10 @@ namespace BA.Prototype
         float timer = 0;
         Collider[] overlapColliders = new Collider[1];
 
+        int target = 0;
+        [SerializeField] Transform point1;
+        [SerializeField] Transform point2;
+
         // Start is called before the first frame update
         void Awake()
         {
@@ -63,6 +67,31 @@ namespace BA.Prototype
 
         private void Update()
         {
+            if (target == 0)
+            {
+                if (NavMesh.SamplePosition(point1.position, out NavMeshHit hit, 5, NavMesh.AllAreas))
+                {
+                    agent.SetDestination(hit.position);
+                    if (Vector3.Distance(transform.position, hit.position) < 0.1f)
+                    {
+                        target = 1;
+                    }
+                }
+                
+            }
+            else
+            {
+                if (NavMesh.SamplePosition(point2.position, out NavMeshHit hit, 5, NavMesh.AllAreas))
+                {
+                    agent.SetDestination(hit.position);
+                    if (Vector3.Distance(transform.position, hit.position) < 0.1f)
+                    {
+                        target = 0;
+                    }
+                }
+            }
+            return;
+
             if (inspection)
             {
                 return;
