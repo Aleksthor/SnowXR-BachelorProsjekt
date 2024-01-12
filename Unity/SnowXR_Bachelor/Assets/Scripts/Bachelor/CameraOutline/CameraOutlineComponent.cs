@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SnowXR.Sim
@@ -10,15 +12,24 @@ namespace SnowXR.Sim
         // Update is called once per frame
         void FixedUpdate()
         {
-
-            for (int i = 0; i < allOutlines.Count; i++)
+            if (allOutlines.Count == 0)
             {
-                allOutlines[i].enabled = false;
+                List<GameObject> gameObjects = GameObject.FindGameObjectsWithTag("Agent").ToList();
+                foreach (var agent in gameObjects)
+                {
+                    allOutlines.Add(agent.GetComponent<Outline>());
+                }
             }
 
-            int layermask = 1 << 7;
+            foreach (var outline in allOutlines)
+            {
+                outline.enabled = false;
+            }
+
+            int layermask = 1 << 9;
             if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 5, layermask))
             {
+                if (!hitInfo.transform.CompareTag("Agent")) return;
                 hitInfo.transform.GetComponent<Outline>().enabled = true;
             }
         }

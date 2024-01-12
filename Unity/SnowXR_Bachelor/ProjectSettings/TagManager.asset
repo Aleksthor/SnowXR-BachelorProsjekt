@@ -10,6 +10,7 @@ TagManager:
   - ElevatorNumericButton
   - ElevatorGoButton
   - Elevator
+  - Agent
   layers:
   - Default
   - TransparentFX
