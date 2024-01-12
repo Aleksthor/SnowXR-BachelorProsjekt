@@ -12,7 +12,7 @@ namespace SnowXR.MassInjury
         [Header("Injured Person Prefab")] 
         [SerializeField] private GameObject injuredPerson;
 
-        [Header("Spawn Prefrences")] 
+        [Header("Spawn Preferences")] 
         [SerializeField] private int numberOfAgents = 15;
         [SerializeField] private Transform agentParent;
 
@@ -20,13 +20,13 @@ namespace SnowXR.MassInjury
         
         
         // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
             StartGame();
         }
 
 
-        void StartGame()
+        private void StartGame()
         {
             List<Transform> spawnPointsCache = spawnPoints;
             for (int i = 0; i < numberOfAgents; i++)
@@ -37,10 +37,15 @@ namespace SnowXR.MassInjury
             }
         }
 
-        Transform GetRandomSpawnPoint(List<Transform> list)
+        private Transform GetRandomSpawnPoint(List<Transform> list)
         {
             int random = Random.Range(0, list.Count);
             return list[random];
+        }
+
+        public List<GameObject> GetAgents()
+        {
+            return spawnedAgents;
         }
     }
 }

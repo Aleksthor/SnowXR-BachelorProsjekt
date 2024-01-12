@@ -50,12 +50,22 @@ namespace SnowXR.MassInjury
         [SerializeField] private int torsoInjuryWeight = 25;
         [SerializeField] private int thighInjuryWeight = 25;
         [SerializeField] private int legsInjuryWeight = 10;
-        private int totalInjuryScore = 0;
         
         
         [Header("Bleeding")] 
         [SerializeField] private InjuryStatus bloodLossSeverity;
         [SerializeField] public float bloodLossML = 0f;
+
+
+        [Header("Inspection")] [SerializeField]
+        private bool inspectionDone = false;
+        
+        
+        // debugging
+        [Header("Debugging")]
+        [SerializeField] private float timeLived = 0f;
+        [SerializeField] private Zone guessedZone;
+        
         
         // Logic
         private float timer = 0f;
@@ -65,11 +75,7 @@ namespace SnowXR.MassInjury
         private const float minBreathingSevere = 30f;
         private const float maxBreathingModerate = 2500f;
         private const float maxBreathingSevere = 1000f;
-        
-        
-        // debugging
-        [Header("Debugging")]
-        [SerializeField] float timeLived = 0f;
+        private int totalInjuryScore = 0;
         
         private void Awake()
         {
@@ -85,6 +91,7 @@ namespace SnowXR.MassInjury
         }
         private void Update()
         {
+            if (inspectionDone) return;
             // If we bled out already
             if (bloodLossML > 4000f)
             {
@@ -786,6 +793,22 @@ namespace SnowXR.MassInjury
         {
             int random = Random.Range(0, 100);
             return random < chance * 100f;
+        }
+
+        public bool InspectionDone()
+        {
+            return inspectionDone;
+        }
+
+        public void Inspect(Zone guess)
+        {
+            guessedZone = guess;
+            inspectionDone = true;
+        }
+
+        public ValueTuple<Zone, Zone> GuessedZone()
+        {
+            return new ValueTuple<Zone, Zone>(correctZone, guessedZone);
         }
         
     }
