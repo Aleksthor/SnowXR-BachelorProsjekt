@@ -10,7 +10,7 @@ namespace SnowXR.MassInjury
     {
         [Header("Game Main Spawn Manager")]
         [SerializeField] private SpawnManager spawnManager;
-        private List<InjuredPerson> agents = new List<InjuredPerson>();
+        private List<BleedingInjury> agents = new List<BleedingInjury>();
         
         [Header("Results")]
         [SerializeField] private int correctZones = 0;
@@ -32,7 +32,7 @@ namespace SnowXR.MassInjury
 
             foreach (var injuredPerson in spawnedAgents)
             {
-                agents.Add(injuredPerson.GetComponent<InjuredPerson>());
+                agents.Add(injuredPerson.GetComponent<BleedingInjury>());
             }
         }
         
