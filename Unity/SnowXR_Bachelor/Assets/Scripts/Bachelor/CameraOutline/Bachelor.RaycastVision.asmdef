@@ -1,0 +1,18 @@
+{
+    "name": "Bachelor.RaycastVision",
+    "rootNamespace": "Bachelor.RaycastVision",
+    "references": [
+        "GUID:838786af7e2185d4aa3f68d8012bbcb9",
+        "GUID:a2724dfacdc2b994fa2798685508670a",
+        "GUID:7a7c48adef6539e498f70f12176fe608"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

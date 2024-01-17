@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1479931027592284062}
   - component: {fileID: 2261180576127598497}
   - component: {fileID: 2875459297836356097}
+  - component: {fileID: 1863918364411759501}
   - component: {fileID: 8384569641489243258}
   - component: {fileID: 940364895681061577}
   m_Layer: 9
@@ -69,19 +70,11 @@ MonoBehaviour:
   zoneReasoning: []
   breathingStatus: 0
   pulse: 0
-  headBleeding: 0
-  neckBleeding: 0
-  rightArmBleeding: 0
-  leftArmBleeding: 0
-  torsoBleeding: 0
-  rightThighBleeding: 0
-  leftThighBleeding: 0
-  rightLegBleeding: 0
-  leftLegBleeding: 0
+  bleedingStatus: 0
+  bleedingArea: 0
   correctZone: 0
   initialZone: 0
   firstInjury: 0.8
-  secondInjury: 0.6
   headInjuryWeight: 10
   neckInjuryWeight: 20
   armInjuryWeight: 30
@@ -115,6 +108,36 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1863918364411759501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312547713710911484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89cb7c1e2d7eaa34db2414458785df62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerOptions:
+  - line: Har du noen skader?
+    onLineExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1863918364411759501}
+          m_TargetAssemblyTypeName: Bachelor.Dialogue.DialogueResponder, Bachelor.Dialogue
+          m_MethodName: Respond
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    removeOnUse: 1
 --- !u!136 &8384569641489243258
 CapsuleCollider:
   m_ObjectHideFlags: 0

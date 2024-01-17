@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Codice.Client.Commands.WkTree;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,12 +40,14 @@ namespace SnowXR.MassInjury
 
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-        
+            animator.SetBool("canStand", injuryScript.CanStand());
+            animator.SetBool("sitting", injuryScript.Sitting());
         }
     }
+    
+    
 
     [System.Serializable]
     public enum Gender

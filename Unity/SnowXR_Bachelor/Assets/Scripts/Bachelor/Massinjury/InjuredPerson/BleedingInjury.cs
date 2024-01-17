@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
@@ -25,17 +24,10 @@ namespace SnowXR.MassInjury
         [Header("Pulse Status")]
         [SerializeField] private int pulse;
         private float pulseIncreaseRate;
-        
-        [Header("Bleeding Status")]
-        [SerializeField] private  BleedingInjuryStatus headBleeding;
-        [SerializeField] private  BleedingInjuryStatus neckBleeding;
-        [SerializeField] private  BleedingInjuryStatus rightArmBleeding;
-        [SerializeField] private  BleedingInjuryStatus leftArmBleeding;
-        [SerializeField] private  BleedingInjuryStatus torsoBleeding;
-        [SerializeField] private  BleedingInjuryStatus rightThighBleeding;
-        [SerializeField] private  BleedingInjuryStatus leftThighBleeding;
-        [SerializeField] private  BleedingInjuryStatus rightLegBleeding;
-        [SerializeField] private  BleedingInjuryStatus leftLegBleeding;
+
+        [Header("Bleeding Status")] 
+        [SerializeField] private BleedingInjuryStatus bleedingStatus;
+        [SerializeField] private BleedingArea bleedingArea;
         
         [Header("Correct Zone")]
         [SerializeField] private Zone correctZone;
@@ -43,7 +35,6 @@ namespace SnowXR.MassInjury
 
         [Header("Chance Settings")] 
         [SerializeField, Range(0f, 1f)] private float firstInjury;
-        [SerializeField, Range(0f, 1f)] private float secondInjury;
         [SerializeField] private int headInjuryWeight = 10;
         [SerializeField] private int neckInjuryWeight = 20;
         [SerializeField] private int armInjuryWeight = 30;
@@ -76,6 +67,7 @@ namespace SnowXR.MassInjury
         private const float maxBreathingModerate = 2500f;
         private const float maxBreathingSevere = 1000f;
         private int totalInjuryScore = 0;
+        private float timeWithoutAir = 0f;
         
         private void Awake()
         {
@@ -117,6 +109,7 @@ namespace SnowXR.MassInjury
                 if (criticalPulseTimer > 20f)
                 {
                     pulse = 0;
+                    breathingStatus = BreathingStatus.None;
                 }
 
             }
@@ -167,6 +160,11 @@ namespace SnowXR.MassInjury
                     }
                     break;
                 case BreathingStatus.None:
+                    timeWithoutAir += Time.deltaTime;
+                    if (timeWithoutAir > 60f)
+                    {
+                        pulse = 0;
+                    }
                     break;
             }
             
@@ -185,25 +183,10 @@ namespace SnowXR.MassInjury
             pulse = 0;
             pulseIncreaseRate = 0;
 
-            headBleeding = 0;
-            neckBleeding = 0;
-            rightArmBleeding = 0;
-            leftArmBleeding = 0;
-            torsoBleeding = 0;
-            rightThighBleeding = 0;
-            leftThighBleeding = 0;
-            rightLegBleeding = 0;
-            leftLegBleeding = 0;
+            bleedingStatus = 0;
+
             // Chance to get first Injury
             if (!RandomBool(firstInjury))
-            {
-                return;
-            }
-
-            GiveSingleInjury();
-
-            // Chance to get first Injury
-            if (!RandomBool(secondInjury))
             {
                 return;
             }
@@ -214,171 +197,89 @@ namespace SnowXR.MassInjury
         private void GiveSingleInjury()
         {
             int random = Random.Range(0, totalInjuryScore);
-            BleedingArea injuryType = GetRandomInjuryType(random);
+            bleedingArea = GetRandomInjuryType(random);
 
-            switch (injuryType)
+            switch (bleedingArea)
             {
                 case BleedingArea.Head:
                     // return if we already have injury here
-                    if (headBleeding != BleedingInjuryStatus.None)
+                    if (bleedingStatus != BleedingInjuryStatus.None)
                     {
                         return;
                     }
-
                     // Random Injury status from Minimal to Severe
-                    headBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
+                    bleedingStatus = (BleedingInjuryStatus)Random.Range(1, 4);
                     // Setup bloodLossSeverity based on Injury Status and area of the body
-                    switch (headBleeding)
+                    switch (bleedingStatus)
                     {
                         case BleedingInjuryStatus.Minimal:
+                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
                         case BleedingInjuryStatus.Moderate:
-                            if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                            {
-                                bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                            }
-
+                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
                         case BleedingInjuryStatus.Severe:
-                            if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                            {
-                                bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                            }
-
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
                             return;
                     }
-
-
-
-
                     break;
                 case BleedingArea.Neck:
                     // return if we already have injury here
-                    if (neckBleeding != BleedingInjuryStatus.None)
+                    if (bleedingStatus != BleedingInjuryStatus.None)
                     {
                         return;
                     }
-                    
                     // Random Injury status from Minimal to Severe
-                    neckBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
+                    bleedingStatus = (BleedingInjuryStatus)Random.Range(1, 4);
                     // Setup bloodLossSeverity based on Injury Status and area of the body
-                    switch (neckBleeding)
+                    switch (bleedingStatus)
                     {
                         case BleedingInjuryStatus.Minimal:
-                            if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                            {
-                                bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                            }
-
+                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
                         case BleedingInjuryStatus.Moderate:
-                            if (bloodLossSeverity < BleedingInjuryStatus.Severe)
-                            {
-                                bloodLossSeverity = BleedingInjuryStatus.Moderate;
-                            }
-
+                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
                         case BleedingInjuryStatus.Severe:
-                            bloodLossSeverity = BleedingInjuryStatus.Severe;
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
                             return;
                     }
-
-
-
-
-
-
-
                     break;
                 case BleedingArea.Arms:
-                    if (random % 2 == 0)
+                    // return if we already have injury here
+                    if (bleedingStatus != BleedingInjuryStatus.None)
                     {
-                        // return if we already have injury here
-                        if (rightArmBleeding != BleedingInjuryStatus.None)
-                        {
-                            return;
-                        }
-                        
-                        // Random Injury status from Minimal to Severe
-                        rightArmBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
-                        // Setup bloodLossSeverity based on Injury Status and area of the body
-                        switch (rightArmBleeding)
-                        {
-                            case BleedingInjuryStatus.Minimal:
-                                return;
-                            case BleedingInjuryStatus.Moderate:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                                }
-
-                                return;
-                            case BleedingInjuryStatus.Severe:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Severe)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Moderate;
-                                }
-
-                                return;
-                        }
+                        return;
                     }
-                    else
+                    // Random Injury status from Minimal to Severe
+                    bleedingStatus = (BleedingInjuryStatus)Random.Range(1, 4);
+                    // Setup bloodLossSeverity based on Injury Status and area of the body
+                    switch (bleedingStatus)
                     {
-                        // return if we already have injury here
-                        if (leftArmBleeding != BleedingInjuryStatus.None)
-                        {
+                        case BleedingInjuryStatus.Minimal:
+                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
-                        }
-                        
-                        // Random Injury status from Minimal to Severe
-                        leftArmBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
-                        // Setup bloodLossSeverity based on Injury Status and area of the body
-                        switch (leftArmBleeding)
-                        {
-                            case BleedingInjuryStatus.Minimal:
-                                return;
-                            case BleedingInjuryStatus.Moderate:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                                }
-
-                                return;
-                            case BleedingInjuryStatus.Severe:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Severe)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Moderate;
-                                }
-
-                                return;
-                        }
+                        case BleedingInjuryStatus.Moderate:
+                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
+                            return;
+                        case BleedingInjuryStatus.Severe:
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
+                            return;
                     }
-
-
-
-
-
-
-
                     break;
                 case BleedingArea.Torso:
                     // return if we already have injury here
-                    if (torsoBleeding != BleedingInjuryStatus.None)
+                    if (bleedingStatus != BleedingInjuryStatus.None)
                     {
                         return;
                     }
-                    
                     // Random Injury status from Minimal to Severe
-                    torsoBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
+                    bleedingStatus = (BleedingInjuryStatus)Random.Range(1, 4);
                     // Setup bloodLossSeverity based on Injury Status and area of the body
-                    switch (torsoBleeding)
+                    switch (bleedingStatus)
                     {
                         case BleedingInjuryStatus.Minimal:
-                            if (bloodLossSeverity < BleedingInjuryStatus.Severe)
-                            {
-                                bloodLossSeverity = BleedingInjuryStatus.Moderate;
-                            }
-
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
                             return;
                         case BleedingInjuryStatus.Moderate:
                             bloodLossSeverity = BleedingInjuryStatus.Severe;
@@ -387,158 +288,50 @@ namespace SnowXR.MassInjury
                             bloodLossSeverity = BleedingInjuryStatus.Severe;
                             return;
                     }
-
-
-
-
-
-
-
-
                     break;
                 case BleedingArea.Thighs:
-                    if (random % 2 == 0)
+                    // return if we already have injury here
+                    if (bleedingStatus != BleedingInjuryStatus.None)
                     {
-                        // return if we already have injury here
-                        if (rightThighBleeding != BleedingInjuryStatus.None)
-                        {
-                            return;
-                        }
-                        
-                        // Random Injury status from Minimal to Severe
-                        rightThighBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
-                        // Setup bloodLossSeverity based on Injury Status and area of the body
-                        switch (rightThighBleeding)
-                        {
-                            case BleedingInjuryStatus.Minimal:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                                }
-
-                                return;
-                            case BleedingInjuryStatus.Moderate:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Severe)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Moderate;
-                                }
-
-                                return;
-                            case BleedingInjuryStatus.Severe:
-                                bloodLossSeverity = BleedingInjuryStatus.Severe;
-                                return;
-                        }
+                        return;
                     }
-                    else
+                    // Random Injury status from Minimal to Severe
+                    bleedingStatus = (BleedingInjuryStatus)Random.Range(1, 4);
+                    // Setup bloodLossSeverity based on Injury Status and area of the body
+                    switch (bleedingStatus)
                     {
-                        // return if we already have injury here
-                        if (leftThighBleeding != BleedingInjuryStatus.None)
-                        {
+                        case BleedingInjuryStatus.Minimal:
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
                             return;
-                        }
-
-                        // Random Injury status from Minimal to Severe
-                        leftThighBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
-                        // Setup bloodLossSeverity based on Injury Status and area of the body
-                        switch (leftThighBleeding)
-                        {
-                            case BleedingInjuryStatus.Minimal:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                                }
-
-                                return;
-                            case BleedingInjuryStatus.Moderate:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Severe)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Moderate;
-                                }
-
-                                return;
-                            case BleedingInjuryStatus.Severe:
-                                bloodLossSeverity = BleedingInjuryStatus.Severe;
-                                return;
-                        }
+                        case BleedingInjuryStatus.Moderate:
+                            bloodLossSeverity = BleedingInjuryStatus.Severe;
+                            return;
+                        case BleedingInjuryStatus.Severe:
+                            bloodLossSeverity = BleedingInjuryStatus.Severe;
+                            return;
                     }
-
-
-
-
-
-
-
-
                     break;
                 case BleedingArea.Legs:
-
-                    if (random % 2 == 0)
+                    // return if we already have injury here
+                    if (bleedingStatus != BleedingInjuryStatus.None)
                     {
-                        // return if we already have injury here
-                        if (rightLegBleeding != BleedingInjuryStatus.None)
-                        {
-                            return;
-                        }
-
-                        // Random Injury status from Minimal to Severe
-                        rightLegBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
-                        // Setup bloodLossSeverity based on Injury Status and area of the body
-                        switch (rightLegBleeding)
-                        {
-                            case BleedingInjuryStatus.Minimal:
-                                return;
-                            case BleedingInjuryStatus.Moderate:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                                }
-                                return;
-                            case BleedingInjuryStatus.Severe:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Severe)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Moderate;
-                                }
-
-                                return;
-                        }
+                        return;
                     }
-                    else
+                    // Random Injury status from Minimal to Severe
+                    bleedingStatus = (BleedingInjuryStatus)Random.Range(1, 4);
+                    // Setup bloodLossSeverity based on Injury Status and area of the body
+                    switch (bleedingStatus)
                     {
-                        // return if we already have injury here
-                        if (leftLegBleeding != BleedingInjuryStatus.None)
-                        {
+                        case BleedingInjuryStatus.Minimal:
+                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
-                        }
-
-                        // Random Injury status from Minimal to Severe
-                        leftLegBleeding = (BleedingInjuryStatus)Random.Range(1, 4);
-                        // Setup bloodLossSeverity based on Injury Status and area of the body
-                        switch (leftLegBleeding)
-                        {
-                            case BleedingInjuryStatus.Minimal:
-                                return;
-                            case BleedingInjuryStatus.Moderate:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Moderate)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Minimal;
-                                }
-                                return;
-                            case BleedingInjuryStatus.Severe:
-                                if (bloodLossSeverity < BleedingInjuryStatus.Severe)
-                                {
-                                    bloodLossSeverity = BleedingInjuryStatus.Moderate;
-                                }
-
-                                return;
-                        }
+                        case BleedingInjuryStatus.Moderate:
+                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
+                            return;
+                        case BleedingInjuryStatus.Severe:
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
+                            return;
                     }
-
-
-
-
-
-
-
                     break;
             }
 
@@ -550,127 +343,113 @@ namespace SnowXR.MassInjury
 
         private void CalculateBreathing()
         {
-            // Breathing is based on torso Injury and bloodLoss Severity
-            switch (torsoBleeding)
+            if (bleedingArea == BleedingArea.Torso || bleedingArea == BleedingArea.Neck)
             {
-                
-                case BleedingInjuryStatus.None:
-                    switch (bloodLossSeverity)
-                    {
-                        case BleedingInjuryStatus.Minimal:
-                            breathingStatus = BreathingStatus.UnNormal;
-                            breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
-                            
-                            
-                            
-                            return;
-                        case BleedingInjuryStatus.Moderate:
-                            if (RandomBool(0.02f))
-                            {
-                                breathingStatus = BreathingStatus.None;
-                            }
-                            else if (RandomBool(0.02f))
-                            {
-                                breathingStatus = BreathingStatus.Critical;
-                                breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
-                            }
-                            else
-                            {
-                                breathingStatus = BreathingStatus.UnNormal;
-                            }
-                            
-                            
-                            
-                            return;
-                        case BleedingInjuryStatus.Severe:
-                            if (RandomBool(0.1f))
-                            {
-                                breathingStatus = BreathingStatus.None;
-                            }
-                            else if (RandomBool(0.1f))
-                            {
-                                breathingStatus = BreathingStatus.Critical;
-                                breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
-                            }
-                            else
-                            {
+                // Breathing is based on torso Injury and bloodLoss Severity
+                switch (bleedingStatus)
+                {
+
+                    case BleedingInjuryStatus.None:
+                        switch (bloodLossSeverity)
+                        {
+                            case BleedingInjuryStatus.Minimal:
                                 breathingStatus = BreathingStatus.UnNormal;
                                 breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
-                            }
-                            
-                            
-                            
-                            return;
-                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    return;
-                case BleedingInjuryStatus.Moderate:
-                    if (RandomBool(0.1f))
-                    {
-                        breathingStatus = BreathingStatus.None;
-                    }
-                    else if (RandomBool(0.1f))
-                    {
-                        breathingStatus = BreathingStatus.Critical;
-                        breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
-                    }
-                    else
-                    {
-                        breathingStatus = BreathingStatus.UnNormal;
-                        breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
-                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    return;
-                case BleedingInjuryStatus.Severe:
-                    if (RandomBool(0.3f))
-                    {
-                        breathingStatus = BreathingStatus.None;
-                    }
-                    else if (RandomBool(0.3f))
-                    {
-                        breathingStatus = BreathingStatus.Critical;
-                        breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
-                    }
-                    else
-                    {
-                        breathingStatus = BreathingStatus.UnNormal;
-                        breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
-                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    return;
+                                return;
+                            case BleedingInjuryStatus.Moderate:
+                                if (RandomBool(0.02f))
+                                {
+                                    breathingStatus = BreathingStatus.Critical;
+                                    breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
+                                }
+                                else
+                                {
+                                    breathingStatus = BreathingStatus.UnNormal;
+                                }
+                                return;
+                            case BleedingInjuryStatus.Severe:
+                                if (RandomBool(0.1f))
+                                {
+                                    breathingStatus = BreathingStatus.Critical;
+                                    breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
+                                }
+                                else
+                                {
+                                    breathingStatus = BreathingStatus.UnNormal;
+                                    breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
+                                }
+                                return;
+                        }
+
+
+
+
+
+
+
+
+
+                        return;
+                    case BleedingInjuryStatus.Moderate:
+                        if (RandomBool(0.1f))
+                        {
+                            breathingStatus = BreathingStatus.None;
+                        }
+                        else if (RandomBool(0.1f))
+                        {
+                            breathingStatus = BreathingStatus.Critical;
+                            breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
+                        }
+                        else
+                        {
+                            breathingStatus = BreathingStatus.UnNormal;
+                            breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+                        return;
+                    case BleedingInjuryStatus.Severe:
+                        if (RandomBool(0.3f))
+                        {
+                            breathingStatus = BreathingStatus.None;
+                        }
+                        else if (RandomBool(0.3f))
+                        {
+                            breathingStatus = BreathingStatus.Critical;
+                            breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
+                        }
+                        else
+                        {
+                            breathingStatus = BreathingStatus.UnNormal;
+                            breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
+                        }
+
+
+
+
+
+
+
+
+
+
+                        return;
+                }
             }
-            
+
+
         }
-        
-        
+
         private void CalculatePulse()
         {
             float pulseUntilShock = Random.Range(10, 20);
@@ -735,6 +514,7 @@ namespace SnowXR.MassInjury
                 correctZone = Zone.Red;
                 return;
             }
+
             
             
             switch (bloodLossSeverity)
@@ -743,7 +523,7 @@ namespace SnowXR.MassInjury
                     correctZone = Zone.Green;
                     return;
                 case BleedingInjuryStatus.Minimal:
-                    if (breathingStatus >= BreathingStatus.UnNormal || torsoBleeding > BleedingInjuryStatus.None)
+                    if (breathingStatus >= BreathingStatus.UnNormal)
                     {
                         correctZone = Zone.Yellow;
                     }
@@ -753,17 +533,13 @@ namespace SnowXR.MassInjury
                     }
                     return;
                 case BleedingInjuryStatus.Moderate:
-                    if (breathingStatus == BreathingStatus.Critical || torsoBleeding > BleedingInjuryStatus.Moderate)
+                    if (breathingStatus == BreathingStatus.UnNormal)
                     {
                         correctZone = Zone.Red;
                     }
-                    else if (breathingStatus == BreathingStatus.UnNormal)
-                    {
-                        correctZone = Zone.Yellow;
-                    }
                     else
                     {
-                        correctZone = Zone.Green;
+                        correctZone = Zone.Yellow;
                     }
                     return;
                 case BleedingInjuryStatus.Severe:
@@ -779,7 +555,14 @@ namespace SnowXR.MassInjury
             zoneReasoning.Add("Blood Loss Severity is " + bloodLossSeverity.ToString());
             zoneReasoning.Add("Pulse is " + pulse.ToString());
             zoneReasoning.Add("Breathing status is " + breathingStatus.ToString());
-            zoneReasoning.Add("Torso bleeding is " + torsoBleeding.ToString());
+            if (bleedingArea == BleedingArea.Torso)
+            {
+                zoneReasoning.Add("Torso bleeding is " + bleedingStatus.ToString());
+            }
+            else
+            {
+                zoneReasoning.Add("Torso bleeding is none");
+            }
         }
 
         private BleedingArea GetRandomInjuryType(int random)
@@ -793,7 +576,7 @@ namespace SnowXR.MassInjury
             injuryWeights.Add(legsInjuryWeight);
 
             int counter = 0;
-            for (int i = 0; i < injuryWeights.Count; i++)
+            for (int i = 1; i < injuryWeights.Count; i++)
             {
                 counter += injuryWeights[i];
 
@@ -827,7 +610,35 @@ namespace SnowXR.MassInjury
         {
             return new ValueTuple<Zone, Zone>(correctZone, guessedZone);
         }
-        
+
+        public bool CanStand()
+        {
+            switch (bleedingArea)
+            {
+                case BleedingArea.Legs:
+                    return (int)bleedingStatus > 0;
+                case BleedingArea.Thighs:
+                    return (int)bleedingStatus > 0;
+                case BleedingArea.Torso:
+                    return (int)bleedingStatus > 0;
+                default:
+                    break;
+            }
+            if (pulse == 0) return false;
+            if ((int)breathingStatus > 1) return false;
+            if ((int)bloodLossSeverity > 1) return false;
+            
+            return true;
+
+        }
+
+        public bool Sitting()
+        {
+            if (breathingStatus == BreathingStatus.UnNormal) return true;
+            if (bloodLossSeverity == BleedingInjuryStatus.Minimal) return true;
+            
+            return false;
+        }
     }
 
     [System.Serializable]
@@ -858,12 +669,12 @@ namespace SnowXR.MassInjury
     
     public enum BleedingArea 
     {
+        None,
         Head,
         Neck,
         Arms,
         Torso,
         Thighs,
-        Legs,
-        None
+        Legs
     }
 }
