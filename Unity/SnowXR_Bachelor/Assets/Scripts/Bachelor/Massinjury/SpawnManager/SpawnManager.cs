@@ -13,7 +13,7 @@ namespace SnowXR.MassInjury
         [SerializeField] private GameObject injuredPerson;
 
         [Header("Spawn Preferences")] 
-        [SerializeField] private int numberOfAgents = 15;
+        [SerializeField] public int numberOfAgents = 15;
         [SerializeField] private Transform agentParent;
 
         private List<GameObject> spawnedAgents = new List<GameObject>();

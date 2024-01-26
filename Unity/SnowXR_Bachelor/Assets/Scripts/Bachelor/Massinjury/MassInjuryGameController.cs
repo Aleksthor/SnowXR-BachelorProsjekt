@@ -86,7 +86,7 @@ namespace SnowXR.MassInjury
                 errorScore += CalculateError(inspectionResult);
             }
 
-            timePerPatient = gameTimer / 15;
+            timePerPatient = gameTimer / Mathf.Clamp(spawnManager.numberOfAgents, 1,15);
 
         }
 
