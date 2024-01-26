@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SnowXR.MassInjury
 {
     public class SpawnManager : MonoBehaviour
     {
-        [Header("List of Spawn Points")]
-        [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
+        private List<Transform> spawnPoints = new List<Transform>();
 
         [Header("Injured Person Prefab")] 
         [SerializeField] private GameObject injuredPerson;
@@ -22,6 +22,13 @@ namespace SnowXR.MassInjury
         // Start is called before the first frame update
         private void Awake()
         {
+            // Slower initialization for faster in-game performance
+            GameObject[] spawns = GameObject.FindGameObjectsWithTag("SpawnPoint");
+
+            foreach (var sp in spawns)
+            {
+                spawnPoints.Add(sp.transform);
+            }
             StartGame();
         }
 

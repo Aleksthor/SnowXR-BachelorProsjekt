@@ -11,6 +11,7 @@ TagManager:
   - ElevatorGoButton
   - Elevator
   - Agent
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - 2DRepresent
   - EventSystem
   - 
-  - 
+  - NavMeshIgnore
   - 
   - 
   - 
