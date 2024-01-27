@@ -611,7 +611,7 @@ namespace SnowXR.MassInjury
             return new ValueTuple<Zone, Zone>(correctZone, guessedZone);
         }
 
-        public bool CanStand()
+        public bool CanWalk()
         {
             switch (bleedingArea)
             {

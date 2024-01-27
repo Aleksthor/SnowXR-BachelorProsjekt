@@ -37,12 +37,11 @@ namespace SnowXR.MassInjury
                     animator = go.GetComponent<Animator>();
                     break;
             }
-
         }
 
         private void Update()
         {
-            animator.SetBool("canStand", injuryScript.CanStand());
+            animator.SetBool("canStand", injuryScript.CanWalk());
             animator.SetBool("sitting", injuryScript.Sitting());
         }
     }

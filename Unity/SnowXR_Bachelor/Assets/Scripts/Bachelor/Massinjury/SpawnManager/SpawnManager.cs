@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using BA.GOAP;
 
 namespace SnowXR.MassInjury
 {
@@ -17,6 +18,9 @@ namespace SnowXR.MassInjury
         [SerializeField] private Transform agentParent;
 
         private List<GameObject> spawnedAgents = new List<GameObject>();
+
+        [Header("PlayerTranform")] 
+        [SerializeField] private GameObject player;
         
         
         // Start is called before the first frame update
@@ -41,6 +45,7 @@ namespace SnowXR.MassInjury
                 Transform spawnPoint = GetRandomSpawnPoint(spawnPointsCache);
                 spawnPointsCache.Remove(spawnPoint);
                 spawnedAgents.Add(Instantiate(injuredPerson,spawnPoint.position,spawnPoint.rotation,agentParent));
+                spawnedAgents[i].GetComponent<MassInjuryAgent>().inspector = player;
             }
         }
 

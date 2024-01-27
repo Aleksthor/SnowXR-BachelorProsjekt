@@ -1,7 +1,9 @@
 {
     "name": "SnowXR.MassInjury",
     "rootNamespace": "SnowXR.MassInjury",
-    "references": [],
+    "references": [
+        "GUID:d57968af93ca90a42966187c46e9ac45"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
