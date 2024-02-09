@@ -639,6 +639,11 @@ namespace SnowXR.MassInjury
             
             return false;
         }
+
+        public int GetBleedingArea()
+        {
+            return (int)bleedingArea;
+        }
     }
 
     [System.Serializable]

@@ -20,6 +20,11 @@ namespace SnowXR.MassInjury
         [SerializeField] private GameObject malePrefab;
         [SerializeField] private GameObject femalePrefab;
         
+        // Cache
+        private static readonly int InjuryType = Animator.StringToHash("InjuryType");
+        private static readonly int CanStand = Animator.StringToHash("canStand");
+        private static readonly int Sitting = Animator.StringToHash("sitting");
+
         // Start is called before the first frame update
         private void Awake()
         {
@@ -41,8 +46,9 @@ namespace SnowXR.MassInjury
 
         private void Update()
         {
-            animator.SetBool("canStand", injuryScript.CanWalk());
-            animator.SetBool("sitting", injuryScript.Sitting());
+            animator.SetInteger(InjuryType, injuryScript.GetBleedingArea());
+            animator.SetBool(CanStand, injuryScript.CanWalk());
+            animator.SetBool(Sitting, injuryScript.Sitting());
         }
     }
     
