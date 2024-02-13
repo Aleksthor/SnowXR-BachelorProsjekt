@@ -40,11 +40,17 @@ namespace Bachelor.RaycastVision
                 if (!hitInfo.transform.CompareTag("Agent")) return;
                 
                 hitInfo.transform.GetComponent<Outline>().enabled = true;
-                DialogueController.instance.SetActiveResponder(hitInfo.transform.GetComponent<DialogueResponder>());
+                if (DialogueController.instance != null)
+                    DialogueController.instance.SetActiveResponder(hitInfo.transform.GetComponent<DialogueResponder>());
+                if (PDialogueController.instance != null)
+                    PDialogueController.instance.SetActiveResponder(hitInfo.transform.GetComponent<DialogueResponder>());
             }
             else
             {
-                DialogueController.instance.SetActiveResponder(null);
+                if (DialogueController.instance != null)
+                    DialogueController.instance.SetActiveResponder(null);
+                if (PDialogueController.instance != null)
+                    PDialogueController.instance.SetActiveResponder(null);
             }
         }
     }
