@@ -7,17 +7,18 @@ namespace Bachelor.Dialogue
 {
     public class DialogueButton : MonoBehaviour
     {
-        public UnityEvent events;
+        public Dialogue events;
         public bool destroyOnUse = false;
 
         public void Activate()
         {
-            events.Invoke();
+            events.onLineExit.Invoke();
             if (destroyOnUse)
             {
                 Destroy(gameObject);
             }
             
+            DialogueController.instance.Activate(events);
             DialogueController.instance.LoadOptions();
         }
     }

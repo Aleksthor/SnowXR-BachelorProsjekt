@@ -34,14 +34,7 @@ namespace Bachelor.Dialogue
         {
             LoadOptions();
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-
-
-        }
+        
 
         
 
@@ -71,7 +64,7 @@ namespace Bachelor.Dialogue
             {
                 GameObject button = Instantiate(buttonPrefab, dialogueOptionsParent);
 
-                button.GetComponent<DialogueButton>().events = option.onLineExit;
+                button.GetComponent<DialogueButton>().events = option;
                 button.GetComponent<DialogueButton>().destroyOnUse = option.removeOnUse;
                 button.GetComponent<Button>().onClick.AddListener(button.GetComponent<DialogueButton>().Activate);
                 
@@ -80,6 +73,34 @@ namespace Bachelor.Dialogue
                 dialogueTextList.Add(button.GetComponentInChildren<Text>());
             }
 
+        }
+
+        public void Activate(Dialogue dialoge)
+        {
+            if (!dialoge.removeOnUse) return;
+            
+            List<Dialogue> _options = new List<Dialogue>();
+            
+            foreach (var dialogue in playerOptions)
+            {
+                _options.Add(dialogue);
+            }
+
+            foreach (var dialogue in playerResponderOptions)
+            {
+                _options.Add(dialogue);
+            }
+
+            if (playerOptions.Contains(dialoge))
+            {
+                playerOptions.Remove(dialoge);
+                return;
+            }
+            if (playerResponderOptions.Contains(dialoge))
+            {
+                playerResponderOptions.Remove(dialoge);
+                return;
+            }
         }
         
 
