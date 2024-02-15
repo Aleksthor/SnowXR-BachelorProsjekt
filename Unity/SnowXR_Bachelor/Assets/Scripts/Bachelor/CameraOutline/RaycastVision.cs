@@ -15,7 +15,10 @@ namespace Bachelor.RaycastVision
 
         private void Start()
         {
-            if (spawnManager == null) return;
+            if (spawnManager == null)
+            {
+                spawnManager = SpawnManager.instance;
+            }
 
             List<GameObject> agents = spawnManager.GetAgents();
             

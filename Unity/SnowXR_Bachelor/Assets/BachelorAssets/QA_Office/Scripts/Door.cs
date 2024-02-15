@@ -52,7 +52,6 @@ public class Door : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		Debug.Log("Hit");
         if (other.CompareTag(PlayerHeadTag)){
             if (DoubleSidesOpen){
 			relativePos = gameObject.transform.InverseTransformPoint (other.transform.position);
@@ -70,7 +69,6 @@ public class Door : MonoBehaviour {
 		}
 	}
 	void OnTriggerExit(Collider other){
-		Debug.Log("hit");
 		if(other.CompareTag(PlayerHeadTag)){			
 			if (isAutomatic) {
 				CloseDoor ();

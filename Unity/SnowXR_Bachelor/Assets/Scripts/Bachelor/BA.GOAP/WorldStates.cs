@@ -20,13 +20,9 @@ namespace BA.GOAP
         {
             return states.ContainsKey(key);
         }
+        
 
         public void AddState(string key, int value)
-        {
-            states.Add(key, value);
-        }
-
-        public void ModifyState(string key, int value)
         {
             if (states.ContainsKey(key))
             {

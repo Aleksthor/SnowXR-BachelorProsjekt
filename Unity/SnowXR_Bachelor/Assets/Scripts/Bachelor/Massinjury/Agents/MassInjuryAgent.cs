@@ -68,6 +68,9 @@ public class MassInjuryAgent : GoapAgent
 
     public void GoToReception()
     {
+        if (beliefes.GetStates().ContainsKey("goToReception")) return;
+        
+        
         SubGoal s1 = new SubGoal("gatherInReception", 1, true);
         goals.Add(s1, 1);
 

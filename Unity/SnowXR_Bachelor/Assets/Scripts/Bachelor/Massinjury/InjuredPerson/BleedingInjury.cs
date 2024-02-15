@@ -43,8 +43,7 @@ namespace SnowXR.MassInjury
         [SerializeField] private BleedingInjuryStatus bloodLossSeverity;
         [SerializeField] public float bloodLossML = 0f;
 
-
-        [Header("Inspection")] [SerializeField]
+        
         private bool inspectionDone = false;
         
         
@@ -604,7 +603,7 @@ namespace SnowXR.MassInjury
         {
             guessedZone = guess;
             inspectionDone = true;
-            agent.beliefes.AddState("cleared", 1);
+            agent.beliefes.SetState("cleared", 1);
         }
 
         public ValueTuple<Zone, Zone> GuessedZone()

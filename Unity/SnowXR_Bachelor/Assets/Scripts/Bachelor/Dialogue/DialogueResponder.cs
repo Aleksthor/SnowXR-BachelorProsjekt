@@ -20,11 +20,6 @@ namespace Bachelor.Dialogue
             bleedingInjury = GetComponent<BleedingInjury>();
         }
 
-        private void Start()
-        {
-            
-        }
-
         public void Respond()
         {
             

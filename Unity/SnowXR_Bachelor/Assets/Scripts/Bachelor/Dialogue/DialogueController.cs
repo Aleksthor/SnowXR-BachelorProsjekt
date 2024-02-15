@@ -27,6 +27,10 @@ namespace Bachelor.Dialogue
             {
                 instance = this;
             }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         // Start is called before the first frame update

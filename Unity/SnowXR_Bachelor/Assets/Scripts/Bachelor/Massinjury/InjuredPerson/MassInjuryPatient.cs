@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 namespace SnowXR.MassInjury
 {
     [RequireComponent(typeof(BleedingInjury), typeof(NavMeshAgent))]
-    public class MassInjuryPerson : MonoBehaviour
+    public class MassInjuryPatient : MonoBehaviour
     {
         private BleedingInjury injuryScript;
         private Animator animator;

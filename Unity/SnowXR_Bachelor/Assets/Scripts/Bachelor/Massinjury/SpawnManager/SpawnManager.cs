@@ -8,6 +8,8 @@ namespace SnowXR.MassInjury
 {
     public class SpawnManager : MonoBehaviour
     {
+        public static SpawnManager instance;
+        
         private List<Transform> spawnPoints = new List<Transform>();
 
         [Header("Injured Person Prefab")] 
@@ -26,6 +28,15 @@ namespace SnowXR.MassInjury
         // Start is called before the first frame update
         private void Awake()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            
             // Slower initialization for faster in-game performance
             GameObject[] spawns = GameObject.FindGameObjectsWithTag("SpawnPoint");
 
