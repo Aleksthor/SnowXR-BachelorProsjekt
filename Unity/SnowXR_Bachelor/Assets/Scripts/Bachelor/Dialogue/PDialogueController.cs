@@ -180,6 +180,8 @@ namespace Bachelor.Dialogue
         // ReSharper disable Unity.PerformanceAnalysis
         private void HandleInputs()
         {
+            if (activationTimer > 0f || !Input.GetKey(KeyCode.Tab)) return;
+            
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 ChangeOption(currentPointer + 1);

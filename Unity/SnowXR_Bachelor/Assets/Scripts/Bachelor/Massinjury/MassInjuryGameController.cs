@@ -57,7 +57,7 @@ namespace SnowXR.MassInjury
             bool isDone = true;
 
             // Check if all agents have been inspected
-            foreach (var injuredPerson in agents.Where(injuredPerson => !injuredPerson.InspectionDone()))
+            foreach (var injuredPerson in agents.Where(injuredPerson => !injuredPerson.IsInspectionDone()))
             {
                 isDone = false;
             }

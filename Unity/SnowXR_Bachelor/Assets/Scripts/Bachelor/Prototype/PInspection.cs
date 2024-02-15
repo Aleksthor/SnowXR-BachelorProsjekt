@@ -24,7 +24,6 @@ namespace BA.Prototype
                 if (bleedingInjury)
                 {
                     bleedingInjury.Inspect(Zone.Green);
-                    bleedingInjury.transform.GetComponent<GoapAgent>().beliefes.AddState("cleared", 1);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Keypad2))
@@ -33,7 +32,6 @@ namespace BA.Prototype
                 if (bleedingInjury)
                 {
                     bleedingInjury.Inspect(Zone.Yellow);
-                    bleedingInjury.transform.GetComponent<GoapAgent>().beliefes.AddState("cleared", 1);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Keypad3))
@@ -42,7 +40,6 @@ namespace BA.Prototype
                 if (bleedingInjury)
                 {
                     bleedingInjury.Inspect(Zone.Red);
-                    bleedingInjury.transform.GetComponent<GoapAgent>().beliefes.AddState("cleared", 1);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Keypad4))
@@ -51,7 +48,6 @@ namespace BA.Prototype
                 if (bleedingInjury)
                 {
                     bleedingInjury.Inspect(Zone.Black);
-                    bleedingInjury.transform.GetComponent<GoapAgent>().beliefes.AddState("cleared", 1);
                 }
             }
         }

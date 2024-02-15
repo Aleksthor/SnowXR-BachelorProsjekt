@@ -1,18 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BA.GOAP;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 
 namespace SnowXR.MassInjury
 {
-    /// <summary>
-    /// Injured Person
-    ///
-    /// Class contains InjuryStatuses for each main body part, and has Logic Functions that
-    /// Initialize and maintain the statuses
-    /// </summary>
+    [RequireComponent(typeof(GoapAgent))]
     public class BleedingInjury : MonoBehaviour
     {
         [Header("Reasoning")] 
@@ -57,6 +53,8 @@ namespace SnowXR.MassInjury
         [SerializeField] private float timeLived = 0f;
         [SerializeField] private Zone guessedZone;
         
+        //Cache
+        private GoapAgent agent;
         
         // Logic
         private float timer = 0f;
@@ -71,6 +69,8 @@ namespace SnowXR.MassInjury
         
         private void Awake()
         {
+            agent = GetComponent<MassInjuryAgent>();
+            
             totalInjuryScore = headInjuryWeight + neckInjuryWeight + armInjuryWeight + torsoInjuryWeight + thighInjuryWeight + legsInjuryWeight;
             bloodLossML = 0f;
             bloodLossSeverity = BleedingInjuryStatus.None;
@@ -595,7 +595,7 @@ namespace SnowXR.MassInjury
             return random < chance * 100f;
         }
 
-        public bool InspectionDone()
+        public bool IsInspectionDone()
         {
             return inspectionDone;
         }
@@ -604,6 +604,7 @@ namespace SnowXR.MassInjury
         {
             guessedZone = guess;
             inspectionDone = true;
+            agent.beliefes.AddState("cleared", 1);
         }
 
         public ValueTuple<Zone, Zone> GuessedZone()
