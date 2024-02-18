@@ -11,7 +11,7 @@ namespace Bachelor.RaycastVision
     public class RaycastVision : MonoBehaviour
     {
         [SerializeField] List<Outline> allOutlines = new List<Outline>();
-        [SerializeField] private SpawnManager spawnManager;
+        private SpawnManager spawnManager;
 
         private void Start()
         {
@@ -20,7 +20,7 @@ namespace Bachelor.RaycastVision
                 spawnManager = SpawnManager.instance;
             }
 
-            List<GameObject> agents = spawnManager.GetAgents();
+            List<GameObject> agents = spawnManager.GetPatients();
             
             foreach (var injuredPerson in agents)
             {

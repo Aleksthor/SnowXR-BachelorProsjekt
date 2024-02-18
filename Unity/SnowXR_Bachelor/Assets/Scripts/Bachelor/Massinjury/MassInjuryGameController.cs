@@ -8,8 +8,8 @@ namespace SnowXR.MassInjury
 {
     public class MassInjuryGameController : MonoBehaviour
     {
-        [Header("Game Main Spawn Manager")]
-        [SerializeField] private SpawnManager spawnManager;
+        public static MassInjuryGameController instance;
+        private SpawnManager spawnManager;
         private List<BleedingInjury> agents = new List<BleedingInjury>();
         
         [Header("Results")]
@@ -22,13 +22,26 @@ namespace SnowXR.MassInjury
         private float updateFrequency = 3f;
         private float gameTimer = 0f;
         private bool gameOver = false;
+        private bool gameStarted = true;
 
-        
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
         private void Start()
         {
+            spawnManager = SpawnManager.instance;
             if (spawnManager == null) return;
 
-            List<GameObject> spawnedAgents = spawnManager.GetAgents();
+            List<GameObject> spawnedAgents = spawnManager.GetPatients();
 
             foreach (var injuredPerson in spawnedAgents)
             {
@@ -120,6 +133,16 @@ namespace SnowXR.MassInjury
                     diff = inspectionResult.Item1 - inspectionResult.Item2;
                     return Mathf.Abs(diff) * 40;
             }
+        }
+
+        public float GetGameTimer()
+        {
+            return gameTimer;
+        }
+
+        public bool GameOver()
+        {
+            return gameOver;
         }
     }
 }

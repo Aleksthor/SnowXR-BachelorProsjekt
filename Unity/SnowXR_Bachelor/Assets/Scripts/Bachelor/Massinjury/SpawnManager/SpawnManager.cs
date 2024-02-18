@@ -66,7 +66,7 @@ namespace SnowXR.MassInjury
             return list[random];
         }
 
-        public List<GameObject> GetAgents()
+        public List<GameObject> GetPatients()
         {
             return spawnedAgents;
         }

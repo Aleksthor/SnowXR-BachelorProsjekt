@@ -27,6 +27,7 @@ namespace SnowXR.MassInjury
         private static readonly int Sitting = Animator.StringToHash("sitting");
 
         private NavMeshAgent agent;
+        private GameObject mesh;
         private static readonly int Walking = Animator.StringToHash("walking");
 
         // Start is called before the first frame update
@@ -35,16 +36,15 @@ namespace SnowXR.MassInjury
             injuryScript = GetComponent<BleedingInjury>();
             agent = GetComponent<NavMeshAgent>();
             gender = (Gender)Random.Range(0, 2);
-            GameObject go;
             switch (gender)
             {
                 case Gender.Male:
-                    go = Instantiate(malePrefab, transform);
-                    animator = go.GetComponent<Animator>();
+                    mesh = Instantiate(malePrefab, transform);
+                    animator = mesh.GetComponent<Animator>();
                     break;
                 case Gender.Female:
-                    go = Instantiate(femalePrefab, transform);
-                    animator = go.GetComponent<Animator>();
+                    mesh = Instantiate(femalePrefab, transform);
+                    animator = mesh.GetComponent<Animator>();
                     break;
             }
         }
@@ -55,6 +55,11 @@ namespace SnowXR.MassInjury
             animator.SetBool(CanStand, injuryScript.CanWalk());
             animator.SetBool(Sitting, injuryScript.Sitting());
             animator.SetBool(Walking, agent.velocity.sqrMagnitude > 1f);
+        }
+
+        public GameObject GetMesh()
+        {
+            return mesh;
         }
     }
     
