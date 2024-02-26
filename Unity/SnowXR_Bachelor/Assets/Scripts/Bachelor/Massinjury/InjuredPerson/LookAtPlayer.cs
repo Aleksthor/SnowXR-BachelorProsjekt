@@ -32,8 +32,6 @@ namespace SnowXR.MassInjury
                     Vector3.Angle(transform.forward, distance.normalized) :
                     Vector3.Angle(transform.forward, distance.normalized) * -1f;
                 
-                Debug.Log("LookTowards " + angle);
-                
                 neck.rotation = Quaternion.Euler(35f,Mathf.Clamp(angle, -70f, 70f) ,0f);
             }
         }

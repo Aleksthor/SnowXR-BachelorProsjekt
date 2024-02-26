@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BA.GOAP;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
@@ -24,13 +25,10 @@ namespace SnowXR.MassInjury
         [Header("Bleeding Status")] 
         [SerializeField] private BleedingInjuryStatus bleedingStatus;
         [SerializeField] private BleedingArea bleedingArea;
-        
-        [Header("Correct Zone")]
-        [SerializeField] private Zone correctZone;
-        [SerializeField] private Zone initialZone;
+
 
         [Header("Chance Settings")] 
-        [SerializeField, Range(0f, 1f)] private float firstInjury;
+        [FormerlySerializedAs("firstInjury")] [SerializeField, Range(0f, 1f)] private float injuryChance;
         [SerializeField] private int headInjuryWeight = 10;
         [SerializeField] private int neckInjuryWeight = 20;
         [SerializeField] private int armInjuryWeight = 30;
@@ -46,11 +44,22 @@ namespace SnowXR.MassInjury
         
         private bool inspectionDone = false;
         
+        [Header("Results")]
+        [SerializeField] private Zone guessedZone;
+        [SerializeField] private Zone initialZone;
+        [SerializeField] private Zone correctZone;
+        [SerializeField] private bool needTourniquet = false;
+        [SerializeField] private bool recievedTourniquet = false;
+        [SerializeField] private bool needPressureRelief = false;
+        [SerializeField] private bool recievedPressureRelief = false;
+        [SerializeField] private bool needPharyngealTube = false;
+        [SerializeField] private bool recievedPharyngealTube = false;
+        
         
         // debugging
         [Header("Debugging")]
         [SerializeField] private float timeLived = 0f;
-        [SerializeField] private Zone guessedZone;
+
         
         //Cache
         private GoapAgent agent;
@@ -61,10 +70,13 @@ namespace SnowXR.MassInjury
         private float breathingTimer = 0f;
         private const float minBreathingModerate = 90f;
         private const float minBreathingSevere = 30f;
-        private const float maxBreathingModerate = 2500f;
-        private const float maxBreathingSevere = 1000f;
+        private const float maxBreathingModerate = 600f;
+        private const float maxBreathingSevere = 45f;
         private int totalInjuryScore = 0;
         private float timeWithoutAir = 0f;
+        private bool dead = false;
+        [SerializeField] private bool concious = true;
+        [SerializeField] private AnimState state = AnimState.Standing;
         
         private void Awake()
         {
@@ -73,22 +85,25 @@ namespace SnowXR.MassInjury
             totalInjuryScore = headInjuryWeight + neckInjuryWeight + armInjuryWeight + torsoInjuryWeight + thighInjuryWeight + legsInjuryWeight;
             bloodLossML = 0f;
             bloodLossSeverity = BleedingInjuryStatus.None;
+            concious = true;
             InitInjuries();
             CalculateBreathing();
             CalculatePulse();
             CalculateCorrectZone();
-            ZoneReasoning();
+            CalculateNeededHelp();
             initialZone = correctZone;
         }
         private void Update()
         {
-            if (inspectionDone) return;
+            DebugAnimationState();
+            if (inspectionDone || dead) return;
             // If we bled out already
             if (bloodLossML > 4000f)
             {
                 pulse = 0;
                 breathingStatus = BreathingStatus.None;
                 correctZone = Zone.Black;
+                dead = true;
                 return;
             }
             // Dead / Black Zone
@@ -96,6 +111,7 @@ namespace SnowXR.MassInjury
             {
                 breathingStatus = BreathingStatus.None;
                 correctZone = Zone.Black;
+                dead = true;
                 return;
             }
             
@@ -107,8 +123,10 @@ namespace SnowXR.MassInjury
                 criticalPulseTimer += Time.deltaTime;
                 if (criticalPulseTimer > 20f)
                 {
+                    concious = false;
                     pulse = 0;
                     breathingStatus = BreathingStatus.None;
+                    dead = true;
                 }
 
             }
@@ -132,6 +150,12 @@ namespace SnowXR.MassInjury
                     break;
             }
             
+            // calculate consciousness based on bloodLoss
+            if (bloodLossML > 600)
+            {
+                concious = false;
+            }
+            
             // Increase Pulse
             if (pulseIncreaseRate != 0f && bloodLossSeverity > 0)
             {
@@ -149,13 +173,20 @@ namespace SnowXR.MassInjury
             {
                 case BreathingStatus.Normal:
                     break;
-                case BreathingStatus.UnNormal:
-                    break;
-                case BreathingStatus.Critical:
+                case BreathingStatus.MinimalProblem:
                     breathingTimer -= Time.deltaTime;
                     if (breathingTimer < 0f)
                     {
                         breathingStatus = BreathingStatus.None;
+                        concious = false;
+                    }
+                    break;
+                case BreathingStatus.CriticalProblem:
+                    breathingTimer -= Time.deltaTime;
+                    if (breathingTimer < 0f)
+                    {
+                        breathingStatus = BreathingStatus.None;
+                        concious = false;
                     }
                     break;
                 case BreathingStatus.None:
@@ -163,13 +194,16 @@ namespace SnowXR.MassInjury
                     if (timeWithoutAir > 60f)
                     {
                         pulse = 0;
+                        dead = false;
                     }
                     break;
             }
             
             // Find out what zone we are now
             CalculateCorrectZone();
-            
+            CalculateNeededHelp();
+
+
         }
 
 
@@ -185,7 +219,7 @@ namespace SnowXR.MassInjury
             bleedingStatus = 0;
 
             // Chance to get first Injury
-            if (!RandomBool(firstInjury))
+            if (!RandomBool(injuryChance))
             {
                 return;
             }
@@ -352,29 +386,29 @@ namespace SnowXR.MassInjury
                         switch (bloodLossSeverity)
                         {
                             case BleedingInjuryStatus.Minimal:
-                                breathingStatus = BreathingStatus.UnNormal;
+                                breathingStatus = BreathingStatus.MinimalProblem;
                                 breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
                                 return;
                             case BleedingInjuryStatus.Moderate:
-                                if (RandomBool(0.02f))
+                                if (RandomBool(0.2f))
                                 {
-                                    breathingStatus = BreathingStatus.Critical;
+                                    breathingStatus = BreathingStatus.CriticalProblem;
                                     breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
                                 }
                                 else
                                 {
-                                    breathingStatus = BreathingStatus.UnNormal;
+                                    breathingStatus = BreathingStatus.MinimalProblem;
                                 }
                                 return;
                             case BleedingInjuryStatus.Severe:
-                                if (RandomBool(0.1f))
+                                if (RandomBool(0.75f))
                                 {
-                                    breathingStatus = BreathingStatus.Critical;
+                                    breathingStatus = BreathingStatus.CriticalProblem;
                                     breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
                                 }
                                 else
                                 {
-                                    breathingStatus = BreathingStatus.UnNormal;
+                                    breathingStatus = BreathingStatus.MinimalProblem;
                                     breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
                                 }
                                 return;
@@ -396,12 +430,12 @@ namespace SnowXR.MassInjury
                         }
                         else if (RandomBool(0.1f))
                         {
-                            breathingStatus = BreathingStatus.Critical;
+                            breathingStatus = BreathingStatus.CriticalProblem;
                             breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
                         }
                         else
                         {
-                            breathingStatus = BreathingStatus.UnNormal;
+                            breathingStatus = BreathingStatus.MinimalProblem;
                             breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
                         }
 
@@ -424,12 +458,12 @@ namespace SnowXR.MassInjury
                         }
                         else if (RandomBool(0.3f))
                         {
-                            breathingStatus = BreathingStatus.Critical;
+                            breathingStatus = BreathingStatus.CriticalProblem;
                             breathingTimer = Random.Range(minBreathingSevere, maxBreathingSevere);
                         }
                         else
                         {
-                            breathingStatus = BreathingStatus.UnNormal;
+                            breathingStatus = BreathingStatus.MinimalProblem;
                             breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
                         }
 
@@ -505,12 +539,16 @@ namespace SnowXR.MassInjury
             if (breathingStatus == BreathingStatus.None)
             {
                 correctZone = Zone.Black;
+                pulse = 0;
+                concious = false;
+                dead = true;
                 return;
             }
 
             if (pulse == 0)
             {
                 correctZone = Zone.Red;
+                concious = false;
                 return;
             }
 
@@ -522,7 +560,7 @@ namespace SnowXR.MassInjury
                     correctZone = Zone.Green;
                     return;
                 case BleedingInjuryStatus.Minimal:
-                    if (breathingStatus >= BreathingStatus.UnNormal)
+                    if (breathingStatus >= BreathingStatus.MinimalProblem)
                     {
                         correctZone = Zone.Yellow;
                     }
@@ -532,7 +570,7 @@ namespace SnowXR.MassInjury
                     }
                     return;
                 case BleedingInjuryStatus.Moderate:
-                    if (breathingStatus == BreathingStatus.UnNormal)
+                    if (breathingStatus == BreathingStatus.MinimalProblem)
                     {
                         correctZone = Zone.Red;
                     }
@@ -547,6 +585,13 @@ namespace SnowXR.MassInjury
             }
             
             
+        }
+
+        private void CalculateNeededHelp()
+        {
+            needTourniquet = bleedingArea is BleedingArea.Arms or BleedingArea.Thighs or BleedingArea.Legs;
+            needPressureRelief = (int)breathingStatus > 0;
+            needPharyngealTube = !concious;
         }
 
         private void ZoneReasoning()
@@ -604,6 +649,7 @@ namespace SnowXR.MassInjury
             guessedZone = guess;
             inspectionDone = true;
             agent.beliefes.SetState("cleared", 1);
+            ZoneReasoning();
         }
 
         public ValueTuple<Zone, Zone> GuessedZone()
@@ -613,6 +659,10 @@ namespace SnowXR.MassInjury
 
         public bool CanWalk()
         {
+            if (pulse == 0) return false;
+            if (concious == false) return false;
+            if ((int)breathingStatus > 1) return false;
+            if ((int)bloodLossSeverity > 1) return false;
             switch (bleedingArea)
             {
                 case BleedingArea.Legs:
@@ -624,9 +674,7 @@ namespace SnowXR.MassInjury
                 default:
                     break;
             }
-            if (pulse == 0) return false;
-            if ((int)breathingStatus > 1) return false;
-            if ((int)bloodLossSeverity > 1) return false;
+            
             
             return true;
 
@@ -634,7 +682,8 @@ namespace SnowXR.MassInjury
 
         public bool Sitting()
         {
-            if (breathingStatus == BreathingStatus.UnNormal) return true;
+            if (concious == false) return false;
+            if (breathingStatus == BreathingStatus.MinimalProblem) return true;
             if (bloodLossSeverity == BleedingInjuryStatus.Minimal) return true;
             
             return false;
@@ -643,6 +692,24 @@ namespace SnowXR.MassInjury
         public int GetBleedingArea()
         {
             return (int)bleedingArea;
+        }
+
+
+        private void DebugAnimationState()
+        {
+            if (!concious)
+            {
+                state = dead ? AnimState.Dead : AnimState.LayingDownUC;
+                return;
+            }
+
+            if (CanWalk())
+            {
+                state = Sitting() ? AnimState.Sitting : AnimState.Standing;
+                return;
+            }
+
+            state = Sitting() ? AnimState.Sitting : AnimState.LayingDownC;
         }
     }
 
@@ -659,8 +726,8 @@ namespace SnowXR.MassInjury
     public enum BreathingStatus 
     {
         Normal,
-        UnNormal,
-        Critical,
+        MinimalProblem,
+        CriticalProblem,
         None
     }
     [System.Serializable]
@@ -681,5 +748,14 @@ namespace SnowXR.MassInjury
         Torso,
         Thighs,
         Legs
+    }
+    public enum AnimState 
+    {
+        Standing,
+        Sitting,
+        LayingDownC,
+        LayingDownUC,
+        Dead
+        
     }
 }

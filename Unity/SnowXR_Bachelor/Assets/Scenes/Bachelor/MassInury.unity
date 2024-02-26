@@ -51802,7 +51802,7 @@ PrefabInstance:
     - target: {fileID: 2683195716791022646, guid: 4ac7df741a9c0a2418ec19477729ee3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.04
+      value: 14.352
       objectReference: {fileID: 0}
     - target: {fileID: 2683195716791022646, guid: 4ac7df741a9c0a2418ec19477729ee3d,
         type: 3}
@@ -52603,7 +52603,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allOutlines: []
-  spawnManager: {fileID: 1184302582}
 --- !u!114 &1886602964
 MonoBehaviour:
   m_ObjectHideFlags: 0
