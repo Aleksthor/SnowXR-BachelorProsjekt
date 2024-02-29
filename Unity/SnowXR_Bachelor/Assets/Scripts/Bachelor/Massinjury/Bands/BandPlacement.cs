@@ -14,10 +14,18 @@ namespace SnowXR.MassInjury
         private Collider currentCollission = null;
 
         [SerializeField] private Zone bandColor;
-
+        
+        private Rigidbody rigidbody;
+        private GrabbableRingHelper ringHelper;
+        private BoxCollider collider;
         private void Awake()
         {
             band = GetComponent<Grabbable>();
+            
+            rigidbody = GetComponent<Rigidbody>();
+            ringHelper = GetComponent<GrabbableRingHelper>();
+            collider = GetComponent<BoxCollider>();
+            
             beingHeld = band.BeingHeld;
         }
 
@@ -57,11 +65,11 @@ namespace SnowXR.MassInjury
                 transform.parent = parent;
                 transform.localPosition = Vector3.zero;
 
-                GetComponent<Grabbable>().enabled = false;
-                GetComponent<Rigidbody>().isKinematic = true;
-                GetComponent<Rigidbody>().useGravity = false;
-                GetComponent<GrabbableRingHelper>().enabled = false;
-                GetComponent<BoxCollider>().enabled = false;
+                band.enabled = false;
+                rigidbody.isKinematic = true;
+                rigidbody.useGravity = false;
+                ringHelper.enabled = false;
+                collider.enabled = false;
                 
                 currentCollission.transform.parent.GetComponent<BleedingInjury>().Inspect(bandColor);
                 
@@ -78,7 +86,6 @@ namespace SnowXR.MassInjury
             if (other.CompareTag("BandReciever"))
             {
                 currentCollission = other;
-                Debug.Log("Ready");
             }
         }
         private void OnTriggerExit(Collider other)
@@ -86,7 +93,6 @@ namespace SnowXR.MassInjury
             if (other == currentCollission)
             {
                 currentCollission = null;
-                Debug.Log("NotReady");
             }
         }
     }
