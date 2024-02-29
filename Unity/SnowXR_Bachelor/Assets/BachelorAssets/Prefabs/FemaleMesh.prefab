@@ -248,7 +248,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3b31e9336b0dc484c9032ebcf05bdb2a,
         type: 3}
       propertyPath: m_Name
-      value: Female Variant
+      value: FemaleMesh
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3b31e9336b0dc484c9032ebcf05bdb2a,
         type: 3}
@@ -361,6 +361,8 @@ MonoBehaviour:
   torsoBleedingParent: {fileID: 1443719327309649859}
   thighBleedingParent: {fileID: 5126769563204001929}
   legBleedingParent: {fileID: 1427423745888806282}
+  leftBicepsParent: {fileID: 3041303848841953423}
+  rightBicepsParent: {fileID: 4777065074354738859}
   minimalBleedingParticles: {fileID: 1000013355911406, guid: c6b57ee0a13cff8409b3405b719aa999,
     type: 3}
   moderateBleedingParticles: {fileID: 1000013355911406, guid: 76e2077cf5eecd941ad0f416d6371fd1,
@@ -376,6 +378,12 @@ Transform:
 --- !u!4 &4725666616669234706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -444324252100140850, guid: 3b31e9336b0dc484c9032ebcf05bdb2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4053663742876387036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4777065074354738859 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8793853121078087799, guid: 3b31e9336b0dc484c9032ebcf05bdb2a,
     type: 3}
   m_PrefabInstance: {fileID: 4053663742876387036}
   m_PrefabAsset: {fileID: 0}

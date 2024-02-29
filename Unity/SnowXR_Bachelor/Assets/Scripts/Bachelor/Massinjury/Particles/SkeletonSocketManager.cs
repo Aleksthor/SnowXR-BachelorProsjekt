@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SnowXR.MassInjury
 {
-    public class BleedingParticleController : MonoBehaviour
+    public class SkeletonSocketManager : MonoBehaviour
     {
         [SerializeField] public Transform headBleedingParent;
         [SerializeField] public Transform neckBleedingParent;
@@ -13,6 +13,9 @@ namespace SnowXR.MassInjury
         [SerializeField] public Transform torsoBleedingParent;
         [SerializeField] public Transform thighBleedingParent;
         [SerializeField] public Transform legBleedingParent;
+        
+        [SerializeField] public Transform leftBicepsParent;
+        [SerializeField] public Transform rightBicepsParent;
 
         [SerializeField] public GameObject minimalBleedingParticles;
         [SerializeField] public GameObject moderateBleedingParticles;

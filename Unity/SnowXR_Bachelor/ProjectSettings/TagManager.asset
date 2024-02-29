@@ -12,6 +12,7 @@ TagManager:
   - Elevator
   - Agent
   - SpawnPoint
+  - BandReciever
   layers:
   - Default
   - TransparentFX

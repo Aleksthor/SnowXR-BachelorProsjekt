@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &287638413027894090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3832607403704230156}
+  - component: {fileID: 7305645318732424752}
+  m_Layer: 9
+  m_Name: BandCollider
+  m_TagString: BandReciever
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3832607403704230156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287638413027894090}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.311, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2541076893982652575}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7305645318732424752
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287638413027894090}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.42
+  m_Height: 2.01
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.48, z: 0}
 --- !u!1 &3312547713710911484
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,6 +93,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 975398443664577121}
+  - {fileID: 3832607403704230156}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5298930162604492726
@@ -86,11 +142,9 @@ MonoBehaviour:
   zoneReasoning: []
   breathingStatus: 0
   pulse: 0
-  bleedingStatus: 0
+  bleedingSeverity: 0
   bleedingArea: 0
-  correctZone: 0
-  initialZone: 0
-  firstInjury: 0.8
+  injuryChance: 0.8
   headInjuryWeight: 10
   neckInjuryWeight: 20
   armInjuryWeight: 30
@@ -99,8 +153,18 @@ MonoBehaviour:
   legsInjuryWeight: 10
   bloodLossSeverity: 0
   bloodLossML: 0
-  timeLived: 0
   guessedZone: 0
+  initialZone: 0
+  correctZone: 0
+  needTourniquet: 0
+  recievedTourniquet: 0
+  needPressureRelief: 0
+  recievedPressureRelief: 0
+  needPharyngealTube: 0
+  recievedPharyngealTube: 0
+  timeLived: 0
+  concious: 1
+  state: 0
 --- !u!114 &6100426835021651039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,10 +249,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.18
+  m_Height: 1.76
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &940364895681061577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +298,7 @@ Transform:
   m_GameObject: {fileID: 7954880764734531155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
