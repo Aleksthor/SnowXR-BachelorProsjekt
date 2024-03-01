@@ -17,6 +17,8 @@ namespace SnowXR.MassInjury
         [SerializeField] public Transform leftBicepsParent;
         [SerializeField] public Transform rightBicepsParent;
 
+        [SerializeField] public Transform breathParent;
+        
         [SerializeField] public GameObject minimalBleedingParticles;
         [SerializeField] public GameObject moderateBleedingParticles;
         [SerializeField] public GameObject severeBleedingParticles;

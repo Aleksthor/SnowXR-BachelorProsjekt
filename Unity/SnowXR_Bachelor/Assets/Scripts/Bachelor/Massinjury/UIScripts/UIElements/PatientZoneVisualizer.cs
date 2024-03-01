@@ -9,15 +9,17 @@ namespace SnowXR.MassInjury
     {
         [SerializeField] private Text name;
         [SerializeField] private Image guess;
+        [SerializeField] private Image initial;
         [SerializeField] private Image correct;
         [SerializeField] private Image border;
 
-        public void SetValues(string name, Color guess, Color correct, Color border)
+        public void SetValues(string name, Color guess, Color correct, Color initial, Color border)
         {
             this.name.text = name;
             this.guess.color = guess;
             this.correct.color = correct;
             this.border.color = border;
+            this.initial.color = initial;
         }
     }
 }

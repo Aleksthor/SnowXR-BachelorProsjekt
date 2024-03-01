@@ -43,12 +43,12 @@ namespace SnowXR.MassInjury
                 if (guess.Item1 == guess.Item2)
                 {
                     GameObject zoneVis = Instantiate(patientZoneVisualizer, correctContent);
-                    zoneVis.GetComponent<PatientZoneVisualizer>().SetValues("Patient " + i, GetColor(guess.Item2), GetColor(guess.Item1), correct);
+                    zoneVis.GetComponent<PatientZoneVisualizer>().SetValues("Patient " + i, GetColor(guess.Item2), GetColor(guess.Item1), GetColor(injury.Initial()), correct);
                 }
                 else
                 {
                     GameObject zoneVis = Instantiate(patientZoneVisualizer, incorrectContent);
-                    zoneVis.GetComponent<PatientZoneVisualizer>().SetValues("Patient " + i, GetColor(guess.Item2), GetColor(guess.Item1), inCorrect);
+                    zoneVis.GetComponent<PatientZoneVisualizer>().SetValues("Patient " + i, GetColor(guess.Item2), GetColor(guess.Item1),GetColor(injury.Initial()), inCorrect);
                 }
 
                 i++;

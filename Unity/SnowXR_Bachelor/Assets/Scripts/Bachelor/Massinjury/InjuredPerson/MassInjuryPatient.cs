@@ -30,6 +30,8 @@ namespace SnowXR.MassInjury
         private GameObject mesh;
         private static readonly int Walking = Animator.StringToHash("walking");
 
+        private Transform normalBreath;
+
         // Start is called before the first frame update
         private void Awake()
         {
@@ -47,7 +49,13 @@ namespace SnowXR.MassInjury
                     animator = mesh.GetComponent<Animator>();
                     break;
             }
+
+            normalBreath = transform.Find("Breathing");
+            normalBreath.parent = mesh.GetComponent<SkeletonSocketManager>().breathParent;
+            normalBreath.localPosition = Vector3.zero;
         }
+
+        
 
         private void Update()
         {
@@ -55,6 +63,23 @@ namespace SnowXR.MassInjury
             animator.SetBool(CanStand, injuryScript.CanWalk());
             animator.SetBool(Sitting, injuryScript.Sitting());
             animator.SetBool(Walking, agent.velocity.sqrMagnitude > 1f);
+            
+            
+            switch (injuryScript.BreathStatus())
+            {
+                case BreathingStatus.None:
+                    normalBreath.gameObject.SetActive(false);
+                    break;
+                case BreathingStatus.CriticalProblem:
+                    normalBreath.gameObject.SetActive(false);
+                    break;
+                case BreathingStatus.MinimalProblem:
+                    normalBreath.gameObject.SetActive(true);
+                    break;
+                case BreathingStatus.Normal:
+                    normalBreath.gameObject.SetActive(true);
+                    break;
+            }
         }
 
         public GameObject GetMesh()

@@ -125,6 +125,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4298319943615571688}
   m_LocalEulerAnglesHint: {x: 0, y: -148.819, z: 0}
+--- !u!1 &6166031653669122836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7749349822229829416}
+  m_Layer: 0
+  m_Name: BREATHPARENT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7749349822229829416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6166031653669122836}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8300218651044821664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6334719971614694308
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +305,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6198296517550657440}
+    - targetCorrespondingSourceObject: {fileID: -3787020065667400580, guid: 3b31e9336b0dc484c9032ebcf05bdb2a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7749349822229829416}
     - targetCorrespondingSourceObject: {fileID: -7782563766584957409, guid: 3b31e9336b0dc484c9032ebcf05bdb2a,
         type: 3}
       insertIndex: -1
@@ -363,6 +398,7 @@ MonoBehaviour:
   legBleedingParent: {fileID: 1427423745888806282}
   leftBicepsParent: {fileID: 3041303848841953423}
   rightBicepsParent: {fileID: 4777065074354738859}
+  breathParent: {fileID: 7749349822229829416}
   minimalBleedingParticles: {fileID: 1000013355911406, guid: c6b57ee0a13cff8409b3405b719aa999,
     type: 3}
   moderateBleedingParticles: {fileID: 1000013355911406, guid: 76e2077cf5eecd941ad0f416d6371fd1,
@@ -384,6 +420,12 @@ Transform:
 --- !u!4 &4777065074354738859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8793853121078087799, guid: 3b31e9336b0dc484c9032ebcf05bdb2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4053663742876387036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8300218651044821664 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3787020065667400580, guid: 3b31e9336b0dc484c9032ebcf05bdb2a,
     type: 3}
   m_PrefabInstance: {fileID: 4053663742876387036}
   m_PrefabAsset: {fileID: 0}

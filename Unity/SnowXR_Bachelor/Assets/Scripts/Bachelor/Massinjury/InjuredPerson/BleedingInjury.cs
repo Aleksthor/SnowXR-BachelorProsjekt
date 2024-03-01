@@ -16,7 +16,7 @@ namespace SnowXR.MassInjury
         [SerializeField] private List<string> zoneReasoning = new List<string>();
         
         [Header("Breath Status")]
-        [SerializeField] private  BreathingStatus breathingStatus;
+        [SerializeField] private BreathingStatus breathingStatus;
         
         [Header("Pulse Status")]
         [SerializeField] private int pulse;
@@ -645,12 +645,27 @@ namespace SnowXR.MassInjury
             return inspectionDone;
         }
 
+        public BreathingStatus BreathStatus()
+        {
+            return breathingStatus;
+        }
+
+        public Zone Initial()
+        {
+            return initialZone;
+        }
+
         public void Inspect(Zone guess)
         {
             guessedZone = guess;
             inspectionDone = true;
             agent.beliefes.SetState("cleared", 1);
             ZoneReasoning();
+        }
+
+        public bool Concious()
+        {
+            return concious;
         }
 
         public ValueTuple<Zone, Zone> GuessedZone()
