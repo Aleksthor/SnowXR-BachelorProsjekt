@@ -31,6 +31,12 @@ namespace SnowXR.MassInjury
         private static readonly int Walking = Animator.StringToHash("walking");
 
         private Transform normalBreath;
+        private Transform heavyBreath;
+        private Transform criticalBreath;
+
+        private SkinnedMeshRenderer head;
+        private SkinnedMeshRenderer hands;
+        private static readonly int Saturation = Shader.PropertyToID("_Saturation");
 
         // Start is called before the first frame update
         private void Awake()
@@ -50,9 +56,32 @@ namespace SnowXR.MassInjury
                     break;
             }
 
-            normalBreath = transform.Find("Breathing");
+            normalBreath = transform.Find("NormalBreath");
+            heavyBreath = transform.Find("HeavyBreath");
+            criticalBreath = transform.Find("CriticalBreath");
+            
+            
             normalBreath.parent = mesh.GetComponent<SkeletonSocketManager>().breathParent;
             normalBreath.localPosition = Vector3.zero;
+            
+            heavyBreath.parent = mesh.GetComponent<SkeletonSocketManager>().breathParent;
+            heavyBreath.localPosition = Vector3.zero;
+            
+            criticalBreath.parent = mesh.GetComponent<SkeletonSocketManager>().breathParent;
+            criticalBreath.localPosition = Vector3.zero;
+
+
+            if (gender == Gender.Male)
+            {
+                head = mesh.transform.Find("mesh").Find("M_Head").GetComponent<SkinnedMeshRenderer>();
+                hands = mesh.transform.Find("mesh").Find("M_Hands").GetComponent<SkinnedMeshRenderer>();
+            }
+            else
+            {
+                head = mesh.transform.Find("mesh").Find("F_Head").GetComponent<SkinnedMeshRenderer>();
+                hands = mesh.transform.Find("mesh").Find("F_Hands").GetComponent<SkinnedMeshRenderer>();
+            }
+
         }
 
         
@@ -69,22 +98,40 @@ namespace SnowXR.MassInjury
             {
                 case BreathingStatus.None:
                     normalBreath.gameObject.SetActive(false);
+                    heavyBreath.gameObject.SetActive(false);
+                    criticalBreath.gameObject.SetActive(false);
                     break;
                 case BreathingStatus.CriticalProblem:
                     normalBreath.gameObject.SetActive(false);
+                    heavyBreath.gameObject.SetActive(false);
+                    criticalBreath.gameObject.SetActive(true);
                     break;
                 case BreathingStatus.MinimalProblem:
-                    normalBreath.gameObject.SetActive(true);
+                    normalBreath.gameObject.SetActive(false);
+                    heavyBreath.gameObject.SetActive(true);
+                    criticalBreath.gameObject.SetActive(false);
                     break;
                 case BreathingStatus.Normal:
                     normalBreath.gameObject.SetActive(true);
+                    heavyBreath.gameObject.SetActive(false);
+                    criticalBreath.gameObject.SetActive(false);
                     break;
             }
+            
+            
+            head.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
+            hands.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
         }
+        
 
         public GameObject GetMesh()
         {
             return mesh;
+        }
+        
+        float map(float s, float a1, float a2, float b1, float b2)
+        {
+            return b1 + (s-a1)*(b2-b1)/(a2-a1);
         }
     }
     
