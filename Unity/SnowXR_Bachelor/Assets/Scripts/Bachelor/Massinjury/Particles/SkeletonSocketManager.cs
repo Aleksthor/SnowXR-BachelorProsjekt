@@ -39,14 +39,15 @@ namespace SnowXR.MassInjury
         public GameObject tourniquetPrefabWhite;
         public GameObject tourniquetPrefabGreen;
 
-        private bool rLegGreen = false;
-        private bool lLegGreen = false;
-        private bool rArmGreen = false;
-        private bool lArmGreen = false;
+        private bool green = false;
+        private bool lastGreen = false;
 
         private BleedingInjury injury;
 
         private GameObject spawnedParticles;
+        private GameObject spawnedTourniquet;
+        private Comparative side = Comparative.None;
+        private BleedingArea area = BleedingArea.None;
         
         private void Start()
         {
@@ -159,30 +160,29 @@ namespace SnowXR.MassInjury
         {
             if (holdingTourniquet)
             {
-                if (lArmGreen != Vector3.Distance(tourniquetTransform.position,
-                        lArmTourniquet.position) < 0.1f)
+                if (!ReferenceEquals(spawnedTourniquet, null))
                 {
-                    Change(!lArmGreen, lArmTourniquet);
-                    lArmGreen = !lArmGreen;
+                    green = Vector3.Distance(spawnedTourniquet.transform.position, tourniquetTransform.position) < 0.2f;
+                    if (green != lastGreen)
+                    {
+                        switch (area)
+                        {
+                            case BleedingArea.Arms:
+                                Change(green, side == Comparative.Left ? lArmTourniquet : rArmTourniquet);
+                                break;
+                            case BleedingArea.Thighs:
+                                Change(green, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
+                                break;
+                            case BleedingArea.Legs:
+                                Change(green, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
-                if (rArmGreen != Vector3.Distance(tourniquetTransform.position,
-                        rArmTourniquet.position) < 0.1f)
-                {
-                    Change(!rArmGreen, rArmTourniquet);
-                    rArmGreen = !rArmGreen;
-                }
-                if (lLegGreen != Vector3.Distance(tourniquetTransform.position,
-                        lLegTourniquet.position) < 0.1f)
-                {
-                    Change(!lLegGreen, lLegTourniquet);
-                    lLegGreen = !lLegGreen;
-                }
-                if (rLegGreen != Vector3.Distance(tourniquetTransform.position,
-                        rLegTourniquet.position) < 0.1f)
-                {
-                    Change(!rLegGreen, rLegTourniquet);
-                    rLegGreen = !rLegGreen;
-                }
+                
+               
             }
         }
 
@@ -195,13 +195,19 @@ namespace SnowXR.MassInjury
                 switch (area)
                 {
                     case (int)BleedingArea.Arms:
-                        Instantiate(tourniquetPrefabWhite, side == Comparative.Left ? lArmTourniquet : rArmTourniquet);
+                        spawnedTourniquet = Instantiate(tourniquetPrefabWhite, side == Comparative.Left ? lArmTourniquet : rArmTourniquet);
+                        this.side = side;
+                        this.area = (BleedingArea)area;
                         break;
                     case (int)BleedingArea.Thighs:
-                        Instantiate(tourniquetPrefabWhite, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
+                        spawnedTourniquet = Instantiate(tourniquetPrefabWhite, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
+                        this.side = side;
+                        this.area = (BleedingArea)area;
                         break;
                     case (int)BleedingArea.Legs:
-                        Instantiate(tourniquetPrefabWhite, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
+                        spawnedTourniquet = Instantiate(tourniquetPrefabWhite, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
+                        this.side = side;
+                        this.area = (BleedingArea)area;
                         break;
                     default:
                         break;
@@ -237,7 +243,7 @@ namespace SnowXR.MassInjury
                     Destroy(child.gameObject);
                 }
 
-                Instantiate(tourniquetPrefabGreen, checking);
+                spawnedTourniquet = Instantiate(tourniquetPrefabGreen, checking);
                 if (!ReferenceEquals(tourniquetTransform, null))
                     tourniquetTransform.GetComponent<TourniquetPlacement>().SetNextParent(checking);
             }
@@ -248,11 +254,12 @@ namespace SnowXR.MassInjury
                     Destroy(child.gameObject);
                 }
 
-                Instantiate(tourniquetPrefabWhite, checking);
+                spawnedTourniquet = Instantiate(tourniquetPrefabWhite, checking);
                 if (!ReferenceEquals(tourniquetTransform, null))
                     tourniquetTransform.GetComponent<TourniquetPlacement>().SetNextParent(null);
             }
-            
+
+            lastGreen = green;
         }
 
 
