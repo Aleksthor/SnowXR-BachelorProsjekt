@@ -9,26 +9,10 @@ using Random = UnityEngine.Random;
 
 namespace SnowXR.MassInjury
 {
-    [RequireComponent(typeof(GoapAgent))]
+    [RequireComponent(typeof(GoapAgent), typeof(MassInjuryPatient))]
     public class BleedingInjury : MonoBehaviour
     {
-        [Header("Reasoning")] 
-        [SerializeField] private List<string> zoneReasoning = new List<string>();
-        
-        [Header("Breath Status")]
-        [SerializeField] private BreathingStatus breathingStatus;
-        
-        [Header("Pulse Status")]
-        [SerializeField] private int pulse;
-        private float pulseIncreaseRate;
-
-        [FormerlySerializedAs("bleedingStatus")]
-        [Header("Bleeding Status")] 
-        [SerializeField] private BleedingInjuryStatus bleedingSeverity;
-        [SerializeField] private BleedingArea bleedingArea;
-
-
-        [Header("Chance Settings")] 
+        [Header("Chance Settings, For Spawning")] 
         [FormerlySerializedAs("firstInjury")] [SerializeField, Range(0f, 1f)] private float injuryChance;
         [SerializeField] private int headInjuryWeight = 10;
         [SerializeField] private int neckInjuryWeight = 20;
@@ -37,12 +21,25 @@ namespace SnowXR.MassInjury
         [SerializeField] private int thighInjuryWeight = 25;
         [SerializeField] private int legsInjuryWeight = 10;
         
+        [FormerlySerializedAs("bleedingStatus")]
+        [Header("Bleeding Status")] 
+        [SerializeField] private BleedingInjuryStatus bleedingSeverity;
+        [SerializeField] private BleedingArea bleedingArea;
+        [SerializeField] private Comparative bleedingSide = Comparative.None;
         
-        [Header("Bleeding")] 
+        [Header("Blood Loss")] 
         [SerializeField] private BleedingInjuryStatus bloodLossSeverity;
         [SerializeField] public float bloodLossML = 0f;
-
         
+        [Header("Breath Status")]
+        [SerializeField] private BreathingStatus breathingStatus;
+        
+        [Header("Pulse Status")]
+        [SerializeField] private int pulse;
+        private float pulseIncreaseRate;
+        
+        [Header("Reasoning")] 
+        [SerializeField] private List<string> zoneReasoning = new List<string>();
         private bool inspectionDone = false;
         
         [Header("Results")]
@@ -57,6 +54,8 @@ namespace SnowXR.MassInjury
         [SerializeField] private bool recievedPharyngealTube = false;
         
         
+        
+        
         // debugging
         [Header("Debugging")]
         [SerializeField] private float timeLived = 0f;
@@ -64,6 +63,7 @@ namespace SnowXR.MassInjury
         
         //Cache
         private GoapAgent agent;
+        private MassInjuryPatient patient;
         
         // Logic
         private float timer = 0f;
@@ -82,6 +82,7 @@ namespace SnowXR.MassInjury
         private void Awake()
         {
             agent = GetComponent<MassInjuryAgent>();
+            patient = GetComponent<MassInjuryPatient>();
             
             totalInjuryScore = headInjuryWeight + neckInjuryWeight + armInjuryWeight + torsoInjuryWeight + thighInjuryWeight + legsInjuryWeight;
             bloodLossML = 0f;
@@ -149,6 +150,12 @@ namespace SnowXR.MassInjury
                 case BleedingInjuryStatus.Severe:
                     bloodLossML += 13f * Time.deltaTime;
                     break;
+            }
+
+            if (needTourniquet && recievedTourniquet)
+            {
+                bloodLossSeverity = BleedingInjuryStatus.None;
+                patient.GetSkeletonSocketManager().RemoveBloodParticles();
             }
             
             // calculate consciousness based on bloodLoss
@@ -287,6 +294,7 @@ namespace SnowXR.MassInjury
                     }
                     // Random Injury status from Minimal to Severe
                     bleedingSeverity = (BleedingInjuryStatus)Random.Range(1, 4);
+                    bleedingSide = (Comparative)Random.Range(1, 3);
                     // Setup bloodLossSeverity based on Injury Status and area of the body
                     switch (bleedingSeverity)
                     {
@@ -331,6 +339,7 @@ namespace SnowXR.MassInjury
                     }
                     // Random Injury status from Minimal to Severe
                     bleedingSeverity = (BleedingInjuryStatus)Random.Range(1, 4);
+                    bleedingSide = (Comparative)Random.Range(1, 3);
                     // Setup bloodLossSeverity based on Injury Status and area of the body
                     switch (bleedingSeverity)
                     {
@@ -353,6 +362,7 @@ namespace SnowXR.MassInjury
                     }
                     // Random Injury status from Minimal to Severe
                     bleedingSeverity = (BleedingInjuryStatus)Random.Range(1, 4);
+                    bleedingSide = (Comparative)Random.Range(1, 3);
                     // Setup bloodLossSeverity based on Injury Status and area of the body
                     switch (bleedingSeverity)
                     {
@@ -634,6 +644,11 @@ namespace SnowXR.MassInjury
             return BleedingArea.None;
         }
 
+        public Comparative Side()
+        {
+            return bleedingSide;
+        }
+
         private bool RandomBool(float chance)
         {
             int random = Random.Range(0, 100);
@@ -732,6 +747,20 @@ namespace SnowXR.MassInjury
 
             state = Sitting() ? AnimState.Sitting : AnimState.LayingDownC;
         }
+
+
+        public void SetRecievedTourniquet(bool input)
+        {
+            recievedTourniquet = input;
+        }
+    }
+
+    [System.Serializable]
+    public enum Comparative
+    {
+        None,
+        Right,
+        Left
     }
 
     [System.Serializable]

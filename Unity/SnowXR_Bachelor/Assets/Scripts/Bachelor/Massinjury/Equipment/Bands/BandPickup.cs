@@ -29,15 +29,12 @@ namespace SnowXR.MassInjury
         }
 
         // Update is called once per frame
-        void Update()
+        public void Pickup()
         {
-            if (grabbable.BeingHeld)
-            {
-                transform.parent = null;
-                rigidbody.isKinematic = false;
-                cubeMesh.SetActive(true);
-                bandMesh.SetActive(false);
-            }
+            transform.parent = null;
+            rigidbody.isKinematic = false;
+            cubeMesh.SetActive(true);
+            bandMesh.SetActive(false);
         }
     }
 }

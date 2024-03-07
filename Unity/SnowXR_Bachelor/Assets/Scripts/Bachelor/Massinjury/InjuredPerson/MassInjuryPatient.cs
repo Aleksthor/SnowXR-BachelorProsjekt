@@ -36,6 +36,8 @@ namespace SnowXR.MassInjury
 
         private SkinnedMeshRenderer head;
         private SkinnedMeshRenderer hands;
+        private SkeletonSocketManager skeletonManager;
+        
         private static readonly int Saturation = Shader.PropertyToID("_Saturation");
 
         // Start is called before the first frame update
@@ -59,15 +61,15 @@ namespace SnowXR.MassInjury
             normalBreath = transform.Find("NormalBreath");
             heavyBreath = transform.Find("HeavyBreath");
             criticalBreath = transform.Find("CriticalBreath");
-            
-            
-            normalBreath.parent = mesh.GetComponent<SkeletonSocketManager>().breathParent;
+
+            skeletonManager = mesh.GetComponent<SkeletonSocketManager>();
+            normalBreath.parent = skeletonManager.breathParent;
             normalBreath.localPosition = Vector3.zero;
             
-            heavyBreath.parent = mesh.GetComponent<SkeletonSocketManager>().breathParent;
+            heavyBreath.parent = skeletonManager.breathParent;
             heavyBreath.localPosition = Vector3.zero;
             
-            criticalBreath.parent = mesh.GetComponent<SkeletonSocketManager>().breathParent;
+            criticalBreath.parent = skeletonManager.breathParent;
             criticalBreath.localPosition = Vector3.zero;
 
 
@@ -122,7 +124,11 @@ namespace SnowXR.MassInjury
             head.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
             hands.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
         }
-        
+
+        public SkeletonSocketManager GetSkeletonSocketManager()
+        {
+            return skeletonManager;
+        }
 
         public GameObject GetMesh()
         {
