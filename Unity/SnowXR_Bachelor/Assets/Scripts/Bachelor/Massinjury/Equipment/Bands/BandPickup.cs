@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BNG;
@@ -21,11 +22,17 @@ namespace SnowXR.MassInjury
             rigidbody = GetComponent<Rigidbody>();
             ringHelper = GetComponent<GrabbableRingHelper>();
             collider = GetComponent<BoxCollider>();
-            
-            rigidbody.isKinematic = true;
 
             cubeMesh = transform.Find("Mesh").Find("Cube").gameObject;
             bandMesh = transform.Find("Mesh").Find("Band").gameObject;
+        }
+
+        private void Update()
+        {
+            if (grabbable.BeingHeld || grabbable.RemoteGrabbing)
+            {
+                Pickup();
+            }
         }
 
         // Update is called once per frame

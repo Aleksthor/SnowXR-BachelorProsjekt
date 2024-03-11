@@ -280,6 +280,7 @@ MonoBehaviour:
   legsInjuryWeight: 10
   bleedingSeverity: 0
   bleedingArea: 0
+  bleedingSide: 0
   bloodLossSeverity: 0
   bloodLossML: 0
   breathingStatus: 0
@@ -329,7 +330,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1863918364411759501}
           m_TargetAssemblyTypeName: Bachelor.Dialogue.DialogueResponder, Bachelor.Dialogue
-          m_MethodName: Respond
+          m_MethodName: RespondHarDuSkader
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -381,7 +382,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.18
+  m_Radius: 0.06
   m_Height: 1.76
   m_Direction: 1
   m_Center: {x: 0, y: 0.88, z: 0}

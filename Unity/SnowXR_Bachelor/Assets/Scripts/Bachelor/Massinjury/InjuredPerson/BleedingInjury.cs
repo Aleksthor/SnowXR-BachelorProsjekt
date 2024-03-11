@@ -257,7 +257,7 @@ namespace SnowXR.MassInjury
                             bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
                         case BleedingInjuryStatus.Moderate:
-                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
                             return;
                         case BleedingInjuryStatus.Severe:
                             bloodLossSeverity = BleedingInjuryStatus.Moderate;
@@ -279,7 +279,7 @@ namespace SnowXR.MassInjury
                             bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
                         case BleedingInjuryStatus.Moderate:
-                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
                             return;
                         case BleedingInjuryStatus.Severe:
                             bloodLossSeverity = BleedingInjuryStatus.Moderate;
@@ -302,7 +302,7 @@ namespace SnowXR.MassInjury
                             bloodLossSeverity = BleedingInjuryStatus.Minimal;
                             return;
                         case BleedingInjuryStatus.Moderate:
-                            bloodLossSeverity = BleedingInjuryStatus.Minimal;
+                            bloodLossSeverity = BleedingInjuryStatus.Moderate;
                             return;
                         case BleedingInjuryStatus.Severe:
                             bloodLossSeverity = BleedingInjuryStatus.Moderate;
@@ -752,6 +752,11 @@ namespace SnowXR.MassInjury
         public void SetRecievedTourniquet(bool input)
         {
             recievedTourniquet = input;
+        }
+
+        public int Pulse()
+        {
+            return pulse;
         }
     }
 

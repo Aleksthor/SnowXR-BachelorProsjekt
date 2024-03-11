@@ -13,6 +13,7 @@ TagManager:
   - Agent
   - SpawnPoint
   - BandReciever
+  - Pulse
   layers:
   - Default
   - TransparentFX

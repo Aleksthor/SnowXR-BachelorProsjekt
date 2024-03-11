@@ -20,9 +20,84 @@ namespace Bachelor.Dialogue
             bleedingInjury = GetComponent<BleedingInjury>();
         }
 
-        public void Respond()
+        public void RespondHarDuSkader()
         {
+            string response = "";
+
+            if (!bleedingInjury.Concious())
+            {
+                response += "Ikke noe svar ..";
+                DialogueController.instance.ShowResponse(response);
+                return;
+            }
+
+            if (bleedingInjury.BreathStatus() == BreathingStatus.CriticalProblem)
+            {
+                response += ".. Du kan høre at pasienten sliter med å snakke ..";
+                DialogueController.instance.ShowResponse(response);
+                return;
+            }
             
+            BleedingArea area = (BleedingArea)bleedingInjury.GetBleedingArea();
+            if (area == BleedingArea.None)
+            {
+                response += "Nei, jeg har ingen skader";
+            }
+            else
+            {
+                response += "Ja, jeg har fått ";
+
+                BleedingInjuryStatus status = (BleedingInjuryStatus)bleedingInjury.GetBleedingSeverity();
+                switch (status)
+                {
+                    case BleedingInjuryStatus.Minimal:
+                        response += "små ";
+                        break;
+                    case BleedingInjuryStatus.Moderate:
+                        break;
+                    case BleedingInjuryStatus.Severe:
+                        response += "store ";
+                        break;
+                    default:
+                        break;
+                }
+
+                switch (area)
+                {
+                    case BleedingArea.Head:
+                        response += "skader i hodet.";
+                        break;
+                    case BleedingArea.Neck:
+                        response += "skader i nakken.";
+                        break;
+                    case BleedingArea.Arms:
+                        response += "skader i ";
+                        response += bleedingInjury.Side() == Comparative.Right ? "høyre arm." : "ventre arm";
+                        break;
+                    case BleedingArea.Torso:
+                        response += "skader i magen.";
+                        break;
+                    case BleedingArea.Thighs:
+                        response += "skader i ";
+                        response += bleedingInjury.Side() == Comparative.Right ? "høyre lår." : "ventre lår";
+                        break;
+                    case BleedingArea.Legs:
+                        response += "skader i ";
+                        response += bleedingInjury.Side() == Comparative.Right ? "høyre legg." : "ventre legg";
+                        break;
+                    default:
+                        break;
+                }
+
+                response += "\n \n";
+
+                if (bleedingInjury.BreathStatus() == BreathingStatus.MinimalProblem)
+                {
+                    response += "Jeg sliter også med å puste.";
+                }
+                
+                DialogueController.instance.ShowResponse(response);
+            }
         }
 
         public List<Dialogue> GetPlayerOptions()

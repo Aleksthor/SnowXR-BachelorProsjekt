@@ -14,6 +14,7 @@ namespace SnowXR.MassInjury
         [SerializeField] private Text clockUI;
         [SerializeField] private Button resultButton;
         [SerializeField] private GameObject resultsUI;
+        [SerializeField] private GameObject dialogueUI;
         private float timer = 0f;
 
         [Header("Colors")] 
@@ -22,7 +23,7 @@ namespace SnowXR.MassInjury
         
         private void Awake()
         {
-            resultButton.onClick.AddListener(ShowResults);
+            resultButton.onClick.AddListener(GoToResults);
             resultButton.gameObject.SetActive(false);
         }
 
@@ -65,11 +66,17 @@ namespace SnowXR.MassInjury
             }
         }
 
-        public void ShowResults()
+        public void GoToResults()
         {
             gameObject.SetActive(false);
             resultsUI.SetActive(true);
             resultsUI.GetComponent<ResultsUI>().ShowResults();
+        }
+
+        public void GoToDialogue()
+        {
+            gameObject.SetActive(false);
+            dialogueUI.SetActive(true);
         }
 
         string ToTimeString(float time)

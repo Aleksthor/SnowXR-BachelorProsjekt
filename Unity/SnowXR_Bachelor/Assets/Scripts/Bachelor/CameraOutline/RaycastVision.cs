@@ -40,13 +40,14 @@ namespace Bachelor.RaycastVision
             int layerMask = 1 << 9;
             if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 5, layerMask))
             {
-                if (!hitInfo.transform.CompareTag("Agent")) return;
-                
-                hitInfo.transform.GetComponent<Outline>().enabled = true;
+                if (!hitInfo.transform.CompareTag("BandReciever")) return;
+
+                Transform owner = hitInfo.transform.parent;
+                owner.GetComponent<Outline>().enabled = true;
                 if (DialogueController.instance != null)
-                    DialogueController.instance.SetActiveResponder(hitInfo.transform.GetComponent<DialogueResponder>());
+                    DialogueController.instance.SetActiveResponder(owner.GetComponent<DialogueResponder>());
                 if (PDialogueController.instance != null)
-                    PDialogueController.instance.SetActiveResponder(hitInfo.transform.GetComponent<DialogueResponder>());
+                    PDialogueController.instance.SetActiveResponder(owner.GetComponent<DialogueResponder>());
             }
             else
             {

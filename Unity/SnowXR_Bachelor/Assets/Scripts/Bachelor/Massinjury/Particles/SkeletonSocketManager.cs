@@ -49,9 +49,19 @@ namespace SnowXR.MassInjury
         private Comparative side = Comparative.None;
         private BleedingArea area = BleedingArea.None;
         
+        
+        [SerializeField] private Transform neckPulse;
+        [SerializeField] private Transform rightArmPulse;
+        [SerializeField] private Transform leftArmPulse;
+        
+
         private void Start()
         {
             injury = transform.parent.GetComponent<BleedingInjury>();
+            neckPulse.GetComponent<PulseCollider>().Setup(injury);
+            rightArmPulse.GetComponent<PulseCollider>().Setup(injury);
+            leftArmPulse.GetComponent<PulseCollider>().Setup(injury);
+            
             switch (injury.GetBleedingArea())
             {
                 case 1:
