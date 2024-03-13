@@ -279,7 +279,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Response goes here
+  m_Text: Svar kommer her ..
 --- !u!1 &1603401493362341735
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Response
+  m_Text: Svar
 --- !u!1 &3351876279275611050
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +518,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dialogue Options
+  m_Text: Dialog Alternativer
 --- !u!1 &3647339640423642481
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +554,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 5}
+  m_SizeDelta: {x: 425, y: 5}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &2997449474717610325
 CanvasRenderer:
@@ -818,7 +818,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 28.27}
-  m_SizeDelta: {x: 150, y: 5}
+  m_SizeDelta: {x: 75, y: 5}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &7829381462899232687
 CanvasRenderer:
@@ -1202,7 +1202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5931661221428858533
 RectTransform:
   m_ObjectHideFlags: 0

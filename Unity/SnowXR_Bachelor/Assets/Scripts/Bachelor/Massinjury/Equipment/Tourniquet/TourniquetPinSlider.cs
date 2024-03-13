@@ -74,13 +74,13 @@ namespace SnowXR.MassInjury
                         Instantiate(placeholderPrefab, parent.parent);
 
                         Collider[] colliders =
-                            Physics.OverlapSphere(transform.position, 4f, 1<<15);
+                            Physics.OverlapSphere(transform.position, 4f, 1<<16);
 
                         Transform closest = null;
                         float best = float.MaxValue;
                         foreach (var col in colliders)
                         {
-                            if (col.CompareTag("Player"))
+                            if (col.CompareTag("Agent"))
                             {
                                 float compare = Vector3.Distance(transform.position, col.transform.position);
                                 if (best > compare)

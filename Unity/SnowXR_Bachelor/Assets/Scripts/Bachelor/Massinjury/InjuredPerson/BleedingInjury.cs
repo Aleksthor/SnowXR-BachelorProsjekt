@@ -102,18 +102,13 @@ namespace SnowXR.MassInjury
             // If we bled out already
             if (bloodLossML > 4000f)
             {
-                pulse = 0;
-                breathingStatus = BreathingStatus.None;
-                correctZone = Zone.Black;
-                dead = true;
+                Die();
                 return;
             }
             // Dead / Black Zone
             if (pulse == 0)
             {
-                breathingStatus = BreathingStatus.None;
-                correctZone = Zone.Black;
-                dead = true;
+                Die();
                 return;
             }
             
@@ -125,10 +120,7 @@ namespace SnowXR.MassInjury
                 criticalPulseTimer += Time.deltaTime;
                 if (criticalPulseTimer > 20f)
                 {
-                    concious = false;
-                    pulse = 0;
-                    breathingStatus = BreathingStatus.None;
-                    dead = true;
+                    Die();
                 }
 
             }
@@ -137,29 +129,31 @@ namespace SnowXR.MassInjury
             timeLived += Time.deltaTime;
             
             // calculate bloodLoss based on injury
-            switch (bloodLossSeverity)
+            if (!needTourniquet || !recievedTourniquet)
             {
-                case BleedingInjuryStatus.None:
-                    break;
-                case BleedingInjuryStatus.Minimal:
-                    bloodLossML += 3f * Time.deltaTime;
-                    break;
-                case BleedingInjuryStatus.Moderate:
-                    bloodLossML += 9f * Time.deltaTime;
-                    break;
-                case BleedingInjuryStatus.Severe:
-                    bloodLossML += 13f * Time.deltaTime;
-                    break;
+                switch (bloodLossSeverity)
+                {
+                    case BleedingInjuryStatus.None:
+                        break;
+                    case BleedingInjuryStatus.Minimal:
+                        bloodLossML += 3f * Time.deltaTime;
+                        break;
+                    case BleedingInjuryStatus.Moderate:
+                        bloodLossML += 9f * Time.deltaTime;
+                        break;
+                    case BleedingInjuryStatus.Severe:
+                        bloodLossML += 13f * Time.deltaTime;
+                        break;
+                }
             }
-
-            if (needTourniquet && recievedTourniquet)
+            else
             {
-                bloodLossSeverity = BleedingInjuryStatus.None;
                 patient.GetSkeletonSocketManager().RemoveBloodParticles();
             }
             
+            
             // calculate consciousness based on bloodLoss
-            if (bloodLossML > 600)
+            if (bloodLossML > 1000)
             {
                 concious = false;
             }
@@ -201,8 +195,7 @@ namespace SnowXR.MassInjury
                     timeWithoutAir += Time.deltaTime;
                     if (timeWithoutAir > 60f)
                     {
-                        pulse = 0;
-                        dead = false;
+                       Die();
                     }
                     break;
             }
@@ -424,15 +417,6 @@ namespace SnowXR.MassInjury
                                 }
                                 return;
                         }
-
-
-
-
-
-
-
-
-
                         return;
                     case BleedingInjuryStatus.Moderate:
                         if (RandomBool(0.1f))
@@ -449,18 +433,6 @@ namespace SnowXR.MassInjury
                             breathingStatus = BreathingStatus.MinimalProblem;
                             breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
                         }
-
-
-
-
-
-
-
-
-
-
-
-
                         return;
                     case BleedingInjuryStatus.Severe:
                         if (RandomBool(0.3f))
@@ -477,16 +449,6 @@ namespace SnowXR.MassInjury
                             breathingStatus = BreathingStatus.MinimalProblem;
                             breathingTimer = Random.Range(minBreathingModerate, maxBreathingModerate);
                         }
-
-
-
-
-
-
-
-
-
-
                         return;
                 }
             }
@@ -549,10 +511,7 @@ namespace SnowXR.MassInjury
         {
             if (breathingStatus == BreathingStatus.None)
             {
-                correctZone = Zone.Black;
-                pulse = 0;
-                concious = false;
-                dead = true;
+                Die();
                 return;
             }
 
@@ -565,12 +524,23 @@ namespace SnowXR.MassInjury
 
             
             
+            
             switch (bloodLossSeverity)
             {
                 case BleedingInjuryStatus.None:
                     correctZone = Zone.Green;
                     return;
                 case BleedingInjuryStatus.Minimal:
+                    if (bloodLossML > 2000)
+                    {
+                        correctZone = Zone.Red;
+                        return;
+                    }
+                    if (bloodLossML > 1000)
+                    {
+                        correctZone = Zone.Yellow;
+                        return;
+                    }
                     if (breathingStatus >= BreathingStatus.MinimalProblem)
                     {
                         correctZone = Zone.Yellow;
@@ -581,6 +551,17 @@ namespace SnowXR.MassInjury
                     }
                     return;
                 case BleedingInjuryStatus.Moderate:
+                    if (bloodLossML > 2000)
+                    {
+                        correctZone = Zone.Red;
+                        return;
+                    }
+                    if (bloodLossML > 1000)
+                    {
+                        correctZone = Zone.Yellow;
+                        return;
+                    }
+                    
                     if (breathingStatus == BreathingStatus.MinimalProblem)
                     {
                         correctZone = Zone.Red;
@@ -598,8 +579,21 @@ namespace SnowXR.MassInjury
             
         }
 
+        private void Die()
+        {
+            pulse = 0;
+            breathingStatus = BreathingStatus.None;
+            correctZone = Zone.Black;
+            dead = true;
+            concious = false;
+            needTourniquet = false;
+            needPharyngealTube = false;
+            needPressureRelief = false;
+        }
+
         private void CalculateNeededHelp()
         {
+            if (dead) return;
             needTourniquet = bleedingArea is BleedingArea.Arms or BleedingArea.Thighs or BleedingArea.Legs;
             needPressureRelief = (int)breathingStatus > 0;
             needPharyngealTube = !concious;
@@ -607,17 +601,32 @@ namespace SnowXR.MassInjury
 
         private void ZoneReasoning()
         {
-            zoneReasoning.Add("Blood Loss Severity is " + bloodLossSeverity.ToString());
-            zoneReasoning.Add("Pulse is " + pulse.ToString());
-            zoneReasoning.Add("Breathing status is " + breathingStatus.ToString());
+            if (recievedTourniquet)
+            {
+                zoneReasoning.Add("Har fått en tourniquet, så pasienten har fått noe behandling.");
+            }
+
+            if (bloodLossML > 1000)
+            {
+                zoneReasoning.Add("Pasienten har mistet " + (bloodLossML / 1000).ToString("F1") + " liter blod");
+            }
+            
+            zoneReasoning.Add("Pasienten har " + bloodLossSeverity.ToString() + " blødninger");
+            zoneReasoning.Add("Pulsen er: " + pulse.ToString());
+            zoneReasoning.Add("Puste status er: " + breathingStatus.ToString());
             if (bleedingArea == BleedingArea.Torso)
             {
-                zoneReasoning.Add("Torso bleeding is " + bleedingSeverity.ToString());
+                zoneReasoning.Add("Pasienten blør i magen");
             }
             else
             {
-                zoneReasoning.Add("Torso bleeding is none");
+                zoneReasoning.Add("Pasienten blør ikke i magen");
             }
+        }
+
+        public List<string> GetZoneReasoning()
+        {
+            return zoneReasoning;
         }
 
         private BleedingArea GetRandomInjuryType(int random)
@@ -676,6 +685,11 @@ namespace SnowXR.MassInjury
             inspectionDone = true;
             agent.beliefes.SetState("cleared", 1);
             ZoneReasoning();
+        }
+
+        public bool Dead()
+        {
+            return dead;
         }
 
         public bool Concious()
@@ -754,9 +768,40 @@ namespace SnowXR.MassInjury
             recievedTourniquet = input;
         }
 
+        public void SetRecievedPharyngealTube(bool input)
+        {
+            recievedPharyngealTube = input;
+        }
+
         public int Pulse()
         {
             return pulse;
+        }
+
+        public bool NeedTourniquet()
+        {
+            return needTourniquet;
+        }
+        public bool NeedPressureRelief()
+        {
+            return needPressureRelief;
+        }
+        public bool NeedPharyngealTube()
+        {
+            return needPharyngealTube;
+        }
+        
+        public bool RecievedTourniquet()
+        {
+            return recievedTourniquet;
+        }
+        public bool RecievedPressureRelief()
+        {
+            return recievedPressureRelief;
+        }
+        public bool RecievedPharyngealTube()
+        {
+            return recievedPharyngealTube;
         }
     }
 

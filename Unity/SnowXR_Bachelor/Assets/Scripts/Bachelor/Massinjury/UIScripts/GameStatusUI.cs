@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace SnowXR.MassInjury
 {
@@ -20,18 +21,26 @@ namespace SnowXR.MassInjury
         [Header("Colors")] 
         [SerializeField] private Color done;
         [SerializeField] private Color notDone;
+
+        [SerializeField] private Sprite maleSprite;
+        [SerializeField] private Sprite femaleSprite;
+
+        private float time;
+        private bool gameOver = false;
         
         private void Awake()
         {
             resultButton.onClick.AddListener(GoToResults);
             resultButton.gameObject.SetActive(false);
+            time = 0f;
         }
 
 
         // Update is called once per frame
         void Update()
         {
-            float time = MassInjuryGameController.instance.GetGameTimer();
+            if (gameOver) return;
+            time += Time.deltaTime;
 
             clockUI.text = ToTimeString(time);
             
@@ -56,14 +65,29 @@ namespace SnowXR.MassInjury
             int i = 0;
             foreach (var go in patients)
             {
+                patientList[i].sprite = go.GetComponent<MassInjuryPatient>().GetGender() == Gender.Male
+                    ? maleSprite
+                    : femaleSprite;
                 patientList[i].color = go.GetComponent<BleedingInjury>().IsInspectionDone() ? done : notDone;
                 i++;
             }
 
-            if (MassInjuryGameController.instance.GameOver())
+            
+            bool isDone = true;
+
+            // Check if all agents have been inspected
+            foreach (var injuredPerson in patients.Where(injuredPerson => !injuredPerson.GetComponent<BleedingInjury>().IsInspectionDone()))
             {
-                resultButton.gameObject.SetActive(true);
+                isDone = false;
             }
+            
+            if (!isDone) return;
+            
+            // Finish the Game
+            gameOver = true;
+            resultButton.gameObject.SetActive(true);
+            
+            
         }
 
         public void GoToResults()

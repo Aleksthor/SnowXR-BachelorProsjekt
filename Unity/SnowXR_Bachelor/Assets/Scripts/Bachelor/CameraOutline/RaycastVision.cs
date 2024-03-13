@@ -37,10 +37,10 @@ namespace Bachelor.RaycastVision
                 outline.enabled = false;
             }
 
-            int layerMask = 1 << 9;
+            int layerMask = 1 << 16;
             if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 5, layerMask))
             {
-                if (!hitInfo.transform.CompareTag("BandReciever")) return;
+                if (!hitInfo.transform.CompareTag("Agent")) return;
 
                 Transform owner = hitInfo.transform.parent;
                 owner.GetComponent<Outline>().enabled = true;

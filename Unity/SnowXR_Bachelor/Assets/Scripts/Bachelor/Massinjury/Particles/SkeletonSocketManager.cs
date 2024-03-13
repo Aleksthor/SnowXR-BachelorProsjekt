@@ -33,21 +33,31 @@ namespace SnowXR.MassInjury
         [SerializeField] private Transform lLegTourniquet;
         [SerializeField] private Transform rLegTourniquet;
 
+        [SerializeField] private Transform pharyngealTubeParent;
 
         private bool holdingTourniquet = false;
         private Transform tourniquetTransform;
         public GameObject tourniquetPrefabWhite;
         public GameObject tourniquetPrefabGreen;
 
-        private bool green = false;
-        private bool lastGreen = false;
+        private bool greenTourniquet = false;
+        private bool lastGreenTrouniquet = false;
+        
+        private bool greenPharyngealTube = false;
+        private bool lastGreenPharyngealTube = false;
 
         private BleedingInjury injury;
 
         private GameObject spawnedParticles;
         private GameObject spawnedTourniquet;
+        private GameObject spawnedPharyngealTube;
         private Comparative side = Comparative.None;
         private BleedingArea area = BleedingArea.None;
+        
+        private bool holdingPharyngealTube = false;
+        private Transform pharyngealTubeTransform;
+        public GameObject pharyngealTubePrefabWhite;
+        public GameObject pharyngealTubePrefabGreen;
         
         
         [SerializeField] private Transform neckPulse;
@@ -172,27 +182,37 @@ namespace SnowXR.MassInjury
             {
                 if (!ReferenceEquals(spawnedTourniquet, null))
                 {
-                    green = Vector3.Distance(spawnedTourniquet.transform.position, tourniquetTransform.position) < 0.2f;
-                    if (green != lastGreen)
+                    greenTourniquet = Vector3.Distance(spawnedTourniquet.transform.position, tourniquetTransform.position) < 0.2f;
+                    if (greenTourniquet != lastGreenTrouniquet)
                     {
                         switch (area)
                         {
                             case BleedingArea.Arms:
-                                Change(green, side == Comparative.Left ? lArmTourniquet : rArmTourniquet);
+                                ChangeTourniquet(greenTourniquet, side == Comparative.Left ? lArmTourniquet : rArmTourniquet);
                                 break;
                             case BleedingArea.Thighs:
-                                Change(green, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
+                                ChangeTourniquet(greenTourniquet, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
                                 break;
                             case BleedingArea.Legs:
-                                Change(green, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
+                                ChangeTourniquet(greenTourniquet, side == Comparative.Left ? lLegTourniquet : rLegTourniquet);
                                 break;
                             default:
                                 break;
                         }
                     }
                 }
-                
-               
+            }
+
+            if (holdingPharyngealTube)
+            {
+                if (!ReferenceEquals(spawnedPharyngealTube, null))
+                {
+                    greenPharyngealTube = Vector3.Distance(spawnedPharyngealTube.transform.position, pharyngealTubeTransform.position) < 0.2f;
+                    if (greenPharyngealTube != lastGreenPharyngealTube)
+                    {
+                        ChangePharyngealTube(greenPharyngealTube, pharyngealTubeParent);
+                    }
+                }
             }
         }
 
@@ -225,32 +245,70 @@ namespace SnowXR.MassInjury
             }
             else
             {
-                foreach (Transform child in lArmTourniquet)
+                if (lArmTourniquet.childCount > 0)
                 {
-                    Destroy(child.gameObject);
+                    foreach (Transform child in lArmTourniquet)
+                    {
+                        Destroy(child.gameObject);
+                    }
                 }
-                foreach (Transform child in rArmTourniquet)
+
+                if (rArmTourniquet.childCount > 0)
                 {
-                    Destroy(child.gameObject);
+                    foreach (Transform child in rArmTourniquet)
+                    {
+                        Destroy(child.gameObject);
+                    }
                 }
-                foreach (Transform child in lLegTourniquet)
+
+                if (lLegTourniquet.childCount > 0)
                 {
-                    Destroy(child.gameObject);
+                    foreach (Transform child in lLegTourniquet)
+                    {
+                        Destroy(child.gameObject);
+                    }
                 }
-                foreach (Transform child in rLegTourniquet)
+
+                if (rLegTourniquet.childCount > 0)
                 {
-                    Destroy(child.gameObject);
+                    foreach (Transform child in rLegTourniquet)
+                    {
+                        Destroy(child.gameObject);
+                    }
+                }
+            }
+        }
+        
+        public void SetHoldingPharyngealTube(bool input, Transform tourniquet)
+        {
+            holdingPharyngealTube = input;
+            pharyngealTubeTransform = tourniquet;
+            if (holdingPharyngealTube)
+            {
+                spawnedPharyngealTube = Instantiate(pharyngealTubePrefabWhite, pharyngealTubeParent);
+            }
+            else
+            {
+                if (pharyngealTubeParent.childCount > 0)
+                {
+                    foreach (Transform child in pharyngealTubeParent)
+                    {
+                        Destroy(child.gameObject);
+                    }
                 }
             }
         }
 
-        private void Change(bool check, Transform checking)
+        private void ChangeTourniquet(bool check, Transform checking)
         {
             if (check)
             {
-                foreach (Transform child in checking)
+                if (checking.childCount > 0)
                 {
-                    Destroy(child.gameObject);
+                    foreach (Transform child in checking)
+                    {
+                        Destroy(child.gameObject);
+                    } 
                 }
 
                 spawnedTourniquet = Instantiate(tourniquetPrefabGreen, checking);
@@ -259,23 +317,61 @@ namespace SnowXR.MassInjury
             }
             else
             {
-                foreach (Transform child in checking)
+                if (checking.childCount > 0)
                 {
-                    Destroy(child.gameObject);
+                    foreach (Transform child in checking)
+                    {
+                        Destroy(child.gameObject);
+                    } 
                 }
-
                 spawnedTourniquet = Instantiate(tourniquetPrefabWhite, checking);
                 if (!ReferenceEquals(tourniquetTransform, null))
                     tourniquetTransform.GetComponent<TourniquetPlacement>().SetNextParent(null);
             }
 
-            lastGreen = green;
+            lastGreenTrouniquet = greenTourniquet;
         }
+        
+        private void ChangePharyngealTube(bool check, Transform checking)
+        {
+            if (check)
+            {
+                if (checking.childCount > 0)
+                {
+                    foreach (Transform child in checking)
+                    {
+                        Destroy(child.gameObject);
+                    } 
+                }
+
+                spawnedPharyngealTube = Instantiate(pharyngealTubePrefabGreen, checking);
+                if (!ReferenceEquals(pharyngealTubeTransform, null))
+                    pharyngealTubeTransform.GetComponent<PharyngealTubePlacement>().SetNextParent(checking);
+            }
+            else
+            {
+                if (checking.childCount > 0)
+                {
+                    foreach (Transform child in checking)
+                    {
+                        Destroy(child.gameObject);
+                    } 
+                }
+
+                spawnedPharyngealTube = Instantiate(pharyngealTubePrefabWhite, checking);
+                if (!ReferenceEquals(pharyngealTubeTransform, null))
+                    pharyngealTubeTransform.GetComponent<PharyngealTubePlacement>().SetNextParent(null);
+            }
+
+            lastGreenPharyngealTube = greenPharyngealTube;
+        }
+
 
 
         public void RemoveBloodParticles()
         {
-            Destroy(spawnedParticles);
+            if (!ReferenceEquals(spawnedParticles, null))
+                Destroy(spawnedParticles);
         }
     }
 }

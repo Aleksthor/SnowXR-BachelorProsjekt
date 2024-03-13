@@ -62,6 +62,12 @@ namespace SnowXR.MassInjury
                     ? patientSockets.leftBicepsParent
                     : patientSockets.rightBicepsParent;
 
+                foreach (Transform child in parent)
+                {
+                    if (child.name.Contains("Band"))
+                        Destroy(child.gameObject);
+                }
+
                 transform.parent = parent;
                 transform.localPosition = Vector3.zero;
 
@@ -83,7 +89,7 @@ namespace SnowXR.MassInjury
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("BandReciever"))
+            if (other.CompareTag("Agent"))
             {
                 currentCollission = other;
             }

@@ -443,6 +443,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4879224221879610266}
   m_LocalEulerAnglesHint: {x: 0.02, y: -85.21, z: -183.13}
+--- !u!1 &5342158063696898206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 544341077626411313}
+  m_Layer: 0
+  m_Name: PHARYNGEALTUBEPARENT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &544341077626411313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342158063696898206}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.29379416, y: -2.4728817e-16, z: 2.5763918e-16, w: 0.95586866}
+  m_LocalPosition: {x: 0, y: 0.0465, z: 0.0187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 403189910610066665}
+  m_LocalEulerAnglesHint: {x: 34.171, y: 0, z: 0}
 --- !u!1 &5878583177100256980
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +786,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7680279191734143048}
+    - targetCorrespondingSourceObject: {fileID: -4889751065536018684, guid: 2e9c931e65fea904e9d86e45d2e7b171,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 544341077626411313}
     - targetCorrespondingSourceObject: {fileID: -7782563766584957409, guid: 2e9c931e65fea904e9d86e45d2e7b171,
         type: 3}
       insertIndex: -1
@@ -793,6 +828,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7089061933588268096}
   m_SourcePrefab: {fileID: 100100000, guid: 2e9c931e65fea904e9d86e45d2e7b171, type: 3}
+--- !u!4 &403189910610066665 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4889751065536018684, guid: 2e9c931e65fea904e9d86e45d2e7b171,
+    type: 3}
+  m_PrefabInstance: {fileID: 4160330200888671213}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1594751716370988522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3431114523341276679, guid: 2e9c931e65fea904e9d86e45d2e7b171,
@@ -890,9 +931,14 @@ MonoBehaviour:
   rArmTourniquet: {fileID: 7288068174649237704}
   lLegTourniquet: {fileID: 8506805058621086007}
   rLegTourniquet: {fileID: 2364197097657606163}
+  pharyngealTubeParent: {fileID: 544341077626411313}
   tourniquetPrefabWhite: {fileID: 3728403377237143320, guid: 68b32f4cc168b004583f0cbf508b8842,
     type: 3}
   tourniquetPrefabGreen: {fileID: 3728403377237143320, guid: 1bbd58aace174cd40bbda6b6c63feeb7,
+    type: 3}
+  pharyngealTubePrefabWhite: {fileID: 7160592311763859082, guid: a9de2b47915785a45b86597505feea87,
+    type: 3}
+  pharyngealTubePrefabGreen: {fileID: 7160592311763859082, guid: 643f6f0a64a112248b998a2d143b177a,
     type: 3}
   neckPulse: {fileID: 211571571650191684}
   rightArmPulse: {fileID: 4130644074280396941}

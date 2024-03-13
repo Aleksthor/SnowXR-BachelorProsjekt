@@ -39,6 +39,8 @@ namespace SnowXR.MassInjury
         private SkeletonSocketManager skeletonManager;
         
         private static readonly int Saturation = Shader.PropertyToID("_Saturation");
+        private static readonly int Dead = Animator.StringToHash("Dead");
+        private static readonly int Concious = Animator.StringToHash("Concious");
 
         // Start is called before the first frame update
         private void Awake()
@@ -94,6 +96,8 @@ namespace SnowXR.MassInjury
             animator.SetBool(CanStand, injuryScript.CanWalk());
             animator.SetBool(Sitting, injuryScript.Sitting());
             animator.SetBool(Walking, agent.velocity.sqrMagnitude > 1f);
+            animator.SetBool(Dead, injuryScript.Dead());
+            animator.SetBool(Concious, injuryScript.Concious());
             
             
             switch (injuryScript.BreathStatus())
@@ -119,15 +123,27 @@ namespace SnowXR.MassInjury
                     criticalBreath.gameObject.SetActive(false);
                     break;
             }
-            
-            
-            head.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
-            hands.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
+
+            if (injuryScript.Dead())
+            {
+                head.material.SetFloat(Saturation, 0.4f);
+                hands.material.SetFloat(Saturation, 0.4f);
+            }
+            else
+            {
+                head.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
+                hands.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
+            }
         }
 
         public SkeletonSocketManager GetSkeletonSocketManager()
         {
             return skeletonManager;
+        }
+
+        public Gender GetGender()
+        {
+            return gender;
         }
 
         public GameObject GetMesh()
