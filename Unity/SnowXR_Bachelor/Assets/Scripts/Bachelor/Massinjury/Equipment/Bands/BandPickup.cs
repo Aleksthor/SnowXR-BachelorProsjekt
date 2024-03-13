@@ -39,7 +39,7 @@ namespace SnowXR.MassInjury
         public void Pickup()
         {
             transform.parent = null;
-            rigidbody.isKinematic = false;
+            //rigidbody.isKinematic = false;
             cubeMesh.SetActive(true);
             bandMesh.SetActive(false);
         }

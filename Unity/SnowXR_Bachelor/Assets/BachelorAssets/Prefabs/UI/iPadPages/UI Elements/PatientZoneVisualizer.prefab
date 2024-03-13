@@ -1762,12 +1762,12 @@ MonoBehaviour:
   initial: {fileID: 5108755361060958486}
   correct: {fileID: 8746800465347659075}
   border: {fileID: 3750693902235108150}
-  tourniquetNeed: {fileID: 9182275599395516452}
-  pharyngealTubeNeed: {fileID: 3414767811709380954}
-  pressureReliefNeed: {fileID: 2409040771729599466}
-  tourniquetRecieved: {fileID: 4223660762923559477}
-  pharyngealTubeRecieved: {fileID: 8364432826049175191}
-  pressureReliefRecieved: {fileID: 4981343689309143956}
+  tourniquetNeed: {fileID: 4223660762923559477}
+  pharyngealTubeNeed: {fileID: 8364432826049175191}
+  pressureReliefNeed: {fileID: 4981343689309143956}
+  tourniquetRecieved: {fileID: 9182275599395516452}
+  pharyngealTubeRecieved: {fileID: 3414767811709380954}
+  pressureReliefRecieved: {fileID: 2409040771729599466}
 --- !u!114 &1666678369295891448
 MonoBehaviour:
   m_ObjectHideFlags: 0

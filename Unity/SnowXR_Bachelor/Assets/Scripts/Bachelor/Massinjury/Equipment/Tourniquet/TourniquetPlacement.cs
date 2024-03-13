@@ -36,10 +36,10 @@ namespace SnowXR.MassInjury
                 if (injury.RecievedTourniquet()) continue;
                 
                 MassInjuryPatient p = patient.GetComponent<MassInjuryPatient>();
-                SkeletonSocketManager
-                skeletonSocketManager = p.GetMesh().GetComponent<SkeletonSocketManager>();
+                TourniquetSockets
+                    tourniquetSockets = p.GetMesh().GetComponent<TourniquetSockets>();
                 
-                skeletonSocketManager.SetHoldingTourniquet(true, transform, injury.Side(), injury.GetBleedingArea());
+                tourniquetSockets.SetHoldingTourniquet(true, transform, injury.Side(), injury.GetBleedingArea());
             }
         }
         public void OnDrop()
@@ -48,10 +48,10 @@ namespace SnowXR.MassInjury
 
             foreach (var patient in patients)
             {
-                SkeletonSocketManager
-                    skeletonSocketManager = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<SkeletonSocketManager>();
+                TourniquetSockets
+                    tourniquetSockets = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<TourniquetSockets>();
                 
-                skeletonSocketManager.SetHoldingTourniquet(false, null);
+                tourniquetSockets.SetHoldingTourniquet(false, null);
             }
             
             if (!ReferenceEquals(nextParent, null))

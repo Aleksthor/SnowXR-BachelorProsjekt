@@ -36,7 +36,7 @@ namespace SnowXR.MassInjury
 
         private SkinnedMeshRenderer head;
         private SkinnedMeshRenderer hands;
-        private SkeletonSocketManager skeletonManager;
+        private BleedingSockets skeletonManager;
         
         private static readonly int Saturation = Shader.PropertyToID("_Saturation");
         private static readonly int Dead = Animator.StringToHash("Dead");
@@ -64,7 +64,7 @@ namespace SnowXR.MassInjury
             heavyBreath = transform.Find("HeavyBreath");
             criticalBreath = transform.Find("CriticalBreath");
 
-            skeletonManager = mesh.GetComponent<SkeletonSocketManager>();
+            skeletonManager = mesh.GetComponent<BleedingSockets>();
             normalBreath.parent = skeletonManager.breathParent;
             normalBreath.localPosition = Vector3.zero;
             
@@ -136,7 +136,7 @@ namespace SnowXR.MassInjury
             }
         }
 
-        public SkeletonSocketManager GetSkeletonSocketManager()
+        public BleedingSockets GetSkeletonSocketManager()
         {
             return skeletonManager;
         }

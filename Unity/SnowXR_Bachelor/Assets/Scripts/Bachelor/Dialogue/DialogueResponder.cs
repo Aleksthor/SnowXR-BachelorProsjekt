@@ -9,7 +9,6 @@ namespace Bachelor.Dialogue
     [RequireComponent(typeof(BleedingInjury))]
     public class DialogueResponder : MonoBehaviour
     {
-
         [SerializeField] private List<Dialogue> playerOptions = new List<Dialogue>();
 
         private BleedingInjury bleedingInjury;
@@ -45,20 +44,23 @@ namespace Bachelor.Dialogue
             }
             else
             {
-                response += "Ja, jeg har fått ";
 
                 BleedingInjuryStatus status = (BleedingInjuryStatus)bleedingInjury.GetBleedingSeverity();
                 switch (status)
                 {
                     case BleedingInjuryStatus.Minimal:
+                        response += "Ja, jeg har fått ";
                         response += "små ";
                         break;
                     case BleedingInjuryStatus.Moderate:
+                        response += "Ja, jeg har fått ";
                         break;
                     case BleedingInjuryStatus.Severe:
+                        response += "Ja, jeg har fått ";
                         response += "store ";
                         break;
                     default:
+                        response += "Nei, jeg har ingen blødninger. ";
                         break;
                 }
 
@@ -95,9 +97,9 @@ namespace Bachelor.Dialogue
                 {
                     response += "Jeg sliter også med å puste.";
                 }
-                
-                DialogueController.instance.ShowResponse(response);
             }
+            
+            DialogueController.instance.ShowResponse(response);
         }
 
         public List<Dialogue> GetPlayerOptions()

@@ -544,11 +544,11 @@ RectTransform:
   - {fileID: 1226822013623760170}
   m_Father: {fileID: 7428048668914445327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50, y: -10.400024}
-  m_SizeDelta: {x: 442, y: -820.8}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 442, y: 379.2}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5485528216599551127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,9 +1001,9 @@ RectTransform:
   - {fileID: 4274249714116083818}
   m_Father: {fileID: 7428048668914445327}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00060856, y: -0.00030518}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -321, y: 0}
   m_SizeDelta: {x: 525.1, y: 493.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6353605195501272776
@@ -3333,7 +3333,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7428048668914445327}
-  - component: {fileID: 6087269273091546486}
   - component: {fileID: 7428048668914445324}
   - component: {fileID: 7428048668914445312}
   - component: {fileID: 848579964192113886}
@@ -3375,42 +3374,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1000, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6087269273091546486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428048668914445318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5bfd3fe9dbd6f0478db587e8e0e4125, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patientList:
-  - {fileID: 7991504457480738144}
-  - {fileID: 3297026585932716128}
-  - {fileID: 4139336219536961410}
-  - {fileID: 5406643281761628845}
-  - {fileID: 8807444782352259156}
-  - {fileID: 8470474744318956931}
-  - {fileID: 6069075502464752177}
-  - {fileID: 2803160843150467981}
-  - {fileID: 6726262632811036792}
-  - {fileID: 3959492561662413045}
-  - {fileID: 1084926916907290925}
-  - {fileID: 5777160300325875974}
-  - {fileID: 2857794031417733309}
-  - {fileID: 1045364373670516935}
-  - {fileID: 1194335127177581567}
-  clockUI: {fileID: 7338877210989144517}
-  resultButton: {fileID: 0}
-  resultsUI: {fileID: 0}
-  dialogueUI: {fileID: 0}
-  done: {r: 0.123558186, g: 0.7924528, b: 0.12335351, a: 0.6862745}
-  notDone: {r: 0, g: 0, b: 0, a: 0}
-  maleSprite: {fileID: 21300000, guid: 26c9dd9370db8ce4d8e65c6a0630d1a8, type: 3}
-  femaleSprite: {fileID: 21300000, guid: 382721f99c4d5974e978e32d17d3ba64, type: 3}
 --- !u!223 &7428048668914445324
 Canvas:
   m_ObjectHideFlags: 0
@@ -4004,7 +3967,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6087269273091546486}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SnowXR.MassInjury.GameStatusUI, SnowXR.MassInjury
         m_MethodName: GoToDialogue
         m_Mode: 1

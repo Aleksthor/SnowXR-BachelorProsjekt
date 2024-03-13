@@ -8,98 +8,97 @@ namespace SnowXR.MassInjury
 {
     public class BandPlacement : MonoBehaviour
     {
-        private Grabbable band;
-        
-        private bool beingHeld = false;
-        private Collider currentCollission = null;
+        private Transform nextParent;
+        private GrabbableUnityEvents events;
+        [SerializeField] private Zone zone;
 
-        [SerializeField] private Zone bandColor;
-        
-        private Rigidbody rigidbody;
-        private GrabbableRingHelper ringHelper;
-        private BoxCollider collider;
         private void Awake()
         {
-            band = GetComponent<Grabbable>();
-            
-            rigidbody = GetComponent<Rigidbody>();
-            ringHelper = GetComponent<GrabbableRingHelper>();
-            collider = GetComponent<BoxCollider>();
-            
-            beingHeld = band.BeingHeld;
+            events = GetComponent<GrabbableUnityEvents>();
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            if (!band.BeingHeld && beingHeld)
-            {
-                beingHeld = false;
-                Dropped();
-                return;
-            }
-
-            if (band.BeingHeld && !beingHeld)
-            {
-                beingHeld = true;
-                Pickup();
-            }
+            events.onGrab.RemoveAllListeners();
+            events.onRelease.RemoveAllListeners();
         }
 
-        private void Dropped()
+        public void OnPickup()
         {
-            if (!ReferenceEquals(currentCollission, null))
+            List<GameObject> patients = SpawnManager.instance.GetPatients();
+
+            foreach (var patient in patients)
             {
-                SkeletonSocketManager patientSockets =
-                    currentCollission.transform.parent.GetComponentInChildren<SkeletonSocketManager>();
+                BleedingInjury injury = patient.GetComponent<BleedingInjury>();
+                
+                MassInjuryPatient p = patient.GetComponent<MassInjuryPatient>();
+                BandSockets
+                    bandSockets = p.GetMesh().GetComponent<BandSockets>();
+                
+                bandSockets.SetHoldingBand(true, transform);
+            }
+        }
+        public void OnDrop()
+        {
+            List<GameObject> patients = SpawnManager.instance.GetPatients();
 
-                if (ReferenceEquals(patientSockets, null))
+            foreach (var patient in patients)
+            {
+                BandSockets
+                    bandSockets = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<BandSockets>();
+                
+                bandSockets.SetHoldingBand(false, null);
+            }
+            
+            if (!ReferenceEquals(nextParent, null))
+            {
+                // Place the Band
+                if (nextParent.childCount > 0)
                 {
-                    return;
-                }
-
-                Transform parent = Vector3.Distance(transform.position, patientSockets.leftBicepsParent.position) <
-                                   Vector3.Distance(transform.position, patientSockets.rightBicepsParent.position)
-                    ? patientSockets.leftBicepsParent
-                    : patientSockets.rightBicepsParent;
-
-                foreach (Transform child in parent)
-                {
-                    if (child.name.Contains("Band"))
+                    foreach (Transform child in nextParent)
+                    {
                         Destroy(child.gameObject);
+                    }
+                }
+                
+                transform.parent = nextParent;
+                transform.localPosition = new Vector3();
+                transform.localRotation = new Quaternion();
+                GetComponent<Grabbable>().enabled = false;
+                GetComponent<Rigidbody>().isKinematic = true;
+                
+                
+                Collider[] colliders =
+                    Physics.OverlapSphere(transform.position, 4f, 1<<16);
+
+                Transform closest = null;
+                float best = float.MaxValue;
+                foreach (var col in colliders)
+                {
+                    if (col.CompareTag("Agent"))
+                    {
+                        float compare = Vector3.Distance(transform.position, col.transform.position);
+                        if (best > compare)
+                        {
+                            best = compare;
+                            closest = col.transform;
+                        }
+                    }
                 }
 
-                transform.parent = parent;
-                transform.localPosition = Vector3.zero;
+                if (!ReferenceEquals(closest, null))
+                {
+                    closest.parent.GetComponent<BleedingInjury>().Inspect(zone);
+                }
 
-                band.enabled = false;
-                rigidbody.isKinematic = true;
-                rigidbody.useGravity = false;
-                ringHelper.enabled = false;
-                collider.enabled = false;
-                
-                currentCollission.transform.parent.GetComponent<BleedingInjury>().Inspect(bandColor);
-                
+                gameObject.name = "PlacedBand";
+
             }
         }
 
-        private void Pickup()
+        public void SetNextParent(Transform transform)
         {
-            
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Agent"))
-            {
-                currentCollission = other;
-            }
-        }
-        private void OnTriggerExit(Collider other)
-        {
-            if (other == currentCollission)
-            {
-                currentCollission = null;
-            }
+            nextParent = transform;
         }
     }
 }

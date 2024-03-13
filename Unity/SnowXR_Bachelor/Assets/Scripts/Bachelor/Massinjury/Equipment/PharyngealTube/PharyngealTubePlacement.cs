@@ -34,10 +34,10 @@ namespace SnowXR.MassInjury
                 if (injury.RecievedPharyngealTube()) continue;
                 
                 MassInjuryPatient p = patient.GetComponent<MassInjuryPatient>();
-                SkeletonSocketManager
-                    skeletonSocketManager = p.GetMesh().GetComponent<SkeletonSocketManager>();
+                PharyngealTubeSockets
+                    pharyngealSockets = p.GetMesh().GetComponent<PharyngealTubeSockets>();
                 
-                skeletonSocketManager.SetHoldingPharyngealTube(true, transform);
+                pharyngealSockets.SetHoldingPharyngealTube(true, transform);
             }
         }
         public void OnDrop()
@@ -46,10 +46,10 @@ namespace SnowXR.MassInjury
 
             foreach (var patient in patients)
             {
-                SkeletonSocketManager
-                    skeletonSocketManager = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<SkeletonSocketManager>();
+                PharyngealTubeSockets
+                    pharyngealSockets = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<PharyngealTubeSockets>();
                 
-                skeletonSocketManager.SetHoldingPharyngealTube(false, null);
+                pharyngealSockets.SetHoldingPharyngealTube(false, null);
             }
             
             if (!ReferenceEquals(nextParent, null))

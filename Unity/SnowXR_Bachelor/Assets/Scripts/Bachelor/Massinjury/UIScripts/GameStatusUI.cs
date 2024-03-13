@@ -25,6 +25,8 @@ namespace SnowXR.MassInjury
         [SerializeField] private Sprite maleSprite;
         [SerializeField] private Sprite femaleSprite;
 
+        [SerializeField] private Transform UI;
+
         private float time;
         private bool gameOver = false;
         
@@ -92,14 +94,14 @@ namespace SnowXR.MassInjury
 
         public void GoToResults()
         {
-            gameObject.SetActive(false);
+            UI.gameObject.SetActive(false);
             resultsUI.SetActive(true);
             resultsUI.GetComponent<ResultsUI>().ShowResults();
         }
 
         public void GoToDialogue()
         {
-            gameObject.SetActive(false);
+            UI.gameObject.SetActive(false);
             dialogueUI.SetActive(true);
         }
 
