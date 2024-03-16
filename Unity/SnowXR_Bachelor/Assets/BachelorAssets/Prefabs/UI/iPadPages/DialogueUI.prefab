@@ -91,7 +91,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5670984264490015965}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4625500966378441063}
+        m_TargetAssemblyTypeName: Bachelor.Dialogue.DialogueUI, Bachelor.Dialogue
+        m_MethodName: GoToGameStatus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5670984264490015965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,9 +691,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 759700559067974526}
-  - component: {fileID: 4013313659601435353}
   - component: {fileID: 1136524339835607733}
   - component: {fileID: 3919129072094832983}
+  - component: {fileID: 4625500966378441063}
   m_Layer: 5
   m_Name: DialogueOptionsParent
   m_TagString: Untagged
@@ -709,42 +721,6 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: 75}
   m_SizeDelta: {x: 787.3, y: 437.2}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &4013313659601435353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126651954017390874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af80064110a35d8428f4a1c268072b3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerOptions:
-  - line: "Alle som kan g\xE5, g\xE5 til resepsjonen."
-    onLineExit:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1136524339835607733}
-          m_TargetAssemblyTypeName: Bachelor.Dialogue.DialogueFunctions, Bachelor.Dialogue
-          m_MethodName: GoToReseption
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    removeOnUse: 0
-  dialogueOptionsParent: {fileID: 759700559067974526}
-  buttonPrefab: {fileID: 2541545978305708290, guid: 00a88d3dcf7376448bbbbbd7bc57abe0,
-    type: 3}
-  parent: {fileID: 7428048668914445318}
-  gameStatus: {fileID: 0}
-  response: {fileID: 7920610643046210629}
 --- !u!114 &1136524339835607733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,6 +759,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4625500966378441063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126651954017390874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a6ee453b51be2e46b89d89cbc6d042f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStatus: {fileID: 0}
+  parent: {fileID: 7428048668914445318}
 --- !u!1 &5456795654987492210
 GameObject:
   m_ObjectHideFlags: 0

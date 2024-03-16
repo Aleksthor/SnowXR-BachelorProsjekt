@@ -12,8 +12,8 @@ TagManager:
   - Elevator
   - Agent
   - SpawnPoint
-  - BandReciever
   - Pulse
+  - BleedingArea
   layers:
   - Default
   - TransparentFX
@@ -28,7 +28,7 @@ TagManager:
   - Grabbable
   - 2DRepresent
   - EventSystem
-  - 
+  - Equipment
   - NavMeshIgnore
   - IgnoreCollission
   - Reciever

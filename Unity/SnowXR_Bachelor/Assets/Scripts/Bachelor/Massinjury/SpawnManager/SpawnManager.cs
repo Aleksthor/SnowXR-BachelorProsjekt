@@ -23,6 +23,8 @@ namespace SnowXR.MassInjury
 
         [Header("PlayerTranform")] 
         [SerializeField] private GameObject player;
+
+        [SerializeField] private List<Color> shirtColors = new List<Color>();
         
         
         // Start is called before the first frame update
@@ -57,6 +59,7 @@ namespace SnowXR.MassInjury
                 spawnPointsCache.Remove(spawnPoint);
                 spawnedAgents.Add(Instantiate(injuredPerson,spawnPoint.position,spawnPoint.rotation,agentParent));
                 spawnedAgents[i].GetComponent<MassInjuryAgent>().inspector = player;
+                spawnedAgents[i].GetComponent<MassInjuryPatient>().SetColor(shirtColors[i]);
             }
         }
 

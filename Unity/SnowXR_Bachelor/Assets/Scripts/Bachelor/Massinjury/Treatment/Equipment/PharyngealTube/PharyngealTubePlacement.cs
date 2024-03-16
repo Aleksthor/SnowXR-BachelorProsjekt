@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,20 @@ namespace SnowXR.MassInjury
         private Transform nextParent;
         [FormerlySerializedAs("tourniquetPrefabStrapStep")] public GameObject pharyngealTubePlaceholder;
         private GrabbableUnityEvents events;
+        private Grabbable grabbable;
 
         private void Awake()
         {
             events = GetComponent<GrabbableUnityEvents>();
+            grabbable = GetComponent<Grabbable>();
+        }
+
+        private void Update()
+        {
+            if (grabbable.BeingHeld || grabbable.RemoteGrabbing)
+            {
+                transform.parent = null;
+            }
         }
 
         private void OnDestroy()
@@ -25,7 +36,7 @@ namespace SnowXR.MassInjury
         public void OnPickup()
         {
             List<GameObject> patients = SpawnManager.instance.GetPatients();
-
+            
             foreach (var patient in patients)
             {
                 BleedingInjury injury = patient.GetComponent<BleedingInjury>();

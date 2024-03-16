@@ -31,7 +31,7 @@ namespace SnowXR.MassInjury
         private static readonly int Walking = Animator.StringToHash("walking");
 
         private Transform normalBreath;
-        private Transform heavyBreath;
+        private Transform closedAirways;
         private Transform criticalBreath;
 
         private SkinnedMeshRenderer head;
@@ -41,6 +41,7 @@ namespace SnowXR.MassInjury
         private static readonly int Saturation = Shader.PropertyToID("_Saturation");
         private static readonly int Dead = Animator.StringToHash("Dead");
         private static readonly int Concious = Animator.StringToHash("Concious");
+        private static readonly int Color1 = Shader.PropertyToID("_Color");
 
         // Start is called before the first frame update
         private void Awake()
@@ -59,17 +60,19 @@ namespace SnowXR.MassInjury
                     animator = mesh.GetComponent<Animator>();
                     break;
             }
+            
+            
 
             normalBreath = transform.Find("NormalBreath");
-            heavyBreath = transform.Find("HeavyBreath");
-            criticalBreath = transform.Find("CriticalBreath");
+            closedAirways = transform.Find("ClosedAirways");
+            criticalBreath = transform.Find("LungInjury");
 
             skeletonManager = mesh.GetComponent<BleedingSockets>();
             normalBreath.parent = skeletonManager.breathParent;
             normalBreath.localPosition = Vector3.zero;
             
-            heavyBreath.parent = skeletonManager.breathParent;
-            heavyBreath.localPosition = Vector3.zero;
+            closedAirways.parent = skeletonManager.breathParent;
+            closedAirways.localPosition = Vector3.zero;
             
             criticalBreath.parent = skeletonManager.breathParent;
             criticalBreath.localPosition = Vector3.zero;
@@ -104,22 +107,22 @@ namespace SnowXR.MassInjury
             {
                 case BreathingStatus.None:
                     normalBreath.gameObject.SetActive(false);
-                    heavyBreath.gameObject.SetActive(false);
+                    closedAirways.gameObject.SetActive(false);
                     criticalBreath.gameObject.SetActive(false);
                     break;
-                case BreathingStatus.CriticalProblem:
+                case BreathingStatus.ClosedAirway:
                     normalBreath.gameObject.SetActive(false);
-                    heavyBreath.gameObject.SetActive(false);
+                    closedAirways.gameObject.SetActive(true);
+                    criticalBreath.gameObject.SetActive(false);
+                    break;
+                case BreathingStatus.LungInjury:
+                    normalBreath.gameObject.SetActive(false);
+                    closedAirways.gameObject.SetActive(false);
                     criticalBreath.gameObject.SetActive(true);
-                    break;
-                case BreathingStatus.MinimalProblem:
-                    normalBreath.gameObject.SetActive(false);
-                    heavyBreath.gameObject.SetActive(true);
-                    criticalBreath.gameObject.SetActive(false);
                     break;
                 case BreathingStatus.Normal:
                     normalBreath.gameObject.SetActive(true);
-                    heavyBreath.gameObject.SetActive(false);
+                    closedAirways.gameObject.SetActive(false);
                     criticalBreath.gameObject.SetActive(false);
                     break;
             }
@@ -133,6 +136,18 @@ namespace SnowXR.MassInjury
             {
                 head.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
                 hands.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
+            }
+        }
+
+        public void SetColor(Color color)
+        {
+            if (gender == Gender.Female)
+            {
+                mesh.transform.Find("mesh").Find("F_Outfit").GetComponent<SkinnedMeshRenderer>().materials[0].SetVector(Color1, color);
+            }
+            else
+            {
+                mesh.transform.Find("mesh").Find("M_Outfit").GetComponent<SkinnedMeshRenderer>().materials[0].SetVector(Color1, color);
             }
         }
 

@@ -11,10 +11,19 @@ namespace SnowXR.MassInjury
         private Transform nextParent;
         public GameObject tourniquetPrefabStrapStep;
         private GrabbableUnityEvents events;
-
+        private Grabbable grabbable;
         private void Awake()
         {
             events = GetComponent<GrabbableUnityEvents>();
+            grabbable = GetComponent<Grabbable>();
+        }
+        
+        private void Update()
+        {
+            if (grabbable.BeingHeld || grabbable.RemoteGrabbing)
+            {
+                transform.parent = null;
+            }
         }
 
         private void OnDestroy()

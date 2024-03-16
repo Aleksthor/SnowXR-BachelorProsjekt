@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5176764277941478395}
   - component: {fileID: 325493525335956352}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GrabPointRightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 2637754397235516915}
   - component: {fileID: 5629072531986836519}
   - component: {fileID: 3954174636445555395}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Band
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 937017580368261563}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 3265966535439297611}
   - component: {fileID: 4636668621730959268}
   - component: {fileID: 3370186288726765941}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 922905997818482559}
   - component: {fileID: 7264734176929707642}
   - component: {fileID: -809593416997476395}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RedBand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,13 +424,13 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 8832
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.05, y: 0.05, z: 0.05}
+  m_Size: {x: 0.033, y: 0.033, z: 0.033}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &922905997818482559
 MonoBehaviour:
@@ -557,7 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3421958822099646943}
   - component: {fileID: 6842620926234049936}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GrabPointLeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,6 +730,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RingHelper
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213795611944346747, guid: 9e3b0bca4dce07c4cac56011bea1487d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6799183511233398105, guid: 9e3b0bca4dce07c4cac56011bea1487d,
         type: 3}

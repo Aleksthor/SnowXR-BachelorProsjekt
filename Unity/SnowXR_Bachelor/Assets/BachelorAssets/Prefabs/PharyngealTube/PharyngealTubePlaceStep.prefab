@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5176764277941478395}
   - component: {fileID: 325493525335956352}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GrabPointRightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 4675418427579541113}
   - component: {fileID: 3762655827658736497}
   - component: {fileID: 6950357593879724401}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 937017580368261563}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 7877245396037641543}
   - component: {fileID: 6984844140971328652}
   - component: {fileID: 1944600462581148927}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PharyngealTubePlaceStep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,28 +225,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeingHeld: 0
-  GrabButton: 2
-  Grabtype: 2
+  GrabButton: 0
+  Grabtype: 0
   GrabPhysics: 1
   GrabMechanic: 0
   GrabSpeed: 15
-  RemoteGrabbable: 0
+  RemoteGrabbable: 1
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
-  ThrowForceMultiplier: 2
-  ThrowForceMultiplierAngular: 1.5
+  ThrowForceMultiplier: 0.1
+  ThrowForceMultiplierAngular: 0.1
   BreakDistance: 0
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 1
   SnapHandModel: 1
   CanBeDropped: 1
-  KeepOriginalParent: 1
+  KeepOriginalParent: 0
   CanBeSnappedToSnapZone: 1
-  ForceDisableKinematicOnDrop: 0
+  ForceDisableKinematicOnDrop: 1
   InstantMovement: 0
   MakeChildCollidersGrabbable: 0
-  handPoseType: 1
+  handPoseType: 4
   SelectedHandPose: {fileID: 0}
   CustomHandPose: 0
   SecondaryGrabBehavior: 0
@@ -278,7 +278,9 @@ MonoBehaviour:
   SecondaryLookOffset: {x: 0, y: 0, z: 0}
   SecondaryLookAtTransform: {fileID: 0}
   LocalOffsetTransform: {fileID: 0}
-  GrabPoints: []
+  GrabPoints:
+  - {fileID: 5176764277941478395}
+  - {fileID: 3421958822099646943}
   UseCustomInspector: 1
   lastFlickTime: 0
   FlickForce: 1
@@ -305,7 +307,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -441,7 +443,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 8832
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -459,7 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3421958822099646943}
   - component: {fileID: 6842620926234049936}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GrabPointLeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -632,6 +634,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RingHelper
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213795611944346747, guid: 9e3b0bca4dce07c4cac56011bea1487d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6799183511233398105, guid: 9e3b0bca4dce07c4cac56011bea1487d,
         type: 3}

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BNG;
 
 namespace SnowXR.MassInjury
 {
@@ -9,12 +10,16 @@ namespace SnowXR.MassInjury
     {
         [SerializeField] private BleedingInjury currentInjury;
         [SerializeField] private int pulse = 0;
+        [SerializeField] private ControllerHand hand;
 
         private AudioSource audioSource;
+        private float speed;
+        private float timer;
 
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
+            
         }
 
         private void Update()
@@ -26,9 +31,21 @@ namespace SnowXR.MassInjury
                 return;
             }
 
-            float fraction = pulse / 60f;
+            timer += Time.deltaTime;
+            if (timer > 1f / speed)
+            {
+                if (!ReferenceEquals(InputBridge.Instance, null))
+                {
+                    InputBridge.Instance.VibrateController(speed, 0.1f, 0.1f, hand);
+                }
 
-            audioSource.pitch = fraction;
+                timer = 0f;
+            }
+            
+
+            speed = pulse / 60f;
+
+            audioSource.pitch = speed;
             audioSource.mute = false;
 
             pulse = currentInjury.Pulse();

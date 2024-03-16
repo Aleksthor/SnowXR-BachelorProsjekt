@@ -21,11 +21,6 @@ namespace Bachelor.Dialogue
         [HideInInspector] DialogueResponder activeResponder;
         private List<Dialogue> playerResponderOptions = new List<Dialogue>();
 
-        [SerializeField] private GameObject parent;
-        [SerializeField] private GameObject gameStatus;
-
-        [SerializeField] private Text response;
-
         private void Awake()
         {
             if (instance == null)
@@ -127,17 +122,7 @@ namespace Bachelor.Dialogue
 
             LoadOptions();
         }
-
-        public void GoToGameStatus()
-        {
-            gameStatus.SetActive(true);
-            parent.SetActive(false);
-        }
-
-        public void ShowResponse(string text)
-        {
-            response.text = text;
-        }
+        
         
     }
 }

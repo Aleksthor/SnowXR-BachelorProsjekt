@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3790097469464426593}
   - component: {fileID: 8973896219136825974}
   m_Layer: 9
-  m_Name: HeavyBreath
+  m_Name: ClosedAirways
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,14 +215,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b99d9b717726264e89179797579ce36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomInjury: 1
   injuryChance: 0.8
-  headInjuryWeight: 10
-  neckInjuryWeight: 20
+  headInjuryWeight: 0
+  neckInjuryWeight: 10
   armInjuryWeight: 30
   torsoInjuryWeight: 25
   thighInjuryWeight: 25
   legsInjuryWeight: 10
-  bleedingSeverity: 0
+  worsenInjury: 0
   bleedingArea: 0
   bleedingSide: 0
   bloodLossSeverity: 0
@@ -237,6 +238,12 @@ MonoBehaviour:
   recievedTourniquet: 0
   needPressureRelief: 0
   recievedPressureRelief: 0
+  needSideLease: 0
+  recievedSideLease: 0
+  needOpenAirways: 0
+  recievedOpenAirways: 0
+  needPressure: 0
+  recievedPressure: 0
   needPharyngealTube: 0
   recievedPharyngealTube: 0
   timeLived: 0
@@ -268,22 +275,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerOptions:
-  - line: Har du noen skader?
+  - line: "Hei er du v\xE5ken?"
     onLineExit:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1863918364411759501}
-          m_TargetAssemblyTypeName: Bachelor.Dialogue.DialogueResponder, Bachelor.Dialogue
-          m_MethodName: RespondHarDuSkader
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     removeOnUse: 1
 --- !u!195 &2875459297836356097
 NavMeshAgent:
@@ -320,7 +315,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 40960
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -359,7 +354,7 @@ GameObject:
   - component: {fileID: 5789622167731893449}
   - component: {fileID: 1882206586159260894}
   m_Layer: 9
-  m_Name: CriticalBreath
+  m_Name: LungInjury
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -705,9 +700,9 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 41472
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -736,7 +731,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

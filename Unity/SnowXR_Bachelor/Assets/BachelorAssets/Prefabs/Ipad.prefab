@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 4377886992511387100}
   - component: {fileID: 1586990595526642200}
   - component: {fileID: 7187402812926504521}
+  - component: {fileID: 6602360925194016346}
   m_Layer: 0
   m_Name: Ipad
   m_TagString: Untagged
@@ -392,7 +393,7 @@ MonoBehaviour:
   BeingHeld: 0
   GrabButton: 0
   Grabtype: 0
-  GrabPhysics: 0
+  GrabPhysics: 1
   GrabMechanic: 0
   GrabSpeed: 15
   RemoteGrabbable: 1
@@ -408,7 +409,7 @@ MonoBehaviour:
   CanBeDropped: 1
   KeepOriginalParent: 1
   CanBeSnappedToSnapZone: 1
-  ForceDisableKinematicOnDrop: 0
+  ForceDisableKinematicOnDrop: 1
   InstantMovement: 0
   MakeChildCollidersGrabbable: 0
   handPoseType: 1
@@ -472,7 +473,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -504,7 +505,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -512,6 +513,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.14276505, y: 0.05687523, z: 0.0038394928}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6602360925194016346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160592311763859082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32eeb1da8ac9d31499e7f2ddf8d44c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holster: {fileID: 0}
 --- !u!1 &8342397875172256750
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +713,11 @@ PrefabInstance:
       propertyPath: gameStatus
       value: 
       objectReference: {fileID: 8010036074544911871}
+    - target: {fileID: 4625500966378441063, guid: 3fb3e1786b2bf284aa24948e97be0ff6,
+        type: 3}
+      propertyPath: gameStatus
+      value: 
+      objectReference: {fileID: 3525013886454340161}
     - target: {fileID: 6879551280120503128, guid: 3fb3e1786b2bf284aa24948e97be0ff6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -709,11 +728,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6879551280120503128, guid: 3fb3e1786b2bf284aa24948e97be0ff6,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 3580541173103570469}
     - target: {fileID: 6879551280120503128, guid: 3fb3e1786b2bf284aa24948e97be0ff6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -864,18 +878,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fb3e1786b2bf284aa24948e97be0ff6, type: 3}
---- !u!114 &3580541173103570469 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4013313659601435353, guid: 3fb3e1786b2bf284aa24948e97be0ff6,
-    type: 3}
-  m_PrefabInstance: {fileID: 433054454933853436}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af80064110a35d8428f4a1c268072b3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &6996129075942062323 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7428048668914445327, guid: 3fb3e1786b2bf284aa24948e97be0ff6,

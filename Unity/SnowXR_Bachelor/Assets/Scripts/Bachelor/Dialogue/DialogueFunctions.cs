@@ -10,7 +10,7 @@ namespace Bachelor.Dialogue
         public void GoToReseption()
         {
             int layerMask = 1 << 9;
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 5f, layerMask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 10f, layerMask);
             foreach (var c in colliders)
             {
                 if (c.CompareTag("Agent"))
