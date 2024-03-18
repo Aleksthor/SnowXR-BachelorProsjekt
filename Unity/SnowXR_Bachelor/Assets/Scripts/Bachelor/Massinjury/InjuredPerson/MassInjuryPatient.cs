@@ -43,6 +43,9 @@ namespace SnowXR.MassInjury
         private static readonly int Concious = Animator.StringToHash("Concious");
         private static readonly int Color1 = Shader.PropertyToID("_Color");
 
+        private bool sideLease = false;
+        private static readonly int Lease = Animator.StringToHash("sideLease");
+
         // Start is called before the first frame update
         private void Awake()
         {
@@ -101,6 +104,7 @@ namespace SnowXR.MassInjury
             animator.SetBool(Walking, agent.velocity.sqrMagnitude > 1f);
             animator.SetBool(Dead, injuryScript.Dead());
             animator.SetBool(Concious, injuryScript.Concious());
+            animator.SetBool(Lease, injuryScript.RecievedSideLease());
             
             
             switch (injuryScript.BreathStatus())
@@ -151,7 +155,7 @@ namespace SnowXR.MassInjury
             }
         }
 
-        public BleedingSockets GetSkeletonSocketManager()
+        public BleedingSockets GetBleedingSockets()
         {
             return skeletonManager;
         }

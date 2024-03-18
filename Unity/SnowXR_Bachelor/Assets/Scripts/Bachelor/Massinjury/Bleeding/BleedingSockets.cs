@@ -38,6 +38,7 @@ namespace SnowXR.MassInjury
         private BleedingInjury injury;
         
         [SerializeField] public Transform openAirways;
+        [SerializeField] public Transform sideLease;
 
         private GameObject spawnedParticles;
         private Comparative side = Comparative.None;
@@ -60,7 +61,8 @@ namespace SnowXR.MassInjury
             leftLegDecalParent.gameObject.SetActive(false);
             rightLegDecalParent.gameObject.SetActive(false);
             
-            openAirways.gameObject.SetActive(true);
+            openAirways.gameObject.SetActive(false);
+            sideLease.gameObject.SetActive(false);
         }
 
         private void Start()
@@ -208,11 +210,8 @@ namespace SnowXR.MassInjury
                 default:
                     break;
             }
-        }
-
-        private void Update()
-        {
-            if (!injury.Concious() && injury.BreathStatus() == BreathingStatus.ClosedAirway && !injury.Dead())
+            
+            if (!injury.Concious() && !injury.Dead() && injury.NeedOpenAirways() && !injury.RecievedOpenAirways())
             {
                 openAirways.gameObject.SetActive(true);
             }
@@ -220,6 +219,21 @@ namespace SnowXR.MassInjury
             {
                 openAirways.gameObject.SetActive(false);
             }
+            
+            if (!injury.Concious() && !injury.Dead() && injury.NeedSideLease() && !injury.RecievedSideLease() && injury.RecievedOpenAirways())
+            {
+                sideLease.gameObject.SetActive(true);
+            }
+            else
+            {
+                sideLease.gameObject.SetActive(false);
+            }
+            
+        }
+
+        public void SetupSideLease()
+        {
+            sideLease.gameObject.SetActive(true);
         }
 
         public BleedingInjury GetInjury()

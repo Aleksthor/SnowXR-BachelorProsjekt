@@ -158,7 +158,7 @@ namespace SnowXR.MassInjury
             }
             else
             {
-                patient.GetSkeletonSocketManager().RemoveBloodParticles();
+                patient.GetBleedingSockets().RemoveBloodParticles();
             }
             
             
@@ -658,7 +658,7 @@ namespace SnowXR.MassInjury
             needTourniquet = false;
             needPharyngealTube = false;
             needPressureRelief = false;
-            patient.GetSkeletonSocketManager().RemoveBloodParticles();
+            patient.GetBleedingSockets().RemoveBloodParticles();
         }
 
         private void CalculateNeededHelp()
@@ -879,6 +879,7 @@ namespace SnowXR.MassInjury
             if (breathingStatus == BreathingStatus.ClosedAirway)
             {
                 breathingStatus = BreathingStatus.Normal;
+                recievedOpenAirways = true;
             }
         }
         public int Pulse()
@@ -919,6 +920,19 @@ namespace SnowXR.MassInjury
         public bool RecievedPressure()
         {
             return recievedPressure;
+        }
+
+        public bool NeedSideLease()
+        {
+            return needSideLease;
+        }
+        public bool NeedOpenAirways()
+        {
+            return needOpenAirways;
+        }
+        public bool RecievedOpenAirways()
+        {
+            return recievedOpenAirways;
         }
     }
 

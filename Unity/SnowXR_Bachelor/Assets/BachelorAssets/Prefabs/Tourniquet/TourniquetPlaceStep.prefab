@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 3986942021821768057}
   - component: {fileID: 2625726294318141040}
   - component: {fileID: 5955923599770763647}
+  - component: {fileID: 4018482117792584242}
   m_Layer: 13
   m_Name: TourniquetPlaceStep
   m_TagString: Untagged
@@ -199,7 +200,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 0.1
   BreakDistance: 0
   HideHandGraphics: 0
-  ParentToHands: 0
+  ParentToHands: 1
   ParentHandModel: 1
   SnapHandModel: 1
   CanBeDropped: 1
@@ -363,6 +364,18 @@ MonoBehaviour:
   RingOnValidPickup: 1
   RingOnValidRemotePickup: 1
   RingHelperScale: 0.2
+--- !u!114 &4018482117792584242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3986942021821768063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 895a84b3692997643a55a5e34a4d0d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3986942022038984944
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +665,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3986942021821768062}
     m_Modifications:
+    - target: {fileID: 4213795611944346737, guid: 9e3b0bca4dce07c4cac56011bea1487d,
+        type: 3}
+      propertyPath: grabbable
+      value: 
+      objectReference: {fileID: 3986942021821768056}
     - target: {fileID: 4213795611944346737, guid: 9e3b0bca4dce07c4cac56011bea1487d,
         type: 3}
       propertyPath: RingSecondarySelectedColor.g

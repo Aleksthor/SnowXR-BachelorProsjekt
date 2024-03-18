@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 7877245396037641543}
   - component: {fileID: 6984844140971328652}
   - component: {fileID: 1944600462581148927}
+  - component: {fileID: -7861158695133880295}
   m_Layer: 13
   m_Name: PharyngealTubePlaceStep
   m_TagString: Untagged
@@ -237,7 +238,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 0.1
   BreakDistance: 0
   HideHandGraphics: 0
-  ParentToHands: 0
+  ParentToHands: 1
   ParentHandModel: 1
   SnapHandModel: 1
   CanBeDropped: 1
@@ -451,6 +452,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.01, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7861158695133880295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160592311763859082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 895a84b3692997643a55a5e34a4d0d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8757124799111350187
 GameObject:
   m_ObjectHideFlags: 0

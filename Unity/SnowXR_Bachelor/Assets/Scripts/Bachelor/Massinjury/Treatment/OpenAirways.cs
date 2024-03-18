@@ -79,7 +79,9 @@ namespace SnowXR.MassInjury
 
                 if (!ReferenceEquals(closest, null))
                 {
-                    closest.parent.GetComponent<BleedingInjury>().OpenedAirways();
+                    var parent = closest.parent;
+                    parent.GetComponent<BleedingInjury>().OpenedAirways();
+                    parent.GetComponent<MassInjuryPatient>().GetBleedingSockets().SetupSideLease();
                 }
             }
         }
