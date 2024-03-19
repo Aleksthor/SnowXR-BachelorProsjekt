@@ -24,14 +24,7 @@ namespace SnowXR.MassInjury
             events.onGrab.RemoveAllListeners();
             events.onRelease.RemoveAllListeners();
         }
-
-        private void Update()
-        {
-            if (grabbable.BeingHeld || grabbable.RemoteGrabbing)
-            {
-                transform.parent = null;
-            }
-        }
+        
         public void OnPickup()
         {
             List<GameObject> patients = SpawnManager.instance.GetPatients();

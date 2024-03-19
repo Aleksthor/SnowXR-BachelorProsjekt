@@ -40,7 +40,7 @@ public class MassInjuryAgent : GoapAgent
 
         BleedingInjury injury = GetComponent<BleedingInjury>();
 
-        if (injury.CanWalk() && !injury.Sitting())
+        if (injury.CanWalk())
         {
             beliefes.AddState("canWalk", 1);
         }

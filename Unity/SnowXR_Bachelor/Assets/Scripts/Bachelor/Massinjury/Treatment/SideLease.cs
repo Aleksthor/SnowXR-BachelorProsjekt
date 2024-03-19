@@ -22,6 +22,7 @@ namespace SnowXR.MassInjury
 
 
         private float currentPercent = 100f;
+        private Transform closest;
 
         private void Start()
         {
@@ -42,6 +43,14 @@ namespace SnowXR.MassInjury
             //events
             if (OnLeverChanged != null)
                 OnLeverChanged.Invoke(currentPercent);
+
+            if (ReferenceEquals(closest, null))
+            {
+                SetClosest();
+            }
+
+            UpdateAnimations();
+            
             if (EventStep3AProcedureCompleted != null && currentPercent < 7f) // if step completed, invoke the event
             {
                 //sets the current percent to 0 to ensure the pose animation gets played unitl the end
@@ -85,12 +94,11 @@ namespace SnowXR.MassInjury
 
         }
 
-        private void Complete()
+        private void SetClosest()
         {
             Collider[] colliders =
                 Physics.OverlapSphere(transform.position, 4f, 1<<16);
-
-            Transform closest = null;
+            
             float best = float.MaxValue;
             foreach (var col in colliders)
             {
@@ -104,11 +112,24 @@ namespace SnowXR.MassInjury
                     }
                 }
             }
+        }
 
+        private void Complete()
+        {
             if (!ReferenceEquals(closest, null))
             {
                 var parent = closest.parent;
                 parent.GetComponent<BleedingInjury>().SetRecievedSideLease(true);
+            }
+        }
+
+        private void UpdateAnimations()
+        {
+            if (!ReferenceEquals(closest, null))
+            {
+                var parent = closest.parent;
+                float value = (100 - currentPercent) / 100;
+                parent.GetComponent<MassInjuryPatient>().UpdateSideLeaseSlider(value);
             }
         }
     }

@@ -791,20 +791,24 @@ namespace SnowXR.MassInjury
         {
             if (pulse == 0) return false;
             if (concious == false) return false;
-            if ((int)breathingStatus > 1) return false;
-            if ((int)bloodLossSeverity > 1) return false;
+            if (breathingStatus > BreathingStatus.Normal) return false;
+            if (bloodLossSeverity > BloodLossSeverity.Minimal) return false;
             switch (bleedingArea)
             {
                 case BleedingArea.Legs:
-                    return (int)bloodLossSeverity > 0;
+                    return bloodLossSeverity > BloodLossSeverity.None;
                 case BleedingArea.Thighs:
-                    return (int)bloodLossSeverity > 0;
+                    return bloodLossSeverity > BloodLossSeverity.None;
                 case BleedingArea.Torso:
-                    return (int)bloodLossSeverity > 0;
+                    return bloodLossSeverity > BloodLossSeverity.None;
                 default:
                     break;
             }
-            
+
+            if (bloodLossML > 500)
+            {
+                return false;
+            }
             
             return true;
 

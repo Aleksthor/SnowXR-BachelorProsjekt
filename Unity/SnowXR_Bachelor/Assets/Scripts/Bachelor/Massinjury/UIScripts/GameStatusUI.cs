@@ -49,7 +49,7 @@ namespace SnowXR.MassInjury
             
             if (patientList.Count == 0) return;
 
-            if (patientList.Count != SpawnManager.instance.numberOfAgents) return;
+            if (patientList.Count != SpawnManager.instance.examSize) return;
 
             timer -= Time.deltaTime;
             if (timer < 0f)

@@ -37,6 +37,8 @@ namespace SnowXR.MassInjury
         private SkinnedMeshRenderer head;
         private SkinnedMeshRenderer hands;
         private BleedingSockets skeletonManager;
+
+        private float sideLeaseSlider = 0f;
         
         private static readonly int Saturation = Shader.PropertyToID("_Saturation");
         private static readonly int Dead = Animator.StringToHash("Dead");
@@ -105,7 +107,7 @@ namespace SnowXR.MassInjury
             animator.SetBool(Dead, injuryScript.Dead());
             animator.SetBool(Concious, injuryScript.Concious());
             animator.SetBool(Lease, injuryScript.RecievedSideLease());
-            
+            animator.SetFloat("sideLeaseSlider", sideLeaseSlider);
             
             switch (injuryScript.BreathStatus())
             {
@@ -168,6 +170,11 @@ namespace SnowXR.MassInjury
         public GameObject GetMesh()
         {
             return mesh;
+        }
+
+        public void UpdateSideLeaseSlider(float number)
+        {
+            sideLeaseSlider = number;
         }
         
         float map(float s, float a1, float a2, float b1, float b2)

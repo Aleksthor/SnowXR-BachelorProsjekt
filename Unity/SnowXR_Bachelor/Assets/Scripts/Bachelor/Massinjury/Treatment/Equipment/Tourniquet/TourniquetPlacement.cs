@@ -18,13 +18,6 @@ namespace SnowXR.MassInjury
             grabbable = GetComponent<Grabbable>();
         }
         
-        private void Update()
-        {
-            if (grabbable.BeingHeld || grabbable.RemoteGrabbing)
-            {
-                transform.parent = null;
-            }
-        }
 
         private void OnDestroy()
         {

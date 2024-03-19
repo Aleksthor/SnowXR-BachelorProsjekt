@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using BA.GOAP;
+using UnityEngine.Serialization;
 
 namespace SnowXR.MassInjury
 {
@@ -10,13 +12,20 @@ namespace SnowXR.MassInjury
     {
         public static SpawnManager instance;
         
-        private List<Transform> spawnPoints = new List<Transform>();
+        private List<Transform> cachedSpawnPoints = new List<Transform>();
+
+        [SerializeField] private GameDifficulty gameDifficulty = GameDifficulty.Easy;
 
         [Header("Injured Person Prefab")] 
         [SerializeField] private GameObject injuredPerson;
-
+        
         [Header("Spawn Preferences")] 
-        [SerializeField] public int numberOfAgents = 15;
+        [SerializeField] public int easySize = 4;
+        [SerializeField] public int mediumSize = 7;
+        [SerializeField] public int hardSize = 10;
+        [SerializeField] public int examSize = 15;
+        
+        
         [SerializeField] private Transform agentParent;
 
         private List<GameObject> spawnedAgents = new List<GameObject>();
@@ -44,7 +53,20 @@ namespace SnowXR.MassInjury
 
             foreach (var sp in spawns)
             {
-                spawnPoints.Add(sp.transform);
+                if (gameDifficulty < GameDifficulty.Hard)
+                {
+                    if (sp.GetComponent<SpawnPoint>().difficulty == gameDifficulty)
+                    {
+                        cachedSpawnPoints.Add(sp.transform);
+                    }
+                }
+                else
+                {
+                    if (sp.GetComponent<SpawnPoint>().difficulty <= gameDifficulty)
+                    {
+                        cachedSpawnPoints.Add(sp.transform);
+                    }
+                }
             }
             StartGame();
         }
@@ -52,14 +74,29 @@ namespace SnowXR.MassInjury
 
         private void StartGame()
         {
-            List<Transform> spawnPointsCache = spawnPoints;
-            for (int i = 0; i < numberOfAgents; i++)
+            float size = 0;
+            switch (gameDifficulty)
             {
-                Transform spawnPoint = GetRandomSpawnPoint(spawnPointsCache);
-                spawnPointsCache.Remove(spawnPoint);
+                case GameDifficulty.Easy:
+                    size = easySize;
+                    break;
+                case GameDifficulty.Medium:
+                    size = mediumSize;
+                    break;
+                case GameDifficulty.Hard:
+                    size = hardSize;
+                    break;
+                case GameDifficulty.Exam:
+                    size = examSize;
+                    break;
+            }
+            for (int i = 0; i < size; i++)
+            {
+                Transform spawnPoint = GetRandomSpawnPoint(cachedSpawnPoints);
+                cachedSpawnPoints.Remove(spawnPoint);
                 spawnedAgents.Add(Instantiate(injuredPerson,spawnPoint.position,spawnPoint.rotation,agentParent));
                 spawnedAgents[i].GetComponent<MassInjuryAgent>().inspector = player;
-                spawnedAgents[i].GetComponent<MassInjuryPatient>().SetColor(shirtColors[i]);
+                spawnedAgents[i].GetComponent<MassInjuryPatient>().SetColor(shirtColors[i % 15]);
             }
         }
 
@@ -73,5 +110,14 @@ namespace SnowXR.MassInjury
         {
             return spawnedAgents;
         }
+    }
+
+    [System.Serializable]
+    public enum GameDifficulty
+    {
+        Easy,
+        Medium,
+        Hard,
+        Exam
     }
 }
