@@ -61,7 +61,7 @@ namespace SnowXR.MassInjury
 
 
             List<GameObject> patients = new List<GameObject>(SpawnManager.instance.GetPatients());
-            patients = patients.OrderBy(x => (int)x.GetComponent<BleedingInjury>().Initial()).ToList();
+            patients = patients.OrderBy(x => (int)x.GetComponent<BleedingInjury>().GuessedZone().Item2).ToList();
 
             int i = 0;
             int correctS = 0;
@@ -78,7 +78,7 @@ namespace SnowXR.MassInjury
                 if (guess.Item1 == guess.Item2)
                 {
                     GameObject zoneVis = Instantiate(patientZoneVisualizer, correctContent);
-                    zoneVis.GetComponent<PatientZoneVisualizer>().SetValues("Pasient " + i, GetColor(guess.Item2), GetColor(guess.Item1), GetColor(injury.Initial()), correct, 
+                    zoneVis.GetComponent<PatientZoneVisualizer>().SetValues("Pasient " + i, GetColor(guess.Item2), GetColor(guess.Item1), GetColor(guess.Item2), correct, 
                         GetColor(injury.NeedTourniquet()), GetColor(injury.RecievedTourniquet()), 
                         GetColor(injury.NeedPharyngealTube()), GetColor(injury.RecievedPharyngealTube()), 
                         GetColor(injury.NeedPressureRelief()), GetColor(injury.RecievedPressureRelief()));
@@ -88,18 +88,14 @@ namespace SnowXR.MassInjury
                 else
                 {
                     GameObject zoneVis = Instantiate(patientZoneVisualizer, incorrectContent);
-                    zoneVis.GetComponent<PatientZoneVisualizer>().SetValues("Pasient " + i, GetColor(guess.Item2), GetColor(guess.Item1),GetColor(injury.Initial()), inCorrect,
+                    zoneVis.GetComponent<PatientZoneVisualizer>().SetValues("Pasient " + i, GetColor(guess.Item2), GetColor(guess.Item1),GetColor(guess.Item2), inCorrect,
                         GetColor(injury.NeedTourniquet()), GetColor(injury.RecievedTourniquet()), 
                         GetColor(injury.NeedPharyngealTube()), GetColor(injury.RecievedPharyngealTube()), 
                         GetColor(injury.NeedPressureRelief()), GetColor(injury.RecievedPressureRelief()));
                     zoneVis.GetComponent<PatientZoneVisualizer>().SetupZoneButton(injury);
                     wrongS += wrongGuessScore * Mathf.Abs(guess.Item1 - guess.Item2);
                 }
-
-                if (injury.Initial() != injury.GuessedZone().Item1)
-                {
-                    worseS += worseZoneScore * Mathf.Abs(guess.Item1 - injury.Initial());
-                }
+                
 
                 if (injury.NeedTourniquet())
                 {

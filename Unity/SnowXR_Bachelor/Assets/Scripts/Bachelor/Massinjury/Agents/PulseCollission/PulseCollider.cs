@@ -8,6 +8,8 @@ namespace SnowXR.MassInjury
     {
         private BleedingInjury injury;
 
+        public PulseArea area;
+
         public void Setup(BleedingInjury i)
         {
             injury = i;
@@ -18,4 +20,6 @@ namespace SnowXR.MassInjury
             return injury;
         }
     }
+
+    
 }

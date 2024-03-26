@@ -44,7 +44,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 679fae2117c86dd4788ca17264590c7f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.173
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -223,7 +223,6 @@ MonoBehaviour:
   torsoInjuryWeight: 25
   thighInjuryWeight: 25
   legsInjuryWeight: 10
-  worsenInjury: 0
   bleedingArea: 0
   bleedingSide: 0
   bloodLossSeverity: 0
@@ -232,7 +231,6 @@ MonoBehaviour:
   pulse: 0
   zoneReasoning: []
   guessedZone: 0
-  initialZone: 0
   correctZone: 0
   needTourniquet: 0
   recievedTourniquet: 0
@@ -246,7 +244,6 @@ MonoBehaviour:
   recievedPressure: 0
   needPharyngealTube: 0
   recievedPharyngealTube: 0
-  timeLived: 0
   concious: 1
   state: 0
 --- !u!114 &6100426835021651039
@@ -387,7 +384,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: be39e79961d2c9348afdaa6d0c066c74, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.173
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -515,7 +512,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c958081f344e01f4eaf7405490b0129e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.173
   m_Pitch: 1
   Loop: 1
   Mute: 0

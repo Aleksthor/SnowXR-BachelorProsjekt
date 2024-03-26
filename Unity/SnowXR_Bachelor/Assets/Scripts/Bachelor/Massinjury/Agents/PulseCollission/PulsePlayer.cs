@@ -11,6 +11,8 @@ namespace SnowXR.MassInjury
         [SerializeField] private BleedingInjury currentInjury;
         [SerializeField] private int pulse = 0;
         [SerializeField] private ControllerHand hand;
+        
+        private PulseArea area;
 
         private AudioSource audioSource;
         private float speed;
@@ -24,12 +26,22 @@ namespace SnowXR.MassInjury
 
         private void Update()
         {
-            if (ReferenceEquals(currentInjury, null))
+            if (ReferenceEquals(currentInjury, null) )
             {
                 pulse = 0;
                 audioSource.mute = true;
                 return;
             }
+
+            if (area == PulseArea.Wrist && currentInjury.bloodLossML > 2000f)
+            {
+                pulse = 0;
+                audioSource.mute = true;
+                return;
+            }
+
+            audioSource.volume = area == PulseArea.Neck ? 1f : 0.8f;
+            
 
             timer += Time.deltaTime;
             if (timer > 1f / speed)
@@ -56,6 +68,7 @@ namespace SnowXR.MassInjury
             if (other.CompareTag("Pulse"))
             {
                 currentInjury = other.GetComponent<PulseCollider>().GetInjury();
+                area = other.GetComponent<PulseCollider>().area;
             }
         }
 
@@ -69,5 +82,11 @@ namespace SnowXR.MassInjury
                 }
             }
         }
+    }
+    
+    public enum PulseArea
+    {
+        Neck,
+        Wrist
     }
 }
