@@ -27,6 +27,8 @@ namespace SnowXR.MassInjury
         
         public void OnPickup()
         {
+            if (SpawnManager.instance == null) return;
+            
             List<GameObject> patients = SpawnManager.instance.GetPatients();
 
             foreach (var patient in patients)
@@ -42,6 +44,8 @@ namespace SnowXR.MassInjury
         }
         public void OnDrop()
         {
+            if (SpawnManager.instance == null) return;
+            
             List<GameObject> patients = SpawnManager.instance.GetPatients();
 
             foreach (var patient in patients)

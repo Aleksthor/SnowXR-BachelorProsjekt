@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using BA.GOAP;
-using UnityEngine.Serialization;
 
 namespace SnowXR.MassInjury
 {
@@ -89,6 +88,9 @@ namespace SnowXR.MassInjury
                 case GameDifficulty.Exam:
                     size = examSize;
                     break;
+                default:
+                    StartTutorial();
+                    return;
             }
             for (int i = 0; i < size; i++)
             {
@@ -100,6 +102,11 @@ namespace SnowXR.MassInjury
             }
         }
 
+        private void StartTutorial()
+        {
+            
+            
+        }
         private Transform GetRandomSpawnPoint(List<Transform> list)
         {
             int random = Random.Range(0, list.Count);
@@ -115,6 +122,7 @@ namespace SnowXR.MassInjury
     [System.Serializable]
     public enum GameDifficulty
     {
+        Tutorial,
         Easy,
         Medium,
         Hard,

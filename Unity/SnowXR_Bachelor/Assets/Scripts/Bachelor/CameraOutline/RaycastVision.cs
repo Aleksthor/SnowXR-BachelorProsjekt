@@ -10,51 +10,51 @@ namespace Bachelor.RaycastVision
 {
     public class RaycastVision : MonoBehaviour
     {
-        [SerializeField] List<Outline> allOutlines = new List<Outline>();
-        private SpawnManager spawnManager;
+        private float gracePeriod = 0f;
+        private bool grace = false;
 
-        private void Start()
-        {
-            if (spawnManager == null)
-            {
-                spawnManager = SpawnManager.instance;
-            }
+        public float graceTime = 1f;
 
-            List<GameObject> agents = spawnManager.GetPatients();
-            
-            foreach (var injuredPerson in agents)
-            {
-                allOutlines.Add(injuredPerson.GetComponent<Outline>());
-            }
-        }
-
+        private Transform cache;
         // Update is called once per frame
         void FixedUpdate()
         {
-
-            foreach (var outline in allOutlines)
-            {
-                outline.enabled = false;
-            }
-
             int layerMask = 1 << 16;
             if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 5, layerMask))
             {
-                if (!hitInfo.transform.CompareTag("Agent")) return;
+                if (!hitInfo.transform.CompareTag("Agent"))
+                {
+                    return;
+                }
 
+                grace = false;
+                cache = hitInfo.transform.parent;
                 Transform owner = hitInfo.transform.parent;
-                owner.GetComponent<Outline>().enabled = true;
-                if (DialogueController.instance != null)
+                if (!ReferenceEquals(DialogueController.instance, null))
+                {
                     DialogueController.instance.SetActiveResponder(owner.GetComponent<DialogueResponder>());
-                if (PDialogueController.instance != null)
-                    PDialogueController.instance.SetActiveResponder(owner.GetComponent<DialogueResponder>());
+                }
             }
             else
             {
-                if (DialogueController.instance != null)
+                if (!ReferenceEquals(DialogueController.instance, null))
+                {
+                    if (!ReferenceEquals(cache, null))
+                    {
+                        if (grace == false)
+                        {
+                            grace = true;
+                            gracePeriod = 0f;
+                        }
+
+                        if (gracePeriod < graceTime)
+                        {
+                            gracePeriod += Time.deltaTime;
+                            return;
+                        }
+                    }
                     DialogueController.instance.SetActiveResponder(null);
-                if (PDialogueController.instance != null)
-                    PDialogueController.instance.SetActiveResponder(null);
+                }
             }
         }
     }
