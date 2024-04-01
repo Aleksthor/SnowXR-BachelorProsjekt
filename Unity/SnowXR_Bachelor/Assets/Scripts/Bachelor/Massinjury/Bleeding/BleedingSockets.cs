@@ -72,6 +72,7 @@ namespace SnowXR.MassInjury
             rightArmPulse.GetComponent<PulseCollider>().Setup(injury);
             leftArmPulse.GetComponent<PulseCollider>().Setup(injury);
             
+            
             switch (injury.GetBleedingArea())
             {
                 case 1:
@@ -228,6 +229,8 @@ namespace SnowXR.MassInjury
             {
                 sideLease.gameObject.SetActive(false);
             }
+            
+            if (injury.Dead()) RemoveBloodParticles();
             
         }
 

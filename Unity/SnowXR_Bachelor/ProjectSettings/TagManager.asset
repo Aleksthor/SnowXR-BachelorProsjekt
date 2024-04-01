@@ -14,6 +14,7 @@ TagManager:
   - SpawnPoint
   - Pulse
   - BleedingArea
+  - Patient
   layers:
   - Default
   - TransparentFX

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using BNG;
+using UnityEngine.Events;
 
 namespace SnowXR.MassInjury
 {
@@ -12,6 +14,8 @@ namespace SnowXR.MassInjury
         private GrabbableUnityEvents events;
         [SerializeField] private Zone zone;
         private Grabbable grabbable;
+        
+        [HideInInspector] public UnityEvent onPickup;
 
         private void Awake()
         {
@@ -27,9 +31,8 @@ namespace SnowXR.MassInjury
         
         public void OnPickup()
         {
-            if (SpawnManager.instance == null) return;
-            
-            List<GameObject> patients = SpawnManager.instance.GetPatients();
+
+            List<GameObject> patients = GameObject.FindGameObjectsWithTag("Patient").ToList();
 
             foreach (var patient in patients)
             {
@@ -41,12 +44,13 @@ namespace SnowXR.MassInjury
                 
                 bandSockets.SetHoldingBand(true, transform);
             }
+            
+            onPickup.Invoke();
         }
         public void OnDrop()
         {
-            if (SpawnManager.instance == null) return;
             
-            List<GameObject> patients = SpawnManager.instance.GetPatients();
+            List<GameObject> patients = GameObject.FindGameObjectsWithTag("Patient").ToList();
 
             foreach (var patient in patients)
             {
@@ -105,6 +109,11 @@ namespace SnowXR.MassInjury
         public void SetNextParent(Transform transform)
         {
             nextParent = transform;
+        }
+
+        public Zone Zone()
+        {
+            return zone;
         }
     }
 }

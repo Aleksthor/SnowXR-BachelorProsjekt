@@ -61,7 +61,7 @@ namespace SnowXR.MassInjury
 
 
             List<GameObject> patients = new List<GameObject>(SpawnManager.instance.GetPatients());
-            patients = patients.OrderBy(x => (int)x.GetComponent<BleedingInjury>().GuessedZone().Item2).ToList();
+            patients = patients.OrderBy(x => (int)x.GetComponent<BleedingInjury>().ZoneTuple().Item2).ToList();
 
             int i = 0;
             int correctS = 0;
@@ -73,7 +73,7 @@ namespace SnowXR.MassInjury
             foreach (var go in patients)
             {
                 BleedingInjury injury = go.GetComponent<BleedingInjury>();
-                ValueTuple<Zone, Zone> guess = injury.GuessedZone();
+                ValueTuple<Zone, Zone> guess = injury.ZoneTuple();
 
                 if (guess.Item1 == guess.Item2)
                 {

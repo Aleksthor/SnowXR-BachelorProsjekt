@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using BNG;
+using System.Linq;
 
 namespace SnowXR.MassInjury
 {
@@ -35,7 +36,7 @@ namespace SnowXR.MassInjury
         }
         public void OnPickup()
         {
-            List<GameObject> patients = SpawnManager.instance.GetPatients();
+            List<GameObject> patients = GameObject.FindGameObjectsWithTag("Patient").ToList();
             
             foreach (var patient in patients)
             {
@@ -53,7 +54,7 @@ namespace SnowXR.MassInjury
         }
         public void OnDrop()
         {
-            List<GameObject> patients = SpawnManager.instance.GetPatients();
+            List<GameObject> patients = GameObject.FindGameObjectsWithTag("Patient").ToList();
 
             foreach (var patient in patients)
             {

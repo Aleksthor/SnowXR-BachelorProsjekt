@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BA.GOAP;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -67,11 +68,14 @@ namespace SnowXR.MassInjury
         // Logic
         private float timer = 0f;
         private int totalInjuryScore = 0;
-        private bool dead = false;
         [SerializeField] private bool concious = true;
+        [SerializeField] private bool dead = false;
         [SerializeField] private AnimState state = AnimState.Standing;
         private bool sitting = false;
         private bool setupSitting = false;
+
+        public UnityEvent onPlaceTourniquet;
+        public UnityEvent onPlaceBand;
         
         private void Awake()
         {
@@ -79,14 +83,18 @@ namespace SnowXR.MassInjury
             patient = GetComponent<MassInjuryPatient>();
             
             totalInjuryScore = headInjuryWeight + neckInjuryWeight + armInjuryWeight + torsoInjuryWeight + thighInjuryWeight + legsInjuryWeight;
-            bloodLossML = 0f;
-            bloodLossSeverity = BloodLossSeverity.None;
-            concious = true;
             if (randomInjury)
             { 
+                bloodLossML = 0f;
+                bloodLossSeverity = BloodLossSeverity.None;
+                concious = true;
                 InitInjuries();
                 CalculateBreathing();
                 CalculatePulse();
+            }
+            else
+            {
+                if (dead) Die();
             }
             CalculateCorrectZone();
             CalculateNeededHelp();
@@ -341,11 +349,17 @@ namespace SnowXR.MassInjury
             breathingStatus = BreathingStatus.None;
             correctZone = Zone.Black;
             dead = true;
-            LooseConciousness();
+            concious = false;
             needTourniquet = false;
             needPharyngealTube = false;
             needPressureRelief = false;
-            patient.GetBleedingSockets().RemoveBloodParticles();
+            needPressure = false;
+            needOpenAirways = false;
+            needSideLease = false;
+            if (!ReferenceEquals(patient.GetBleedingSockets(), null))
+            {
+                patient.GetBleedingSockets().RemoveBloodParticles();
+            }
         }
 
         private void CalculateNeededHelp()
@@ -452,6 +466,8 @@ namespace SnowXR.MassInjury
             inspectionDone = true;
             agent.beliefes.SetState("cleared", 1);
             ZoneReasoning();
+            
+            onPlaceBand.Invoke();
         }
 
         public bool Dead()
@@ -464,9 +480,14 @@ namespace SnowXR.MassInjury
             return concious;
         }
 
-        public ValueTuple<Zone, Zone> GuessedZone()
+        public ValueTuple<Zone, Zone> ZoneTuple()
         {
             return new ValueTuple<Zone, Zone>(correctZone, guessedZone);
+        }
+        
+        public Zone GuessedZone()
+        {
+            return guessedZone;
         }
 
         public bool CanWalk()
@@ -540,6 +561,10 @@ namespace SnowXR.MassInjury
         public void SetRecievedTourniquet(bool input)
         {
             recievedTourniquet = input;
+            if (recievedTourniquet)
+            {
+                onPlaceTourniquet.Invoke();
+            }
         }
 
         public void SetRecievedPharyngealTube(bool input)

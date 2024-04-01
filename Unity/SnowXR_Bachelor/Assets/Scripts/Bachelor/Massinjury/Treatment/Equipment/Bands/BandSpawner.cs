@@ -12,6 +12,12 @@ namespace SnowXR.MassInjury
         [SerializeField] private GameObject yellowBand;
         [SerializeField] private GameObject redBand;
         [SerializeField] private GameObject blackBand;
+
+        private void Awake()
+        {
+            SpawnNewBand();
+        }
+
         private void Update()
         {
             if (bandParent.childCount != 4)

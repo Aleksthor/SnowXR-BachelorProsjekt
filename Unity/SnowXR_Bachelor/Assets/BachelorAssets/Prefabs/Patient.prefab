@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 940364895681061577}
   m_Layer: 9
   m_Name: Patient
-  m_TagString: Agent
+  m_TagString: Patient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,7 +245,14 @@ MonoBehaviour:
   needPharyngealTube: 0
   recievedPharyngealTube: 0
   concious: 1
+  dead: 0
   state: 0
+  onPlaceTourniquet:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlaceBand:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6100426835021651039
 MonoBehaviour:
   m_ObjectHideFlags: 0
