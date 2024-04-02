@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BNG;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 namespace SnowXR.MassInjury
 {
@@ -13,6 +14,9 @@ namespace SnowXR.MassInjury
         public GameObject tourniquetPrefabStrapStep;
         private GrabbableUnityEvents events;
         private Grabbable grabbable;
+
+        [HideInInspector] public UnityEvent onPickup;
+        [HideInInspector] public UnityEvent onPlacement;
         private void Awake()
         {
             events = GetComponent<GrabbableUnityEvents>();
@@ -44,6 +48,8 @@ namespace SnowXR.MassInjury
                 
                 tourniquetSockets.SetHoldingTourniquet(true, transform, injury.Side(), injury.GetBleedingArea());
             }
+            
+            onPickup.Invoke();
         }
         public void OnDrop()
         {
@@ -60,6 +66,7 @@ namespace SnowXR.MassInjury
             if (!ReferenceEquals(nextParent, null))
             {
                 Instantiate(tourniquetPrefabStrapStep, nextParent);
+                onPlacement.Invoke();
                 Destroy(gameObject);
             }
         }

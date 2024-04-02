@@ -17,8 +17,7 @@ namespace Bachelor.Dialogue
         [SerializeField] private GameObject buttonPrefab;
         
         private List<Text> dialogueTextList = new List<Text>();
-        
-        [HideInInspector] DialogueResponder activeResponder;
+        DialogueResponder activeResponder;
         private List<Dialogue> playerResponderOptions = new List<Dialogue>();
 
         private void Awake()

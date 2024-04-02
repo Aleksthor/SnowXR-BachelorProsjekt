@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,38 @@ namespace SnowXR.MassInjury
         [SerializeField] private Transform pharyngealTube1;
         [SerializeField] private Transform pharyngealTube2;
         [SerializeField] private Transform pharyngealTube3;
-        
+
+        private void Awake()
+        {
+            if (tourniquet1.childCount == 0)
+            {
+                Instantiate(tourniquet, tourniquet1);
+            }
+            if (tourniquet2.childCount == 0)
+            {
+                Instantiate(tourniquet, tourniquet2);
+            }
+            if (pressureRelief1.childCount == 0)
+            {
+                Instantiate(pressureRelief, pressureRelief1);
+            }
+            if (pressureRelief2.childCount == 0)
+            {
+                Instantiate(pressureRelief, pressureRelief2);
+            }
+            if (pharyngealTube1.childCount == 0)
+            {
+                Instantiate(pharyngealTube, pharyngealTube1);
+            }
+            if (pharyngealTube2.childCount == 0)
+            {
+                Instantiate(pharyngealTube, pharyngealTube2);
+            }
+            if (pharyngealTube3.childCount == 0)
+            {
+                Instantiate(pharyngealTube, pharyngealTube3);
+            }
+        }
 
         // Update is called once per frame
         void Update()

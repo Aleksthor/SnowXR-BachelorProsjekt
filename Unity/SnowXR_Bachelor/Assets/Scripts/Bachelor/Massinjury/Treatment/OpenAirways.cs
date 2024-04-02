@@ -54,8 +54,7 @@ namespace SnowXR.MassInjury
             mouthOpeness = value;
             if (mouthOpeness > 90)
             {
-                //Debug.Log("MouthOpen");
-                //superParent.gameObject.SetActive(false);
+                superParent.gameObject.SetActive(false);
                 OnCompletedStep2?.Invoke();
                 
                 

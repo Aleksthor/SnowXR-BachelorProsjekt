@@ -27294,7 +27294,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 777084329}
           m_TargetAssemblyTypeName: Bachelor.Dialogue.DialogueFunctions, Bachelor.Dialogue
-          m_MethodName: GoToReseption
+          m_MethodName: GoToReception
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -39522,6 +39522,12 @@ Transform:
   - {fileID: 959079225}
   m_Father: {fileID: 1366596572}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1075836669 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5770977359586076427, guid: 73c63903629718c4490cf2bf185e24cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1400832700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1076093304
 GameObject:
   m_ObjectHideFlags: 0
@@ -44781,6 +44787,9 @@ MonoBehaviour:
   currentInjury: {fileID: 0}
   pulse: 0
   hand: 0
+  onListen:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!135 &1203033281
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -48398,6 +48407,12 @@ Transform:
   - {fileID: 1093612203}
   m_Father: {fileID: 164000728}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!4 &1278361202 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4140664753330263361, guid: 73c63903629718c4490cf2bf185e24cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1400832700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1281331515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50740,6 +50755,9 @@ MonoBehaviour:
   currentInjury: {fileID: 0}
   pulse: 0
   hand: 1
+  onListen:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &1337910512
 AudioSource:
   m_ObjectHideFlags: 0
@@ -54087,6 +54105,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 178362529595710996, guid: 73c63903629718c4490cf2bf185e24cf,
+        type: 3}
+      propertyPath: holster
+      value: 
+      objectReference: {fileID: 38264788}
+    - target: {fileID: 178362529595710996, guid: 73c63903629718c4490cf2bf185e24cf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4863715886382608418, guid: 73c63903629718c4490cf2bf185e24cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -54095,7 +54123,7 @@ PrefabInstance:
     - target: {fileID: 4863715886382608418, guid: 73c63903629718c4490cf2bf185e24cf,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.350002
+      value: 16.847
       objectReference: {fileID: 0}
     - target: {fileID: 4863715886382608418, guid: 73c63903629718c4490cf2bf185e24cf,
         type: 3}
@@ -57283,6 +57311,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2261180576127598497, guid: 2d5e0f94c2547384ea96229dc5d9888c,
         type: 3}
+      propertyPath: concious
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261180576127598497, guid: 2d5e0f94c2547384ea96229dc5d9888c,
+        type: 3}
       propertyPath: bloodLossML
       value: 1400
       objectReference: {fileID: 0}
@@ -60174,6 +60207,11 @@ GameObject:
   - component: {fileID: 1587369788}
   - component: {fileID: 1587369789}
   - component: {fileID: 1587369790}
+  - component: {fileID: 1587369791}
+  - component: {fileID: 1587369793}
+  - component: {fileID: 1587369792}
+  - component: {fileID: 1587369795}
+  - component: {fileID: 1587369794}
   m_Layer: 0
   m_Name: Tutorial
   m_TagString: Untagged
@@ -60257,6 +60295,103 @@ MonoBehaviour:
   bandParent: {fileID: 541169736}
   progressBar: {fileID: 203378485}
   percentText: {fileID: 1829349619}
+--- !u!114 &1587369791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587369787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7d6a11d96653f45bfaec2898204e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patient: {fileID: 454440794}
+  tourniquet1Parent: {fileID: 1278361202}
+  tourniquet2Parent: {fileID: 1075836669}
+  bandParent: {fileID: 0}
+  progressBar: {fileID: 947352813}
+  percentText: {fileID: 2035093265}
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1587369792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587369787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a4306475d78cf419921cda763510ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patient: {fileID: 1481135276}
+  progressBar: {fileID: 144796375}
+  percentText: {fileID: 366194884}
+  rightHand: {fileID: 1337910511}
+  leftHand: {fileID: 1203033280}
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1587369793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587369787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3754ff0ebf0c043ac3088fdc7658cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patient: {fileID: 1802527902}
+  progressBar: {fileID: 1440142555}
+  percentText: {fileID: 1919679198}
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1587369794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587369787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ba392a8921a6849a6b967c625df6b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patient: {fileID: 2060540132}
+  progressBar: {fileID: 932292988}
+  percentText: {fileID: 2048020442}
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1587369795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587369787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bc94d2420f8c248af27ef450c3b559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patient: {fileID: 1011987951}
+  progressBar: {fileID: 1266961989}
+  percentText: {fileID: 1576434869}
+  rightHand: {fileID: 1337910511}
+  leftHand: {fileID: 1203033280}
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1588734405
 GameObject:
   m_ObjectHideFlags: 0

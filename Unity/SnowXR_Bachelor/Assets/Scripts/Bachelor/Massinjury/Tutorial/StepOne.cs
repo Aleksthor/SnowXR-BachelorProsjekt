@@ -26,7 +26,6 @@ namespace SnowXR.MassInjury
         void Start()
         {
             injury = patient.GetComponent<BleedingInjury>();
-            injury.onPlaceBand.AddListener(StepComplete);
 
             foreach (Transform child in bandParent)
             {
@@ -63,6 +62,9 @@ namespace SnowXR.MassInjury
                     }
                 }
             }
+            
+            
+            injury.onPlaceBand.AddListener(StepComplete);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BNG;
+using UnityEngine.Events;
 
 namespace SnowXR.MassInjury
 {
@@ -17,11 +18,13 @@ namespace SnowXR.MassInjury
         private AudioSource audioSource;
         private float speed;
         private float timer;
+        private bool active = false;
+
+        [HideInInspector] public UnityEvent onListen;
 
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
-            
         }
 
         private void Update()
@@ -69,6 +72,8 @@ namespace SnowXR.MassInjury
             {
                 currentInjury = other.GetComponent<PulseCollider>().GetInjury();
                 area = other.GetComponent<PulseCollider>().area;
+                onListen.Invoke();
+                active = true;
             }
         }
 
@@ -79,8 +84,24 @@ namespace SnowXR.MassInjury
                 if (ReferenceEquals(currentInjury, other.GetComponent<PulseCollider>().GetInjury()))
                 {
                     currentInjury = null;
+                    active = false;
                 }
             }
+        }
+
+        public bool Active()
+        {
+            return active;
+        }
+
+        public ControllerHand Hand()
+        {
+            return hand;
+        }
+
+        public PulseArea Area()
+        {
+            return area;
         }
     }
     

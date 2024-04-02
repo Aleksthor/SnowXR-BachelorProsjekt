@@ -76,6 +76,10 @@ namespace SnowXR.MassInjury
 
         public UnityEvent onPlaceTourniquet;
         public UnityEvent onPlaceBand;
+        public UnityEvent onRecievePressure;
+        public UnityEvent onRecievePressureRelief;
+        public UnityEvent onRecieveOpenAirways;
+        public UnityEvent onRecieveSideLease;
         
         private void Awake()
         {
@@ -570,19 +574,32 @@ namespace SnowXR.MassInjury
         public void SetRecievedPharyngealTube(bool input)
         {
             recievedPharyngealTube = input;
+            
         }
         
         public void SetRecievedSideLease(bool input)
         {
             recievedSideLease = input;
+            if (recievedSideLease)
+            {
+                onRecieveSideLease.Invoke();
+            }
         }
         public void SetRecievedPressure(bool input)
         {
             recievedPressure = input;
+            if (recievedPressure)
+            {
+                onRecievePressure.Invoke();
+            }
         }
         public void SetRecievedPressureRelief(bool input)
         {
             recievedPressureRelief = input;
+            if (recievedPressureRelief)
+            {
+                onRecievePressureRelief.Invoke();
+            }
         }
 
         public void OpenedAirways()
@@ -590,8 +607,10 @@ namespace SnowXR.MassInjury
             if (breathingStatus == BreathingStatus.ClosedAirway)
             {
                 breathingStatus = BreathingStatus.Normal;
-                recievedOpenAirways = true;
             }
+            
+            recievedOpenAirways = true;
+            onRecieveOpenAirways.Invoke();
         }
         public int Pulse()
         {

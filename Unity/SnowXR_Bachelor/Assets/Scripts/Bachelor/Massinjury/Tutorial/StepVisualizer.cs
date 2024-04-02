@@ -47,6 +47,9 @@ namespace SnowXR.MassInjury
         public void NextStep()
         {
             numbers[current].color = finishedStep;
+
+            if (current >= numbers.Count - 1) return;
+            
             current++;
             numbers[current].color = currentStep;
 
