@@ -17,10 +17,12 @@ namespace SnowXR.MassInjury
 
         [SerializeField] private Transform superParent;
 
+        private bool startCheck = false;
         private float value;
         void Start()
         {
             lever.onLeverChange.AddListener(OnLevelChangedUpdate);
+            startCheck = false;
         }
 
         private void OnDestroy()
@@ -37,22 +39,29 @@ namespace SnowXR.MassInjury
             if (JawGrabbable.BeingHeld)
             {
                 this.value = value;
-            }
+                
+                //if we are holdding jaw, but NOT the head, make jaw grabber TryRelease()
+                if (JawGrabbable.BeingHeld && !HeadGrabbable.BeingHeld)
+                {
+                    JawGrabbable.GetPrimaryGrabber().TryRelease();
+                }
 
-            //if we are holdding jaw, but NOT the head, make jaw grabber TryRelease()
-            if (JawGrabbable.BeingHeld && !HeadGrabbable.BeingHeld)
-            {
-                JawGrabbable.GetPrimaryGrabber().TryRelease();
+                CheckForCompletion();
             }
-
-            CheckForCompletion();
         }
 
         private void CheckForCompletion()
         {
             float mouthOpeness = 0;
             mouthOpeness = value;
-            if (mouthOpeness > 90)
+            if (mouthOpeness > 0f)
+            {
+                startCheck = true;
+            }
+
+            if (!startCheck) return;
+            
+            if (mouthOpeness < 10)
             {
                 superParent.gameObject.SetActive(false);
                 OnCompletedStep2?.Invoke();

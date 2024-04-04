@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPoseType: 1
-  SelectedHandPose: {fileID: 11400000, guid: b8f69f4b8e1b5ae4f9babeb9e3d139bf, type: 2}
+  SelectedHandPose: {fileID: 11400000, guid: c172c6b09f63dba419ddb419496a4367, type: 2}
   HandPose: 0
   LeftHandIsValid: 0
   RightHandIsValid: 1
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPoseType: 1
-  SelectedHandPose: {fileID: 11400000, guid: b8f69f4b8e1b5ae4f9babeb9e3d139bf, type: 2}
+  SelectedHandPose: {fileID: 11400000, guid: c172c6b09f63dba419ddb419496a4367, type: 2}
   HandPose: 0
   LeftHandIsValid: 1
   RightHandIsValid: 0
@@ -678,6 +678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4339966111837092846}
+  - component: {fileID: 896307965982176168}
   m_Layer: 13
   m_Name: OpenMouth
   m_TagString: Untagged
@@ -702,6 +703,25 @@ Transform:
   - {fileID: 4339966111645966142}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &896307965982176168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339966111837092840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000e612f04f6e8b42aa9c5ce669928b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCompletedStep2:
+    m_PersistentCalls:
+      m_Calls: []
+  lever: {fileID: 4339966112046514553}
+  HeadGrabbable: {fileID: 4339966111645966143}
+  JawGrabbable: {fileID: 4339966112046514544}
+  superParent: {fileID: 0}
 --- !u!1 &4339966112028312435
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,7 +842,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -841,7 +861,7 @@ MonoBehaviour:
   BeingHeld: 0
   GrabButton: 0
   Grabtype: 0
-  GrabPhysics: 2
+  GrabPhysics: 1
   GrabMechanic: 1
   GrabSpeed: 15
   RemoteGrabbable: 0
@@ -927,7 +947,7 @@ HingeJoint:
   m_UseAcceleration: 0
   m_Limits:
     min: 0
-    max: 26.78
+    max: 32.17
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -1067,12 +1087,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumXRotation: 0
-  MaximumXRotation: 26.78
+  MaximumXRotation: 32.17
   InitialXRotation: 0
   SwitchOnSound: {fileID: 0}
   SwitchOffSound: {fileID: 0}
   SwitchTolerance: 1.25
-  UseSmoothLook: 1
+  UseSmoothLook: 0
   SmoothLookSpeed: 15
   AllowPhysicsForces: 0
   ReturnToCenter: 0

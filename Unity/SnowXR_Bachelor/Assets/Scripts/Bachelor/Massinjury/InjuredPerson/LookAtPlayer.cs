@@ -31,7 +31,7 @@ namespace SnowXR.MassInjury
         // Update is called once per frame
         void LateUpdate()
         {
-            if (!bleedingInjury.Concious() || (!bleedingInjury.CanWalk() && !bleedingInjury.Sitting())) return;
+            if (!bleedingInjury.Concious()) return;
             Vector3 distance = playerTransform.position - transform.position;
             if (distance.sqrMagnitude < 9f)
             {

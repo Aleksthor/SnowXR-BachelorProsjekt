@@ -20,6 +20,12 @@ namespace SnowXR.MassInjury
         
         [SerializeField] private UnityEvent onStepComplete;
         
+        [SerializeField] private List<string> steps = new List<string>();
+        [SerializeField] private List<string> hints = new List<string>();
+
+        [SerializeField] private TextMeshProUGUI step;
+        [SerializeField] private TextMeshProUGUI hint;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -31,6 +37,8 @@ namespace SnowXR.MassInjury
             
             progressBar.value = 0f;
             percentText.text = "0 %";
+            step.text = steps[0];
+            hint.text = hints[0];
         }
 
         private void AskIfAwake()
@@ -44,6 +52,8 @@ namespace SnowXR.MassInjury
             {
                 progressBar.value = 1f;
                 percentText.text = "100 %";
+                step.text = steps[3];
+                hint.text = hints[3];
                 
                 onStepComplete.Invoke();
             }
@@ -51,6 +61,8 @@ namespace SnowXR.MassInjury
             {
                 progressBar.value = 0.5f;
                 percentText.text = "50 %";
+                step.text = steps[2];
+                hint.text = hints[2];
                 
                 injury.onPlaceBand.AddListener(PlaceBand);
             }
@@ -60,6 +72,8 @@ namespace SnowXR.MassInjury
         {
             progressBar.value = 1f;
             percentText.text = "100 %";
+            step.text = steps[3];
+            hint.text = hints[3];
             
             injury.onPlaceBand.RemoveAllListeners();
             

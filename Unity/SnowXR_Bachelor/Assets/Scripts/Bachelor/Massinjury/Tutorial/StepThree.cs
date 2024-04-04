@@ -18,6 +18,12 @@ namespace SnowXR.MassInjury
         
         [SerializeField] private UnityEvent onStepComplete;
         
+        [SerializeField] private List<string> steps = new List<string>();
+        [SerializeField] private List<string> hints = new List<string>();
+
+        [SerializeField] private TextMeshProUGUI step;
+        [SerializeField] private TextMeshProUGUI hint;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -27,12 +33,16 @@ namespace SnowXR.MassInjury
 
             progressBar.value = 0f;
             percentText.text = "0 %";
+            step.text = steps[0];
+            hint.text = hints[0];
         }
 
         public void RecievePressure()
         {
             progressBar.value = 0.25f;
             percentText.text = "25 %";
+            step.text = steps[1];
+            hint.text = hints[1];
             
             injury.onRecievePressure.RemoveAllListeners();
             injury.onRecieveOpenAirways.AddListener(OpenAirways);
@@ -42,6 +52,8 @@ namespace SnowXR.MassInjury
         {
             progressBar.value = 0.5f;
             percentText.text = "50 %";
+            step.text = steps[2];
+            hint.text = hints[2];
             
             injury.onRecieveOpenAirways.RemoveAllListeners();
             injury.onRecieveSideLease.AddListener(SideLease);
@@ -51,6 +63,8 @@ namespace SnowXR.MassInjury
         {
             progressBar.value = 0.75f;
             percentText.text = "75 %";
+            step.text = steps[3];
+            hint.text = hints[3];
             
             injury.onRecieveSideLease.RemoveAllListeners();
             injury.onPlaceBand.AddListener(PlaceBand);
@@ -62,6 +76,8 @@ namespace SnowXR.MassInjury
             
             progressBar.value = 1f;
             percentText.text = "100 %";
+            step.text = steps[4];
+            hint.text = hints[4];
             
             injury.onPlaceBand.RemoveAllListeners();
             

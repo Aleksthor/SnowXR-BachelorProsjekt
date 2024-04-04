@@ -20,6 +20,11 @@ namespace SnowXR.MassInjury
 
         private List<GameObject> bands = new List<GameObject>();
 
+        [SerializeField] private List<string> steps = new List<string>();
+        [SerializeField] private List<string> hints = new List<string>();
+
+        [SerializeField] private TextMeshProUGUI step;
+        [SerializeField] private TextMeshProUGUI hint;
 
         private BleedingInjury injury;
         // Start is called before the first frame update
@@ -35,6 +40,9 @@ namespace SnowXR.MassInjury
 
             progressBar.value = 0f;
             percentText.text = "0 %";
+
+            step.text = steps[0];
+            hint.text = hints[0];
         }
 
         private void StepComplete()
@@ -45,6 +53,9 @@ namespace SnowXR.MassInjury
                 GetComponent<StepVisualizer>().NextStep();
                 progressBar.value = 1f;
                 percentText.text = "100 %";
+                
+                step.text = steps[2];
+                hint.text = hints[2];
             }
         }
 
@@ -58,6 +69,8 @@ namespace SnowXR.MassInjury
                     {
                         progressBar.value = 0.5f;
                         percentText.text = "50 %";
+                        step.text = steps[1];
+                        hint.text = hints[1];
                         band.GetComponent<BandPlacement>().onPickup.RemoveAllListeners();
                     }
                 }
