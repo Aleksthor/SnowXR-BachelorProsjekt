@@ -861,7 +861,7 @@ MonoBehaviour:
   BeingHeld: 0
   GrabButton: 0
   Grabtype: 0
-  GrabPhysics: 1
+  GrabPhysics: 2
   GrabMechanic: 1
   GrabSpeed: 15
   RemoteGrabbable: 0
@@ -869,7 +869,7 @@ MonoBehaviour:
   RemoteGrabDistance: 10
   ThrowForceMultiplier: 1
   ThrowForceMultiplierAngular: 1.125
-  BreakDistance: 1
+  BreakDistance: 3
   HideHandGraphics: 0
   ParentToHands: 0
   ParentHandModel: 0

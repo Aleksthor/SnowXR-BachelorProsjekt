@@ -191,7 +191,7 @@ MonoBehaviour:
   GrabButton: 0
   Grabtype: 0
   GrabPhysics: 1
-  GrabMechanic: 0
+  GrabMechanic: 1
   GrabSpeed: 15
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
@@ -349,6 +349,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tourniquetPrefabStrapStep: {fileID: 1329966644697303785, guid: 4c3143eea80a69640a8307998a62ff7c,
     type: 3}
+  onPickup:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlacement:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5955923599770763647
 MonoBehaviour:
   m_ObjectHideFlags: 0

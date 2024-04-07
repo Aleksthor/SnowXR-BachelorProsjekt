@@ -11,6 +11,8 @@ namespace SnowXR.MassInjury
         private Grabbable grabbable;
         private GameObject cubeMesh;
         private GameObject bandMesh;
+
+        private bool done = false;
         
         
         // Start is called before the first frame update
@@ -24,16 +26,17 @@ namespace SnowXR.MassInjury
 
         private void Update()
         {
-            if (grabbable.BeingHeld || grabbable.RemoteGrabbing)
+            if ((grabbable.BeingHeld || grabbable.RemoteGrabbing) && !done)
             {
                 Pickup();
+                done = true;
             }
         }
 
         // Update is called once per frame
         public void Pickup()
         {
-            //rigidbody.isKinematic = false;
+            transform.parent = null;
             cubeMesh.SetActive(true);
             bandMesh.SetActive(false);
         }

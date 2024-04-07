@@ -44,6 +44,7 @@ namespace SnowXR.MassInjury
                 if (ReferenceEquals(other.transform, currentArea))
                 {
                     currentArea = null;
+                    timer = 0f;
                 }
             }
         }

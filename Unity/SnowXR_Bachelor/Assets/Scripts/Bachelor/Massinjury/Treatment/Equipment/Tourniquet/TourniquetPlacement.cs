@@ -5,6 +5,7 @@ using BNG;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 
 namespace SnowXR.MassInjury
 {
@@ -17,12 +18,23 @@ namespace SnowXR.MassInjury
 
         [HideInInspector] public UnityEvent onPickup;
         [HideInInspector] public UnityEvent onPlacement;
+
+        private bool done = false;
         private void Awake()
         {
             events = GetComponent<GrabbableUnityEvents>();
             grabbable = GetComponent<Grabbable>();
         }
-        
+
+        private void Update()
+        {
+            if ((grabbable.RemoteGrabbing || grabbable.BeingHeld) && !done)
+            {
+                transform.parent = null;
+                done = true;
+            }
+        }
+
 
         private void OnDestroy()
         {

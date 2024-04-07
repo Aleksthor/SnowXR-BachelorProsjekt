@@ -12,7 +12,7 @@ namespace SnowXR.MassInjury
             Collider[] colliders = Physics.OverlapSphere(transform.position, 10f, layerMask);
             foreach (var c in colliders)
             {
-                if (c.CompareTag("Agent"))
+                if (c.CompareTag("Patient"))
                 {
                     MassInjuryAgent agent = c.GetComponent<MassInjuryAgent>();
                     if (!ReferenceEquals(agent, null))
