@@ -104,7 +104,7 @@ namespace SnowXR.MassInjury
             CalculateNeededHelp();
             DebugAnimationState();
         }
-        
+
         private void InitInjuries()
         {
 
@@ -324,6 +324,11 @@ namespace SnowXR.MassInjury
                 correctZone = Zone.Red;
                 return;
             }
+
+            if (bleedingArea == BleedingArea.Neck)
+            {
+                correctZone = Zone.Red;
+            }
             
             if (bloodLossML > 2000)
             {
@@ -391,6 +396,7 @@ namespace SnowXR.MassInjury
 
         private void ZoneReasoning()
         {
+            zoneReasoning.Clear();
 
             if (bloodLossML > 1000)
             {
@@ -398,20 +404,25 @@ namespace SnowXR.MassInjury
             }
             
             zoneReasoning.Add("Pasienten har " + bloodLossSeverity.ToString() + " blødninger");
-            zoneReasoning.Add("Pulsen er: " + pulse.ToString());
+            zoneReasoning.Add(pulse > 120 ? " Pulsen er over 120" : "Pulsen er under 120");
             zoneReasoning.Add("Puste status er: " + breathingStatus.ToString());
             if (bleedingArea == BleedingArea.Torso)
             {
                 zoneReasoning.Add("Pasienten blør i magen");
             }
-            else
+            if (bleedingArea == BleedingArea.Neck)
             {
-                zoneReasoning.Add("Pasienten blør ikke i magen");
+                zoneReasoning.Add("Pasienten blør i nakken");
             }
         }
 
         public List<string> GetZoneReasoning()
         {
+            if (zoneReasoning.Count == 0)
+            {
+                ZoneReasoning();
+            }
+            
             return zoneReasoning;
         }
 
@@ -539,6 +550,11 @@ namespace SnowXR.MassInjury
             return (int)bloodLossSeverity;
         }
 
+        public bool NeedPressure()
+        {
+            return needPressure;
+        }
+
 
         private void DebugAnimationState()
         {
@@ -607,6 +623,16 @@ namespace SnowXR.MassInjury
             
             recievedOpenAirways = true;
             onRecieveOpenAirways.Invoke();
+        }
+
+        public MassInjuryPatient GetPatient()
+        {
+            return patient;
+        }
+
+        public Zone CorrectZone()
+        {
+            return correctZone;
         }
         public int Pulse()
         {
