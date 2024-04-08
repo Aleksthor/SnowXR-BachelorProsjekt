@@ -229,7 +229,7 @@ MonoBehaviour:
   GrabButton: 0
   Grabtype: 0
   GrabPhysics: 1
-  GrabMechanic: 0
+  GrabMechanic: 1
   GrabSpeed: 15
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RingOnValidPickup: 1
-  RingOnValidRemotePickup: 0
+  RingOnValidRemotePickup: 1
   RingHelperScale: 0.2
 --- !u!114 &7877245396037641543
 MonoBehaviour:

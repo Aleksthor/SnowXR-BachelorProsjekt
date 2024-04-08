@@ -141,7 +141,7 @@ namespace SnowXR.MassInjury
 
         private void GiveSingleInjury()
         {
-            int random = Random.Range(0, totalInjuryScore);
+            int random = Random.Range(1, totalInjuryScore);
             bleedingArea = GetRandomInjuryType(random);
             bloodLossSeverity = CalculateBleedingSeverity();
         }
@@ -391,10 +391,6 @@ namespace SnowXR.MassInjury
 
         private void ZoneReasoning()
         {
-            if (recievedTourniquet)
-            {
-                zoneReasoning.Add("Har fått en tourniquet, så pasienten har fått noe behandling.");
-            }
 
             if (bloodLossML > 1000)
             {

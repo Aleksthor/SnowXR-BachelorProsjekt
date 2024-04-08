@@ -10,7 +10,7 @@ namespace SnowXR.MassInjury
     public class SettingsUI : MonoBehaviour
     {
         [SerializeField] private GameObject UI;
-        [SerializeField] private ControllerBinding ToggleHandsInput = ControllerBinding.StartButtonDown;
+        [SerializeField] private ControllerBinding ToggleHandsInput = ControllerBinding.AButtonDown;
 
         private void Start()
         {

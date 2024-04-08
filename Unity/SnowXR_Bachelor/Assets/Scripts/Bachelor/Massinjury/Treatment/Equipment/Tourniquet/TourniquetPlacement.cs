@@ -44,6 +44,7 @@ namespace SnowXR.MassInjury
 
         public void OnPickup()
         {
+            transform.localScale = Vector3.one;
             List<GameObject> patients = GameObject.FindGameObjectsWithTag("Patient").ToList();
 
             foreach (var patient in patients)
