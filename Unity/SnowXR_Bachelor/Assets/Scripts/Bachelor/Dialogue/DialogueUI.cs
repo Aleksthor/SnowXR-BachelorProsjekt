@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Bachelor.Dialogue
+namespace MassInjury.Dialogue
 {
     public class DialogueUI : MonoBehaviour
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
 
-namespace BA.GOAP
+namespace MassInjury.Goap
 {
     public class SubGoal
     {

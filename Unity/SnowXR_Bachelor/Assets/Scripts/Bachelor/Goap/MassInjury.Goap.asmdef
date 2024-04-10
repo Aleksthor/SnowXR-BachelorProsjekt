@@ -1,6 +1,6 @@
 {
-    "name": "BA.GOAP",
-    "rootNamespace": "BA.GOAP",
+    "name": "MassInjury.Goap",
+    "rootNamespace": "MassInjury.Goap",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

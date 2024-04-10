@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Bachelor.Dialogue
+namespace MassInjury.Dialogue
 {
     public class DialogueButton : MonoBehaviour
     {

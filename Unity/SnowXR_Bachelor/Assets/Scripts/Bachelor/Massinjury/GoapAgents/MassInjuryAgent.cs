@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using SnowXR.MassInjury;
-using BA.GOAP;
+using MassInjury.Goap;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(BleedingInjury))]

@@ -1,3 +1,14 @@
 {
-	"name": "MassInjury.Person"
+    "name": "MassInjury.Person",
+    "rootNamespace": "MassInjury.Person",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

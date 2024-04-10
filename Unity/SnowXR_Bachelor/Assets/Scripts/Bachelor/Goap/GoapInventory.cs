@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BA.GOAP
+namespace MassInjury.Goap
 {
-    public class GoapInventory 
+    public class GoapInventory
     {
         private List<GameObject> items = new List<GameObject>();
 

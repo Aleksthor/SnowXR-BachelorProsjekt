@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace BA.GOAP
+namespace MassInjury.Goap
 {
     [System.Serializable]
     public abstract class GoapAction

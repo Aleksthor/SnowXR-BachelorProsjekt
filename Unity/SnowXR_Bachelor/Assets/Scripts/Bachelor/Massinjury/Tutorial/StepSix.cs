@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Bachelor.Dialogue;
+using MassInjury.Dialogue;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Bachelor.Dialogue;
+using MassInjury.Dialogue;
 
 namespace SnowXR.MassInjury
 {

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Bachelor.Dialogue;
+using MassInjury.Dialogue;
 using MassInjury.Person;
 using UnityEngine;
 using Random = UnityEngine.Random;

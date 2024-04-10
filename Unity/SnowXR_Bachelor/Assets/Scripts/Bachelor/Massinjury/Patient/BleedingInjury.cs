@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using BA.GOAP;
+using MassInjury.Goap;
 using MassInjury.Person;
 using UnityEngine;
 using UnityEngine.Events;

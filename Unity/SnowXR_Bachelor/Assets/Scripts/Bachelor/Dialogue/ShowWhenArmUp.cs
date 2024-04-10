@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Bachelor.Dialogue
+namespace MassInjury.Dialogue
 {
     public class ShowWhenArmUp : MonoBehaviour
     {

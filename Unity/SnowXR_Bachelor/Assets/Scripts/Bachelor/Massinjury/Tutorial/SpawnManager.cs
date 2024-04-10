@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
-using BA.GOAP;
+using MassInjury.Goap;
 using MassInjury.Person;
 
 namespace SnowXR.MassInjury

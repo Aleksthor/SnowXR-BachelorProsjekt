@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BA.GOAP
+namespace MassInjury.Goap
 {
     
     public class WorldStates

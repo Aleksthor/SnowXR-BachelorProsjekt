@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SnowXR.MassInjury;
-using BA.GOAP;
+using MassInjury.Goap;
 
 
 namespace BA.Prototype

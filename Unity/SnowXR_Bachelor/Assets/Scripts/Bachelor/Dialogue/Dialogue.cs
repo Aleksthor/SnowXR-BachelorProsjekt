@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Bachelor.Dialogue
+namespace MassInjury.Dialogue
 {
     [System.Serializable]
     public class Dialogue

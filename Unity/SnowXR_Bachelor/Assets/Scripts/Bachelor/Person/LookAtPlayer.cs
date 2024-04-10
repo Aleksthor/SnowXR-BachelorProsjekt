@@ -1,19 +1,15 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using MassInjury.Person;
 using UnityEngine;
 
-namespace SnowXR.MassInjury
+namespace MassInjury.Person
 {
-    [RequireComponent(typeof(BleedingInjury))]
     public class LookAtPlayer : MonoBehaviour
     {
         [SerializeField] private Transform neck;
 
         private Transform playerTransform;
-
-        private BleedingInjury bleedingInjury;
+        
 
         private Quaternion cachedQuaternion;
         
@@ -25,14 +21,12 @@ namespace SnowXR.MassInjury
                 .Find("spine_01_jnt").Find("spine_02_jnt").Find("spine_03_jnt").Find("neck_jnt");
 
             playerTransform = GameObject.Find("XR Rig Advanced").transform.Find("PlayerController");
-            bleedingInjury = GetComponent<BleedingInjury>();
             cachedQuaternion = Quaternion.identity;
         }
 
         // Update is called once per frame
         void LateUpdate()
         {
-            if (!bleedingInjury.Concious()) return;
             Vector3 distance = playerTransform.position - transform.position;
             if (distance.sqrMagnitude < 9f)
             {
