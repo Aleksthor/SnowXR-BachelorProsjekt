@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1615933097735896681}
   m_Layer: 0
-  m_Name: PressureRelief
+  m_Name: PressureReliefWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,10 +29,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2913781845780738267}
+  - {fileID: 4674269076817949746}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3451283831305492272
+--- !u!1001 &5139996445267383257
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -42,18 +42,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f2cf2255b918440478d861ce7c78cbf9,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f2cf2255b918440478d861ce7c78cbf9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f2cf2255b918440478d861ce7c78cbf9,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f2cf2255b918440478d861ce7c78cbf9,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 0.1125
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2cf2255b918440478d861ce7c78cbf9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2cf2255b918440478d861ce7c78cbf9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.0006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2cf2255b918440478d861ce7c78cbf9,
         type: 3}
@@ -95,14 +110,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nal_MESH_Prototype
       objectReference: {fileID: 0}
+    - target: {fileID: 5345730258915410118, guid: f2cf2255b918440478d861ce7c78cbf9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f9eaae81f894324483d01c29d4f2280, type: 2}
+    - target: {fileID: 5594004294491803551, guid: f2cf2255b918440478d861ce7c78cbf9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6f9eaae81f894324483d01c29d4f2280, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2cf2255b918440478d861ce7c78cbf9, type: 3}
---- !u!4 &2913781845780738267 stripped
+--- !u!4 &4674269076817949746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2cf2255b918440478d861ce7c78cbf9,
     type: 3}
-  m_PrefabInstance: {fileID: 3451283831305492272}
+  m_PrefabInstance: {fileID: 5139996445267383257}
   m_PrefabAsset: {fileID: 0}

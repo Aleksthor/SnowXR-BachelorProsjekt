@@ -48,7 +48,7 @@ namespace SnowXR.MassInjury
                 dialogues[0].onLineExit.RemoveListener(AskIfAwake);
             }
 
-            if (injury.GetComponent<DialogueResponder>().AskIfAwake())
+            if (injury.Concious())
             {
                 progressBar.value = 1f;
                 percentText.text = "100 %";

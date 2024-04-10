@@ -20,6 +20,8 @@ namespace Bachelor.Dialogue
         DialogueResponder activeResponder;
         private List<Dialogue> playerResponderOptions = new List<Dialogue>();
 
+        [SerializeField] public AudioSource dialogueAudioSource;
+
         private void Awake()
         {
             if (instance == null)
@@ -93,6 +95,8 @@ namespace Bachelor.Dialogue
             {
                 _options.Add(dialogue);
             }
+            
+            
 
             if (playerOptions.Contains(dialoge))
             {
@@ -104,6 +108,11 @@ namespace Bachelor.Dialogue
                 playerResponderOptions.Remove(dialoge);
                 return;
             }
+        }
+
+        public DialogueResponder GetActiveResponder()
+        {
+            return activeResponder;
         }
         
 
@@ -120,6 +129,12 @@ namespace Bachelor.Dialogue
             
 
             LoadOptions();
+        }
+
+        public void PlayAudio(AudioClip clip)
+        {
+            dialogueAudioSource.clip = clip;
+            dialogueAudioSource.Play();
         }
         
         

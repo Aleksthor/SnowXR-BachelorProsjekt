@@ -610,6 +610,8 @@ namespace SnowXR.MassInjury
             recievedPressureRelief = input;
             if (recievedPressureRelief)
             {
+                if (breathingStatus == BreathingStatus.LungInjury) 
+                    breathingStatus = BreathingStatus.Normal;
                 onRecievePressureRelief.Invoke();
             }
         }

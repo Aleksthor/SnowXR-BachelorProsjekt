@@ -2,22 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Bachelor.Dialogue
 {
     public class DialogueResponder : MonoBehaviour
     {
         [SerializeField] private List<Dialogue> playerOptions = new List<Dialogue>();
-        
+
+        [SerializeField] private AudioSource audioSource;
+
         public List<Dialogue> GetPlayerOptions()
         {
             return playerOptions;
         }
 
-        public bool AskIfAwake()
+        public void PlayClip(AudioClip clip)
         {
-            return true;
+            audioSource.clip = clip;
+            audioSource.Play();
         }
+        
         
     }
 }

@@ -74,13 +74,13 @@ namespace SnowXR.MassInjury
                         Instantiate(placeholderPrefab, parent.parent);
 
                         Collider[] colliders =
-                            Physics.OverlapSphere(transform.position, 4f, 1<<16);
+                            Physics.OverlapSphere(transform.position, 4f, 1<<9);
 
                         Transform closest = null;
                         float best = float.MaxValue;
                         foreach (var col in colliders)
                         {
-                            if (col.CompareTag("Agent"))
+                            if (col.CompareTag("Patient"))
                             {
                                 float compare = Vector3.Distance(transform.position, col.transform.position);
                                 if (best > compare)
@@ -93,7 +93,7 @@ namespace SnowXR.MassInjury
 
                         if (!ReferenceEquals(closest, null))
                         {
-                            closest.parent.GetComponent<BleedingInjury>().SetRecievedTourniquet(true);
+                            closest.GetComponent<BleedingInjury>().SetRecievedTourniquet(true);
                         }
                         
                         Destroy(parent.gameObject);

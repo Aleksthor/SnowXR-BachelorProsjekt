@@ -115,7 +115,7 @@ MonoBehaviour:
     type: 3}
   pharyngealTube: {fileID: 7160592311763859082, guid: 43d3397dfe3cf714889663398bf19e59,
     type: 3}
-  pressureRelief: {fileID: 6028191941375624976, guid: 4ae320fa3f294c54e9bd219fe1cf2db1,
+  pressureRelief: {fileID: 3986942021821768063, guid: 76110b08d407dbc488c7f515970d1dce,
     type: 3}
   tourniquet1: {fileID: 4140664753330263361}
   pressureRelief1: {fileID: 7774449717749145051}

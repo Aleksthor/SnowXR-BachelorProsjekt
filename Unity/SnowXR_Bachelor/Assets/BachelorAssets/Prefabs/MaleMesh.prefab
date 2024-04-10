@@ -911,6 +911,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 403189910610066665}
   m_LocalEulerAnglesHint: {x: 34.171, y: 0, z: 0}
+--- !u!1 &5482122178303328408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7503965356348388857}
+  m_Layer: 0
+  m_Name: PRESSURERELIEFPARENT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7503965356348388857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482122178303328408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.98789227, z: 0, w: 0.15514159}
+  m_LocalPosition: {x: -0.1846, y: 0.0671, z: -0.0608}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7104613595712576861}
+  m_LocalEulerAnglesHint: {x: 0, y: 162.15, z: 0}
 --- !u!1 &5722729920626457128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1823,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5103033062816751441}
+    - targetCorrespondingSourceObject: {fileID: 6567618429029164720, guid: 2e9c931e65fea904e9d86e45d2e7b171,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7503965356348388857}
     - targetCorrespondingSourceObject: {fileID: -7893297155341302189, guid: 2e9c931e65fea904e9d86e45d2e7b171,
         type: 3}
       insertIndex: -1
@@ -1905,6 +1940,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1359804619361112291}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e9c931e65fea904e9d86e45d2e7b171,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2303309183668527645}
   m_SourcePrefab: {fileID: 100100000, guid: 2e9c931e65fea904e9d86e45d2e7b171, type: 3}
 --- !u!4 &403189910610066665 stripped
 Transform:
@@ -2071,6 +2110,23 @@ MonoBehaviour:
   bandPrefabWhite: {fileID: 7160592311763859082, guid: 26b332fe725a5d6448166e5b1de36cd0,
     type: 3}
   bandPrefabGreen: {fileID: 7160592311763859082, guid: 03373a2b7984c2245afb8eb59744d71c,
+    type: 3}
+--- !u!114 &2303309183668527645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3854271592053950140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb12dd766828b6a438958f0dd34961aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressureReliefParent: {fileID: 7503965356348388857}
+  pressureReliefPrefabWhite: {fileID: 6028191941375624976, guid: b5a1a8e297b074449aaa7dd5879f9088,
+    type: 3}
+  pressureReliefPrefabGreen: {fileID: 6028191941375624976, guid: 17345499cbe1ea64db3673d10feac73a,
     type: 3}
 --- !u!4 &4205030281648118745 stripped
 Transform:

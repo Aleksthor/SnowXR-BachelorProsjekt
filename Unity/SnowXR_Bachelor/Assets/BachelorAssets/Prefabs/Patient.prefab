@@ -144,6 +144,8 @@ GameObject:
   - component: {fileID: 1863918364411759501}
   - component: {fileID: 2875459297836356097}
   - component: {fileID: 8384569641489243258}
+  - component: {fileID: 3443433925320659127}
+  - component: {fileID: 7253759555586229351}
   m_Layer: 9
   m_Name: Patient
   m_TagString: Patient
@@ -293,8 +295,23 @@ MonoBehaviour:
   - line: "Hei er du v\xE5ken?"
     onLineExit:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7253759555586229351}
+          m_TargetAssemblyTypeName: SnowXR.MassInjury.DialogueFunctions, SnowXR.MassInjury
+          m_MethodName: AskIfAwake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     removeOnUse: 1
+    dialogueFemale: {fileID: 8300000, guid: 784f58dc5676b124abc078a78081fb23, type: 3}
+    dialogueMale: {fileID: 8300000, guid: ed6142a7e79479d41bf76890fbfd9830, type: 3}
+  audioSource: {fileID: 3443433925320659127}
 --- !u!195 &2875459297836356097
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -340,6 +357,122 @@ CapsuleCollider:
   m_Height: 1.76
   m_Direction: 1
   m_Center: {x: 0, y: 0.88, z: 0}
+--- !u!82 &3443433925320659127
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312547713710911484}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7253759555586229351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3312547713710911484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879232349932eaa4d83cc144bb22c3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imAwakeMale:
+  - {fileID: 8300000, guid: 1fb70e68b9f6bd74db88acbacf9ecc0d, type: 3}
+  - {fileID: 8300000, guid: 5aea72b7fb29a664294fe52ef0c0ef8a, type: 3}
+  - {fileID: 8300000, guid: 1add24c0b52373f449bcb31758cf8d2d, type: 3}
+  imAwakeFemale:
+  - {fileID: 8300000, guid: 6110b5e321672984a8c1b55c9f09499e, type: 3}
+  - {fileID: 8300000, guid: 8afc827fc2a18454f9a07365e727fc7e, type: 3}
+  - {fileID: 8300000, guid: 1acbe71d4c2cd6b4989f700b25ab0f92, type: 3}
 --- !u!1 &4138257632683775593
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ namespace SnowXR.MassInjury
 
         public void RestartScene()
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         
         public void LoadMainMenu()
