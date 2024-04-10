@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BNG;
 using UnityEngine;
 using System.Linq;
+using MassInjury.Person;
 using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 
@@ -55,7 +56,7 @@ namespace SnowXR.MassInjury
                 
                 if (injury.RecievedTourniquet()) continue;
                 
-                MassInjuryPatient p = patient.GetComponent<MassInjuryPatient>();
+                GenderComponent p = patient.GetComponent<GenderComponent>();
                 TourniquetSockets
                     tourniquetSockets = p.GetMesh().GetComponent<TourniquetSockets>();
                 
@@ -71,7 +72,7 @@ namespace SnowXR.MassInjury
             foreach (var patient in patients)
             {
                 TourniquetSockets
-                    tourniquetSockets = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<TourniquetSockets>();
+                    tourniquetSockets = patient.GetComponent<GenderComponent>().GetMesh().GetComponent<TourniquetSockets>();
                 
                 tourniquetSockets.SetHoldingTourniquet(false, null);
             }

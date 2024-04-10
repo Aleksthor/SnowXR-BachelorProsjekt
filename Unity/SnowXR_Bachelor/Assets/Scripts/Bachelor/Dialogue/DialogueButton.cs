@@ -19,6 +19,8 @@ namespace Bachelor.Dialogue
 
         public void Activate()
         {
+            DialogueController.instance.GetActiveResponder();
+            
             if (!ReferenceEquals(events.dialogueFemale, null))
             {
                 // Play Sound
@@ -43,8 +45,24 @@ namespace Bachelor.Dialogue
         {
             if (waitForAudio)
             {
-                if (DialogueController.instance.dialogueAudioSource.time >=
-                    DialogueController.instance.dialogueAudioSource.clip.length)
+                if (!ReferenceEquals(DialogueController.instance.dialogueAudioSource.clip, null))
+                {
+                    if (DialogueController.instance.dialogueAudioSource.time >=
+                        DialogueController.instance.dialogueAudioSource.clip.length)
+                    {
+                        events.onLineExit.Invoke();
+            
+                        DialogueController.instance.Activate(events);
+                        DialogueController.instance.LoadOptions();
+                        waitForAudio = false;
+                    
+                        if (destroyOnUse)
+                        {
+                            Destroy(gameObject);
+                        }
+                    }
+                }
+                else
                 {
                     events.onLineExit.Invoke();
             
@@ -57,6 +75,7 @@ namespace Bachelor.Dialogue
                         Destroy(gameObject);
                     }
                 }
+                
             }
         }
 

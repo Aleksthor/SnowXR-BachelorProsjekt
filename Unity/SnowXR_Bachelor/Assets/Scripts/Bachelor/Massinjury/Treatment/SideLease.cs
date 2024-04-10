@@ -129,7 +129,7 @@ namespace SnowXR.MassInjury
             {
                 var parent = closest.parent;
                 float value = (100 - currentPercent) / 100;
-                parent.GetComponent<MassInjuryPatient>().UpdateSideLeaseSlider(value);
+                parent.GetComponent<PatientAnimationController>().UpdateSideLeaseSlider(value);
             }
         }
     }

@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MassInjury.Person;
 using UnityEngine;
 
 namespace SnowXR.MassInjury
 {
-    [RequireComponent(typeof(MassInjuryPatient), typeof(BleedingInjury))]
+    [RequireComponent(typeof(PatientAnimationController), typeof(BleedingInjury))]
     public class LookAtPlayer : MonoBehaviour
     {
         [SerializeField] private Transform neck;
@@ -19,7 +20,7 @@ namespace SnowXR.MassInjury
         // Start is called before the first frame update
         void Start()
         {
-            GameObject mesh = GetComponent<MassInjuryPatient>().GetMesh();
+            GameObject mesh = GetComponent<GenderComponent>().GetMesh();
             neck = mesh.transform.Find("skeleton").Find("root").Find("cog_jnt").Find("pelvis_jnt")
                 .Find("spine_01_jnt").Find("spine_02_jnt").Find("spine_03_jnt").Find("neck_jnt");
 

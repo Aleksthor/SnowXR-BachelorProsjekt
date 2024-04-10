@@ -133,6 +133,7 @@ namespace Bachelor.Dialogue
 
         public void PlayAudio(AudioClip clip)
         {
+            if (ReferenceEquals(clip, null)) return;
             dialogueAudioSource.clip = clip;
             dialogueAudioSource.Play();
         }

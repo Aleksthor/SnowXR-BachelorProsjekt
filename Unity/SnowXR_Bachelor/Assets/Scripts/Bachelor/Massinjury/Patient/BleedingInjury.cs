@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using BA.GOAP;
+using MassInjury.Person;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -10,7 +11,7 @@ using Random = UnityEngine.Random;
 
 namespace SnowXR.MassInjury
 {
-    [RequireComponent(typeof(GoapAgent), typeof(MassInjuryPatient))]
+    [RequireComponent(typeof(GoapAgent), typeof(PatientAnimationController))]
     public class BleedingInjury : MonoBehaviour
     {
         [Header("Chance Settings, For Spawning")] 
@@ -63,7 +64,8 @@ namespace SnowXR.MassInjury
         
         //Cache
         private GoapAgent agent;
-        private MassInjuryPatient patient;
+        private PatientAnimationController patientAnimationController;
+        private GenderComponent genderComponent;
         
         // Logic
         private float timer = 0f;
@@ -84,7 +86,8 @@ namespace SnowXR.MassInjury
         private void Awake()
         {
             agent = GetComponent<MassInjuryAgent>();
-            patient = GetComponent<MassInjuryPatient>();
+            patientAnimationController = GetComponent<PatientAnimationController>();
+            genderComponent = GetComponent<GenderComponent>();
             
             totalInjuryScore = headInjuryWeight + neckInjuryWeight + armInjuryWeight + torsoInjuryWeight + thighInjuryWeight + legsInjuryWeight;
             if (randomInjury)
@@ -365,9 +368,9 @@ namespace SnowXR.MassInjury
             needPressure = false;
             needOpenAirways = false;
             needSideLease = false;
-            if (!ReferenceEquals(patient.GetBleedingSockets(), null))
+            if (!ReferenceEquals(patientAnimationController.GetBleedingSockets(), null))
             {
-                patient.GetBleedingSockets().RemoveBloodParticles();
+                patientAnimationController.GetBleedingSockets().RemoveBloodParticles();
             }
         }
 
@@ -452,6 +455,11 @@ namespace SnowXR.MassInjury
         public Comparative Side()
         {
             return bleedingSide;
+        }
+
+        public GenderComponent GetGenderComponent()
+        {
+            return genderComponent;
         }
 
         private bool RandomBool(float chance)
@@ -627,9 +635,9 @@ namespace SnowXR.MassInjury
             onRecieveOpenAirways.Invoke();
         }
 
-        public MassInjuryPatient GetPatient()
+        public PatientAnimationController GetPatient()
         {
-            return patient;
+            return patientAnimationController;
         }
 
         public Zone CorrectZone()

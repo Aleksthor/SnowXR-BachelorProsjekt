@@ -2,24 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Codice.Client.Commands.WkTree;
+using MassInjury.Person;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace SnowXR.MassInjury
 {
-    [RequireComponent(typeof(BleedingInjury), typeof(NavMeshAgent))]
-    public class MassInjuryPatient : MonoBehaviour
+    [RequireComponent(typeof(BleedingInjury), typeof(NavMeshAgent), typeof(GenderComponent))]
+    public class PatientAnimationController : MonoBehaviour
     {
         private BleedingInjury injuryScript;
         private Animator animator;
-
-        [Header("Gender")]
-        [SerializeField] Gender gender;
-
-        [Header("Spawning Body")] 
-        [SerializeField] private GameObject malePrefab;
-        [SerializeField] private GameObject femalePrefab;
         
         // Cache
         private static readonly int InjuryType = Animator.StringToHash("InjuryType");
@@ -27,24 +21,17 @@ namespace SnowXR.MassInjury
         private static readonly int Sitting = Animator.StringToHash("sitting");
 
         private NavMeshAgent agent;
-        private GameObject mesh;
         private static readonly int Walking = Animator.StringToHash("walking");
 
         private Transform normalBreath;
         private Transform closedAirways;
         private Transform criticalBreath;
-
-        private SkinnedMeshRenderer head;
-        private SkinnedMeshRenderer hands;
+        
         private BleedingSockets skeletonManager;
 
         private float sideLeaseSlider = 0f;
-        
-        private static readonly int Saturation = Shader.PropertyToID("_Saturation");
         private static readonly int Dead = Animator.StringToHash("Dead");
         private static readonly int Concious = Animator.StringToHash("Concious");
-        private static readonly int Color1 = Shader.PropertyToID("_Color");
-
         private bool sideLease = false;
         private static readonly int Lease = Animator.StringToHash("sideLease");
 
@@ -53,18 +40,6 @@ namespace SnowXR.MassInjury
         {
             injuryScript = GetComponent<BleedingInjury>();
             agent = GetComponent<NavMeshAgent>();
-            gender = (Gender)Random.Range(0, 2);
-            switch (gender)
-            {
-                case Gender.Male:
-                    mesh = Instantiate(malePrefab, transform);
-                    animator = mesh.GetComponent<Animator>();
-                    break;
-                case Gender.Female:
-                    mesh = Instantiate(femalePrefab, transform);
-                    animator = mesh.GetComponent<Animator>();
-                    break;
-            }
             
             
 
@@ -72,6 +47,13 @@ namespace SnowXR.MassInjury
             closedAirways = transform.Find("ClosedAirways");
             criticalBreath = transform.Find("LungInjury");
 
+        }
+
+        private void Start()
+        {
+            GameObject mesh = GetComponent<GenderComponent>().GetMesh();
+            
+            animator = mesh.GetComponent<Animator>();
             skeletonManager = mesh.GetComponent<BleedingSockets>();
             normalBreath.parent = skeletonManager.breathParent;
             normalBreath.localPosition = Vector3.zero;
@@ -81,22 +63,8 @@ namespace SnowXR.MassInjury
             
             criticalBreath.parent = skeletonManager.breathParent;
             criticalBreath.localPosition = Vector3.zero;
-
-
-            if (gender == Gender.Male)
-            {
-                head = mesh.transform.Find("mesh").Find("M_Head").GetComponent<SkinnedMeshRenderer>();
-                hands = mesh.transform.Find("mesh").Find("M_Hands").GetComponent<SkinnedMeshRenderer>();
-            }
-            else
-            {
-                head = mesh.transform.Find("mesh").Find("F_Head").GetComponent<SkinnedMeshRenderer>();
-                hands = mesh.transform.Find("mesh").Find("F_Hands").GetComponent<SkinnedMeshRenderer>();
-            }
-
         }
 
-        
 
         private void Update()
         {
@@ -132,62 +100,19 @@ namespace SnowXR.MassInjury
                     criticalBreath.gameObject.SetActive(false);
                     break;
             }
-
-            if (injuryScript.Dead())
-            {
-                head.material.SetFloat(Saturation, 0.4f);
-                hands.material.SetFloat(Saturation, 0.4f);
-            }
-            else
-            {
-                head.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
-                hands.material.SetFloat(Saturation, map(injuryScript.bloodLossML, 4000f,0f, 0.4f,1f));
-            }
         }
-
-        public void SetColor(Color color)
-        {
-            if (gender == Gender.Female)
-            {
-                mesh.transform.Find("mesh").Find("F_Outfit").GetComponent<SkinnedMeshRenderer>().materials[0].SetVector(Color1, color);
-            }
-            else
-            {
-                mesh.transform.Find("mesh").Find("M_Outfit").GetComponent<SkinnedMeshRenderer>().materials[0].SetVector(Color1, color);
-            }
-        }
+        
 
         public BleedingSockets GetBleedingSockets()
         {
             return skeletonManager;
         }
-
-        public Gender GetGender()
-        {
-            return gender;
-        }
-
-        public GameObject GetMesh()
-        {
-            return mesh;
-        }
+        
 
         public void UpdateSideLeaseSlider(float number)
         {
             sideLeaseSlider = number;
         }
-        
-        float map(float s, float a1, float a2, float b1, float b2)
-        {
-            return b1 + (s-a1)*(b2-b1)/(a2-a1);
-        }
     }
     
-    
-
-    [System.Serializable]
-    public enum Gender
-    {
-        Male, Female
-    }
 }

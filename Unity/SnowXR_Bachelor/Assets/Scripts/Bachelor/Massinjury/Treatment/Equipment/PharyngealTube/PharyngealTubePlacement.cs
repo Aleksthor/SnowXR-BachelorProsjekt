@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using BNG;
 using System.Linq;
+using MassInjury.Person;
 
 namespace SnowXR.MassInjury
 {
@@ -15,6 +16,8 @@ namespace SnowXR.MassInjury
         private GrabbableUnityEvents events;
         private Grabbable grabbable;
 
+        private bool done = false;
+
         private void Awake()
         {
             events = GetComponent<GrabbableUnityEvents>();
@@ -23,9 +26,10 @@ namespace SnowXR.MassInjury
 
         private void Update()
         {
-            if (grabbable.BeingHeld || grabbable.RemoteGrabbing)
+            if ((grabbable.RemoteGrabbing || grabbable.BeingHeld) && !done)
             {
                 transform.parent = null;
+                done = true;
             }
         }
 
@@ -46,7 +50,7 @@ namespace SnowXR.MassInjury
                 
                 if (injury.RecievedPharyngealTube()) continue;
                 
-                MassInjuryPatient p = patient.GetComponent<MassInjuryPatient>();
+                GenderComponent p = patient.GetComponent<GenderComponent>();
                 PharyngealTubeSockets
                     pharyngealSockets = p.GetMesh().GetComponent<PharyngealTubeSockets>();
                 
@@ -60,7 +64,7 @@ namespace SnowXR.MassInjury
             foreach (var patient in patients)
             {
                 PharyngealTubeSockets
-                    pharyngealSockets = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<PharyngealTubeSockets>();
+                    pharyngealSockets = patient.GetComponent<GenderComponent>().GetMesh().GetComponent<PharyngealTubeSockets>();
                 
                 pharyngealSockets.SetHoldingPharyngealTube(false, null);
             }

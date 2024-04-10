@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using BA.GOAP;
+using MassInjury.Person;
 
 namespace SnowXR.MassInjury
 {
@@ -28,9 +29,6 @@ namespace SnowXR.MassInjury
         [SerializeField] private Transform agentParent;
 
         private List<GameObject> spawnedAgents = new List<GameObject>();
-
-        [Header("PlayerTranform")] 
-        [SerializeField] private GameObject player;
 
         [SerializeField] private List<Color> shirtColors = new List<Color>();
         
@@ -97,8 +95,7 @@ namespace SnowXR.MassInjury
                 Transform spawnPoint = GetRandomSpawnPoint(cachedSpawnPoints);
                 cachedSpawnPoints.Remove(spawnPoint);
                 spawnedAgents.Add(Instantiate(injuredPerson,spawnPoint.position,spawnPoint.rotation,agentParent));
-                spawnedAgents[i].GetComponent<MassInjuryAgent>().inspector = player;
-                spawnedAgents[i].GetComponent<MassInjuryPatient>().SetColor(shirtColors[i % 15]);
+                spawnedAgents[i].GetComponent<GenderComponent>().SetColor(shirtColors[i % 15]);
             }
         }
 

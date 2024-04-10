@@ -12,8 +12,6 @@ public class MassInjuryAgent : GoapAgent
 {
     [SerializeField] private Vector3 receptionGatherLocation = new Vector3();
 
-    public GameObject inspector;
-
     // Start is called before the first frame update
     new void Start()
     {
@@ -46,23 +44,6 @@ public class MassInjuryAgent : GoapAgent
         }
 
         beliefes.AddState("notCleared", 1);
-    }
-
-    private void FixedUpdate()
-    {
-        if (!ReferenceEquals(inspector, null))
-        {
-            if (Vector3.Distance(transform.position, inspector.transform.position) < 5f)
-            {
-                beliefes.SetState("inspectorClose", 1);
-                beliefes.RemoveState("inspectorNotClose");
-            }
-            else
-            {
-                beliefes.SetState("inspectorNotClose", 1);
-                beliefes.RemoveState("inspectorClose");
-            }
-        }
     }
 
 

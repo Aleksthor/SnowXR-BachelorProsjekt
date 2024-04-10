@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using MassInjury.Person;
 
 namespace SnowXR.MassInjury
 {
@@ -43,7 +44,7 @@ namespace SnowXR.MassInjury
 
         public void Setup(BleedingInjury injury, Transform zoneReason, Transform treatment)
         {
-            genderIcon.sprite = injury.GetPatient().GetGender() == Gender.Male ? male : female;
+            genderIcon.sprite = injury.GetGenderComponent().GetGender() == Gender.Male ? male : female;
 
             injuryText.text = GetInjuryText(injury);
 

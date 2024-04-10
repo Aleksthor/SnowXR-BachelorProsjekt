@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using SnowXR.MassInjury;
 using UnityEngine;
 using Bachelor.Dialogue;
 
-namespace Bachelor.RaycastVision
+namespace SnowXR.MassInjury
 {
     public class RaycastVision : MonoBehaviour
     {

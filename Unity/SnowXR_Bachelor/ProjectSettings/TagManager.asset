@@ -32,7 +32,7 @@ TagManager:
   - Equipment
   - NavMeshIgnore
   - IgnoreCollission
-  - Reciever
+  - DialogueAgent
   - 
   - 
   - 

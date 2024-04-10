@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using BNG;
+using MassInjury.Person;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -53,7 +54,7 @@ namespace SnowXR.MassInjury
                 if (!injury.NeedPressureRelief()) continue;
                 if (injury.RecievedPressureRelief()) continue;
                 
-                MassInjuryPatient p = patient.GetComponent<MassInjuryPatient>();
+                GenderComponent p = patient.GetComponent<GenderComponent>();
                 PressureReliefSockets
                     tourniquetSockets = p.GetMesh().GetComponent<PressureReliefSockets>();
                 
@@ -69,7 +70,7 @@ namespace SnowXR.MassInjury
             foreach (var patient in patients)
             {
                 PressureReliefSockets
-                    tourniquetSockets = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<PressureReliefSockets>();
+                    tourniquetSockets = patient.GetComponent<GenderComponent>().GetMesh().GetComponent<PressureReliefSockets>();
                 
                 tourniquetSockets.SetHoldingPressureRelief(false, null);
             }

@@ -14522,7 +14522,6 @@ GameObject:
   - component: {fileID: 2534590921411956069}
   - component: {fileID: 5654164735356120286}
   - component: {fileID: 7958925310321077096}
-  - component: {fileID: 4075638467121991556}
   - component: {fileID: 7636297565512250513}
   m_Layer: 9
   m_Name: PlayerController
@@ -14943,19 +14942,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsSittingPosible: 1
   heightOffset: 1
---- !u!114 &4075638467121991556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744764921152171930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd618fa711923354887f1385d144388c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graceTime: 1
 --- !u!114 &7636297565512250513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56785,6 +56771,7 @@ GameObject:
   - component: {fileID: 5593435006132946241}
   - component: {fileID: 4410913910781356507}
   - component: {fileID: 4729637065265118882}
+  - component: {fileID: 6273194473159653855}
   m_Layer: 9
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -56972,6 +56959,19 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &6273194473159653855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7608060635847282854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd618fa711923354887f1385d144388c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graceTime: 1
 --- !u!1 &7609921491578958778
 GameObject:
   m_ObjectHideFlags: 0

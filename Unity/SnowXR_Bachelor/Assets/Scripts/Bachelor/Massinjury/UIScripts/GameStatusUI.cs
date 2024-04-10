@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using MassInjury.Person;
 
 namespace SnowXR.MassInjury
 {
@@ -67,7 +68,7 @@ namespace SnowXR.MassInjury
             int i = 0;
             foreach (var go in patients)
             {
-                patientList[i].sprite = go.GetComponent<MassInjuryPatient>().GetGender() == Gender.Male
+                patientList[i].sprite = go.GetComponent<GenderComponent>().GetGender() == Gender.Male
                     ? maleSprite
                     : femaleSprite;
                 patientList[i].color = go.GetComponent<BleedingInjury>().IsInspectionDone() ? done : notDone;

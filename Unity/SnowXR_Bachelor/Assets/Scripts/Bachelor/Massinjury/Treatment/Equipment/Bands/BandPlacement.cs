@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using BNG;
+using MassInjury.Person;
 using UnityEngine.Events;
 
 namespace SnowXR.MassInjury
@@ -17,6 +18,7 @@ namespace SnowXR.MassInjury
         
         [HideInInspector] public UnityEvent onPickup;
 
+        private bool done = false;
         private void Awake()
         {
             events = GetComponent<GrabbableUnityEvents>();
@@ -29,6 +31,15 @@ namespace SnowXR.MassInjury
             events.onRelease.RemoveAllListeners();
         }
         
+        private void Update()
+        {
+            if ((grabbable.RemoteGrabbing || grabbable.BeingHeld) && !done)
+            {
+                transform.parent = null;
+                done = true;
+            }
+        }
+        
         public void OnPickup()
         {
 
@@ -38,7 +49,7 @@ namespace SnowXR.MassInjury
             {
                 BleedingInjury injury = patient.GetComponent<BleedingInjury>();
                 
-                MassInjuryPatient p = patient.GetComponent<MassInjuryPatient>();
+                GenderComponent p = patient.GetComponent<GenderComponent>();
                 BandSockets
                     bandSockets = p.GetMesh().GetComponent<BandSockets>();
                 
@@ -55,7 +66,7 @@ namespace SnowXR.MassInjury
             foreach (var patient in patients)
             {
                 BandSockets
-                    bandSockets = patient.GetComponent<MassInjuryPatient>().GetMesh().GetComponent<BandSockets>();
+                    bandSockets = patient.GetComponent<GenderComponent>().GetMesh().GetComponent<BandSockets>();
                 
                 bandSockets.SetHoldingBand(false, null);
             }

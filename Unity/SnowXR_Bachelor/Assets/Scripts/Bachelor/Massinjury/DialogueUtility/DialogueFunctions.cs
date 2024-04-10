@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Bachelor.Dialogue;
+using MassInjury.Person;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,8 +12,13 @@ namespace SnowXR.MassInjury
     public class DialogueFunctions : MonoBehaviour
     {
 
+        [Header("Patient Responses")]
         [SerializeField] private List<AudioClip> imAwakeMale = new List<AudioClip>();
         [SerializeField] private List<AudioClip> imAwakeFemale = new List<AudioClip>();
+        
+        [Header("Police Responses")]
+        [SerializeField] private List<AudioClip> numberPatientsMale = new List<AudioClip>();
+        [SerializeField] private List<AudioClip> numberPatientsFemale = new List<AudioClip>();
 
         public void GoToReception()
         {
@@ -34,21 +40,37 @@ namespace SnowXR.MassInjury
         public void AskIfAwake()
         {
             DialogueResponder responder = DialogueController.instance.GetActiveResponder();
+            
             if (responder.GetComponent<BleedingInjury>().Concious())
             {
-                switch (responder.GetComponent<MassInjuryPatient>().GetGender())
+                switch (responder.GetComponent<GenderComponent>().GetGender())
                 {
                     case Gender.Male:
-                        responder.PlayClip(imAwakeMale[Random.Range(0,imAwakeMale.Count)]);
+                        if (imAwakeMale.Count > 0)
+                            responder.PlayClip(imAwakeMale[Random.Range(0,imAwakeMale.Count)]);
                         break;
                     case Gender.Female:
-                        responder.PlayClip(imAwakeFemale[Random.Range(0,imAwakeFemale.Count)]);
+                        if (imAwakeFemale.Count > 0)
+                            responder.PlayClip(imAwakeFemale[Random.Range(0,imAwakeFemale.Count)]);
                         break;
                 }
             }
-            else
+        }
+        
+        public void RespondHowManyPatients()
+        {
+            DialogueResponder responder = DialogueController.instance.GetActiveResponder();
+            
+            switch (responder.GetComponent<GenderComponent>().GetGender())
             {
-                
+                case Gender.Male:
+                    if (imAwakeMale.Count > 0)
+                        responder.PlayClip(imAwakeMale[Random.Range(0,imAwakeMale.Count)]);
+                    break;
+                case Gender.Female:
+                    if (imAwakeFemale.Count > 0)
+                        responder.PlayClip(imAwakeFemale[Random.Range(0,imAwakeFemale.Count)]);
+                    break;
             }
         }
         
