@@ -238,14 +238,14 @@ namespace SnowXR.MassInjury
 
         private void CalculateBreathing()
         {
-            if (bloodLossML > 3500f)
+            if (bloodLossML > 3600f)
             {
                 Die();
                 return;
             }
 
             // This means 1/3 chance to pass out with high bloodLoss, Around 1/10 chance with low bloodLoss
-            if (RandomBool(bloodLossML / 9000f))
+            if (RandomBool(bloodLossML / 6000f))
             {
                 LooseConciousness();
                 return;
@@ -261,7 +261,7 @@ namespace SnowXR.MassInjury
                     }
                     break;
                 case BloodLossSeverity.Severe:
-                    if (RandomBool(0.3f))
+                    if (RandomBool(0.1f))
                     {
                         Die();
                     }
@@ -274,7 +274,7 @@ namespace SnowXR.MassInjury
             
             if (bleedingArea == BleedingArea.Torso)
             {
-                if (RandomBool(0.5f))
+                if (RandomBool(0.3f))
                 {
                     breathingStatus = BreathingStatus.LungInjury;
                 }

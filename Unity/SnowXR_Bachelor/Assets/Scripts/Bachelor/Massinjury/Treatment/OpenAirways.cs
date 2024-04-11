@@ -19,10 +19,37 @@ namespace SnowXR.MassInjury
 
         private bool startCheck = false;
         private float value;
+
+        private Transform patient;
+        private PatientAnimationController animController;
+        
+        
         void Start()
         {
             lever.onLeverChange.AddListener(OnLevelChangedUpdate);
             startCheck = false;
+            
+            
+            Collider[] colliders =
+                Physics.OverlapSphere(transform.position, 4f, 1<<9);
+
+            Transform closest = null;
+            float best = float.MaxValue;
+            foreach (var col in colliders)
+            {
+                if (col.CompareTag("Patient"))
+                {
+                    float compare = Vector3.Distance(transform.position, col.transform.position);
+                    if (best > compare)
+                    {
+                        best = compare;
+                        closest = col.transform;
+                    }
+                }
+            }
+
+            patient = closest;
+            animController = patient.GetComponent<PatientAnimationController>();
         }
 
         private void OnDestroy()
@@ -54,6 +81,7 @@ namespace SnowXR.MassInjury
         {
             float mouthOpeness = 0;
             mouthOpeness = value;
+            animController.SetOpenMouthSlider(mouthOpeness / 130f);
             if (mouthOpeness > 0f)
             {
                 startCheck = true;
@@ -68,13 +96,13 @@ namespace SnowXR.MassInjury
                 
                 
                 Collider[] colliders =
-                    Physics.OverlapSphere(transform.position, 4f, 1<<16);
+                    Physics.OverlapSphere(transform.position, 4f, 1<<9);
 
                 Transform closest = null;
                 float best = float.MaxValue;
                 foreach (var col in colliders)
                 {
-                    if (col.CompareTag("Agent"))
+                    if (col.CompareTag("Patient"))
                     {
                         float compare = Vector3.Distance(transform.position, col.transform.position);
                         if (best > compare)
@@ -87,7 +115,7 @@ namespace SnowXR.MassInjury
 
                 if (!ReferenceEquals(closest, null))
                 {
-                    var parent = closest.parent;
+                    var parent = closest;
                     parent.GetComponent<BleedingInjury>().OpenedAirways();
                     parent.GetComponent<PatientAnimationController>().GetBleedingSockets().SetupSideLease();
                 }

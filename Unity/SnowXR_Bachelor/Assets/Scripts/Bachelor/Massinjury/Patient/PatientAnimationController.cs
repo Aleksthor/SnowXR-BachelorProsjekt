@@ -30,10 +30,13 @@ namespace SnowXR.MassInjury
         private BleedingSockets skeletonManager;
 
         private float sideLeaseSlider = 0f;
+        private float openMouthSlider = 0f;
         private static readonly int Dead = Animator.StringToHash("Dead");
         private static readonly int Concious = Animator.StringToHash("Concious");
         private bool sideLease = false;
         private static readonly int Lease = Animator.StringToHash("sideLease");
+        private static readonly int SideLeaseSlider = Animator.StringToHash("sideLeaseSlider");
+        private static readonly int OpenMouthSlider = Animator.StringToHash("openMouthSlider");
 
         // Start is called before the first frame update
         private void Awake()
@@ -75,7 +78,8 @@ namespace SnowXR.MassInjury
             animator.SetBool(Dead, injuryScript.Dead());
             animator.SetBool(Concious, injuryScript.Concious());
             animator.SetBool(Lease, injuryScript.RecievedSideLease());
-            animator.SetFloat("sideLeaseSlider", sideLeaseSlider);
+            animator.SetFloat(SideLeaseSlider, sideLeaseSlider);
+            animator.SetFloat(OpenMouthSlider, openMouthSlider);
             
             switch (injuryScript.BreathStatus())
             {
@@ -100,6 +104,12 @@ namespace SnowXR.MassInjury
                     criticalBreath.gameObject.SetActive(false);
                     break;
             }
+        }
+
+        public void SetOpenMouthSlider(float set)
+        {
+            openMouthSlider = set;
+            Debug.Log(openMouthSlider);
         }
         
 

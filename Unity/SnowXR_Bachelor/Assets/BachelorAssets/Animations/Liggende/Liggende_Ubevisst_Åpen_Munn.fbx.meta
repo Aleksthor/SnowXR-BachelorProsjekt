@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b6410db6ddb3aae43b9479cb4f743013
+guid: bf329361cf64ff344923c6f6bd5b0500
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: "\xC5penMunn"
+      name: "\xC5pen Munn"
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
@@ -44,7 +44,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

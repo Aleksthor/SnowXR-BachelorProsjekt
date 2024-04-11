@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4339966110760976324}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: 0, w: 0}
+  m_LocalRotation: {x: -0.7071068, y: 0.7071068, z: -0, w: 0}
   m_LocalPosition: {x: 0.015816875, y: -0.028946638, z: 0.08194836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4339966111288119879}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: -90}
 --- !u!114 &4339966110760976330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +861,7 @@ MonoBehaviour:
   BeingHeld: 0
   GrabButton: 0
   Grabtype: 0
-  GrabPhysics: 2
+  GrabPhysics: 1
   GrabMechanic: 1
   GrabSpeed: 15
   RemoteGrabbable: 0
@@ -876,7 +876,7 @@ MonoBehaviour:
   SnapHandModel: 1
   CanBeDropped: 1
   KeepOriginalParent: 1
-  CanBeSnappedToSnapZone: 1
+  CanBeSnappedToSnapZone: 0
   ForceDisableKinematicOnDrop: 0
   InstantMovement: 0
   MakeChildCollidersGrabbable: 0
@@ -930,7 +930,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0017192364, y: 0.20653188, z: -0.8153355}
+  m_ConnectedAnchor: {x: 0.0021193027, y: 0.18393481, z: -0.81623554}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -947,7 +947,7 @@ HingeJoint:
   m_UseAcceleration: 0
   m_Limits:
     min: 0
-    max: 32.17
+    max: 40.19
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinimumXRotation: 0
-  MaximumXRotation: 32.17
+  MaximumXRotation: 40.19
   InitialXRotation: 0
   SwitchOnSound: {fileID: 0}
   SwitchOffSound: {fileID: 0}
@@ -1095,7 +1095,7 @@ MonoBehaviour:
   UseSmoothLook: 0
   SmoothLookSpeed: 15
   AllowPhysicsForces: 0
-  ReturnToCenter: 0
+  ReturnToCenter: 1
   ReturnLookSpeed: 5
   SnapToGrabber: 0
   DropLeverOnActivation: 0
