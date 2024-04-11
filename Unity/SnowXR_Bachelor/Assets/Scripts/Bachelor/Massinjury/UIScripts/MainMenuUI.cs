@@ -10,12 +10,12 @@ namespace SnowXR.MassInjury
 
         public void StartGame()
         {
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(1);
         }
         
         public void StartTutorial()
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(2);
         }
     }
 }

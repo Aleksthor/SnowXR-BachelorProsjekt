@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Codice.Client.Commands.WkTree;
 using MassInjury.Person;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 namespace SnowXR.MassInjury
 {

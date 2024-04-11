@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bootstrapping/Bootstrapper.unity
     guid: a49116c14b94f184f8367c86e832e8fa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scene_Skadested_Prototype.unity
     guid: d4f4b5dc36c11a740a320257fb9424be
   - enabled: 0
@@ -20,18 +20,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Multiplayer/FishnetTest.unity
     guid: c9e729d41d705de4b902c74491c1e974
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bootstrapping/AlwaysNeeded.unity
     guid: f7d3eb9adc57f9546b14876649b8a05f
+  - enabled: 1
+    path: Assets/Scenes/Bachelor/HovedMeny.unity
+    guid: 65bfcb52917c5724ba0e305fe9f20a7e
   - enabled: 1
     path: Assets/Scenes/Bachelor/MassInury.unity
     guid: 47b1b43e46ac1a54c8ff86617d3bb046
   - enabled: 1
     path: Assets/Scenes/Bachelor/MassInury Tutorial.unity
     guid: e252d6379e0834148b7144435156ff51
-  - enabled: 1
-    path: Assets/Scenes/Bachelor/HovedMeny.unity
-    guid: 65bfcb52917c5724ba0e305fe9f20a7e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,
       type: 2}

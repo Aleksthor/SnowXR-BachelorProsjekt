@@ -14,12 +14,12 @@ namespace SnowXR
     {
         [SerializeField, Self()] private AgentBehaviour _agentBehaviour;
 
-
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             Handles.Label(transform.position, GetText());        
         }
-
+#endif
         private void OnDrawGizmosSelected()
         {
             if (_agentBehaviour.CurrentActionData == null)

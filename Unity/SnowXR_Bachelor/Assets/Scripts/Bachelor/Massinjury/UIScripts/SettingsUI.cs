@@ -33,7 +33,7 @@ namespace SnowXR.MassInjury
         
         public void LoadMainMenu()
         {
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(0);
         }
     }
 }
