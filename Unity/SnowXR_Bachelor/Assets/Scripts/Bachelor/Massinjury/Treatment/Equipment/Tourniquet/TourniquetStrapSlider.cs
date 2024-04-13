@@ -9,6 +9,7 @@ namespace SnowXR.MassInjury
     public class TourniquetStrapSlider : MonoBehaviour
     {
         [SerializeField] private UnityEvent OnCompletedStep1 = new UnityEvent();
+        [HideInInspector] public UnityEvent onStrapTourniquet = new UnityEvent();
 
         [SerializeField] private GameObject tourniquetPinPrefab;
         /// <summary>
@@ -66,6 +67,7 @@ namespace SnowXR.MassInjury
                 var parent = transform.parent;
                 Instantiate(tourniquetPinPrefab, parent.parent);
                 OnCompletedStep1?.Invoke();
+                onStrapTourniquet?.Invoke();
                 
                 Destroy(parent.gameObject);
                 //release grab

@@ -49,8 +49,8 @@ namespace SnowXR.MassInjury
             
             injury.onRecieveSideLease.RemoveAllListeners();
             
-            rightHand.onListen.AddListener(CheckPulse);
-            leftHand.onListen.AddListener(CheckPulse);
+            rightHand.onListenWrist.AddListener(CheckPulse);
+            leftHand.onListenWrist.AddListener(CheckPulse);
             
         }
 
@@ -63,8 +63,8 @@ namespace SnowXR.MassInjury
                 step.text = steps[4];
                 hint.text = hints[4];
             
-                rightHand.onListen.RemoveAllListeners();
-                leftHand.onListen.RemoveAllListeners();
+                rightHand.onListenNeck.RemoveAllListeners();
+                leftHand.onListenNeck.RemoveAllListeners();
                     
                 injury.onPlaceBand.AddListener(PlaceBand);
             }
@@ -76,8 +76,8 @@ namespace SnowXR.MassInjury
                 step.text = steps[4];
                 hint.text = hints[4];
             
-                rightHand.onListen.RemoveAllListeners();
-                leftHand.onListen.RemoveAllListeners();
+                rightHand.onListenNeck.RemoveAllListeners();
+                leftHand.onListenNeck.RemoveAllListeners();
                     
                 injury.onPlaceBand.AddListener(PlaceBand);
             }

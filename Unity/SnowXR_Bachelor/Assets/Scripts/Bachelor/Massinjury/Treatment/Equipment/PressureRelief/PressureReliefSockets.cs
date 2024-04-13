@@ -92,5 +92,10 @@ namespace SnowXR.MassInjury
 
             lastGreenPressureRelief = greenPressureRelief;
         }
+
+        public Transform GetSocket()
+        {
+            return pressureReliefParent;
+        }
     }
 }

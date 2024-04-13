@@ -18,7 +18,7 @@ namespace SnowXR.MassInjury
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if (ToggleHandsInput.GetDown() || Input.GetKeyDown(KeyCode.P))
             {

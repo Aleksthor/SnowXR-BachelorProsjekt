@@ -20,6 +20,8 @@ namespace SnowXR.MassInjury
         public UnityEvent EventStep3AProcedureCompleted;
 
 
+        [HideInInspector] public UnityEvent onStartSideLease;
+        private bool triggerOnce1 = false;
 
         private float currentPercent = 100f;
         private Transform closest;
@@ -33,6 +35,12 @@ namespace SnowXR.MassInjury
         //this isnt optimal, haveing a dummypercent we are not using, but i could not find a way around this using lambdas
         private void OnSubleverChange(float dummyPercent)
         {
+            if (!triggerOnce1)
+            {
+                triggerOnce1 = true;
+                onStartSideLease.Invoke();
+            }
+            
             //lower percentage / angle means closer to being finished or in "stabilt sideleie"
             float percent = leverShoulder.LeverPercentage + leverKnee.LeverPercentage;
             percent *= 0.5f;

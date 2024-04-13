@@ -59,7 +59,7 @@ namespace SnowXR.MassInjury
             }
         }
         
-          public void SetHoldingTourniquet(bool input, Transform tourniquet, Comparative side = Comparative.None, int area = 0)
+        public void SetHoldingTourniquet(bool input, Transform tourniquet, Comparative side = Comparative.None, int area = 0)
         {
             holdingTourniquet = input;
             tourniquetTransform = tourniquet;
@@ -153,6 +153,17 @@ namespace SnowXR.MassInjury
             }
 
             lastGreenTrouniquet = greenTourniquet;
+        }
+
+        public List<Transform> GetSockets()
+        {
+            List<Transform> sockets = new List<Transform>();
+            sockets.Add(rArmTourniquet);
+            sockets.Add(lArmTourniquet);
+            sockets.Add(rLegTourniquet);
+            sockets.Add(lLegTourniquet);
+
+            return sockets;
         }
         
     }

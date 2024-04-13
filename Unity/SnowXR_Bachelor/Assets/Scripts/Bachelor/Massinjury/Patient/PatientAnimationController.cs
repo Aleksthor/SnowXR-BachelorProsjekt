@@ -107,14 +107,9 @@ namespace SnowXR.MassInjury
         public void SetOpenMouthSlider(float set)
         {
             openMouthSlider = set;
-            Debug.Log(openMouthSlider);
         }
         
-
-        public BleedingSockets GetBleedingSockets()
-        {
-            return skeletonManager;
-        }
+        
         
 
         public void UpdateSideLeaseSlider(float number)

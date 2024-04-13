@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BNG;
+using UnityEngine.Events;
 
 namespace SnowXR.MassInjury
 {
@@ -36,6 +37,8 @@ namespace SnowXR.MassInjury
 
         private int snaps = 0;
         [SerializeField] private GameObject placeholderPrefab;
+
+        [HideInInspector] public UnityEvent onPinStrap = new UnityEvent();
 
         void Start()
         {
@@ -95,6 +98,8 @@ namespace SnowXR.MassInjury
                         {
                             closest.GetComponent<BleedingInjury>().SetRecievedTourniquet(true);
                         }
+                        
+                        onPinStrap?.Invoke();
                         
                         Destroy(parent.gameObject);
                     }

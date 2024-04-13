@@ -9,6 +9,7 @@ namespace SnowXR.MassInjury
     public class PressureReliefSlider : MonoBehaviour
     {
         [SerializeField] private UnityEvent OnCompletedStep1 = new UnityEvent();
+        [HideInInspector] public UnityEvent onPush = new UnityEvent();
         /// <summary>
         /// How far away slider has moved from inital RangeLow position
         /// </summary>
@@ -89,7 +90,7 @@ namespace SnowXR.MassInjury
                 {
                     closest.GetComponent<BleedingInjury>().SetRecievedPressureRelief(true);
                 }
-                        
+                onPush?.Invoke();
                 Destroy(parent.gameObject);
             }
         }

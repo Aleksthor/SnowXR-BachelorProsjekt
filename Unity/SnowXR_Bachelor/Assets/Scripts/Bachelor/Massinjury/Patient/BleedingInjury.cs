@@ -368,9 +368,9 @@ namespace SnowXR.MassInjury
             needPressure = false;
             needOpenAirways = false;
             needSideLease = false;
-            if (!ReferenceEquals(patientAnimationController.GetBleedingSockets(), null))
+            if (!ReferenceEquals(genderComponent.GetMesh().GetComponent<BleedingSockets>(), null))
             {
-                patientAnimationController.GetBleedingSockets().RemoveBloodParticles();
+                genderComponent.GetMesh().GetComponent<BleedingSockets>().RemoveBloodParticles();
             }
         }
 

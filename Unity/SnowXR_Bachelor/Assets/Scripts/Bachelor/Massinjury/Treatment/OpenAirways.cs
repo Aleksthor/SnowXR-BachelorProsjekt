@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using MassInjury.Person;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +11,8 @@ namespace SnowXR.MassInjury
     public class OpenAirways : MonoBehaviour
     {
         [SerializeField] private UnityEvent OnCompletedStep2 = new UnityEvent();
+        [HideInInspector] public UnityEvent onGrabHead = new UnityEvent();
+        [HideInInspector] public UnityEvent onGrabChin = new UnityEvent();
 
         [SerializeField] private BNG.Lever lever;
 
@@ -19,6 +23,8 @@ namespace SnowXR.MassInjury
 
         private bool startCheck = false;
         private float value;
+        private bool triggerOnce1 = false;
+        private bool triggerOnce2 = false;
 
         private Transform patient;
         private PatientAnimationController animController;
@@ -65,6 +71,7 @@ namespace SnowXR.MassInjury
         {
             if (JawGrabbable.BeingHeld)
             {
+                
                 this.value = value;
                 
                 //if we are holdding jaw, but NOT the head, make jaw grabber TryRelease()
@@ -77,8 +84,27 @@ namespace SnowXR.MassInjury
             }
         }
 
+        private void FixedUpdate()
+        {
+            if (HeadGrabbable.BeingHeld && !triggerOnce1)
+            {
+                onGrabHead.Invoke();
+                triggerOnce1 = true;
+            }
+            else
+            {
+                triggerOnce1 = false;
+            }
+        }
+
         private void CheckForCompletion()
         {
+
+            if (!triggerOnce2)
+            {
+                triggerOnce2 = true;
+                onGrabChin.Invoke();
+            }
             float mouthOpeness = 0;
             mouthOpeness = value;
             animController.SetOpenMouthSlider(mouthOpeness / 130f);
@@ -117,7 +143,7 @@ namespace SnowXR.MassInjury
                 {
                     var parent = closest;
                     parent.GetComponent<BleedingInjury>().OpenedAirways();
-                    parent.GetComponent<PatientAnimationController>().GetBleedingSockets().SetupSideLease();
+                    parent.GetComponent<GenderComponent>().GetMesh().GetComponent<BleedingSockets>().SetupSideLease();
                 }
             }
         }

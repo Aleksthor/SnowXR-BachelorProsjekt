@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MassInjury.Dialogue
@@ -11,6 +12,10 @@ namespace MassInjury.Dialogue
     {
         [SerializeField] private Transform playerController;
         [SerializeField] private Transform leftHand;
+
+        [HideInInspector] public UnityEvent onShowDialogue = new UnityEvent();
+
+        private bool shown = false;
         private void Update()
         {
             Transform child = transform.GetChild(0);
@@ -23,13 +28,21 @@ namespace MassInjury.Dialogue
 
             float fade = Mathf.Clamp(slopeFade * angleFade, 0f, 1f);
 
+            if (fade > 0f && !shown)
+            {
+                shown = true;
+                onShowDialogue?.Invoke();
+            }
+            if (fade <= 0f && shown)
+            {
+                shown = false;
+            }
+            
+            
             foreach (Transform granChild in child)
             {
                 granChild.GetComponent<DialogueButton>().Fade(fade);
             }
-            
-            transform.GetChild(0).gameObject.SetActive(slope < 0.3f && slope > -0.3f && angle > -0.8f && angle < 0.8f);
-            
             
             float rotation = Vector3.Dot(transform.up, Vector3.up);
 

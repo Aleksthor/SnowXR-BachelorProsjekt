@@ -15,7 +15,7 @@ namespace SnowXR.MassInjury
             if (!ReferenceEquals(currentArea, null))
             {
                 timer += Time.deltaTime;
-                if (timer > 3.5f)
+                if (timer > 4.5f)
                 {
                     BleedingSockets sockets = currentArea.GetComponent<BleedingCollider>().GetSockets();
                     sockets.GetInjury().SetRecievedPressure(true);
@@ -41,6 +41,7 @@ namespace SnowXR.MassInjury
         {
             if (other.CompareTag("BleedingArea"))
             {
+                timer = 0;
                 if (ReferenceEquals(other.transform, currentArea))
                 {
                     currentArea = null;

@@ -13,9 +13,5 @@ namespace SnowXR.MassInjury
             SceneManager.LoadScene(1);
         }
         
-        public void StartTutorial()
-        {
-            SceneManager.LoadScene(2);
-        }
     }
 }

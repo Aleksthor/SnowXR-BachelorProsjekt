@@ -17,8 +17,8 @@ namespace SnowXR.MassInjury
         private GrabbableUnityEvents events;
         private Grabbable grabbable;
 
-        [HideInInspector] public UnityEvent onPickup;
-        [HideInInspector] public UnityEvent onPlacement;
+        [HideInInspector] public UnityEvent onPickup = new UnityEvent();
+        [HideInInspector] public UnityEvent onPlacement = new UnityEvent();
 
         private bool done = false;
         private void Awake()
@@ -63,7 +63,7 @@ namespace SnowXR.MassInjury
                 tourniquetSockets.SetHoldingTourniquet(true, transform, injury.Side(), injury.GetBleedingArea());
             }
             
-            onPickup.Invoke();
+            onPickup?.Invoke();
         }
         public void OnDrop()
         {
@@ -80,7 +80,9 @@ namespace SnowXR.MassInjury
             if (!ReferenceEquals(nextParent, null))
             {
                 Instantiate(tourniquetPrefabStrapStep, nextParent);
-                onPlacement.Invoke();
+                
+                onPlacement?.Invoke();
+                
                 Destroy(gameObject);
             }
         }
