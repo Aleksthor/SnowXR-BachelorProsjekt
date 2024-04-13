@@ -38,11 +38,15 @@ namespace SnowXR.MassInjury
                 child.gameObject.SetActive(false);
             }
             header.gameObject.SetActive(false);
-            patient.gameObject.SetActive(false);
             skip.gameObject.SetActive(false);
             
 
             progress = StepProgress.NotStarted;
+        }
+        
+        private void Start()
+        {
+            patient.gameObject.SetActive(false);
         }
         
         public void OpenPage()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,12 +37,16 @@ namespace SnowXR.MassInjury
                 child.gameObject.SetActive(false);
             }
             header.gameObject.SetActive(false);
-            patient.gameObject.SetActive(false);
             skip.gameObject.SetActive(false);
 
             progress = StepProgress.NotStarted;
         }
-        
+
+        private void Start()
+        {
+            patient.gameObject.SetActive(false);
+        }
+
         public void OpenPage()
         {
             step1Text.gameObject.SetActive(true);

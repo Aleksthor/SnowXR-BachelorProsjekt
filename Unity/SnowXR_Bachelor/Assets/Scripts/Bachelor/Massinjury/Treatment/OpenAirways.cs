@@ -120,30 +120,12 @@ namespace SnowXR.MassInjury
                 superParent.gameObject.SetActive(false);
                 OnCompletedStep2?.Invoke();
                 
-                
-                Collider[] colliders =
-                    Physics.OverlapSphere(transform.position, 4f, 1<<9);
 
-                Transform closest = null;
-                float best = float.MaxValue;
-                foreach (var col in colliders)
+                if (!ReferenceEquals(patient, null))
                 {
-                    if (col.CompareTag("Patient"))
-                    {
-                        float compare = Vector3.Distance(transform.position, col.transform.position);
-                        if (best > compare)
-                        {
-                            best = compare;
-                            closest = col.transform;
-                        }
-                    }
-                }
-
-                if (!ReferenceEquals(closest, null))
-                {
-                    var parent = closest;
-                    parent.GetComponent<BleedingInjury>().OpenedAirways();
-                    parent.GetComponent<GenderComponent>().GetMesh().GetComponent<BleedingSockets>().SetupSideLease();
+                    
+                    patient.GetComponent<BleedingInjury>().OpenedAirways();
+                    patient.GetComponent<GenderComponent>().GetMesh().GetComponent<BleedingSockets>().SetupSideLease();
                 }
             }
         }

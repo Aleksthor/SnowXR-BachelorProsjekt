@@ -43,7 +43,6 @@ namespace SnowXR.MassInjury
                 child.gameObject.SetActive(false);
             }
             header.gameObject.SetActive(false);
-            patient.gameObject.SetActive(false);
             skip.gameObject.SetActive(false);
             
 
@@ -52,8 +51,7 @@ namespace SnowXR.MassInjury
 
         private void Start()
         {
-            Transform openMouthParent =
-                patient.GetComponent<GenderComponent>().GetMesh().GetComponent<BleedingSockets>().openAirways;
+            Transform openMouthParent = patient.GetComponent<GenderComponent>().GetMesh().GetComponent<BleedingSockets>().openAirways;
 
             foreach (Transform child in openMouthParent)
             {
@@ -62,7 +60,7 @@ namespace SnowXR.MassInjury
 
             sideLease = patient.GetComponent<GenderComponent>().GetMesh().transform.Find("SideLease")
                 .GetComponent<SideLease>();
-
+            patient.gameObject.SetActive(false);
         }
 
         public void OpenPage()

@@ -45,6 +45,7 @@ namespace SnowXR.MassInjury
 
             progress = StepProgress.NotStarted;
         }
+        
 
         public void OpenPage()
         {
