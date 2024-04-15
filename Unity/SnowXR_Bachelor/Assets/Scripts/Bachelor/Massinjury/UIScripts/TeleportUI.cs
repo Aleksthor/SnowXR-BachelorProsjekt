@@ -12,12 +12,17 @@ namespace SnowXR.MassInjury
 
         [SerializeField] private Transform playerController;
 
+        [SerializeField] private Transform results;
+
         [SerializeField] private Transform parent;
 
         private float timer = 0f;
         private bool finished = false;
-        
-        
+
+        private void Start()
+        {
+            results.gameObject.SetActive(false);
+        }
 
         private void Update()
         {
@@ -58,6 +63,10 @@ namespace SnowXR.MassInjury
             var transform1 = playerController.transform;
             transform1.position = postion;
             transform1.eulerAngles = rotation;
+            
+            results.gameObject.SetActive(true);
+            
+            results.GetComponent<ResultsUI>().ShowResults();
             
             parent.gameObject.SetActive(false);
         }

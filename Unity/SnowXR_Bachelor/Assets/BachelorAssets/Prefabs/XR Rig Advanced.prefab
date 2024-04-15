@@ -2632,6 +2632,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 821997572700427926}
   leftHand: {fileID: 8828502472152269313}
+  onShowDialogue:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &255338892268959709
 GameObject:
   m_ObjectHideFlags: 0
@@ -17968,7 +17971,10 @@ MonoBehaviour:
   currentInjury: {fileID: 0}
   pulse: 0
   hand: 1
-  onListen:
+  onListenNeck:
+    m_PersistentCalls:
+      m_Calls: []
+  onListenWrist:
     m_PersistentCalls:
       m_Calls: []
 --- !u!82 &3813888232413117259
@@ -37611,7 +37617,10 @@ MonoBehaviour:
   currentInjury: {fileID: 0}
   pulse: 0
   hand: 0
-  onListen:
+  onListenNeck:
+    m_PersistentCalls:
+      m_Calls: []
+  onListenWrist:
     m_PersistentCalls:
       m_Calls: []
 --- !u!82 &6177219659950314118
@@ -66856,7 +66865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658bdf529ce7324428f810402878fabb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  postion: {x: 3.5, y: 17.7, z: 3}
+  postion: {x: 4.5, y: 14.33, z: 10.5}
   rotation: {x: 0, y: 90, z: 0}
   playerController: {fileID: 330276855545024377}
   parent: {fileID: 3315385832386796847}

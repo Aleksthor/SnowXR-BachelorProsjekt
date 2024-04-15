@@ -24,9 +24,6 @@ namespace SnowXR.MassInjury
         [SerializeField] public int mediumSize = 7;
         [SerializeField] public int hardSize = 10;
         [SerializeField] public int examSize = 15;
-        
-        
-        [SerializeField] private Transform agentParent;
 
         private List<GameObject> spawnedAgents = new List<GameObject>();
 
@@ -94,7 +91,7 @@ namespace SnowXR.MassInjury
             {
                 Transform spawnPoint = GetRandomSpawnPoint(cachedSpawnPoints);
                 cachedSpawnPoints.Remove(spawnPoint);
-                spawnedAgents.Add(Instantiate(injuredPerson,spawnPoint.position,spawnPoint.rotation,agentParent));
+                spawnedAgents.Add(Instantiate(injuredPerson,spawnPoint.position,spawnPoint.rotation,spawnPoint));
                 spawnedAgents[i].GetComponent<GenderComponent>().SetColor(shirtColors[i % 15]);
             }
         }

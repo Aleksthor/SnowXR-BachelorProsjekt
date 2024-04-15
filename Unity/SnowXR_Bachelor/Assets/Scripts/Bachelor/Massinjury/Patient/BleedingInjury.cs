@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using MassInjury.Goap;
 using MassInjury.Person;
 using UnityEngine;
@@ -60,6 +61,8 @@ namespace SnowXR.MassInjury
         [SerializeField] private bool recievedPressure = false;
         [SerializeField] private bool needPharyngealTube = false;
         [SerializeField] private bool recievedPharyngealTube = false;
+        
+      
 
         
         //Cache
@@ -68,13 +71,21 @@ namespace SnowXR.MassInjury
         private GenderComponent genderComponent;
         
         // Logic
-        private float timer = 0f;
         private int totalInjuryScore = 0;
         [SerializeField] private bool concious = true;
         [SerializeField] private bool dead = false;
         [SerializeField] private AnimState state = AnimState.Standing;
+        
+        [SerializeField] private AudioClip helpMale;
+        [SerializeField] private AudioClip helpFemale;
+
+        private float timer = 0f;
+        private float nextScream = 0f;
+        
         private bool sitting = false;
         private bool setupSitting = false;
+
+        private AudioSource audioSource;
 
         public UnityEvent onPlaceTourniquet;
         public UnityEvent onPlaceBand;
@@ -88,6 +99,7 @@ namespace SnowXR.MassInjury
             agent = GetComponent<MassInjuryAgent>();
             patientAnimationController = GetComponent<PatientAnimationController>();
             genderComponent = GetComponent<GenderComponent>();
+            audioSource = GetComponent<AudioSource>();
             
             totalInjuryScore = headInjuryWeight + neckInjuryWeight + armInjuryWeight + torsoInjuryWeight + thighInjuryWeight + legsInjuryWeight;
             if (randomInjury)
@@ -106,6 +118,34 @@ namespace SnowXR.MassInjury
             CalculateCorrectZone();
             CalculateNeededHelp();
             DebugAnimationState();
+
+            if (concious)
+            {
+                if (bloodLossSeverity > BloodLossSeverity.Minimal)
+                {
+                    nextScream = Random.Range(20f, 40f) + Random.Range(20f, 40f) + Random.Range(20f, 40f);
+                }
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            
+            if (concious && bloodLossSeverity > BloodLossSeverity.Minimal)
+            {
+                timer += Time.fixedDeltaTime;
+
+                if (timer > nextScream)
+                {
+                    timer = 0f;
+                    nextScream = Random.Range(20f, 40f) + Random.Range(20f, 40f) + Random.Range(20f, 40f);
+                    audioSource.clip =
+                        genderComponent.GetGender() == Gender.Male ? helpMale : helpFemale;
+                    audioSource.Play();
+                    
+                }
+            }
+            
         }
 
         private void InitInjuries()
@@ -368,10 +408,6 @@ namespace SnowXR.MassInjury
             needPressure = false;
             needOpenAirways = false;
             needSideLease = false;
-            if (!ReferenceEquals(genderComponent.GetMesh().GetComponent<BleedingSockets>(), null))
-            {
-                genderComponent.GetMesh().GetComponent<BleedingSockets>().RemoveBloodParticles();
-            }
         }
 
         private void CalculateNeededHelp()
@@ -379,9 +415,9 @@ namespace SnowXR.MassInjury
             if (dead) return;
             needTourniquet = bleedingArea is BleedingArea.Arms or BleedingArea.Thighs or BleedingArea.Legs;
             needPressureRelief = breathingStatus == BreathingStatus.LungInjury;
-            needSideLease = !concious;
+            needSideLease = !concious || needPressureRelief;
             needPressure = bloodLossSeverity >= BloodLossSeverity.Moderate;
-            needOpenAirways = !concious;
+            needOpenAirways = !concious || needPressureRelief;
             
             needPharyngealTube = !concious && bloodLossML > 2000f;
         }

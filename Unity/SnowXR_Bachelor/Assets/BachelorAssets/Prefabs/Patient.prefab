@@ -219,6 +219,8 @@ MonoBehaviour:
   concious: 1
   dead: 0
   state: 0
+  helpMale: {fileID: 8300000, guid: a1f3edb218f3a2c4eab4b88554170d5a, type: 3}
+  helpFemale: {fileID: 8300000, guid: 3a6ea97770c219f4384ea4e819142dc2, type: 3}
   onPlaceTourniquet:
     m_PersistentCalls:
       m_Calls: []
@@ -542,7 +544,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: be39e79961d2c9348afdaa6d0c066c74, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c7728f7f6c2fc0f478d098e615f198ba, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.173
   m_Pitch: 1
