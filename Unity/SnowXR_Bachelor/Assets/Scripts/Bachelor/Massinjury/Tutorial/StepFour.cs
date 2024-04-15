@@ -15,8 +15,8 @@ namespace SnowXR.MassInjury
         [SerializeField] private Slider progressBar;
         [SerializeField] private TextMeshProUGUI percentText;
 
-        [SerializeField] private PulsePlayer rightHand;
-        [SerializeField] private PulsePlayer leftHand;
+        [SerializeField] private PulseAudioPlayer rightHand;
+        [SerializeField] private PulseAudioPlayer leftHand;
         
         private BleedingInjury injury;
         

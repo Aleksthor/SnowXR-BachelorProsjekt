@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace SnowXR.MassInjury
 {
-    public class PulsePlayer : MonoBehaviour
+    public class PulseAudioPlayer : MonoBehaviour
     {
         [SerializeField] private BleedingInjury currentInjury;
         [SerializeField] private int pulse = 0;

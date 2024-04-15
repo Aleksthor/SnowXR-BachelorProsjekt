@@ -22,8 +22,8 @@ namespace SnowXR.MassInjury
         [SerializeField] private Transform step3Progress;
         
         [SerializeField] private Transform patient;
-        [SerializeField] private PulsePlayer rightHand;
-        [SerializeField] private PulsePlayer leftHand;
+        [SerializeField] private PulseAudioPlayer rightHand;
+        [SerializeField] private PulseAudioPlayer leftHand;
         
         
         [SerializeField] private Color doneColor;

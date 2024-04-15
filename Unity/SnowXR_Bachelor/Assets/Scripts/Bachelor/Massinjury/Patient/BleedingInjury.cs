@@ -378,17 +378,20 @@ namespace SnowXR.MassInjury
                 correctZone = Zone.Red;
                 return;
             }
+            
+            if (breathingStatus == BreathingStatus.LungInjury || recievedPharyngealTube)
+            {
+                correctZone = Zone.Red;
+                return;
+            }
+            
+            
             if (bloodLossML > 1000)
             {
                 correctZone = Zone.Yellow;
                 return;
             }
             
-            if (breathingStatus == BreathingStatus.LungInjury)
-            {
-                correctZone = Zone.Red;
-                return;
-            }
 
             correctZone = bloodLossSeverity >= BloodLossSeverity.Moderate ? Zone.Yellow : Zone.Green;            
             
@@ -623,8 +626,11 @@ namespace SnowXR.MassInjury
             recievedTourniquet = input;
             if (recievedTourniquet)
             {
+                genderComponent.GetMesh().GetComponent<BleedingSockets>().RemoveBloodParticles();
+                recievedPressure = true;
                 onPlaceTourniquet.Invoke();
             }
+            
         }
 
         public void SetRecievedPharyngealTube(bool input)
