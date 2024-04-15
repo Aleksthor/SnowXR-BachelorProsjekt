@@ -10,10 +10,8 @@ namespace MassInjury.Utility
         [SerializeField] CullingSpace space;
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Enter");
             if (other.CompareTag("Culling"))
             {
-                Debug.Log("Change Culling Space");
                 CullingObjects.instance.NewSpace(space);   
             }
         }
