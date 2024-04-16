@@ -567,8 +567,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa48bf7edb0ae6439f42a301eef0ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  male: {fileID: 21300000, guid: 26c9dd9370db8ce4d8e65c6a0630d1a8, type: 3}
-  female: {fileID: 21300000, guid: 382721f99c4d5974e978e32d17d3ba64, type: 3}
+  males:
+  - {fileID: 21300000, guid: 26c9dd9370db8ce4d8e65c6a0630d1a8, type: 3}
+  - {fileID: 21300000, guid: 8b93991c4120d7744b2a2ec8b77801bf, type: 3}
+  - {fileID: 21300000, guid: 8b93991c4120d7744b2a2ec8b77801bf, type: 3}
+  - {fileID: 21300000, guid: 5af544377c6d7e3409a8bf8f7d88b4fd, type: 3}
+  - {fileID: 21300000, guid: 43480fe3d7c04cf4a8f33f86adeb018c, type: 3}
+  - {fileID: 21300000, guid: 22a660dfebcb7524da1b651ff38a5161, type: 3}
+  - {fileID: 21300000, guid: 002ca516aedbeb84e86198c4b8559219, type: 3}
+  - {fileID: 21300000, guid: b8b877b2d4509134ab2e037c67944958, type: 3}
+  females:
+  - {fileID: 21300000, guid: 382721f99c4d5974e978e32d17d3ba64, type: 3}
+  - {fileID: 21300000, guid: 72457ce7d4a50ad4e91bdf354f787bd7, type: 3}
+  - {fileID: 21300000, guid: 72457ce7d4a50ad4e91bdf354f787bd7, type: 3}
+  - {fileID: 21300000, guid: 3e2464fefb3bad94b80f17bddf590a33, type: 3}
+  - {fileID: 21300000, guid: 65e3693384f019f4da03d8c3a0cc72d5, type: 3}
+  - {fileID: 21300000, guid: c3e7418410a72c54b813304d7893c78b, type: 3}
+  - {fileID: 21300000, guid: 77cf53967b2271a45887bc14e102ef3b, type: 3}
+  - {fileID: 21300000, guid: 8adcb95c89018cc4580557170aeef317, type: 3}
   genderIcon: {fileID: 7571607662674126203}
   injuryText: {fileID: 7416381491831824745}
   correctZone: {fileID: 7167602803154161786}

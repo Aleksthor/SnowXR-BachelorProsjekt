@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MassInjury.Player;
 using UnityEngine;
 
 namespace SnowXR.MassInjury

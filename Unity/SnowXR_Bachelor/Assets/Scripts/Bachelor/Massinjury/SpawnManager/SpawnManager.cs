@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using MassInjury.Goap;
 using MassInjury.Person;
+using MassInjury.Player;
 
 namespace SnowXR.MassInjury
 {
@@ -41,6 +42,8 @@ namespace SnowXR.MassInjury
             {
                 Destroy(gameObject);
             }
+
+            gameDifficulty = PlayerSettings.instance.GetGameDifficulty();
             
             // Slower initialization for faster in-game performance
             GameObject[] spawns = GameObject.FindGameObjectsWithTag("SpawnPoint");
@@ -113,13 +116,5 @@ namespace SnowXR.MassInjury
         }
     }
 
-    [System.Serializable]
-    public enum GameDifficulty
-    {
-        Tutorial,
-        Easy,
-        Medium,
-        Hard,
-        Exam
-    }
+    
 }

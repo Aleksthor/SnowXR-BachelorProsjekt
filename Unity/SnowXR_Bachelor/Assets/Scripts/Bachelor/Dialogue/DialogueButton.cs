@@ -1,9 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MassInjury.Person;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using MassInjury.Player;
+using PlayerSettings = MassInjury.Player.PlayerSettings;
 
 namespace MassInjury.Dialogue
 {
@@ -20,14 +24,28 @@ namespace MassInjury.Dialogue
         public void Activate()
         {
             DialogueController.instance.GetActiveResponder();
-            
-            if (!ReferenceEquals(events.dialogueFemale, null))
+            switch (PlayerSettings.instance.GetGender())
             {
-                // Play Sound
-                DialogueController.instance.PlayAudio(events.dialogueFemale);
+                case Gender.Male:
+                    if (!ReferenceEquals(events.dialogueMale, null))
+                    {
+                        // Play Sound
+                        DialogueController.instance.PlayAudio(events.dialogueMale);
 
-                waitForAudio = true;
-                return;
+                        waitForAudio = true;
+                        return;
+                    }
+                    break;
+                case Gender.Female:
+                    if (!ReferenceEquals(events.dialogueFemale, null))
+                    {
+                        // Play Sound
+                        DialogueController.instance.PlayAudio(events.dialogueFemale);
+
+                        waitForAudio = true;
+                        return;
+                    }
+                    break;
             }
             
             events.onLineExit.Invoke();
@@ -41,7 +59,7 @@ namespace MassInjury.Dialogue
             }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (waitForAudio)
             {
