@@ -8,12 +8,10 @@ namespace SnowXR.MassInjury
     public class EquipmentSpawner : MonoBehaviour
     {
         [SerializeField] private GameObject tourniquet;
-        [SerializeField] private GameObject pharyngealTube;
         [SerializeField] private GameObject pressureRelief;
 
         [SerializeField] private Transform tourniquet1;
         [SerializeField] private Transform pressureRelief1;
-        [SerializeField] private Transform pharyngealTube1;
 
         private void Awake()
         {
@@ -25,14 +23,10 @@ namespace SnowXR.MassInjury
             {
                 Instantiate(pressureRelief, pressureRelief1);
             }
-            if (pharyngealTube1.childCount == 0)
-            {
-                Instantiate(pharyngealTube, pharyngealTube1);
-            }
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if (tourniquet1.childCount == 0)
             {
@@ -41,10 +35,6 @@ namespace SnowXR.MassInjury
             if (pressureRelief1.childCount == 0)
             {
                 Instantiate(pressureRelief, pressureRelief1);
-            }
-            if (pharyngealTube1.childCount == 0)
-            {
-                Instantiate(pharyngealTube, pharyngealTube1);
             }
             
         }

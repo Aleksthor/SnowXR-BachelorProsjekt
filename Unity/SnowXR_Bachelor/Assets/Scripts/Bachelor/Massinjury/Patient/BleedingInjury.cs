@@ -75,9 +75,6 @@ namespace SnowXR.MassInjury
         [SerializeField] private bool concious = true;
         [SerializeField] private bool dead = false;
         [SerializeField] private AnimState state = AnimState.Standing;
-        
-        [SerializeField] private AudioClip helpMale;
-        [SerializeField] private AudioClip helpFemale;
 
         private float timer = 0f;
         private float nextScream = 0f;
@@ -126,26 +123,6 @@ namespace SnowXR.MassInjury
                     nextScream = Random.Range(20f, 40f) + Random.Range(20f, 40f) + Random.Range(20f, 40f);
                 }
             }
-        }
-
-        private void FixedUpdate()
-        {
-            
-            if (concious && bloodLossSeverity > BloodLossSeverity.Minimal)
-            {
-                timer += Time.fixedDeltaTime;
-
-                if (timer > nextScream)
-                {
-                    timer = 0f;
-                    nextScream = Random.Range(20f, 40f) + Random.Range(20f, 40f) + Random.Range(20f, 40f);
-                    audioSource.clip =
-                        genderComponent.GetGender() == Gender.Male ? helpMale : helpFemale;
-                    audioSource.Play();
-                    
-                }
-            }
-            
         }
 
         private void InitInjuries()

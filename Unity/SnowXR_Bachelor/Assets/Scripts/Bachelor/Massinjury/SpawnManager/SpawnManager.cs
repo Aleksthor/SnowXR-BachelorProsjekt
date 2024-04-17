@@ -43,7 +43,8 @@ namespace SnowXR.MassInjury
                 Destroy(gameObject);
             }
 
-            gameDifficulty = PlayerSettings.instance.GetGameDifficulty();
+            if (PlayerSettings.instance)
+                gameDifficulty = PlayerSettings.instance.GetGameDifficulty();
             
             // Slower initialization for faster in-game performance
             GameObject[] spawns = GameObject.FindGameObjectsWithTag("SpawnPoint");

@@ -4054,6 +4054,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: openMouthSlider
     m_EventTreshold: 0.15
+  - m_ConditionMode: 2
+    m_ConditionEvent: Dead
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6096507582926080094}
   m_Solo: 0

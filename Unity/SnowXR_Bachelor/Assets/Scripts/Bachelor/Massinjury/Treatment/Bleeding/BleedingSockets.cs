@@ -225,6 +225,10 @@ namespace SnowXR.MassInjury
             {
                 sideLease.gameObject.SetActive(true);
             }
+            else if (!injury.Dead() && injury.NeedPressureRelief())
+            {
+                sideLease.gameObject.SetActive(true);
+            }
             else
             {
                 sideLease.gameObject.SetActive(false);

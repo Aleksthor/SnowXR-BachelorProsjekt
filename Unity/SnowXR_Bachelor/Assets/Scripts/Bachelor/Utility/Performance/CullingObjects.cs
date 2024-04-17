@@ -306,7 +306,7 @@ namespace MassInjury.Utility
             roomC.gameObject.SetActive(true);
             roomCDecor.gameObject.SetActive(true);
             
-            roomD.gameObject.SetActive(false);
+            roomD.gameObject.SetActive(true);
             roomDDecor.gameObject.SetActive(false);
             
             roomE.gameObject.SetActive(false);
@@ -456,7 +456,7 @@ namespace MassInjury.Utility
             roomA.gameObject.SetActive(true);
             roomADecor.gameObject.SetActive(false);
             
-            roomB.gameObject.SetActive(false);
+            roomB.gameObject.SetActive(true);
             roomBDecor.gameObject.SetActive(false);
             
             roomC.gameObject.SetActive(false);
