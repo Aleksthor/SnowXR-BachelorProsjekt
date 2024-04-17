@@ -36,6 +36,8 @@ namespace MassInjury.Utility
 
 
         [SerializeField] private CullingSpace currentSpace;
+        
+        private bool done = false;
 
         private void Awake()
         {
@@ -43,11 +45,17 @@ namespace MassInjury.Utility
             {
                 instance = this;
             }
+            done = false;
         }
 
-        private void Start()
+        private void Update()
         {
-            NewSpace(CullingSpace.DownStairs);
+
+            if (!done)
+            {
+                done = true;
+                NewSpace(CullingSpace.DownStairs);
+            }
         }
 
 
