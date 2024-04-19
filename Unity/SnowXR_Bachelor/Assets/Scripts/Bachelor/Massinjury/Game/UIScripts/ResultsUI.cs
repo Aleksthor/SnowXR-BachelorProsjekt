@@ -29,6 +29,9 @@ namespace SnowXR.MassInjury
         public void ShowResults()
         {
             List<GameObject> patients = SpawnManager.instance.GetPatients();
+            patients = patients.OrderBy(p => (int)p.GetComponent<BleedingInjury>().CorrectZone()).ToList();
+           
+
             
             foreach (var go in patients)
             {

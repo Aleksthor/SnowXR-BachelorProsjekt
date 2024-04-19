@@ -19,11 +19,16 @@ namespace SnowXR.MassInjury
         [SerializeField] private Image guessedZone;
         
         [SerializeField] private Image background;
+        [SerializeField] private TextMeshProUGUI time;
         
         [SerializeField] private Color greenZone;
         [SerializeField] private Color yellowZone;
         [SerializeField] private Color redZone;
         [SerializeField] private Color blackZone;
+
+        [SerializeField] private Color veryGood;
+        [SerializeField] private Color good;
+        [SerializeField] private Color bad;
 
         private List<string> zoneReasonings = new List<string>();
 
@@ -110,6 +115,20 @@ namespace SnowXR.MassInjury
 
             treatmentParent = treatment;
             zoneReasoningParent = zoneReason;
+
+            time.text = Mathf.FloorToInt(injury.GetInspectionTime()) + " sek";
+            if (Mathf.FloorToInt(injury.GetInspectionTime()) < 20)
+            {
+                time.color = veryGood;
+            }
+            else if (Mathf.FloorToInt(injury.GetInspectionTime()) < 30)
+            {
+                time.color = good;
+            }
+            else 
+            {
+                time.color = bad;
+            }
 
             foreach (var check in treatments.results)
             {
