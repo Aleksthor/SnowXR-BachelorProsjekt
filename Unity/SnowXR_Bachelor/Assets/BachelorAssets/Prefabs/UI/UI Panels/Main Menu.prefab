@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 5
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8426215407864810675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1415,6 +1415,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17be2abff082a74b9cb633712857938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fader: {fileID: 0}
+  selected: {r: 0, g: 0, b: 0, a: 0}
+  notSelected: {r: 0, g: 0, b: 0, a: 0}
+  male: {fileID: 0}
+  female: {fileID: 0}
+  easy: {fileID: 0}
+  medium: {fileID: 0}
+  hard: {fileID: 0}
+  exam: {fileID: 0}
 --- !u!1 &5319902832199454564
 GameObject:
   m_ObjectHideFlags: 0
