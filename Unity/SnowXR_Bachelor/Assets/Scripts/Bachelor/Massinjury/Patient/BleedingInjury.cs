@@ -77,12 +77,15 @@ namespace SnowXR.MassInjury
         [SerializeField] private AnimState state = AnimState.Standing;
 
         private float timer = 0f;
-        private float nextScream = 0f;
+        private float inspectionTime = 0f;
+        private bool inspectorClose = false;
+        private int order = 0;
         
         private bool sitting = false;
         private bool setupSitting = false;
 
         private AudioSource audioSource;
+        private int room = 0;
 
         public UnityEvent onPlaceTourniquet;
         public UnityEvent onPlaceBand;
@@ -116,12 +119,13 @@ namespace SnowXR.MassInjury
             CalculateNeededHelp();
             DebugAnimationState();
 
-            if (concious)
+        }
+
+        private void Update()
+        {
+            if (inspectorClose)
             {
-                if (bloodLossSeverity > BloodLossSeverity.Minimal)
-                {
-                    nextScream = Random.Range(20f, 40f) + Random.Range(20f, 40f) + Random.Range(20f, 40f);
-                }
+                timer += Time.deltaTime;
             }
         }
 
@@ -497,11 +501,15 @@ namespace SnowXR.MassInjury
 
         public void Inspect(Zone guess)
         {
+            if (ScoringSystem.instance)
+            {
+                order = ScoringSystem.instance.GetOrder();
+            }
             guessedZone = guess;
             inspectionDone = true;
             agent.beliefes.SetState("cleared", 1);
             ZoneReasoning();
-            
+            inspectionTime = timer;
             onPlaceBand.Invoke();
         }
 
@@ -721,6 +729,43 @@ namespace SnowXR.MassInjury
         {
             return (0.000000007f * bloodLoss * bloodLoss * bloodLoss) - (0.00003f * bloodLoss * bloodLoss) +
                    (0.055 * bloodLoss) + 80f;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Culling"))
+            {
+                Debug.Log("Timer Start");
+                inspectorClose = true;
+            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Culling"))
+            {
+                Debug.Log("Timer Stop");
+                inspectorClose = false;
+            }
+        }
+
+        public float GetInspectionTime()
+        {
+            return inspectionTime;
+        }
+
+        public void SetRoom(int r)
+        {
+            room = r;
+        }
+
+        public int GetRoom()
+        {
+            return room;
+        }
+
+        public int GetOrder()
+        {
+            return order;
         }
     }
 

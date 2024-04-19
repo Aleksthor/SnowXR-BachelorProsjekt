@@ -21,8 +21,11 @@ namespace SnowXR.MassInjury
 
         [SerializeField] private Transform zoneReasoningParent;
         [SerializeField] private Transform treatmentParent;
-        
-        
+
+        [SerializeField] private TextMeshProUGUI zoneScore;
+        [SerializeField] private TextMeshProUGUI treatmentScore;
+        [SerializeField] private TextMeshProUGUI orderScore;
+
         public void ShowResults()
         {
             List<GameObject> patients = SpawnManager.instance.GetPatients();
@@ -62,6 +65,11 @@ namespace SnowXR.MassInjury
                     
                 }
             }
+
+            zoneScore.text = ScoringSystem.instance.ZoneScore(patients).ToString();
+            treatmentScore.text = ScoringSystem.instance.TreatmentScore(patients).ToString();
+            orderScore.text = ScoringSystem.instance.OrderScore(patients).ToString();
+
         }
         
         

@@ -36,7 +36,6 @@ namespace SnowXR.MassInjury
         // Update is called once per frame
         public void Pickup()
         {
-            transform.parent = null;
             cubeMesh.SetActive(true);
             bandMesh.SetActive(false);
         }

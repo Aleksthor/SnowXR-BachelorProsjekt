@@ -9,5 +9,8 @@ namespace SnowXR.MassInjury
     public class SpawnPoint : MonoBehaviour
     {
         [SerializeField] public GameDifficulty difficulty;
+        [SerializeField] public int room;
     }
+
+
 }

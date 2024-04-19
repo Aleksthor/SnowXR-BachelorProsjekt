@@ -97,6 +97,7 @@ namespace SnowXR.MassInjury
                 cachedSpawnPoints.Remove(spawnPoint);
                 spawnedAgents.Add(Instantiate(injuredPerson,spawnPoint.position,spawnPoint.rotation,spawnPoint));
                 spawnedAgents[i].GetComponent<GenderComponent>().SetColor(shirtColors[i % 15]);
+                spawnedAgents[i].GetComponent<BleedingInjury>().SetRoom(spawnPoint.GetComponent<SpawnPoint>().room);
             }
         }
 

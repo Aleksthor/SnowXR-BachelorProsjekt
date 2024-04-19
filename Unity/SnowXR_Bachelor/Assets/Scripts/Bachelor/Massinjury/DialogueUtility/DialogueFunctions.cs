@@ -33,6 +33,7 @@ namespace SnowXR.MassInjury
                     {
                         agent.GoToReception();
                     }
+                    agent.transform.parent = null;
                 }
             }
         }

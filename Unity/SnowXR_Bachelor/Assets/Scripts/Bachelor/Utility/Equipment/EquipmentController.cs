@@ -20,7 +20,7 @@ namespace SnowXR.Sim
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             if (input.GetDown() || Input.GetKeyDown(KeyCode.Q))
             {
