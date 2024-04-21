@@ -111,7 +111,7 @@ namespace SnowXR.MassInjury
 
             }
 
-            return Mathf.Clamp(score, 0, 230);
+            return Mathf.Clamp(score, 1, 230);
         }
 
         public int TreatmentScore(List<GameObject> patients)
@@ -205,7 +205,7 @@ namespace SnowXR.MassInjury
 
             }
 
-            return Mathf.Clamp(score, 0, 230);
+            return Mathf.Clamp(score, 1, 230);
         }
 
         public int OrderScore(List<GameObject> patients)
@@ -230,12 +230,20 @@ namespace SnowXR.MassInjury
 
                 if (injury.GetRoom() > maxRoom)
                 {
+                    for (int i = 0; i < injury.GetRoom(); i++)
+                    {
+                        if (!rooms.ContainsKey(i))
+                        {
+                            rooms.Add(i, new List<BleedingInjury>());
+                        }
+                    }
+
                     maxRoom = injury.GetRoom();
                 }
             }
 
 
-            for (int i = 0; i < maxRoom; i++)
+            for (int i = 0; i <= maxRoom; i++)
             {
                 rooms[i] = rooms[i].OrderBy(p => p.GetOrder()).ToList();   
                 
@@ -317,7 +325,101 @@ namespace SnowXR.MassInjury
 
                 }
             }
-            return Mathf.Clamp(score + 40, 0, 230);
+            return Mathf.Clamp(score + 40, 1, 230);
+        }
+
+
+        public List<int> RoomScores(List<GameObject> patients)
+        {
+            List<int> scores = new List<int>();
+
+            int maxRoom = 0;
+            Dictionary<int, List<BleedingInjury>> rooms = new Dictionary<int, List<BleedingInjury>>();
+
+            foreach (GameObject patient in patients)
+            {
+                BleedingInjury injury = patient.GetComponent<BleedingInjury>();
+
+                if (rooms.ContainsKey(injury.GetRoom()))
+                {
+                    rooms[injury.GetRoom()].Add(injury);
+                }
+                else
+                {
+                    rooms.Add(patient.GetComponent<BleedingInjury>().GetRoom(), new List<BleedingInjury>());
+                    rooms[injury.GetRoom()].Add(injury);
+                }
+
+                if (injury.GetRoom() > maxRoom)
+                {
+                    for (int i = 0; i < injury.GetRoom(); i++)
+                    {
+                        if (!rooms.ContainsKey(i))
+                        {
+                            rooms.Add(i, new List<BleedingInjury>());
+                        }
+                    }
+                    maxRoom = injury.GetRoom();
+                }
+            }
+
+
+            for (int i = 0; i <= maxRoom; i++)
+            {
+                int score = 0;
+                rooms[i] = rooms[i].OrderBy(p => p.GetOrder()).ToList();
+
+                for (int j = 0; j < rooms[i].Count; j++)
+                {
+                    if (rooms[i][j] == null) continue;
+                    BleedingInjury injury = rooms[i][j];
+
+
+                    switch ((int)injury.CorrectZone() - (int)injury.GuessedZone())
+                    {
+                        case 0:
+                            score += Mathf.FloorToInt(correctZone / rooms[i].Count);
+                            break;
+                        case 1:
+                            score += Mathf.FloorToInt(wrongZoneONE / rooms[i].Count);
+                            break;
+                        case 2:
+                            score += Mathf.FloorToInt(wrongZoneTWO / rooms[i].Count);
+                            break;
+                        case 3:
+                            score += Mathf.FloorToInt(wrongZoneTHREE / rooms[i].Count);
+                            break;
+                        case -1:
+                            score += Mathf.FloorToInt(wrongZoneNONE / rooms[i].Count);
+                            break;
+                        case -2:
+                            score += Mathf.FloorToInt(wrongZoneNTWO / rooms[i].Count);
+                            break;
+                        case -3:
+                            score += Mathf.FloorToInt(wrongZoneNTHREE / rooms[i].Count);
+                            break;
+                    }
+
+
+
+                    if (injury.GetInspectionTime() < 20f)
+                    {
+                        score += 7;
+                    }
+                    else if (injury.GetInspectionTime() < 30f)
+                    {
+                        score += 5;
+                    }
+
+
+                
+                }
+                scores.Add(score);
+            }
+
+
+
+            return scores;
         }
 
         public int GetOrder()

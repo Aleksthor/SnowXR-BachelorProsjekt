@@ -10,6 +10,7 @@ namespace SnowXR.MassInjury
     {
         [SerializeField] public GameDifficulty difficulty;
         [SerializeField] public int room;
+        [SerializeField] public int slot;
     }
 
 
