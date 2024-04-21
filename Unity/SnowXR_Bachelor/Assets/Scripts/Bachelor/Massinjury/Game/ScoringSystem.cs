@@ -245,79 +245,92 @@ namespace SnowXR.MassInjury
 
             for (int i = 0; i <= maxRoom; i++)
             {
-                rooms[i] = rooms[i].OrderBy(p => p.GetOrder()).ToList();   
-                
-                for(int j = 0; j < rooms[i].Count; j++)
+                rooms[i] = rooms[i].OrderBy(p => p.GetOrder()).ToList();
+                bool check = false;
+                for (int j = 0; j < rooms[i].Count; j++)
                 {
                     Zone zone = rooms[i][j].CorrectZone();
                     switch (zone)
                     {
                         case Zone.Green:
                             // Check all the earlier patients
+                            check = false;
                             for (int p = 0; p < j; p++)
                             {
                                 if ((int)rooms[i][p].CorrectZone() > (int)zone)
                                 {
                                     score += Mathf.FloorToInt(greenTooEarly / patients.Count);
+                                    check = true;
                                     break;
                                 }
                             }
-
-                            score += Mathf.FloorToInt(greenCorrectOrder / patients.Count);
+                            if (check)
+                                score += Mathf.FloorToInt(greenCorrectOrder / patients.Count);
                             break;
                         case Zone.Yellow:
                             // Check all the earlier patients
+                            check = false;
                             for (int p = 0; p < j; p++)
                             {
                                 if ((int)rooms[i][p].CorrectZone() > (int)zone)
                                 {
                                     score += Mathf.FloorToInt(yellowTooEarly / patients.Count);
+                                    check = true;
                                     break;
                                 }
                             }                      
                             // Check all the later patients
                             for (int p = 0; p < j; p++)
                             {
-                                if ((int)rooms[i][p].CorrectZone() < (int)zone)
+                                if ((int)rooms[i][p].CorrectZone() < (int)zone && !check)
                                 {
                                     score += Mathf.FloorToInt(yellowTooLate / patients.Count);
+                                    check = true;
                                     break;
                                 }
                             }
-                            score += Mathf.FloorToInt(yellowCorrectOrder / patients.Count);
+                            if (check)
+                                score += Mathf.FloorToInt(yellowCorrectOrder / patients.Count);
                             break;
                         case Zone.Red:
                             // Check all the earlier patients
+                            check = false;
                             for (int p = 0; p < j; p++)
-                            {
+                            {                             
                                 if ((int)rooms[i][p].CorrectZone() > (int)zone)
                                 {
                                     score += Mathf.FloorToInt(redTooEarly / patients.Count);
+                                    check = true;
                                     break;
                                 }
                             }
                             // Check all the later patients
                             for (int p = 0; p < j; p++)
                             {
-                                if ((int)rooms[i][p].CorrectZone() < (int)zone)
+                                if ((int)rooms[i][p].CorrectZone() < (int)zone && !check)
                                 { 
                                     score += Mathf.FloorToInt(redTooLate / patients.Count);
+                                    check = true;
                                     break;
                                 }
                             }
-                            score += Mathf.FloorToInt(redCorrectOrder / patients.Count);
+                            if (!check)
+                                score += Mathf.FloorToInt(redCorrectOrder / patients.Count);
                             break;
                         case Zone.Black:
                             // Check all the later patients
+                            check = false;
                             for (int p = 0; p < j; p++)
                             {
                                 if ((int)rooms[i][p].CorrectZone() < (int)zone)
                                 {
                                     score += Mathf.FloorToInt(blackTooLate / patients.Count);
+                                    check = true;
                                     break;
                                 }
                             }
-                            score += Mathf.FloorToInt(blackCorrectOrder / patients.Count);
+                            if (!check)
+                                score += Mathf.FloorToInt(blackCorrectOrder / patients.Count);
                             break;
 
                     }
