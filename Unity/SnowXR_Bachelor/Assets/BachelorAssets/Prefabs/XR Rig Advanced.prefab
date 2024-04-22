@@ -25815,6 +25815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: 8
+  input2: 4
   equipment:
   - {fileID: 2083891954136048655}
   - {fileID: 4500032292411962019}
@@ -41632,6 +41633,7 @@ GameObject:
   - component: {fileID: 5417910001343040275}
   - component: {fileID: 1647914792584462288}
   - component: {fileID: 1270331116372639839}
+  - component: {fileID: 6827831214412655371}
   m_Layer: 9
   m_Name: XR Rig Advanced
   m_TagString: Player
@@ -41723,6 +41725,24 @@ MonoBehaviour:
   HMDIsActive: 0
   LeftControllerPosition: {x: -0.2, y: -0.2, z: 0.5}
   RightControllerPosition: {x: 0.2, y: -0.2, z: 0.5}
+--- !u!114 &6827831214412655371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5476553293917614057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4b5dce911cd75419e777684561c572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 330276855545024377}
+  body: {fileID: 330276855545024377}
+  rightHand: {fileID: 4492889507533769086}
+  leftHand: {fileID: 4625387053148938305}
+  bandHolder: {fileID: 1763145694084385192}
+  plivo: {fileID: 858293918456661603}
 --- !u!1 &5482169603419835148
 GameObject:
   m_ObjectHideFlags: 0
@@ -51685,7 +51705,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 1275888368302615900}
-  ToggleHandsInput: 2
+  Input1: 2
+  Input2: 6
   fader: {fileID: 8191879077052594699}
 --- !u!1 &6871741346238832668
 GameObject:
