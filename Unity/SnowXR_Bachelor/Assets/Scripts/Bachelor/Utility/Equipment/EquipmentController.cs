@@ -8,6 +8,7 @@ namespace SnowXR.Sim
     public class EquipmentController : MonoBehaviour
     {
         [SerializeField] private ControllerBinding input = ControllerBinding.YButtonDown;
+        [SerializeField] private ControllerBinding input2 = ControllerBinding.BButtonDown;
 
         [SerializeField] private List<GameObject> equipment = new List<GameObject>();
         // Start is called before the first frame update
@@ -22,7 +23,7 @@ namespace SnowXR.Sim
         // Update is called once per frame
         void Update()
         {
-            if (input.GetDown() || Input.GetKeyDown(KeyCode.Q))
+            if (input.GetDown() || Input.GetKeyDown(KeyCode.Q) || input2.GetDown())
             {
                 foreach (var gameObject in equipment)
                 {

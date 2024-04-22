@@ -59,14 +59,14 @@ namespace SnowXR.MassInjury
             header.gameObject.SetActive(true);
             step1Button.gameObject.SetActive(true);
             skip.gameObject.SetActive(true);
-            
-            patient.gameObject.SetActive(true);
+           
 
             progress++;
         }
 
         public void Understand()
         {
+            patient.gameObject.SetActive(true);
             step1Text.gameObject.SetActive(false);
             step1Button.gameObject.SetActive(false);
             

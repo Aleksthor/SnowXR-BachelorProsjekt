@@ -11,7 +11,8 @@ namespace SnowXR.MassInjury
     public class SettingsUI : MonoBehaviour
     {
         [SerializeField] private GameObject UI;
-        [SerializeField] private ControllerBinding ToggleHandsInput = ControllerBinding.AButtonDown;
+        [SerializeField] private ControllerBinding Input1 = ControllerBinding.AButtonDown;
+        [SerializeField] private ControllerBinding Input2 = ControllerBinding.XButtonDown;
         [SerializeField] private FadeScreen fader;
 
         private AudioSource audioSource;
@@ -31,7 +32,7 @@ namespace SnowXR.MassInjury
         // Update is called once per frame
         void Update()
         {
-            if (ToggleHandsInput.GetDown() || Input.GetKeyDown(KeyCode.P))
+            if (Input1.GetDown() || Input.GetKeyDown(KeyCode.P) || Input2.GetDown())
             {
                 UI.SetActive(!UI.activeSelf);
             }

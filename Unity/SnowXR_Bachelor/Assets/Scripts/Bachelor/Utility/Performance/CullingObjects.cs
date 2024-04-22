@@ -54,7 +54,7 @@ namespace MassInjury.Utility
             if (!done)
             {
                 done = true;
-                NewSpace(CullingSpace.DownStairs);
+                NewSpace(CullingSpace.Reception);
             }
         }
 
