@@ -14,8 +14,10 @@ namespace MassInjury.Dialogue
         [SerializeField] private Transform leftHand;
 
         [HideInInspector] public UnityEvent onShowDialogue = new UnityEvent();
-
         private bool shown = false;
+
+
+
         private void Update()
         {
             Transform child = transform.GetChild(0);
@@ -28,7 +30,7 @@ namespace MassInjury.Dialogue
 
             float fade = Mathf.Clamp(slopeFade * angleFade, 0f, 1f);
 
-            if (fade > 0f && !shown)
+            if (fade >= 0.8f && !shown)
             {
                 shown = true;
                 onShowDialogue?.Invoke();
