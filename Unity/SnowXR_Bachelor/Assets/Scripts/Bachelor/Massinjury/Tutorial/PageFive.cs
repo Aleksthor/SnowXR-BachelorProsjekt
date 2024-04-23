@@ -81,7 +81,7 @@ namespace SnowXR.MassInjury
             openAirways.onGrabChin.AddListener(GrabChin);
             patient.GetComponent<BleedingInjury>().onRecieveOpenAirways.AddListener(ClosedMouth);
 
-            progress++;
+            progress = StepProgress.One;
         }
 
         private void GrabHead()
@@ -107,11 +107,6 @@ namespace SnowXR.MassInjury
             }
             skip.gameObject.SetActive(true);
             step4Text.gameObject.SetActive(true);
-            step1Progress.gameObject.SetActive(true);
-            step2Progress.gameObject.SetActive(true);
-            step3Progress.gameObject.SetActive(true);
-            step4Progress.gameObject.SetActive(true);
-            step5Progress.gameObject.SetActive(true);
             step2Progress.GetComponent<Image>().color = doneColor;
             step3Progress.GetComponent<Image>().color = doneColor;
             progress = StepProgress.Four;
@@ -133,6 +128,7 @@ namespace SnowXR.MassInjury
         }
         private void SideLease()
         {
+            step4Progress.GetComponent<Image>().color = doneColor;
             step5Progress.GetComponent<Image>().color = doneColor;
             sideLease.onStartSideLease.RemoveAllListeners();
             patient.GetComponent<BleedingInjury>().onRecieveSideLease.RemoveAllListeners();

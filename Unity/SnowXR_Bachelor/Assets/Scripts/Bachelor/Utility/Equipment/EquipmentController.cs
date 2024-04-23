@@ -16,7 +16,7 @@ namespace SnowXR.Sim
         {
             foreach (var gameObject in equipment)
             {
-                gameObject.SetActive(false);
+                gameObject.SetActive(true);
             }
         }
 

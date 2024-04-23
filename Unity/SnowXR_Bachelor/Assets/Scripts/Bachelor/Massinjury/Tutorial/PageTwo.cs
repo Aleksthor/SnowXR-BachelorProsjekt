@@ -27,7 +27,9 @@ namespace SnowXR.MassInjury
 
         
         [SerializeField] private ControllerBinding bandInput = ControllerBinding.YButtonDown;
+        [SerializeField] private ControllerBinding bandInput2 = ControllerBinding.BButtonDown;
         [SerializeField] private ControllerBinding settingsInput = ControllerBinding.AButtonDown;
+        [SerializeField] private ControllerBinding settingsInput2 = ControllerBinding.XButtonDown;
 
         [SerializeField] private Color doneColor;
 
@@ -62,41 +64,41 @@ namespace SnowXR.MassInjury
         }
 
 
-        private void FixedUpdate()
+        private void Update()
         {
             switch (progress)
             {
                 case StepProgress.NotStarted:
                     return;
                 case StepProgress.One:
-                    if (bandInput.GetDown())
+                    if (bandInput.GetDown() || bandInput2.GetDown())
                     {
                         step1Text.gameObject.SetActive(false);
                         step2Text.gameObject.SetActive(true);
                         step1Progress.GetComponent<Image>().color = doneColor;
-                        progress++;
+                        progress = StepProgress.Two;
                     }
                     break;
                 case StepProgress.Two:
-                    if (bandInput.GetDown())
+                    if (bandInput.GetDown() || bandInput2.GetDown())
                     {
                         step2Text.gameObject.SetActive(false);
                         step3Text.gameObject.SetActive(true);
                         step2Progress.GetComponent<Image>().color = doneColor;
-                        progress++;
+                        progress = StepProgress.Three;
                     }
                     break;
                 case StepProgress.Three:
-                    if (settingsInput.GetDown())
+                    if (settingsInput.GetDown() || settingsInput2.GetDown())
                     {
                         step3Text.gameObject.SetActive(false);
                         step4Text.gameObject.SetActive(true);
                         step3Progress.GetComponent<Image>().color = doneColor;
-                        progress++;
+                        progress = StepProgress.Four;
                     }
                     break;
                 case StepProgress.Four:
-                    if (settingsInput.GetDown())
+                    if (settingsInput.GetDown() || settingsInput2.GetDown()) 
                     {
                         step4Progress.GetComponent<Image>().color = doneColor;
                         progress = StepProgress.Completed;
