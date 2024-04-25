@@ -298,7 +298,7 @@ namespace MassInjury.Utility
         {
             downStairs.gameObject.SetActive(false);
             
-            reception.gameObject.SetActive(false);
+            reception.gameObject.SetActive(true);
             receptionDecor.gameObject.SetActive(false);
             
 
@@ -357,7 +357,7 @@ namespace MassInjury.Utility
             stairs.gameObject.SetActive(false);
             stairsDecor.gameObject.SetActive(false);
             
-            roomA.gameObject.SetActive(false);
+            roomA.gameObject.SetActive(true);
             roomADecor.gameObject.SetActive(false);
             
             roomB.gameObject.SetActive(true);

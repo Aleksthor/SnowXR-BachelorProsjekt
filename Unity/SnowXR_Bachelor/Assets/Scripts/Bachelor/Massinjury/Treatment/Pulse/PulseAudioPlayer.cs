@@ -44,7 +44,7 @@ namespace SnowXR.MassInjury
                 return;
             }
 
-            audioSource.volume = area == PulseArea.Neck ? 1f : 0.5f;
+            audioSource.volume = area == PulseArea.Neck ? 0.1f : 0.05f;
             
 
             timer += Time.deltaTime;

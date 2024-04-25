@@ -375,6 +375,9 @@ MonoBehaviour:
   EventStep3AProcedureCompleted:
     m_PersistentCalls:
       m_Calls: []
+  onStartSideLease:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8151465203995669374
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +501,7 @@ MonoBehaviour:
   GrabSpeed: 15
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
-  RemoteGrabDistance: 10
+  RemoteGrabDistance: 2
   ThrowForceMultiplier: 1
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
@@ -1497,7 +1500,7 @@ MonoBehaviour:
   GrabSpeed: 15
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
-  RemoteGrabDistance: 10
+  RemoteGrabDistance: 2
   ThrowForceMultiplier: 1
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1

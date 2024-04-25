@@ -88,7 +88,7 @@ namespace SnowXR.MassInjury
                 lowest = ref leverShoulder;
             }
 
-
+            return;
             if (Mathf.Abs(highest.LeverPercentage - lowest.LeverPercentage) > 10f)
             {
                 //Debug.Log("Oh oh!" + Mathf.Abs(highest.LeverPercentage - lowest.LeverPercentage));

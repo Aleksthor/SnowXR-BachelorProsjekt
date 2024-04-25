@@ -3675,12 +3675,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401611279229087294}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.20000021}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5260620867136052425}
+  m_Father: {fileID: 821997572700427926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8191879077052594699
 MonoBehaviour:
@@ -8570,7 +8570,7 @@ MonoBehaviour:
     m_Right: 50
     m_Top: 50
     m_Bottom: 50
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -14673,7 +14673,7 @@ MonoBehaviour:
   CenterEyeAnchor: {fileID: 821997572700427926}
   GroundedLayers:
     serializedVersion: 2
-    m_Bits: 1281
+    m_Bits: 1
   DistanceFromGround: 0
   DistanceFromGroundOffset: 0
   MinimumCapsuleHeight: 0.4
@@ -16384,8 +16384,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3650789681480920559}
+  m_Children: []
   m_Father: {fileID: 5250892353347252901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4391203755327037708
@@ -41700,7 +41699,7 @@ MonoBehaviour:
   PlayerDownAction: {fileID: -5448902572583850724, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
   MinPlayerHeight: 0.2
-  MaxPlayerHeight: 5
+  MaxPlayerHeight: 2.5
   LockCameraAction: {fileID: 7248157346319567513, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
   CameraLookAction: {fileID: 3400255892409606642, guid: 27bafa1c7d8a77b47985ab70c0511986,
@@ -57038,6 +57037,7 @@ Transform:
   - {fileID: 4049911169278039032}
   - {fileID: 8554048553729106795}
   - {fileID: 3671716450674591877}
+  - {fileID: 3650789681480920559}
   m_Father: {fileID: 5250892353347252901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &3227596949074412812

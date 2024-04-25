@@ -66,7 +66,7 @@ namespace SnowXR.MassInjury
             
             results.gameObject.SetActive(true);
             
-            results.GetComponent<ResultsUI>().ShowResults();
+            results.transform.Find("Results").GetComponent<ResultsUI>().ShowResults();
             
             parent.gameObject.SetActive(false);
         }

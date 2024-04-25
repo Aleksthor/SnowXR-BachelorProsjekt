@@ -66,7 +66,7 @@ namespace MassInjury.Dialogue
                 if (!ReferenceEquals(DialogueController.instance.dialogueAudioSource.clip, null))
                 {
                     if (DialogueController.instance.dialogueAudioSource.time >=
-                        DialogueController.instance.dialogueAudioSource.clip.length)
+                        DialogueController.instance.dialogueAudioSource.clip.length - 0.1f)
                     {
                         events.onLineExit.Invoke();
             

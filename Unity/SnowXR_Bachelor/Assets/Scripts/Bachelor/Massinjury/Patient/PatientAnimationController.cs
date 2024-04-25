@@ -72,7 +72,7 @@ namespace SnowXR.MassInjury
             animator.SetInteger(InjuryType, injuryScript.GetBleedingArea());
             animator.SetBool(CanStand, injuryScript.CanWalk());
             animator.SetBool(Sitting, injuryScript.Sitting());
-            animator.SetBool(Walking, agent.velocity.sqrMagnitude > 1f);
+            animator.SetBool(Walking, agent.velocity.sqrMagnitude > 0.1f);
             animator.SetBool(Dead, injuryScript.Dead());
             animator.SetBool(Concious, injuryScript.Concious());
             animator.SetBool(Lease, injuryScript.RecievedSideLease());

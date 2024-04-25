@@ -427,7 +427,7 @@ namespace SnowXR.MassInjury
 
                 
                 }
-                scores.Add(score);
+                scores.Add(Mathf.Clamp(score, 0, 230));
             }
 
 

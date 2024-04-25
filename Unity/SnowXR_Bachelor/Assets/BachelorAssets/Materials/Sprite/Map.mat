@@ -104,9 +104,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Middle: 0.73
-    - _NE: 0.1825
-    - _NW: 0.6425
+    - _Middle: 0.75
+    - _NE: 0.75
+    - _NW: 0.75
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0

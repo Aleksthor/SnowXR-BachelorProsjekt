@@ -22,15 +22,18 @@ namespace SnowXR.MassInjury
 
         public void GoToReception()
         {
+            Debug.Log("Go to reception");
             int layerMask = 1 << 9;
             Collider[] colliders = Physics.OverlapSphere(transform.position, 10f, layerMask);
             foreach (var c in colliders)
             {
                 if (c.CompareTag("Patient"))
                 {
+                    Debug.Log("1 Agent");
                     MassInjuryAgent agent = c.GetComponent<MassInjuryAgent>();
                     if (!ReferenceEquals(agent, null))
                     {
+                        Debug.Log("Calling Agent Script");
                         agent.GoToReception();
                     }
                     agent.transform.parent = null;

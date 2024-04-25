@@ -211,8 +211,16 @@ namespace SnowXR.MassInjury
                 default:
                     break;
             }
-            
-            if (!injury.Concious() && !injury.Dead() && injury.NeedOpenAirways() && !injury.RecievedOpenAirways())
+
+            if (injury.Dead())
+            {
+                openAirways.gameObject.SetActive(false);
+                sideLease.gameObject.SetActive(false);
+                RemoveBloodParticles();
+                return;
+            }
+
+            if (!injury.Concious() && injury.NeedOpenAirways() && !injury.RecievedOpenAirways())
             {
                 openAirways.gameObject.SetActive(true);
             }
@@ -221,11 +229,11 @@ namespace SnowXR.MassInjury
                 openAirways.gameObject.SetActive(false);
             }
             
-            if (!injury.Concious() && !injury.Dead() && injury.NeedSideLease() && !injury.RecievedSideLease() && injury.RecievedOpenAirways())
+            if (!injury.Concious() && injury.NeedSideLease() && !injury.RecievedSideLease())
             {
                 sideLease.gameObject.SetActive(true);
             }
-            else if (!injury.Dead() && injury.NeedPressureRelief())
+            else if (injury.NeedPressureRelief())
             {
                 sideLease.gameObject.SetActive(true);
             }
@@ -234,7 +242,10 @@ namespace SnowXR.MassInjury
                 sideLease.gameObject.SetActive(false);
             }
             
-            if (injury.Dead()) RemoveBloodParticles();
+            if (openAirways.gameObject.activeSelf)
+            {
+                sideLease.gameObject.SetActive(false);
+            }
             
         }
 

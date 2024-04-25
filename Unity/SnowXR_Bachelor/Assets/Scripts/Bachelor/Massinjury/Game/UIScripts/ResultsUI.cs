@@ -63,6 +63,10 @@ namespace SnowXR.MassInjury
         {
             Material mapMaterial = mapBackground.material;
             mapMaterial.SetFloat("_SE", 0.75f);
+            mapMaterial.SetFloat("_SW", 0.75f);
+            mapMaterial.SetFloat("_NE", 0.75f);
+            mapMaterial.SetFloat("_NW", 0.75f);
+            mapMaterial.SetFloat("_Middle", 0.75f);
         }
 
         public void ShowResults()
@@ -204,10 +208,10 @@ namespace SnowXR.MassInjury
                         break;
                 }
                 if (p == null) { continue; }
-                p.GetComponent<Image>().sprite = injury.GetGenderComponent().GetGender() == Gender.Male ? male : female;
-                p.GetComponent<Image>().color = injury.GuessedZone() == injury.CorrectZone() ? correctGuess : wrongGuess;
+                p.transform.Find("Body").GetComponent<Image>().sprite = injury.GetGenderComponent().GetGender() == Gender.Male ? male : female;
+                p.transform.Find("Body").GetComponent<Image>().color = injury.GuessedZone() == injury.CorrectZone() ? correctGuess : wrongGuess;
                 p.transform.Find("Band").GetComponent<Image>().color = GetColor(injury.GuessedZone());
-
+                p.GetComponent<MapPatientUI>().Setup(injury, zoneReasoningParent, treatmentParent);
                 bool checkmark = true;
 
                 if (injury.NeedOpenAirways() && !injury.RecievedOpenAirways())

@@ -639,6 +639,8 @@ namespace SnowXR.MassInjury
         {
             if (concious == false) return false;
             if (bloodLossSeverity == BloodLossSeverity.Minimal) return true;
+            if (breathingStatus == BreathingStatus.LungInjury) return false;
+            
             if (!setupSitting)
             {
                 sitting = RandomBool(0.33f);
@@ -810,7 +812,6 @@ namespace SnowXR.MassInjury
         {
             if (other.CompareTag("Culling"))
             {
-                Debug.Log("Timer Start");
                 inspectorClose = true;
             }
         }
@@ -818,7 +819,6 @@ namespace SnowXR.MassInjury
         {
             if (other.CompareTag("Culling"))
             {
-                Debug.Log("Timer Stop");
                 inspectorClose = false;
             }
         }
