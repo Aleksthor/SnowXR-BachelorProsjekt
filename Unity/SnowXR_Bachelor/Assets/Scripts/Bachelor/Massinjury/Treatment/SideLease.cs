@@ -58,8 +58,7 @@ namespace SnowXR.MassInjury
             }
 
             UpdateAnimations();
-            
-            if (EventStep3AProcedureCompleted != null && currentPercent < 7f) // if step completed, invoke the event
+            if (EventStep3AProcedureCompleted != null && remap(currentPercent, 100, 40, 100, 0) < 7f) // if step completed, invoke the event
             {
                 //sets the current percent to 0 to ensure the pose animation gets played unitl the end
                 currentPercent = 0f;
@@ -136,9 +135,14 @@ namespace SnowXR.MassInjury
             if (!ReferenceEquals(closest, null))
             {
                 var parent = closest.parent;
-                float value = (100 - currentPercent) / 100;
+                float value = (100 - remap(currentPercent,100,40,100,0)) / 100;
                 parent.GetComponent<PatientAnimationController>().UpdateSideLeaseSlider(value);
             }
+        }
+
+        public float remap(float val, float in1, float in2, float out1, float out2)
+        {
+            return out1 + (val - in1) * (out2 - out1) / (in2 - in1);
         }
     }
 }
