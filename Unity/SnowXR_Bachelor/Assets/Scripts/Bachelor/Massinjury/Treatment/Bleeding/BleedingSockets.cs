@@ -60,7 +60,17 @@ namespace SnowXR.MassInjury
             rightThighDecalParent.gameObject.SetActive(false);
             leftLegDecalParent.gameObject.SetActive(false);
             rightLegDecalParent.gameObject.SetActive(false);
-            
+
+            headBleedingParent.gameObject.SetActive(false);
+            neckBleedingParent.gameObject.SetActive(false);
+            leftArmBleedingParent.gameObject.SetActive(false);
+            rightArmBleedingParent.gameObject.SetActive(false);
+            torsoBleedingParent.gameObject.SetActive(false);
+            leftThighBleedingParent.gameObject.SetActive(false);
+            rightThighBleedingParent.gameObject.SetActive(false);
+            leftLegBleedingParent.gameObject.SetActive(false);
+            rightLegBleedingParent.gameObject.SetActive(false);
+
             openAirways.gameObject.SetActive(false);
             sideLease.gameObject.SetActive(false);
         }
@@ -90,6 +100,7 @@ namespace SnowXR.MassInjury
                         default:
                             break;
                     }
+                    headBleedingParent.gameObject.SetActive(true);
                     headBleedingParent.GetComponent<SphereCollider>().enabled = true;
                     headDecalParent.gameObject.SetActive(true);
                     break;
@@ -108,6 +119,7 @@ namespace SnowXR.MassInjury
                         default:
                             break;
                     }
+                    neckBleedingParent.gameObject.SetActive(true);
                     neckBleedingParent.GetComponent<SphereCollider>().enabled = true;
                     neckDecalParent.gameObject.SetActive(true);
                     break;
@@ -129,11 +141,13 @@ namespace SnowXR.MassInjury
 
                     if (injury.Side() == Comparative.Left)
                     {
+                        leftArmBleedingParent.gameObject.SetActive(true);
                         leftArmBleedingParent.GetComponent<SphereCollider>().enabled = true;
                         leftArmDecalParent.gameObject.SetActive(true);
                     }
                     else
                     {
+                        rightArmBleedingParent.gameObject.SetActive(true);
                         rightArmBleedingParent.GetComponent<SphereCollider>().enabled = true;
                         rightArmDecalParent.gameObject.SetActive(true);
                     }
@@ -153,6 +167,7 @@ namespace SnowXR.MassInjury
                         default:
                             break;
                     }
+                    torsoBleedingParent.gameObject.SetActive(true);
                     torsoBleedingParent.GetComponent<SphereCollider>().enabled = true;
                     torsoDecalParent.gameObject.SetActive(true);
                     break;
@@ -173,11 +188,13 @@ namespace SnowXR.MassInjury
                     }
                     if (injury.Side() == Comparative.Left)
                     {
+                        leftThighBleedingParent.gameObject.SetActive(true);
                         leftThighBleedingParent.GetComponent<SphereCollider>().enabled = true;
                         leftThighDecalParent.gameObject.SetActive(true);
                     }
                     else
                     {
+                        rightThighBleedingParent.gameObject.SetActive(true);
                         rightThighBleedingParent.GetComponent<SphereCollider>().enabled = true;
                         rightThighDecalParent.gameObject.SetActive(true);
                     }
@@ -199,11 +216,13 @@ namespace SnowXR.MassInjury
                     }
                     if (injury.Side() == Comparative.Left)
                     {
+                        leftLegBleedingParent.gameObject.SetActive(true);
                         leftLegBleedingParent.GetComponent<SphereCollider>().enabled = true;
                         leftLegDecalParent.gameObject.SetActive(true);
                     }
                     else
                     {
+                        rightLegBleedingParent.gameObject.SetActive(true);
                         rightLegBleedingParent.GetComponent<SphereCollider>().enabled = true;
                         rightLegDecalParent.gameObject.SetActive(true);
                     }
@@ -220,7 +239,7 @@ namespace SnowXR.MassInjury
                 return;
             }
 
-            if (!injury.Concious() && injury.NeedOpenAirways() && !injury.RecievedOpenAirways())
+            if (injury.NeedOpenAirways() && !injury.RecievedOpenAirways())
             {
                 openAirways.gameObject.SetActive(true);
             }
@@ -228,21 +247,12 @@ namespace SnowXR.MassInjury
             {
                 openAirways.gameObject.SetActive(false);
             }
-            
-            if (!injury.Concious() && injury.NeedSideLease() && !injury.RecievedSideLease())
-            {
-                sideLease.gameObject.SetActive(true);
-            }
-            else if (injury.NeedPressureRelief())
+
+            if (injury.NeedSideLease() && !injury.RecievedSideLease())
             {
                 sideLease.gameObject.SetActive(true);
             }
             else
-            {
-                sideLease.gameObject.SetActive(false);
-            }
-            
-            if (openAirways.gameObject.activeSelf)
             {
                 sideLease.gameObject.SetActive(false);
             }

@@ -26,6 +26,12 @@ namespace SnowXR.MassInjury
         private float currentPercent = 100f;
         private Transform closest;
 
+        [SerializeField] private Transform hip;
+        [SerializeField] private Transform shoulder;
+
+        [SerializeField] private Transform hipParent;
+        [SerializeField] private Transform shoulderParent;
+
         private void Start()
         {
             leverShoulder.onLeverChange.AddListener(OnSubleverChange);
@@ -56,6 +62,8 @@ namespace SnowXR.MassInjury
             {
                 SetClosest();
             }
+
+
 
             UpdateAnimations();
             if (EventStep3AProcedureCompleted != null && remap(currentPercent, 100, 40, 100, 0) < 7f) // if step completed, invoke the event
@@ -99,6 +107,12 @@ namespace SnowXR.MassInjury
                 lowest.SetLeverAngle(offsetAngle);
             }
 
+        }
+
+        private void FixedUpdate()
+        {
+            hip.transform.position = hipParent.transform.position;
+            shoulder.transform.position = shoulderParent.transform.position;
         }
 
         private void SetClosest()

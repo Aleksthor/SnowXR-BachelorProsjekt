@@ -20,6 +20,8 @@ namespace SnowXR.MassInjury
         private float timer;
         private bool active = false;
 
+        private Transform target;
+
         [HideInInspector] public UnityEvent onListenNeck;
         [HideInInspector] public UnityEvent onListenWrist;
 
@@ -37,6 +39,13 @@ namespace SnowXR.MassInjury
                 return;
             }
 
+            if (ReferenceEquals(target, null))
+            {
+                pulse = 0;
+                audioSource.mute = true;
+                return;
+            }
+
             if (area == PulseArea.Wrist && currentInjury.bloodLossML > 2000f)
             {
                 pulse = 0;
@@ -48,6 +57,9 @@ namespace SnowXR.MassInjury
             
 
             timer += Time.deltaTime;
+            pulse = currentInjury.Pulse();
+            speed = pulse / 60f;
+
             if (timer > 1f / speed)
             {
                 if (!ReferenceEquals(InputBridge.Instance, null))
@@ -59,18 +71,16 @@ namespace SnowXR.MassInjury
             }
             
 
-            speed = pulse / 60f;
-
             audioSource.pitch = speed;
             audioSource.mute = false;
 
-            pulse = currentInjury.Pulse();
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Pulse"))
             {
+                target = other.transform;
                 currentInjury = other.GetComponent<PulseCollider>().GetInjury();
                 area = other.GetComponent<PulseCollider>().area;
                 if (area == PulseArea.Neck) onListenNeck.Invoke();
@@ -83,11 +93,9 @@ namespace SnowXR.MassInjury
         {
             if (other.CompareTag("Pulse"))
             {
-                if (ReferenceEquals(currentInjury, other.GetComponent<PulseCollider>().GetInjury()))
-                {
-                    currentInjury = null;
-                    active = false;
-                }
+                currentInjury = null;
+                active = false;
+                target = null;
             }
         }
 

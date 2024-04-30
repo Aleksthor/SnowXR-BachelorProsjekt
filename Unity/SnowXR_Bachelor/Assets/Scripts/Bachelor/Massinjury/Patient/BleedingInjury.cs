@@ -398,13 +398,16 @@ namespace SnowXR.MassInjury
         private void CalculateNeededHelp()
         {
             if (dead) return;
-            needTourniquet = bleedingArea is BleedingArea.Arms or BleedingArea.Thighs or BleedingArea.Legs;
+
+            if (bloodLossSeverity > BloodLossSeverity.Minimal)
+            {
+                needTourniquet = bleedingArea is BleedingArea.Arms or BleedingArea.Thighs or BleedingArea.Legs;
+            }
+
             needPressureRelief = breathingStatus == BreathingStatus.LungInjury;
-            needSideLease = !concious || needPressureRelief;
-            needPressure = bloodLossSeverity >= BloodLossSeverity.Moderate;
-            needOpenAirways = !concious || needPressureRelief;
-            
-            needPharyngealTube = !concious && bloodLossML > 2000f;
+            needSideLease = bloodLossSeverity > BloodLossSeverity.Minimal || !concious;
+            needPressure = bloodLossSeverity > BloodLossSeverity.Minimal;
+            needOpenAirways = breathingStatus == BreathingStatus.ClosedAirway;          
         }
 
         private void LooseConciousness()
@@ -412,9 +415,12 @@ namespace SnowXR.MassInjury
             concious = false;
             if (breathingStatus == BreathingStatus.Normal)
             {
-                breathingStatus = BreathingStatus.ClosedAirway;
-                needSideLease = true;
-                needOpenAirways = true;
+                if (RandomBool(0.1f))
+                {
+                    breathingStatus = BreathingStatus.ClosedAirway;
+                    needSideLease = true;
+                    needOpenAirways = true;
+                }
             }
         }
 

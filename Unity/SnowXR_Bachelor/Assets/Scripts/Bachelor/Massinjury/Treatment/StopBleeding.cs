@@ -1,3 +1,4 @@
+using BNG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,17 +9,28 @@ namespace SnowXR.MassInjury
     {
         private Transform currentArea;
         private float timer = 0;
-        
 
         private void Update()
         {
             if (!ReferenceEquals(currentArea, null))
             {
+                if (!currentArea.GetChild(0).GetComponent<Grabbable>().BeingHeld)
+                {
+                    return;
+                }
+
                 timer += Time.deltaTime;
-                if (timer > 4.5f)
+                if (timer > 3.5f)
                 {
                     BleedingSockets sockets = currentArea.GetComponent<BleedingCollider>().GetSockets();
-                    sockets.GetInjury().SetRecievedPressure(true);
+                    BleedingInjury injury = sockets.GetInjury();
+
+                    if (injury.GetBleedingSeverity() > (int)BloodLossSeverity.Moderate)
+                    {
+                        timer = 0f;
+                        return;
+                    }
+                    injury.SetRecievedPressure(true);
                     sockets.RemoveBloodParticles();
                     timer = 0f;
                 }
@@ -34,6 +46,7 @@ namespace SnowXR.MassInjury
             if (other.CompareTag("BleedingArea"))
             {
                 currentArea = other.transform;
+                timer = 0f;
             }
         }
 
@@ -42,11 +55,7 @@ namespace SnowXR.MassInjury
             if (other.CompareTag("BleedingArea"))
             {
                 timer = 0;
-                if (ReferenceEquals(other.transform, currentArea))
-                {
-                    currentArea = null;
-                    timer = 0f;
-                }
+                currentArea = null;
             }
         }
     }

@@ -122,10 +122,8 @@ namespace SnowXR.MassInjury
                 
 
                 if (!ReferenceEquals(patient, null))
-                {
-                    
+                {          
                     patient.GetComponent<BleedingInjury>().OpenedAirways();
-                    patient.GetComponent<GenderComponent>().GetMesh().GetComponent<BleedingSockets>().SetupSideLease();
                 }
             }
         }
