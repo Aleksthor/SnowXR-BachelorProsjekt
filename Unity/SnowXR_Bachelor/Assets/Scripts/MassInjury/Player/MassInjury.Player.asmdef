@@ -1,0 +1,16 @@
+{
+    "name": "SnowXR.MassInjury.Player",
+    "rootNamespace": "SnowXR.MassInjury.Player",
+    "references": [
+        "GUID:cd21840d248905d43b31afe11f235ba0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

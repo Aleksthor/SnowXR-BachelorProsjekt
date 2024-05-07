@@ -1713,7 +1713,7 @@ PrefabInstance:
     - target: {fileID: 8151465203978074556, guid: ce2838b8876f84844b788cb58b853ffe,
         type: 3}
       propertyPath: m_Name
-      value: SideLease
+      value: RecoveryPose
       objectReference: {fileID: 0}
     - target: {fileID: 8151465203978074557, guid: ce2838b8876f84844b788cb58b853ffe,
         type: 3}
@@ -2444,7 +2444,7 @@ MonoBehaviour:
   severeBleedingParticles: {fileID: 1000013355911406, guid: f045ce5bb84ccff40a5522f779ba44a3,
     type: 3}
   openAirways: {fileID: 5752291673886479906}
-  sideLease: {fileID: 8673992924407311531}
+  recoverPose: {fileID: 8673992924407311531}
   neckPulse: {fileID: 211571571650191684}
   rightArmPulse: {fileID: 4130644074280396941}
   leftArmPulse: {fileID: 2492555830964359688}
@@ -2729,11 +2729,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StopBleeding
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914903782648901027, guid: a009595f47a6a8347956f29b0e9a5e96,
-        type: 3}
-      propertyPath: LeftHandIsValid
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

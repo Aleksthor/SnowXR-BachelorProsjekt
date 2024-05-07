@@ -346,8 +346,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6110b5e321672984a8c1b55c9f09499e, type: 3}
   - {fileID: 8300000, guid: 8afc827fc2a18454f9a07365e727fc7e, type: 3}
   - {fileID: 8300000, guid: 1acbe71d4c2cd6b4989f700b25ab0f92, type: 3}
-  numberPatientsMale: []
-  numberPatientsFemale: []
 --- !u!114 &1398155657837514630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,6 +788,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6102899031644670664}
   - component: {fileID: 1510644020486960431}
+  - component: {fileID: 3466204214370008857}
   m_Layer: 16
   m_Name: DialogueCollider
   m_TagString: Agent
@@ -831,9 +830,30 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.08
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &3466204214370008857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5521227365686801352}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.01, y: 1.45, z: 0.88}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7954880764734531155
 GameObject:

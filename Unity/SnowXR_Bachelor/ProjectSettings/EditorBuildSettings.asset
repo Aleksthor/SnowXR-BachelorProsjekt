@@ -24,13 +24,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Bootstrapping/AlwaysNeeded.unity
     guid: f7d3eb9adc57f9546b14876649b8a05f
   - enabled: 1
-    path: Assets/Scenes/Bachelor/TestRoom.unity
+    path: Assets/Scenes/Masseskade/Hovedmeny.unity
     guid: 11bc6561ab95a504fb2e03f00320f740
   - enabled: 1
-    path: Assets/Scenes/Bachelor/MassInury.unity
+    path: Assets/Scenes/Masseskade/MassInury.unity
     guid: 47b1b43e46ac1a54c8ff86617d3bb046
   - enabled: 1
-    path: Assets/Scenes/Bachelor/MassInury Tutorial.unity
+    path: Assets/Scenes/Masseskade/Tutorial (old).unity
     guid: e252d6379e0834148b7144435156ff51
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260,

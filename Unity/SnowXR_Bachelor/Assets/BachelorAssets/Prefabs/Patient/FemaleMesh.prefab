@@ -2643,7 +2643,7 @@ MonoBehaviour:
   severeBleedingParticles: {fileID: 1000013355911406, guid: f045ce5bb84ccff40a5522f779ba44a3,
     type: 3}
   openAirways: {fileID: 7831368018477794516}
-  sideLease: {fileID: 94468884691942311}
+  recoverPose: {fileID: 94468884691942311}
   neckPulse: {fileID: 2907566800782983147}
   rightArmPulse: {fileID: 3991261341874659154}
   leftArmPulse: {fileID: 1155044305248410074}
@@ -3183,7 +3183,7 @@ PrefabInstance:
     - target: {fileID: 8151465203978074556, guid: ce2838b8876f84844b788cb58b853ffe,
         type: 3}
       propertyPath: m_Name
-      value: SideLease
+      value: RecoveryPose
       objectReference: {fileID: 0}
     - target: {fileID: 8151465203978074557, guid: ce2838b8876f84844b788cb58b853ffe,
         type: 3}
