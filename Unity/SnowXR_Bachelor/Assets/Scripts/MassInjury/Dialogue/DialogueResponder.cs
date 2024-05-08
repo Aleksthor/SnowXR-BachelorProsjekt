@@ -22,6 +22,11 @@ namespace SnowXR.MassInjury.Dialogue
             audioSource.clip = clip;
             audioSource.Play();
         }
+
+        public bool Playing()
+        {
+            return audioSource.isPlaying;
+        }
         
         
     }

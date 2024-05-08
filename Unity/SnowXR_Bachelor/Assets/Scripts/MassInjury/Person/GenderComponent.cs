@@ -7,6 +7,7 @@ namespace SnowXR.MassInjury.Person
     public class GenderComponent : MonoBehaviour
     {
         [Header("Gender")]
+        [SerializeField] private bool randomGender = true;
         [SerializeField] Gender gender;
         
         [Header("Spawning Body")] 
@@ -19,7 +20,10 @@ namespace SnowXR.MassInjury.Person
         // Start is called before the first frame update
         void Awake()
         {
-            gender = (Gender)Random.Range(0, 2);
+            if (randomGender) 
+            {
+                gender = (Gender)Random.Range(0, 2);
+            }
             switch (gender)
             {
                 case Gender.Male:

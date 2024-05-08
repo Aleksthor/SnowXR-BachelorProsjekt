@@ -112,6 +112,11 @@ namespace SnowXR.MassInjury
         {
             return spawnedAgents;
         }
+
+        public GameDifficulty Difficulty()
+        {
+            return gameDifficulty;
+        }
     }
 
     

@@ -42,6 +42,7 @@ namespace SnowXR.MassInjury
                     injury.SetRecievedPressure(true);
                     sockets.RemoveBloodParticles();
                     timer = 0f;
+                    Destroy(currentArea.GetChild(0).gameObject);
                 }
             }
             else

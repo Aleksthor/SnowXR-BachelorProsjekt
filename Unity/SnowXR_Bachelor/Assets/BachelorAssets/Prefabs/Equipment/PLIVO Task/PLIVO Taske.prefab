@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1613015334499737676}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.8212657, w: 0.570546}
-  m_LocalPosition: {x: -0.0038, y: 0.1023, z: 0.1167}
+  m_LocalPosition: {x: -0.0038, y: 0.1, z: 0.1167}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,12 +77,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da6f9338ecb9e3468dea09219a00c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tourniquet1: {fileID: 4140664753330263361}
+  pressureRelief1: {fileID: 7774449717749145051}
   tourniquet: {fileID: 3986942021821768063, guid: d772411db7d894b4da03366f93c1e2bd,
     type: 3}
   pressureRelief: {fileID: 3986942021821768063, guid: 76110b08d407dbc488c7f515970d1dce,
     type: 3}
-  tourniquet1: {fileID: 4140664753330263361}
-  pressureRelief1: {fileID: 7774449717749145051}
 --- !u!1 &3333403461661780425
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 3333403461661780425}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5402045, y: 0.45626646, z: 0.5402045, w: 0.45626646}
-  m_LocalPosition: {x: -0.0039, y: 0.1103, z: 0.0214}
+  m_LocalPosition: {x: -0.0039, y: 0.1, z: 0.0214}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []

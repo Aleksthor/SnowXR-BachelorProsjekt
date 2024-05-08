@@ -1665,15 +1665,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17be2abff082a74b9cb633712857938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fader: {fileID: 0}
-  selected: {r: 0.16602883, g: 0.42796463, b: 0.8584906, a: 0.8666667}
-  notSelected: {r: 0.9245283, g: 0.8940014, b: 0.8940014, a: 0.8666667}
   male: {fileID: 1344300980830301225}
   female: {fileID: 8730556765849894189}
   easy: {fileID: 985601844819603467}
   medium: {fileID: 7932950613479305896}
   hard: {fileID: 8279762044559721827}
   exam: {fileID: 2784324461195036725}
+  selected: {r: 0.16602883, g: 0.42796463, b: 0.8584906, a: 0.8666667}
+  notSelected: {r: 0.9245283, g: 0.8940014, b: 0.8940014, a: 0.8666667}
+  fader: {fileID: 0}
 --- !u!82 &5343423985126006447
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1839,8 +1839,8 @@ MonoBehaviour:
   step2Progress: {fileID: 7361452343693028529}
   step3Progress: {fileID: 8425890601157397995}
   step4Progress: {fileID: 322380806967245724}
-  bandInput: 8
-  bandInput2: 4
+  bandInput: 7
+  bandInput2: 3
   settingsInput: 2
   settingsInput2: 6
   doneColor: {r: 0.14357407, g: 0.8584906, b: 0.07694017, a: 0.85882354}
@@ -7025,8 +7025,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Trykk (Y) eller (B) for \xE5 gjemme utstyr\nUtstyret sitter p\xE5 hoftene
-    dine"
+  m_text: "Hold inne (Y) eller (B) for \xE5 gjemme utstyr\nUtstyret sitter p\xE5
+    hoftene dine"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

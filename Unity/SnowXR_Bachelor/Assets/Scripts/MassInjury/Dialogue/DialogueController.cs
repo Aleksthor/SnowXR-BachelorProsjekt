@@ -119,6 +119,7 @@ namespace SnowXR.MassInjury.Dialogue
         public void SetActiveResponder(DialogueResponder responder)
         {
             if (activeResponder == responder) return;
+            if (responder != null) { if (responder.Playing()) return; }
             activeResponder = responder;
 
             playerResponderOptions = new List<Dialogue>();

@@ -1,3 +1,4 @@
+using log4net.Util;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,12 @@ namespace SnowXR.MassInjury.Goap
         public override bool PostPerform()
         {
             beliefes.RemoveState("goToReception");
+
+            Vector3 direction = Random.insideUnitCircle;
+            direction.z = direction.y;
+            direction.y = 0;
+
+            agent.transform.rotation = Quaternion.LookRotation(direction.normalized);
             return true;
         }
     }

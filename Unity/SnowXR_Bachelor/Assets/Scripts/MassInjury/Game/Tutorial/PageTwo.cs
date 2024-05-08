@@ -26,8 +26,8 @@ namespace SnowXR.MassInjury
         [SerializeField] private Transform step4Progress;
 
         
-        [SerializeField] private ControllerBinding bandInput = ControllerBinding.YButtonDown;
-        [SerializeField] private ControllerBinding bandInput2 = ControllerBinding.BButtonDown;
+        [SerializeField] private ControllerBinding bandInput = ControllerBinding.YButton;
+        [SerializeField] private ControllerBinding bandInput2 = ControllerBinding.BButton;
         [SerializeField] private ControllerBinding settingsInput = ControllerBinding.AButtonDown;
         [SerializeField] private ControllerBinding settingsInput2 = ControllerBinding.XButtonDown;
 
@@ -80,7 +80,7 @@ namespace SnowXR.MassInjury
                     }
                     break;
                 case StepProgress.Two:
-                    if (bandInput.GetDown() || bandInput2.GetDown())
+                    if (!bandInput.GetDown() && !bandInput2.GetDown())
                     {
                         step2Text.gameObject.SetActive(false);
                         step3Text.gameObject.SetActive(true);

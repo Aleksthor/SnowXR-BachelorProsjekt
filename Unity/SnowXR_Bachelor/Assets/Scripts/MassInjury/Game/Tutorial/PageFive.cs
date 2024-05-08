@@ -58,7 +58,7 @@ namespace SnowXR.MassInjury
                 openAirways = child.GetComponent<OpenAirways>();
             }
 
-            sideLease = patient.GetComponent<GenderComponent>().GetMesh().transform.Find("SideLease")
+            sideLease = patient.GetComponent<GenderComponent>().GetMesh().transform.Find("RecoveryPose")
                 .GetComponent<SideLease>();
             patient.gameObject.SetActive(false);
         }

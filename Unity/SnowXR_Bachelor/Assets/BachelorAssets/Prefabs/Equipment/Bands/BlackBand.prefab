@@ -321,7 +321,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.015, y: 0.08, z: 0.015}
+  m_Size: {x: 0.01, y: 0.08, z: 0.005}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &922905997818482559
 MonoBehaviour:
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c4ff10098874e468aa31d31b86f67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zone: 3
+  triageZone: 0
   onPickup:
     m_PersistentCalls:
       m_Calls: []

@@ -345,8 +345,8 @@ Transform:
   m_GameObject: {fileID: 1405407220374816365}
   serializedVersion: 2
   m_LocalRotation: {x: -0.004668376, y: -0.0033581462, z: -0.0065652914, w: 0.999962}
-  m_LocalPosition: {x: 0, y: 0.05500006, z: 0}
-  m_LocalScale: {x: 0.10000001, y: 0.01, z: 0.10000001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.10000001, y: 0.1, z: 0.10000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4215648440530785104}
@@ -470,7 +470,7 @@ MonoBehaviour:
   GrabSpeed: 10
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
-  RemoteGrabDistance: 0.3
+  RemoteGrabDistance: 2
   ThrowForceMultiplier: 1
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
@@ -577,7 +577,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1.0000011, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.010944556, y: 0.039811246, z: 0.05242662}
+  m_ConnectedAnchor: {x: -0.0109446, y: 0.03981129, z: 0.052426606}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -630,6 +630,9 @@ MonoBehaviour:
       m_Calls: []
   placeholderPrefab: {fileID: 3728403377237143320, guid: e377aa6beb0adad41a53f4203277a925,
     type: 3}
+  onPinStrap:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1405407220416618150
 GameObject:
   m_ObjectHideFlags: 0

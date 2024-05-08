@@ -188,14 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b99d9b717726264e89179797579ce36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomInjury: 1
-  injuryChance: 0.8
-  headInjuryWeight: 0
-  neckInjuryWeight: 0
-  armInjuryWeight: 30
-  torsoInjuryWeight: 25
-  thighInjuryWeight: 25
-  legsInjuryWeight: 10
   bleedingArea: 0
   bleedingSide: 0
   bloodLossSeverity: 0
@@ -209,17 +201,22 @@ MonoBehaviour:
   recievedTourniquet: 0
   needPressureRelief: 0
   recievedPressureRelief: 0
-  needSideLease: 0
-  recievedSideLease: 0
+  needRecoveryPose: 0
+  recievedRecoveryPose: 0
   needOpenAirways: 0
   recievedOpenAirways: 0
   needPressure: 0
   recievedPressure: 0
   needPharyngealTube: 0
   recievedPharyngealTube: 0
-  concious: 1
-  dead: 0
-  state: 0
+  randomInjury: 1
+  injuryChance: 0.8
+  headInjuryWeight: 0
+  neckInjuryWeight: 0
+  armInjuryWeight: 30
+  torsoInjuryWeight: 25
+  thighInjuryWeight: 25
+  legsInjuryWeight: 10
   onPlaceTourniquet:
     m_PersistentCalls:
       m_Calls: []
@@ -238,6 +235,9 @@ MonoBehaviour:
   onRecieveSideLease:
     m_PersistentCalls:
       m_Calls: []
+  concious: 1
+  dead: 0
+  state: 0
 --- !u!114 &1863918364411759501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,8 +268,46 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     removeOnUse: 1
-    dialogueFemale: {fileID: 8300000, guid: 784f58dc5676b124abc078a78081fb23, type: 3}
+    dialogueFemale: {fileID: 8300000, guid: f9d7615a1aa61894b9ae588a5febae2f, type: 3}
     dialogueMale: {fileID: 8300000, guid: ed6142a7e79479d41bf76890fbfd9830, type: 3}
+  - line: "F\xE5r du puste?"
+    onLineExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7253759555586229351}
+          m_TargetAssemblyTypeName: SnowXR.MassInjury.DialogueFunctions, SnowXR.MassInjury
+          m_MethodName: AskIfCanBreathe
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    removeOnUse: 1
+    dialogueFemale: {fileID: 8300000, guid: cc37ea4f2071ad74191ead82b4af5197, type: 3}
+    dialogueMale: {fileID: 8300000, guid: 39af921135da2594b95ce1d62332b5d7, type: 3}
+  - line: Hvor er du skadet?
+    onLineExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7253759555586229351}
+          m_TargetAssemblyTypeName: SnowXR.MassInjury.DialogueFunctions, SnowXR.MassInjury
+          m_MethodName: AskWhereHurt
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    removeOnUse: 1
+    dialogueFemale: {fileID: 8300000, guid: bb29cd3323adb7344842dc52f4f81e3c, type: 3}
+    dialogueMale: {fileID: 8300000, guid: a9fd6f4a80c19a944b852f4611bf155a, type: 3}
   audioSource: {fileID: 3443433925320659127}
 --- !u!114 &4472949310820511505
 MonoBehaviour:
@@ -283,6 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adf318bb56bdf145bb1bf286b64ac7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomGender: 1
   gender: 0
   malePrefab: {fileID: 3854271592053950140, guid: 0988c5f6fb45ef042b36c9a343fb434b,
     type: 3}
@@ -346,6 +385,28 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6110b5e321672984a8c1b55c9f09499e, type: 3}
   - {fileID: 8300000, guid: 8afc827fc2a18454f9a07365e727fc7e, type: 3}
   - {fileID: 8300000, guid: 1acbe71d4c2cd6b4989f700b25ab0f92, type: 3}
+  canBreatheMale:
+  - {fileID: 8300000, guid: 3bdd666b670557a49b9b237978a7cb67, type: 3}
+  canBreatheFemale:
+  - {fileID: 8300000, guid: ef3b73c5962b2fc408a73660cc494ff1, type: 3}
+  cannotBreatheMale:
+  - {fileID: 8300000, guid: ab5df3dd3fb355a4db87679539e2a31c, type: 3}
+  cannotBreatheFemale:
+  - {fileID: 8300000, guid: 0562627d3ebc2e94a993ac7a95da34dd, type: 3}
+  whereHurtMale:
+  - {fileID: 8300000, guid: d0d5c09e226c9ba45994ca03e100a956, type: 3}
+  - {fileID: 8300000, guid: 1388b093d153ffa4ca5f6d71097db390, type: 3}
+  - {fileID: 8300000, guid: b13a865eee455b846b32338eced8faf8, type: 3}
+  - {fileID: 8300000, guid: 306d3d9ba9fbe574ea00fc0abf7e6901, type: 3}
+  - {fileID: 8300000, guid: 5c09f9e6e4deed9408627f94271892c3, type: 3}
+  - {fileID: 8300000, guid: e95b5d600d283384a94f8e0199cb798a, type: 3}
+  whereHurtFemale:
+  - {fileID: 8300000, guid: b2598c6b52775dc4db59a751ff3d1947, type: 3}
+  - {fileID: 8300000, guid: 0e9b13a17db53d643801802913ec0ccb, type: 3}
+  - {fileID: 8300000, guid: f49f2cfacdec6714eb09b963a92bc687, type: 3}
+  - {fileID: 8300000, guid: 8b2985d55a07dfa40b7339beb02c89d8, type: 3}
+  - {fileID: 8300000, guid: 565f2e88ca6daf745b1ccfc68ca8a579, type: 3}
+  - {fileID: 8300000, guid: f67e2da837d77104a90961cb67d3504a, type: 3}
 --- !u!114 &1398155657837514630
 MonoBehaviour:
   m_ObjectHideFlags: 0
