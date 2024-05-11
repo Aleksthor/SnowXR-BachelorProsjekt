@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SnowXR.MassInjury
 {
@@ -30,6 +31,29 @@ namespace SnowXR.MassInjury
             // Get all the treamentResults
             // This is for the result UI
             treatmentResults = new TreatmentResult(injury);
+
+            bool wrong = false;
+            for (int i = 0; i < treatmentResults.treatments.Count; i++)
+            {
+                switch (treatmentResults.results[i])
+                {
+                    case 0: // Correct                      
+                        break;
+                    case 1: // Wrong
+                        transform.Find("Correct").gameObject.SetActive(false);
+                        transform.Find("Wrong").GetComponent<Image>().color = Color.red;
+                        wrong = true;
+                        break;
+                    case 2: // Unessacary
+                        if (!wrong)
+                        {
+                            transform.Find("Correct").gameObject.SetActive(false);
+                            transform.Find("Wrong").GetComponent<Image>().color = Color.yellow;
+                        }
+                        break;
+                }
+
+            }
         }
 
         // Click on the patient to show details in result UI
@@ -58,13 +82,31 @@ namespace SnowXR.MassInjury
                 Destroy(t.gameObject);
             }
             // Spawn this patients treament UI elements
+            bool wrong = false;
             for (int i = 0; i < treatmentResults.treatments.Count; i++)
             {
                 GameObject go = Instantiate(treatmentUI, treatments);
-                go.GetComponentInChildren<TextMeshProUGUI>().text = treatmentResults.treatments[i];
-                if (!treatmentResults.results[i])
+                go.GetComponentInChildren<TextMeshProUGUI>().text = treatmentResults.treatments[i];             
+                switch (treatmentResults.results[i])
                 {
-                    go.transform.Find("Correct").gameObject.SetActive(false);
+                    case 0: // Correct                      
+                        break;
+                    case 1: // Wrong
+                        go.transform.Find("Correct").gameObject.SetActive(false);
+                        go.transform.Find("Wrong").GetComponent<Image>().color = Color.red;
+                        wrong = true;
+                        break;
+                    case 2: // Unessacary
+                        if (!wrong)
+                        {
+                            go.transform.Find("Correct").gameObject.SetActive(false);
+                            go.transform.Find("Wrong").GetComponent<Image>().color = Color.yellow;
+                        }
+                        break;
+                    case 3:
+                        Destroy(go);
+                        break;
+
                 }
 
             }

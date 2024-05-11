@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using SnowXR.MassInjury.Player;
+using SnowXR.MassInjury.Person;
 
 namespace SnowXR.MassInjury
 {
@@ -17,8 +18,10 @@ namespace SnowXR.MassInjury
 
         private NavMeshAgent agent;
         private AudioSource source;
+        private Animator animator;
         private Vector3 startPos;
         private bool played = false;
+        private float timer = 0f;
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -28,6 +31,9 @@ namespace SnowXR.MassInjury
         private void Start()
         {
             StartCoroutine(GoToPlayer());
+            animator = GetComponent<GenderComponent>().GetMesh().GetComponent<Animator>();
+            animator.SetBool("canStand", true);
+            animator.SetBool("Concious", true);
         }
 
         IEnumerator GoToPlayer()
@@ -45,6 +51,7 @@ namespace SnowXR.MassInjury
         // Update is called once per frame
         void Update()
         {
+            animator.SetBool("walking", agent.velocity.magnitude > 0f);
             if (source.clip != null)
             {
                 if (source.clip.length < source.time + 0.2f)
@@ -56,6 +63,13 @@ namespace SnowXR.MassInjury
 
             if (agent.hasPath && !played && !source.isPlaying)
             {
+                timer += Time.deltaTime;
+                if (timer > 7.5f)
+                {
+                    agent.SetDestination(startPos);
+                    return;
+                }
+
                 if (Vector3.Distance(playerEye.position, agent.destination) > 1.5f)
                 {
                     agent.SetDestination(FindDestination());

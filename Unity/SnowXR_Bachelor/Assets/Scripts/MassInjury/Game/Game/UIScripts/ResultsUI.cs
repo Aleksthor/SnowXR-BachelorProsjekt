@@ -82,9 +82,15 @@ namespace SnowXR.MassInjury
         {
             List<GameObject> patients = SpawnManager.instance.GetPatients();
             patients = patients.OrderBy(p => (int)p.GetComponent<BleedingInjury>().CorrectZone()).ToList();
-           
 
-            
+            Material mapMaterial = mapBackground.material;
+            List<int> roomScores = ScoringSystem.instance.RoomScores(patients);
+            if (roomScores[0] != 0) mapMaterial.SetFloat("_SE", roomScores[0]);
+            if (roomScores[4] != 0) mapMaterial.SetFloat("_SW", roomScores[4]);
+            if (roomScores[1] != 0) mapMaterial.SetFloat("_NE", roomScores[1]);
+            if (roomScores[2] != 0) mapMaterial.SetFloat("_NW", roomScores[2]);
+            if (roomScores[3] != 0) mapMaterial.SetFloat("_Middle", roomScores[3]);
+
             foreach (var go in patients)
             {
                 bool next = false;
@@ -124,9 +130,7 @@ namespace SnowXR.MassInjury
             zoneScore.text = ScoringSystem.instance.ZoneScore(patients).ToString();
             treatmentScore.text = ScoringSystem.instance.TreatmentScore(patients).ToString();
             orderScore.text = ScoringSystem.instance.OrderScore(patients).ToString();
-
-
-            Material mapMaterial = mapBackground.material;                    
+                   
 
 
             SpawnPatientsOnMap();
@@ -185,34 +189,7 @@ namespace SnowXR.MassInjury
                 p.transform.Find("Body").GetComponent<Image>().sprite = injury.GetGenderComponent().GetGender() == Gender.Male ? male : female;
                 p.transform.Find("Body").GetComponent<Image>().color = injury.GuessedZone() == injury.CorrectZone() ? correctGuess : wrongGuess;
                 p.transform.Find("Band").GetComponent<Image>().color = GetColor(injury.GuessedZone());
-                p.GetComponent<MapPatientUI>().Setup(injury, zoneReasoningParent, treatmentParent);
-                bool checkmark = true;
-
-                if (injury.NeedOpenAirways() && !injury.RecievedOpenAirways())
-                {
-                    checkmark = false;
-                }
-                if (injury.NeedPressure() && !injury.RecievedPressure())
-                {
-                    checkmark = false;
-                }
-                if (injury.NeedPressureRelief() && !injury.RecievedPressureRelief())
-                {
-                    checkmark = false;
-                }
-                if (injury.NeedRecoveryPose() && !injury.RecievedRecoveryPose())
-                {
-                    checkmark = false;
-                }
-                if (injury.NeedTourniquet() && !injury.RecievedTourniquet())
-                {
-                    checkmark = false;
-                }
-
-                if (!checkmark)
-                {
-                    p.transform.Find("Checkmark").gameObject.SetActive(false);
-                }
+                p.GetComponent<MapPatientUI>().Setup(injury, zoneReasoningParent, treatmentParent);             
 
             }
 

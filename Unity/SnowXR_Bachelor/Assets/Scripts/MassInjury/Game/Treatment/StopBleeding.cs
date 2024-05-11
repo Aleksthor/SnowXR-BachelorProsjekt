@@ -16,6 +16,8 @@ namespace SnowXR.MassInjury
             if (!ReferenceEquals(currentArea, null))
             {
                 BleedingSockets sockets = currentArea.GetComponent<BleedingCollider>().GetSockets();
+                if (currentArea.childCount == 0) return;
+
                 if (!currentArea.GetChild(0).GetComponent<Grabbable>().BeingHeld)
                 {
                     foreach(Transform child in currentParticles.transform)

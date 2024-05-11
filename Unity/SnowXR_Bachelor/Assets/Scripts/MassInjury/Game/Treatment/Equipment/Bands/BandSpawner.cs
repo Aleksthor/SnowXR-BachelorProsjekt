@@ -26,16 +26,6 @@ namespace SnowXR.MassInjury
             {
                 SpawnNewBand();
             }
-
-            foreach (Transform b in bandParent.transform)
-            {
-                BandPlacement bp = b.GetComponent<BandPlacement>();
-                if (bp.Removed() && !bp.Grabbing())
-                {
-                    bp.transform.SetParent(null);
-                    bp.GetComponent<Rigidbody>().isKinematic = false;
-                }
-            }
         }
 
         private void SpawnNewBand()

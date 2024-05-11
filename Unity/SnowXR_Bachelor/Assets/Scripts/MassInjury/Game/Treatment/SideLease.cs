@@ -68,7 +68,7 @@ namespace SnowXR.MassInjury
 
 
             UpdateAnimations();
-            if (EventStep3AProcedureCompleted != null && remap(currentPercent, 100, 40, 100, 0) < 7f) // if step completed, invoke the event
+            if (EventStep3AProcedureCompleted != null && remap(currentPercent, 100, 40, 100, 0) < 15f) // if step completed, invoke the event
             {
                 //sets the current percent to 0 to ensure the pose animation gets played unitl the end
                 currentPercent = 0f;

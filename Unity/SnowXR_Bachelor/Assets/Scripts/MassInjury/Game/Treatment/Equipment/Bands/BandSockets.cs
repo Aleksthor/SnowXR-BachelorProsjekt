@@ -36,7 +36,7 @@ namespace SnowXR.MassInjury
                     greenRight = Vector3.Distance(spawnedBandRight.transform.position, bandTransform.position) < 0.2f;
                     if (greenRight != lastGreenRight)
                     {
-                        ChangePharyngealTube(greenRight, rightBicepsParent, Comparative.Right);
+                        ChangeBand(greenRight, rightBicepsParent, Comparative.Right);
                         lastGreenRight = greenRight;
                     }
                 }
@@ -45,7 +45,7 @@ namespace SnowXR.MassInjury
                     greenLeft = Vector3.Distance(spawnedBandLeft.transform.position, bandTransform.position) < 0.2f;
                     if (greenLeft != lastGreenLeft)
                     {
-                        ChangePharyngealTube(greenLeft, leftBicepsParent, Comparative.Left);
+                        ChangeBand(greenLeft, leftBicepsParent, Comparative.Left);
                         lastGreenLeft = greenLeft;
                     }
                 }
@@ -109,7 +109,7 @@ namespace SnowXR.MassInjury
         }
         
         
-        private void ChangePharyngealTube(bool check, Transform checking, Comparative side)
+        private void ChangeBand(bool check, Transform checking, Comparative side)
         {
             if (check)
             {

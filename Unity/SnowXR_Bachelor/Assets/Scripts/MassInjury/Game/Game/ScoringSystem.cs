@@ -26,6 +26,7 @@ namespace SnowXR.MassInjury
         [SerializeField] private float pressureDone = 30;
         [SerializeField] private float tourniquetDone = 60;
         [SerializeField] private float pressureReliefDone = 70;
+        [SerializeField] private float bandageDone = 40;
 
         // Scores for not done treatments
         [Header("Treatment Not Done Scores ( / num Patients)")]
@@ -34,6 +35,7 @@ namespace SnowXR.MassInjury
         [SerializeField] private float pressureNotDone = -40;
         [SerializeField] private float tourniquetNotDone = -50;
         [SerializeField] private float pressureReliefNotDone = -60;
+        [SerializeField] private float bandageNotDone = -40;
 
         // Base score if dont need treatment
         [Header("Treatment Base Scores ( / num Patients)")]
@@ -42,6 +44,16 @@ namespace SnowXR.MassInjury
         [SerializeField] private float pressureBase = 25;
         [SerializeField] private float tourniquetBase = 25;
         [SerializeField] private float pressureReliefBase = 25;
+        [SerializeField] private float bandageBase = 25;
+
+        // Base score if unnessacary treatment
+        [Header("Treatment Base Scores ( / num Patients)")]
+        [SerializeField] private float openAirwaysU = -30;
+        [SerializeField] private float sideLeaseU = -30;
+        [SerializeField] private float pressureU = -30;
+        [SerializeField] private float tourniquetU = -30;
+        [SerializeField] private float pressureReliefU = -30;
+        [SerializeField] private float bandageU = -30;
 
         // Score on order too early
         [Header("Order Too Early Scores ( / num Patients)")]
@@ -145,7 +157,14 @@ namespace SnowXR.MassInjury
                 }
                 else
                 {
-                    score += Mathf.FloorToInt(openAirwaysBase / patients.Count);
+                    if (injury.RecievedOpenAirways())
+                    {
+                        score += Mathf.FloorToInt(openAirwaysU / patients.Count);
+                    }
+                    else
+                    {
+                        score += Mathf.FloorToInt(openAirwaysBase / patients.Count);
+                    }
                 }
 
                 if (injury.NeedRecoveryPose())
@@ -161,7 +180,14 @@ namespace SnowXR.MassInjury
                 }
                 else
                 {
-                    score += Mathf.FloorToInt(sideLeaseBase / patients.Count);
+                    if (injury.RecievedRecoveryPose())
+                    {
+                        score += Mathf.FloorToInt(sideLeaseU / patients.Count);
+                    }
+                    else
+                    {
+                        score += Mathf.FloorToInt(sideLeaseBase / patients.Count);
+                    }
                 }
 
                 if (injury.NeedPressure())
@@ -177,7 +203,14 @@ namespace SnowXR.MassInjury
                 }
                 else
                 {
-                    score += Mathf.FloorToInt(pressureBase / patients.Count);
+                    if(injury.RecievedPressure())
+                    {
+                        score += Mathf.FloorToInt(pressureU / patients.Count);
+                    }
+                    else
+                    {
+                        score += Mathf.FloorToInt(pressureBase / patients.Count);
+                    }
                 }
 
                 if (injury.NeedTourniquet())
@@ -193,7 +226,14 @@ namespace SnowXR.MassInjury
                 }
                 else
                 {
-                    score += Mathf.FloorToInt(tourniquetBase / patients.Count);
+                    if (injury.RecievedTourniquet())
+                    {
+                        score += Mathf.FloorToInt(tourniquetU / patients.Count);
+                    }
+                    else
+                    {
+                        score += Mathf.FloorToInt(tourniquetBase / patients.Count);
+                    }
                 }
 
                 if (injury.NeedPressureRelief())
@@ -209,9 +249,37 @@ namespace SnowXR.MassInjury
                 }
                 else
                 {
-                    score += Mathf.FloorToInt(pressureReliefBase / patients.Count);
+                    if (injury.RecievedPressureRelief())
+                    {
+                        score += Mathf.FloorToInt(pressureReliefU / patients.Count);
+                    }
+                    else
+                    {
+                        score += Mathf.FloorToInt(pressureReliefBase / patients.Count);
+                    }
                 }
-
+                if (injury.NeedBandage())
+                {
+                    if (injury.RecievedBandage())
+                    {
+                        score += Mathf.FloorToInt(bandageDone / patients.Count);
+                    }
+                    else
+                    {
+                        score += Mathf.FloorToInt(bandageNotDone / patients.Count);
+                    }
+                }
+                else
+                {
+                    if (injury.RecievedBandage())
+                    {
+                        score += Mathf.FloorToInt(bandageU / patients.Count);
+                    }
+                    else
+                    {
+                        score += Mathf.FloorToInt(bandageBase / patients.Count);
+                    }
+                }
             }
 
             return Mathf.Clamp(score, 1, 230);
@@ -348,6 +416,105 @@ namespace SnowXR.MassInjury
                 }
             }
             return Mathf.Clamp(score + 40, 1, 230);
+        }
+
+        public List<int> RoomScores(List<GameObject> patients)
+        {
+            List<int> scores = new List<int>();
+
+            int maxRoom = 0;
+            Dictionary<int, List<BleedingInjury>> rooms = new Dictionary<int, List<BleedingInjury>>();
+
+            for(int i = 0; i < 5; i++)
+            {
+                rooms.Add(i, new List<BleedingInjury>());
+                scores.Add(0);
+            }
+
+            foreach (GameObject patient in patients)
+            {
+                BleedingInjury injury = patient.GetComponent<BleedingInjury>();
+
+                if (rooms.ContainsKey(injury.GetRoom()))
+                {
+                    rooms[injury.GetRoom()].Add(injury);
+                }
+                else
+                {
+                    rooms.Add(patient.GetComponent<BleedingInjury>().GetRoom(), new List<BleedingInjury>());
+                    rooms[injury.GetRoom()].Add(injury);
+                }
+
+                if (injury.GetRoom() > maxRoom)
+                {
+                    for (int i = 0; i < injury.GetRoom(); i++)
+                    {
+                        if (!rooms.ContainsKey(i))
+                        {
+                            rooms.Add(i, new List<BleedingInjury>());
+                        }
+                    }
+                    maxRoom = injury.GetRoom();
+                }
+            }
+
+
+            for (int i = 0; i <= 4; i++)
+            {
+                int score = 0;
+                rooms[i] = rooms[i].OrderBy(p => p.GetOrder()).ToList();
+
+                for (int j = 0; j < rooms[i].Count; j++)
+                {
+                    if (rooms[i][j] == null) continue;
+                    BleedingInjury injury = rooms[i][j];
+                    scores[i] += 1;
+
+                    switch ((int)injury.CorrectZone() - (int)injury.GuessedZone())
+                    {
+                        case 0:
+                            score += Mathf.FloorToInt(correctZone / rooms[i].Count);
+                            break;
+                        case 1:
+                            score += Mathf.FloorToInt(wrongZoneONE / rooms[i].Count);
+                            break;
+                        case 2:
+                            score += Mathf.FloorToInt(wrongZoneTWO / rooms[i].Count);
+                            break;
+                        case 3:
+                            score += Mathf.FloorToInt(wrongZoneTHREE / rooms[i].Count);
+                            break;
+                        case -1:
+                            score += Mathf.FloorToInt(wrongZoneNONE / rooms[i].Count);
+                            break;
+                        case -2:
+                            score += Mathf.FloorToInt(wrongZoneNTWO / rooms[i].Count);
+                            break;
+                        case -3:
+                            score += Mathf.FloorToInt(wrongZoneNTHREE / rooms[i].Count);
+                            break;
+                    }
+
+
+
+                    if (injury.GetInspectionTime() < 20f)
+                    {
+                        score += 7;
+                    }
+                    else if (injury.GetInspectionTime() < 30f)
+                    {
+                        score += 5;
+                    }
+
+
+
+                }
+                scores[i] += score;
+            }
+
+
+
+            return scores;
         }
 
         public int GetOrder()

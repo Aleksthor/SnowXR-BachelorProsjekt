@@ -54,6 +54,9 @@ namespace SnowXR.MassInjury
         // Pressure
         [SerializeField] private bool needPressure = false;
         [SerializeField] private bool recievedPressure = false;
+        // Bandage
+        [SerializeField] private bool needBandage = false;
+        [SerializeField] private bool recievedBandage = false;
         // Pharyngeal Tube
         [SerializeField] private bool needPharyngealTube = false;
         [SerializeField] private bool recievedPharyngealTube = false;
@@ -399,10 +402,10 @@ namespace SnowXR.MassInjury
             {
                 needTourniquet = bleedingArea is BleedingArea.Arms or BleedingArea.Thighs or BleedingArea.Legs;
             }
-
+            needBandage = bloodLossSeverity > BloodLossSeverity.None && bloodLossSeverity < BloodLossSeverity.Severe;
             needPressureRelief = breathingStatus == BreathingStatus.LungInjury;
             needRecoveryPose = bloodLossSeverity > BloodLossSeverity.Minimal || !concious;
-            needPressure = bloodLossSeverity > BloodLossSeverity.Minimal;
+            needPressure = bloodLossSeverity >= BloodLossSeverity.Minimal && bloodLossSeverity < BloodLossSeverity.Severe;
             needOpenAirways = breathingStatus == BreathingStatus.ClosedAirway;
         }
         private void ZoneReasoning()
@@ -685,7 +688,10 @@ namespace SnowXR.MassInjury
         {
             return needOpenAirways;
         }
-
+        public bool NeedBandage()
+        {
+            return needBandage;
+        }
         public bool RecievedTourniquet()
         {
             return recievedTourniquet;
@@ -710,7 +716,10 @@ namespace SnowXR.MassInjury
         {
             return recievedOpenAirways;
         }
-
+        public bool RecievedBandage()
+        {
+            return recievedBandage;
+        }
         private double FitPolyPulseToBloodLoss(float bloodLoss)
         {
             return (0.000000007f * bloodLoss * bloodLoss * bloodLoss) - (0.00003f * bloodLoss * bloodLoss) +
@@ -761,10 +770,10 @@ namespace SnowXR.MassInjury
             if (breathingStatus == BreathingStatus.ClosedAirway)
             {
                 breathingStatus = BreathingStatus.Normal;
+                recievedOpenAirways = true;
+                onRecieveOpenAirways.Invoke();
             }
-            
-            recievedOpenAirways = true;
-            onRecieveOpenAirways.Invoke();
+           
         }
 
         #endregion
@@ -772,16 +781,15 @@ namespace SnowXR.MassInjury
         #region Setters
         public void Inspect(Zone guess)
         {
+            guessedZone = guess;
+            inspectionDone = true;
+            ZoneReasoning();
+            inspectionTime = timer;
+            onPlaceBand.Invoke();
             if (ScoringSystem.instance)
             {
                 order = ScoringSystem.instance.GetOrder();
             }
-            guessedZone = guess;
-            inspectionDone = true;
-            agent.beliefes.SetState("cleared", 1);
-            ZoneReasoning();
-            inspectionTime = timer;
-            onPlaceBand.Invoke();
         }
 
         public void SetRecievedTourniquet(bool input)
@@ -790,10 +798,8 @@ namespace SnowXR.MassInjury
             if (recievedTourniquet)
             {
                 genderComponent.GetMesh().GetComponent<BleedingSockets>().RemoveBloodParticles();
-                recievedPressure = true;
                 onPlaceTourniquet.Invoke();
-            }
-            
+            }     
         }
 
         public void SetRecievedPharyngealTube(bool input)
@@ -801,7 +807,11 @@ namespace SnowXR.MassInjury
             recievedPharyngealTube = input;
             
         }
-        
+        public void SetRecievedBandage(bool input)
+        {
+            recievedBandage = input;
+
+        }
         public void SetRecievedRecoveryPose(bool input)
         {
             recievedRecoveryPose = input;

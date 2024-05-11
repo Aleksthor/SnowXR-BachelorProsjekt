@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
+using UnityEngine.Rendering.Universal;
 
 namespace SnowXR.MassInjury
 {
@@ -38,6 +37,11 @@ namespace SnowXR.MassInjury
         [SerializeField] public GameObject minimalBleedingParticles;
         [SerializeField] public GameObject moderateBleedingParticles;
         [SerializeField] public GameObject severeBleedingParticles;
+
+        [Header("Decal Materials")]
+        [SerializeField] public List<Material> minimalDecals;
+        [SerializeField] public List<Material> moderateDecals;
+        [SerializeField] public List<Material> severeDecals;
 
         [Header("TreatmentParents")]
         [SerializeField] public Transform openAirways;
@@ -96,12 +100,15 @@ namespace SnowXR.MassInjury
                     {
                         case 1:
                             spawnedParticles = Instantiate(minimalBleedingParticles, headBleedingParent);
+                            headDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];
                             break;
                         case 2:
                             spawnedParticles = Instantiate(moderateBleedingParticles, headBleedingParent);
+                            headDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
                             break;
                         case 3:
                             spawnedParticles = Instantiate(severeBleedingParticles, headBleedingParent);
+                            headDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
                             break;
                         default:
                             break;
@@ -115,12 +122,15 @@ namespace SnowXR.MassInjury
                     {
                         case 1:
                             spawnedParticles = Instantiate(minimalBleedingParticles, neckBleedingParent);
+                            neckDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];
                             break;
                         case 2:
                             spawnedParticles = Instantiate(moderateBleedingParticles, neckBleedingParent);
+                            neckDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
                             break;
                         case 3:
                             spawnedParticles = Instantiate(severeBleedingParticles, neckBleedingParent);
+                            neckDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
                             break;
                         default:
                             break;
@@ -134,12 +144,36 @@ namespace SnowXR.MassInjury
                     {
                         case 1:
                             spawnedParticles = Instantiate(minimalBleedingParticles, injury.Side() == Comparative.Left ? leftArmBleedingParent : rightArmBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftArmDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];
+                            }
+                            else
+                            {
+                                rightArmDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];
+                            }
                             break;
                         case 2:
                             spawnedParticles = Instantiate(moderateBleedingParticles, injury.Side() == Comparative.Left ? leftArmBleedingParent : rightArmBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftArmDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
+                            }
+                            else
+                            {
+                                rightArmDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
+                            }
                             break;
                         case 3:
                             spawnedParticles = Instantiate(severeBleedingParticles, injury.Side() == Comparative.Left ? leftArmBleedingParent : rightArmBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftArmDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
+                            }
+                            else
+                            {
+                                rightArmDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
+                            }
                             break;
                         default:
                             break;
@@ -163,12 +197,15 @@ namespace SnowXR.MassInjury
                     {
                         case 1:
                             spawnedParticles = Instantiate(minimalBleedingParticles, torsoBleedingParent);
+                            torsoDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];                          
                             break;
                         case 2:
                             spawnedParticles = Instantiate(moderateBleedingParticles, torsoBleedingParent);
+                            torsoDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
                             break;
                         case 3:
                             spawnedParticles = Instantiate(severeBleedingParticles, torsoBleedingParent);
+                            torsoDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
                             break;
                         default:
                             break;
@@ -182,12 +219,36 @@ namespace SnowXR.MassInjury
                     {
                         case 1:
                             spawnedParticles = Instantiate(minimalBleedingParticles, injury.Side() == Comparative.Left ? leftThighBleedingParent : rightThighBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftThighDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];
+                            }
+                            else
+                            {
+                                rightThighDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];
+                            }
                             break;
                         case 2:
                             spawnedParticles = Instantiate(moderateBleedingParticles, injury.Side() == Comparative.Left ? leftThighBleedingParent : rightThighBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftThighDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
+                            }
+                            else
+                            {
+                                rightThighDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
+                            }
                             break;
                         case 3:
                             spawnedParticles = Instantiate(severeBleedingParticles, injury.Side() == Comparative.Left ? leftThighBleedingParent : rightThighBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftThighDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
+                            }
+                            else
+                            {
+                                rightThighDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
+                            }
                             break;
                         default:
                             break;
@@ -210,12 +271,36 @@ namespace SnowXR.MassInjury
                     {
                         case 1:
                             spawnedParticles = Instantiate(minimalBleedingParticles, injury.Side() == Comparative.Left ? leftLegBleedingParent : rightLegBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftLegDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];
+                            }
+                            else
+                            {
+                                rightLegDecalParent.GetComponentInChildren<DecalProjector>().material = minimalDecals[Random.Range(0, minimalDecals.Count)];
+                            }
                             break;
                         case 2:
                             spawnedParticles =  Instantiate(moderateBleedingParticles, injury.Side() == Comparative.Left ? leftLegBleedingParent : rightLegBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftLegDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
+                            }
+                            else
+                            {
+                                rightLegDecalParent.GetComponentInChildren<DecalProjector>().material = moderateDecals[Random.Range(0, moderateDecals.Count)];
+                            }
                             break;
                         case 3:
                             spawnedParticles = Instantiate(severeBleedingParticles, injury.Side() == Comparative.Left ? leftLegBleedingParent : rightLegBleedingParent);
+                            if (injury.Side() == Comparative.Left)
+                            {
+                                leftLegDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
+                            }
+                            else
+                            {
+                                rightLegDecalParent.GetComponentInChildren<DecalProjector>().material = severeDecals[Random.Range(0, severeDecals.Count)];
+                            }
                             break;
                         default:
                             break;
@@ -294,14 +379,50 @@ namespace SnowXR.MassInjury
             {
                 Destroy(spawnedParticles);
                 headBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach(Transform child in headBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
                 neckBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach (Transform child in neckBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
                 leftArmBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach (Transform child in leftArmBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
                 rightArmBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach (Transform child in rightArmBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
                 torsoBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach (Transform child in torsoBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
                 leftThighBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach (Transform child in leftThighBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
                 rightThighBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach (Transform child in rightThighBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
                 leftLegBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach (Transform child in leftLegBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
                 rightLegBleedingParent.GetComponent<SphereCollider>().enabled = false;
+                foreach (Transform child in rightLegBleedingParent)
+                {
+                    Destroy(child.gameObject);
+                }
             }
                 
         }

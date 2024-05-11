@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1156617083716478298}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0128, y: 0.0038, z: -0.066}
+  m_LocalPosition: {x: 0.0128, y: 0.0038, z: -0.022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPoseType: 1
-  SelectedHandPose: {fileID: 11400000, guid: bdfd0c22b697f3a4fb37009f2f0cbd5a, type: 2}
+  SelectedHandPose: {fileID: 11400000, guid: cd1585b0cd5a39741b0e61743cc4fd76, type: 2}
   HandPose: 0
   LeftHandIsValid: 0
   RightHandIsValid: 1
@@ -115,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 6441326037846638333}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.024966275, z: -0, w: 0.9996883}
-  m_LocalPosition: {x: -0.0113, y: -0.007, z: -0.04791632}
+  m_LocalPosition: {x: -0.0113, y: -0.007, z: -0.0098}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPoseType: 1
-  SelectedHandPose: {fileID: 11400000, guid: bdfd0c22b697f3a4fb37009f2f0cbd5a, type: 2}
+  SelectedHandPose: {fileID: 11400000, guid: cd1585b0cd5a39741b0e61743cc4fd76, type: 2}
   HandPose: 0
   LeftHandIsValid: 1
   RightHandIsValid: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c4ff10098874e468aa31d31b86f67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triageZone: 0
+  triageZone: 3
   onPickup:
     m_PersistentCalls:
       m_Calls: []
@@ -662,6 +662,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Band
       objectReference: {fileID: 0}
+    - target: {fileID: 4536339588282918463, guid: 775f76ae21332314f9c6686d242ca8f4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5971114052068770121, guid: 775f76ae21332314f9c6686d242ca8f4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -712,11 +717,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6129804303730111144, guid: 775f76ae21332314f9c6686d242ca8f4,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: efd04d1e454492a4b861ca9ef2944f35, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

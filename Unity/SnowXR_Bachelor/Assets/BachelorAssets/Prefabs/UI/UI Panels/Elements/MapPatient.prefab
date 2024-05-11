@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 7385340425000549498}
   - component: {fileID: 8129620096688346748}
   m_Layer: 5
-  m_Name: Cross
+  m_Name: Wrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 2829591354141536781}
   - component: {fileID: 5898964938106473339}
   m_Layer: 5
-  m_Name: Checkmark
+  m_Name: Correct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

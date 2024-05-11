@@ -39,7 +39,7 @@ namespace SnowXR.MassInjury
             events.onRelease.RemoveAllListeners();
         }
 
-        public bool Removed()
+        public void Update()
         {
             if (!done)
             {
@@ -47,7 +47,6 @@ namespace SnowXR.MassInjury
                 if (done)
                     transform.SetParent(null);
             }
-            return done;
         }
         public bool Grabbing()
         {

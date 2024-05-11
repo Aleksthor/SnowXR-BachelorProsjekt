@@ -144,11 +144,25 @@ namespace SnowXR.MassInjury
             zoneReasoningParent = zoneReason;
 
             // Remove the correct checkmark if we've missed a treatment
+            bool wrong = false;
             foreach (var check in treatments.results)
             {
-                if (!check)
+                switch(check)
                 {
-                    transform.Find("Correct").gameObject.SetActive(false);
+                    case 0: // Correct                      
+                        break;
+                    case 1: // Wrong
+                        transform.Find("Correct").gameObject.SetActive(false);
+                        transform.Find("Wrong").GetComponent<Image>().color = Color.red;
+                        wrong = true;
+                        break;
+                    case 2: // Unessacary
+                        if (!wrong)
+                        {
+                            transform.Find("Correct").gameObject.SetActive(false);
+                            transform.Find("Wrong").GetComponent<Image>().color = yellowZone;
+                        }
+                        break;
                 }
             }
         }
@@ -226,15 +240,32 @@ namespace SnowXR.MassInjury
                 Destroy(t.gameObject);               
             }
             // Spawn this patients treament UI elements
+            bool wrong = false;
             for (int i = 0; i < treatments.treatments.Count; i++)
             {   
                 GameObject go = Instantiate(treatmentPrefab, treatmentParent);
                 go.GetComponentInChildren<TextMeshProUGUI>().text = treatments.treatments[i];
-                if (!treatments.results[i])
+                switch (treatments.results[i])
                 {
-                    go.transform.Find("Correct").gameObject.SetActive(false);
+                    case 0: // Correct                      
+                        break;
+                    case 1: // Wrong
+                        transform.Find("Correct").gameObject.SetActive(false);
+                        transform.Find("Wrong").GetComponent<Image>().color = Color.red;
+                        wrong = true;
+                        break;
+                    case 2: // Unessacary
+                        if (!wrong)
+                        {
+                            transform.Find("Correct").gameObject.SetActive(false);
+                            transform.Find("Wrong").GetComponent<Image>().color = Color.yellow;
+                        }
+                        break;
+                    case 3:
+                        Destroy(go);
+                        break;
                 }
-                
+
             }
         }
 
@@ -247,37 +278,154 @@ namespace SnowXR.MassInjury
     public struct TreatmentResult
     {
         public List<string> treatments;
-        public List<bool> results;
+        public List<int> results;
 
         public TreatmentResult(BleedingInjury injury)
         {
             treatments = new List<string>();
-            results = new List<bool>();
+            results = new List<int>();
 
+            treatments.Add("Tourniquet");
             if (injury.NeedTourniquet())
             {
-                treatments.Add("Tourniquet");
-                results.Add(injury.RecievedTourniquet());
+                if (injury.RecievedTourniquet())
+                {
+                    results.Add(0);
+                }
+                else
+                {
+                    results.Add(1);
+                }
             }
+            else
+            {
+                if (injury.RecievedTourniquet())
+                {
+                    results.Add(2);
+                }
+                else
+                {
+                    results.Add(3);
+                }
+            }
+            treatments.Add("Åpne luftveier");
             if (injury.NeedOpenAirways())
             {
-                treatments.Add("Åpne luftveier");
-                results.Add(injury.RecievedOpenAirways());
+                if (injury.RecievedOpenAirways())
+                {
+                    results.Add(0);
+                }
+                else
+                {
+                    results.Add(1);
+                }
             }
+            else
+            {
+                if (injury.RecievedTourniquet())
+                {
+                    results.Add(2);
+                }
+                else
+                {
+                    results.Add(3);
+                }
+            }
+            treatments.Add("Legge i sideleie");
             if (injury.NeedRecoveryPose())
             {
-                treatments.Add("Legge i sideleie");
-                results.Add(injury.RecievedRecoveryPose());
+                if (injury.RecievedRecoveryPose())
+                {
+                    results.Add(0);
+                }
+                else
+                {
+                    results.Add(1);
+                }
             }
+            else
+            {
+                if (injury.RecievedRecoveryPose())
+                {
+                    results.Add(2);
+                }
+                else
+                {
+                    results.Add(3);
+                }
+            }
+            
+
+
+            treatments.Add("Sette trykk avlaster i lungen");
             if (injury.NeedPressureRelief())
             {
-                treatments.Add("Sette trykk avlaster i lungen");
-                results.Add(injury.RecievedPressureRelief());
+                if (injury.RecievedPressureRelief())
+                {
+                    results.Add(0);
+                }
+                else
+                {
+                    results.Add(1);
+                }
             }
+            else
+            {
+                if (injury.RecievedPressureRelief())
+                {
+                    results.Add(2);
+                }
+                else
+                {
+                    results.Add(3);
+                }
+            }
+            
+            treatments.Add("Stoppe blødninger med trykk");
             if (injury.NeedPressure())
             {
-                treatments.Add("Stoppe blødninger med trykk");
-                results.Add(injury.RecievedPressure());
+                if (injury.RecievedPressure())
+                {
+                    results.Add(0);
+                }
+                else
+                {
+                    results.Add(1);
+                }
+            }
+            else
+            {
+                if (injury.RecievedPressure())
+                {
+                    results.Add(2);
+                }
+                else
+                {
+                    results.Add(3);
+                }
+            }
+            treatments.Add("Bandage");
+            if (injury.NeedBandage())
+            {
+                if (injury.RecievedBandage())
+                {
+                    results.Add(0);
+                }
+                else
+                {
+                    results.Add(1);
+                }
+            }
+            else
+            {
+                if (injury.RecievedBandage())
+                {
+                    results.Add(2);
+                }
+                else
+                {
+                    results.Add(3);
+                }
             }
         }
     }
