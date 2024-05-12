@@ -415,12 +415,12 @@ namespace SnowXR.MassInjury
             switch (correctZone)
             {
                 case Zone.Green:
-                    zoneReasoning.Add("Riktig sone for denne pasienten er grønn.");
-                    zoneReasoning.Add("Grunnen til dette er:");
+                    zoneReasoning.Add("Riktig Triage : Grønn (Vanlig).");
+                    zoneReasoning.Add("Grunnen til dette er at pasienten har:");
                     switch (bloodLossSeverity)
                     {
                         case BloodLossSeverity.Minimal:
-                            zoneReasoning.Add("Pasienten har små blødninger");
+                            zoneReasoning.Add("Små blødninger");
                             break;
                         default:
                             break;
@@ -428,48 +428,48 @@ namespace SnowXR.MassInjury
                     }
                     if (bloodLossML < 500)
                     {
-                        zoneReasoning.Add("Pasienten har mistet mindre enn 0.5L blod");
+                        zoneReasoning.Add("Mistet mindre enn 0.5L blod");
                     }
                     if (pulse < 120)
                     {
-                        zoneReasoning.Add("Pulsen til pasienten er under 120");
+                        zoneReasoning.Add("Pulsen er under 120");
                     }
 
 
                     break;
                 case Zone.Yellow:
-                    zoneReasoning.Add("Riktig sone for denne pasienten er gul.");
-                    zoneReasoning.Add("Grunnen til dette er:");
+                    zoneReasoning.Add("Riktig Triage : Grønn (Haster).");
+                    zoneReasoning.Add("Grunnen til dette er at pasienten har:");
                     switch (bloodLossSeverity)
                     {
                         case BloodLossSeverity.Minimal:
-                            zoneReasoning.Add("Pasienten har små blødninger");
+                            zoneReasoning.Add("Små blødninger");
                             break;
                         case BloodLossSeverity.Moderate:
-                            zoneReasoning.Add("Pasienten har moderate blødninger");
+                            zoneReasoning.Add("Moderate blødninger");
                             break;
                         default:
                             break;
                     }
                     if (bloodLossML < 1000)
                     {
-                        zoneReasoning.Add("Pasienten har mistet mindre enn 1L blod");
+                        zoneReasoning.Add("Mistet mindre enn 1L blod");
                     }
                     if (pulse < 120)
                     {
-                        zoneReasoning.Add("Pulsen til pasienten er under 120");
+                        zoneReasoning.Add("Pulsen er under 120");
                     }
                     break;
                 case Zone.Red:
-                    zoneReasoning.Add("Riktig sone for denne pasienten er rød.");
-                    zoneReasoning.Add("Grunnen til dette er:");
+                    zoneReasoning.Add("Riktig Triage : Rød (Akutt).");
+                    zoneReasoning.Add("Grunnen til dette er at pasienten har:");
                     switch (bloodLossSeverity)
                     {
                         case BloodLossSeverity.Moderate:
-                            zoneReasoning.Add("Pasienten har moderate blødninger");
+                            zoneReasoning.Add("Moderate blødninger");
                             break;
                         case BloodLossSeverity.Severe:
-                            zoneReasoning.Add("Pasienten har store blødninger");
+                            zoneReasoning.Add("Store blødninger");
                             break;
                         default:
                             break;
@@ -477,31 +477,43 @@ namespace SnowXR.MassInjury
                     }
                     if (bloodLossML > 2000)
                     {
-                        zoneReasoning.Add("Pasienten har mistet over 2L blod");
+                        zoneReasoning.Add("Mistet over 2L blod");
                     }
                     if (pulse > 120)
                     {
-                        zoneReasoning.Add("Pulsen til pasienten er over 120");
+                        zoneReasoning.Add("Pulsen er over 120");
                     }
                     if (breathingStatus == BreathingStatus.LungInjury || recievedPressureRelief)
                     {
-                        zoneReasoning.Add("Pasienten har skader i lungen");
+                        zoneReasoning.Add("Skader i lungen");
                     }
 
                     break;
                 case Zone.Black:
-                    zoneReasoning.Add("Riktig sone for denne pasienten er sort.");
-                    zoneReasoning.Add("Grunnen til dette er:");
+                    zoneReasoning.Add("Riktig Triage : Sort (Livløs).");
                     if (dead)
                     {
-                        zoneReasoning.Add("Pasienten er død");
-                    }
-                    else if (pulse == 0)
-                    {
-                        zoneReasoning.Add("Pasienten har ingen puls");
+                        zoneReasoning.Add("Grunnen til dette er at pasienten er død");
                     }
                     break;
             }
+
+            if (inspectionTime < 10f)
+            {
+                zoneReasoning.Add("Du brukte " + (int)inspectionTime + " sekunder på inspeksjon.");
+                zoneReasoning.Add("Dette er veldig bra");
+            }
+            else if (inspectionTime < 30f)
+            {
+                zoneReasoning.Add("Du brukte " + (int)inspectionTime + " sekunder på inspeksjon.");
+                zoneReasoning.Add("Dette er bra");
+            }
+            else
+            {
+                zoneReasoning.Add("Du brukte " + (int)inspectionTime + " sekunder på inspeksjon.");
+                zoneReasoning.Add("Du skal helst bruke under 30 sekunder");
+            }
+           
         }
 
         #endregion
@@ -691,6 +703,11 @@ namespace SnowXR.MassInjury
         public bool NeedBandage()
         {
             return needBandage;
+        }
+
+        public bool CanOpenAirways()
+        {
+            return !concious;
         }
         public bool RecievedTourniquet()
         {

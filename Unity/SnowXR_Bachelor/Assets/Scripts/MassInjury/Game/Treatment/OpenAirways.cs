@@ -126,6 +126,7 @@ namespace SnowXR.MassInjury
                 if (!ReferenceEquals(patient, null))
                 {          
                     patient.GetComponent<BleedingInjury>().OpenedAirways();
+                    animController.SetOpenMouthSlider(0f);
                 }
             }
         }

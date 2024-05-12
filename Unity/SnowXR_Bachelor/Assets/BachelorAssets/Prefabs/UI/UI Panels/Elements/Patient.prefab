@@ -701,6 +701,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa48bf7edb0ae6439f42a301eef0ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reasonPrefab: {fileID: 5946662454562048491, guid: c3b813a9d6923c84f9c167d7ef5f959c,
+    type: 3}
+  treatmentPrefab: {fileID: 2134085213510721450, guid: d991ebab518b219458aac29b514c1604,
+    type: 3}
   males:
   - {fileID: 21300000, guid: 26c9dd9370db8ce4d8e65c6a0630d1a8, type: 3}
   - {fileID: 21300000, guid: 8b93991c4120d7744b2a2ec8b77801bf, type: 3}
@@ -720,22 +724,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 77cf53967b2271a45887bc14e102ef3b, type: 3}
   - {fileID: 21300000, guid: 8adcb95c89018cc4580557170aeef317, type: 3}
   genderIcon: {fileID: 7571607662674126203}
-  injuryText: {fileID: 7416381491831824745}
   correctZone: {fileID: 7167602803154161786}
   guessedZone: {fileID: 6431584361051850625}
   background: {fileID: 5524972283883209687}
+  injuryText: {fileID: 7416381491831824745}
   time: {fileID: 2338397654148831301}
   greenZone: {r: 0.11209719, g: 0.7735849, b: 0.062032763, a: 0.9019608}
   yellowZone: {r: 0.9150943, g: 0.86569875, b: 0.22014059, a: 0.8156863}
   redZone: {r: 0.8509804, g: 0.23820694, b: 0.17254902, a: 0.85882354}
   blackZone: {r: 0, g: 0, b: 0, a: 0.8666667}
-  veryGood: {r: 0, g: 0, b: 0, a: 0}
-  good: {r: 0, g: 0, b: 0, a: 0}
-  bad: {r: 0, g: 0, b: 0, a: 0}
-  reasonPrefab: {fileID: 5946662454562048491, guid: c3b813a9d6923c84f9c167d7ef5f959c,
-    type: 3}
-  treatmentPrefab: {fileID: 2134085213510721450, guid: d991ebab518b219458aac29b514c1604,
-    type: 3}
+  veryGood: {r: 0.1952672, g: 0.7264151, b: 0.07195621, a: 0.92941177}
+  good: {r: 0.7250313, g: 0.8509804, b: 0.117647074, a: 0.8666667}
+  bad: {r: 0.8392157, g: 0.52610594, b: 0.2666667, a: 0.8509804}
 --- !u!1 &4127168225643592322
 GameObject:
   m_ObjectHideFlags: 0

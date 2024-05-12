@@ -73,34 +73,36 @@ namespace SnowXR.MassInjury
         {
             // Get the current patient we are interacting with
             DialogueResponder responder = DialogueController.instance.GetActiveResponder();
-
-            //If patient is concious, play male/female clip based on gender
-            if (responder.GetComponent<BleedingInjury>().BreathStatus() == BreathingStatus.Normal)
+            if (responder.GetComponent<BleedingInjury>().Concious())
             {
-                switch (responder.GetComponent<GenderComponent>().GetGender())
+                //If patient is concious, play male/female clip based on gender
+                if (responder.GetComponent<BleedingInjury>().BreathStatus() == BreathingStatus.Normal)
                 {
-                    case Gender.Male:
-                        if (canBreatheMale.Count > 0)
-                            responder.PlayClip(canBreatheMale[Random.Range(0, imAwakeMale.Count)]);
-                        break;
-                    case Gender.Female:
-                        if (canBreatheFemale.Count > 0)
-                            responder.PlayClip(canBreatheFemale[Random.Range(0, imAwakeFemale.Count)]);
-                        break;
+                    switch (responder.GetComponent<GenderComponent>().GetGender())
+                    {
+                        case Gender.Male:
+                            if (canBreatheMale.Count > 0)
+                                responder.PlayClip(canBreatheMale[Random.Range(0, imAwakeMale.Count)]);
+                            break;
+                        case Gender.Female:
+                            if (canBreatheFemale.Count > 0)
+                                responder.PlayClip(canBreatheFemale[Random.Range(0, imAwakeFemale.Count)]);
+                            break;
+                    }
                 }
-            }
-            else if (responder.GetComponent<BleedingInjury>().BreathStatus() == BreathingStatus.LungInjury)
-            {
-                switch (responder.GetComponent<GenderComponent>().GetGender())
+                else if (responder.GetComponent<BleedingInjury>().BreathStatus() == BreathingStatus.LungInjury)
                 {
-                    case Gender.Male:
-                        if (cannotBreatheMale.Count > 0)
-                            responder.PlayClip(cannotBreatheMale[Random.Range(0, imAwakeMale.Count)]);
-                        break;
-                    case Gender.Female:
-                        if (cannotBreatheMale.Count > 0)
-                            responder.PlayClip(cannotBreatheMale[Random.Range(0, imAwakeFemale.Count)]);
-                        break;
+                    switch (responder.GetComponent<GenderComponent>().GetGender())
+                    {
+                        case Gender.Male:
+                            if (cannotBreatheMale.Count > 0)
+                                responder.PlayClip(cannotBreatheMale[Random.Range(0, imAwakeMale.Count)]);
+                            break;
+                        case Gender.Female:
+                            if (cannotBreatheMale.Count > 0)
+                                responder.PlayClip(cannotBreatheMale[Random.Range(0, imAwakeFemale.Count)]);
+                            break;
+                    }
                 }
             }
         }
@@ -109,126 +111,128 @@ namespace SnowXR.MassInjury
             // Get the current patient we are interacting with
             DialogueResponder responder = DialogueController.instance.GetActiveResponder();
 
-            switch((BleedingArea)responder.GetComponent<BleedingInjury>().GetBleedingArea())
+            if (responder.GetComponent<BleedingInjury>().Concious())
             {
-                case BleedingArea.None:
-                    switch (responder.GetComponent<GenderComponent>().GetGender())
-                    {
-                        case Gender.Male:
-                            if (whereHurtMale.Count > 0)
-                                responder.PlayClip(whereHurtMale[0]);
-                            break;
-                        case Gender.Female:
-                            if (whereHurtFemale.Count > 0)
-                                responder.PlayClip(whereHurtFemale[0]);
-                            break;
-                    }
-                    break;
-                case BleedingArea.Arms:
-                    if (responder.GetComponent<BleedingInjury>().Side() == Comparative.Right)
-                    {
+                switch ((BleedingArea)responder.GetComponent<BleedingInjury>().GetBleedingArea())
+                {
+                    case BleedingArea.None:
                         switch (responder.GetComponent<GenderComponent>().GetGender())
                         {
                             case Gender.Male:
                                 if (whereHurtMale.Count > 0)
-                                    responder.PlayClip(whereHurtMale[1]);
+                                    responder.PlayClip(whereHurtMale[0]);
                                 break;
                             case Gender.Female:
                                 if (whereHurtFemale.Count > 0)
-                                    responder.PlayClip(whereHurtFemale[1]);
+                                    responder.PlayClip(whereHurtFemale[0]);
                                 break;
                         }
-                    }
-                    else
-                    {
+                        break;
+                    case BleedingArea.Arms:
+                        if (responder.GetComponent<BleedingInjury>().Side() == Comparative.Right)
+                        {
+                            switch (responder.GetComponent<GenderComponent>().GetGender())
+                            {
+                                case Gender.Male:
+                                    if (whereHurtMale.Count > 0)
+                                        responder.PlayClip(whereHurtMale[1]);
+                                    break;
+                                case Gender.Female:
+                                    if (whereHurtFemale.Count > 0)
+                                        responder.PlayClip(whereHurtFemale[1]);
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            switch (responder.GetComponent<GenderComponent>().GetGender())
+                            {
+                                case Gender.Male:
+                                    if (whereHurtMale.Count > 0)
+                                        responder.PlayClip(whereHurtMale[2]);
+                                    break;
+                                case Gender.Female:
+                                    if (whereHurtFemale.Count > 0)
+                                        responder.PlayClip(whereHurtFemale[2]);
+                                    break;
+                            }
+                        }
+                        break;
+                    case BleedingArea.Torso:
                         switch (responder.GetComponent<GenderComponent>().GetGender())
                         {
                             case Gender.Male:
                                 if (whereHurtMale.Count > 0)
-                                    responder.PlayClip(whereHurtMale[2]);
+                                    responder.PlayClip(whereHurtMale[3]);
                                 break;
                             case Gender.Female:
                                 if (whereHurtFemale.Count > 0)
-                                    responder.PlayClip(whereHurtFemale[2]);
+                                    responder.PlayClip(whereHurtFemale[3]);
                                 break;
                         }
-                    }
-                    break;
-                case BleedingArea.Torso:
-                    switch (responder.GetComponent<GenderComponent>().GetGender())
-                    {
-                        case Gender.Male:
-                            if (whereHurtMale.Count > 0)
-                                responder.PlayClip(whereHurtMale[3]);
-                            break;
-                        case Gender.Female:
-                            if (whereHurtFemale.Count > 0)
-                                responder.PlayClip(whereHurtFemale[3]);
-                            break;
-                    }
-                    break;
-                case BleedingArea.Legs:
-                    if (responder.GetComponent<BleedingInjury>().Side() == Comparative.Right)
-                    {
-                        switch (responder.GetComponent<GenderComponent>().GetGender())
+                        break;
+                    case BleedingArea.Legs:
+                        if (responder.GetComponent<BleedingInjury>().Side() == Comparative.Right)
                         {
-                            case Gender.Male:
-                                if (whereHurtMale.Count > 0)
-                                    responder.PlayClip(whereHurtMale[4]);
-                                break;
-                            case Gender.Female:
-                                if (whereHurtFemale.Count > 0)
-                                    responder.PlayClip(whereHurtFemale[4]);
-                                break;
+                            switch (responder.GetComponent<GenderComponent>().GetGender())
+                            {
+                                case Gender.Male:
+                                    if (whereHurtMale.Count > 0)
+                                        responder.PlayClip(whereHurtMale[4]);
+                                    break;
+                                case Gender.Female:
+                                    if (whereHurtFemale.Count > 0)
+                                        responder.PlayClip(whereHurtFemale[4]);
+                                    break;
+                            }
                         }
-                    }
-                    else
-                    {
-                        switch (responder.GetComponent<GenderComponent>().GetGender())
+                        else
                         {
-                            case Gender.Male:
-                                if (whereHurtMale.Count > 0)
-                                    responder.PlayClip(whereHurtMale[5]);
-                                break;
-                            case Gender.Female:
-                                if (whereHurtFemale.Count > 0)
-                                    responder.PlayClip(whereHurtFemale[5]);
-                                break;
+                            switch (responder.GetComponent<GenderComponent>().GetGender())
+                            {
+                                case Gender.Male:
+                                    if (whereHurtMale.Count > 0)
+                                        responder.PlayClip(whereHurtMale[5]);
+                                    break;
+                                case Gender.Female:
+                                    if (whereHurtFemale.Count > 0)
+                                        responder.PlayClip(whereHurtFemale[5]);
+                                    break;
+                            }
                         }
-                    }
-                    break;
-                case BleedingArea.Thighs:
-                    if (responder.GetComponent<BleedingInjury>().Side() == Comparative.Right)
-                    {
-                        switch (responder.GetComponent<GenderComponent>().GetGender())
+                        break;
+                    case BleedingArea.Thighs:
+                        if (responder.GetComponent<BleedingInjury>().Side() == Comparative.Right)
                         {
-                            case Gender.Male:
-                                if (whereHurtMale.Count > 0)
-                                    responder.PlayClip(whereHurtMale[4]);
-                                break;
-                            case Gender.Female:
-                                if (whereHurtFemale.Count > 0)
-                                    responder.PlayClip(whereHurtFemale[4]);
-                                break;
+                            switch (responder.GetComponent<GenderComponent>().GetGender())
+                            {
+                                case Gender.Male:
+                                    if (whereHurtMale.Count > 0)
+                                        responder.PlayClip(whereHurtMale[4]);
+                                    break;
+                                case Gender.Female:
+                                    if (whereHurtFemale.Count > 0)
+                                        responder.PlayClip(whereHurtFemale[4]);
+                                    break;
+                            }
                         }
-                    }
-                    else
-                    {
-                        switch (responder.GetComponent<GenderComponent>().GetGender())
+                        else
                         {
-                            case Gender.Male:
-                                if (whereHurtMale.Count > 0)
-                                    responder.PlayClip(whereHurtMale[5]);
-                                break;
-                            case Gender.Female:
-                                if (whereHurtFemale.Count > 0)
-                                    responder.PlayClip(whereHurtFemale[5]);
-                                break;
+                            switch (responder.GetComponent<GenderComponent>().GetGender())
+                            {
+                                case Gender.Male:
+                                    if (whereHurtMale.Count > 0)
+                                        responder.PlayClip(whereHurtMale[5]);
+                                    break;
+                                case Gender.Female:
+                                    if (whereHurtFemale.Count > 0)
+                                        responder.PlayClip(whereHurtFemale[5]);
+                                    break;
+                            }
                         }
-                    }
-                    break;
+                        break;
+                }
             }
-
         
         }
     }

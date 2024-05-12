@@ -103,6 +103,13 @@ namespace SnowXR.MassInjury
                     criticalBreath.gameObject.SetActive(false);
                     break;
             }
+
+            if (injuryScript.Dead())
+            {
+                normalBreath.gameObject.SetActive(false);
+                closedAirways.gameObject.SetActive(false);
+                criticalBreath.gameObject.SetActive(false);
+            }
         }
 
         public void SetOpenMouthSlider(float set)

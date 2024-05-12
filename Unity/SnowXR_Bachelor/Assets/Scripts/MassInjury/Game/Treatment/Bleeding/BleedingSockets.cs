@@ -332,7 +332,7 @@ namespace SnowXR.MassInjury
             }
 
             // Setup Open Airways
-            if (injury.NeedOpenAirways() && !injury.RecievedOpenAirways())
+            if (injury.CanOpenAirways() && !injury.RecievedOpenAirways())
             {
                 openAirways.gameObject.SetActive(true);
             }
