@@ -102,7 +102,7 @@ namespace SnowXR.MassInjury
             {
                 spawnedBandage = Instantiate(torso ? bandPrefabWhiteTorso : bandPrefabWhite, injuryTransform);
             }
-            else
+            else if (!ReferenceEquals(injuryTransform, null))
             {
                 if (injuryTransform.childCount > 0)
                 {
