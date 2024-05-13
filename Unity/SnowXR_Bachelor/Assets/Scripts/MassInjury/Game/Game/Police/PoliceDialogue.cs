@@ -22,6 +22,7 @@ namespace SnowXR.MassInjury
         private Vector3 startPos;
         private bool played = false;
         private float timer = 0f;
+        private Quaternion rot;
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -34,6 +35,7 @@ namespace SnowXR.MassInjury
             animator = GetComponent<GenderComponent>().GetMesh().GetComponent<Animator>();
             animator.SetBool("canStand", true);
             animator.SetBool("Concious", true);
+            rot = transform.rotation;
         }
 
         IEnumerator GoToPlayer()
@@ -61,11 +63,19 @@ namespace SnowXR.MassInjury
                 }
             }
 
+            if (Vector3.Distance(startPos, transform.position) < 0.5f)
+            {
+                transform.rotation = rot;
+            }
+
             if (agent.hasPath && !played && !source.isPlaying)
             {
+
                 timer += Time.deltaTime;
                 if (timer > 7.5f)
                 {
+                   
+
                     agent.SetDestination(startPos);
                     return;
                 }

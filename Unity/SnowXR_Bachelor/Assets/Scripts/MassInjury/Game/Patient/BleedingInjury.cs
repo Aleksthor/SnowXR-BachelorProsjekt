@@ -800,8 +800,8 @@ namespace SnowXR.MassInjury
         {
             guessedZone = guess;
             inspectionDone = true;
-            ZoneReasoning();
             inspectionTime = timer;
+            ZoneReasoning();
             onPlaceBand.Invoke();
             if (ScoringSystem.instance)
             {
